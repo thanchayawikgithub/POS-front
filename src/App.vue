@@ -2,31 +2,21 @@
 import MainView from "./views/MainView.vue";
 import LoginView from "./views/LoginView.vue";
 
-import { computed, onMounted, ref } from "vue";
-const loginName = ref("");
-const isLogin = computed(() => {
-  return loginName.value !== "";
-});
-const login = (userName: string): void => {
-  loginName.value = userName;
-  localStorage.setItem("loginName", userName);
-};
-const logout = () => {
-  loginName.value = "";
-  localStorage.removeItem("loginName");
-};
-const loadData = () => {
-  loginName.value = localStorage.getItem("loginName") || "";
-};
-
+import { onMounted } from "vue";
+import { useLoginStore } from "@/stores/login";
+const loginStore = useLoginStore();
 onMounted(() => {
-  loadData();
+  loginStore.loadData();
 });
 </script>
 
 <template>
-  <LoginView v-if="!isLogin" @login="login" />
-  <MainView v-if="isLogin" @logout="logout" />
+  <LoginView v-if="!loginStore.isLogin" />
+  <MainView
+    v-if="loginStore.isLogin"
+    @logout="loginStore.logout"
+    :login-name="loginStore.loginName"
+  />
 </template>
 
 <style scoped></style>
