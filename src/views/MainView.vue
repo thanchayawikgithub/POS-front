@@ -3,9 +3,9 @@ import { ref } from "vue";
 import {
   mdiWeatherSunny,
   mdiWeatherNight,
-  mdiFolder,
   mdiAccountMultiple,
   mdiStar,
+  mdiAccount,
 } from "@mdi/js";
 import { useLoginStore } from "@/stores/login";
 const loginStore = useLoginStore();
@@ -46,9 +46,10 @@ const logout = () => {
 
       <v-list density="compact" nav>
         <v-list-item
-          :prepend-icon="mdiFolder"
-          title="My Files"
-          value="myfiles"
+          :prepend-icon="mdiAccount"
+          title="Users"
+          value="users"
+          to="/user"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiAccountMultiple"
