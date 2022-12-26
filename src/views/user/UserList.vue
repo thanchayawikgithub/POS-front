@@ -5,13 +5,21 @@ const userStore = useUserStore();
 const deleteUser = (index: number): void => {
   userStore.deleteUser(index);
 };
+const addNew = () => {
+  userStore.dialog = true;
+};
+const editUser = () => {
+  userStore.dialog = true;
+};
 </script>
 
 <template>
   <v--container>
     <v-row>
       <v-col cols="3" offset="9">
-        <v-btn color="primary" :prepend-icon="mdiPlus">Add New</v-btn>
+        <v-btn color="primary" :prepend-icon="mdiPlus" @click="addNew"
+          >Add New</v-btn
+        >
       </v-col>
     </v-row>
     <v-row cols="12">
@@ -33,7 +41,12 @@ const deleteUser = (index: number): void => {
               <td>{{ item.name }}</td>
               <td>{{ item.password }}</td>
               <td>
-                <v-btn :icon="mdiPencil" color="secondary" class="ma-1"></v-btn>
+                <v-btn
+                  :icon="mdiPencil"
+                  color="secondary"
+                  class="ma-1"
+                  @click="editUser"
+                ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
                   color="error"

@@ -3,6 +3,7 @@ import { defineStore } from "pinia";
 import type User from "@/types/User";
 
 export const useUserStore = defineStore("user", () => {
+  const dialog = ref(false);
   const lastId = 4;
   const users = ref<User[]>([
     { id: 1, login: "admin", name: "Administrrator", password: "1245678" },
@@ -14,5 +15,5 @@ export const useUserStore = defineStore("user", () => {
     const index = users.value.findIndex((item) => item.id === id);
     users.value.splice(index, 1);
   };
-  return { users, deleteUser };
+  return { users, deleteUser, dialog };
 });
