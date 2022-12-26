@@ -7,11 +7,12 @@ const form = ref<VForm | null>(null);
 const save = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    userStore.dialog = false;
+    userStore.saveUser();
   }
 };
 const clear = () => {
   userStore.dialog = false;
+  userStore.clear();
 };
 </script>
 
@@ -29,6 +30,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Login*"
+                    v-model="userStore.editedUser.login"
                     required
                     :rules="[
                       (v) => !!v || 'Login จะต้องไม่มีชช่องว่าง',
@@ -41,6 +43,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Name"
+                    v-model="userStore.editedUser.name"
                     :rules="[
                       (v) => !!v || 'Name จะต้องไม่มีชช่องว่าง',
                       (v) =>
@@ -53,6 +56,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Password*"
+                    v-model="userStore.editedUser.password"
                     type="password"
                     required
                     :rules="[
