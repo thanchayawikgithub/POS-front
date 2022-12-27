@@ -7,13 +7,13 @@ const emit = defineEmits<{
   (e: "login", userName: string): void;
 }>();
 const loginName = ref("");
-const Password = ref("");
+const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
 const login = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    loginStore.login(loginName.value);
+    loginStore.login(loginName.value, password.value);
   }
 };
 const reset = () => {
@@ -46,7 +46,7 @@ const reset = () => {
             <v-text-field
               label="Password"
               type="Password"
-              v-model="Password"
+              v-model="password"
               :rules="[
                 (v) => !!v || 'Password is required',
                 (v) =>

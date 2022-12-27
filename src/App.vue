@@ -4,6 +4,7 @@ import LoginView from "./views/LoginView.vue";
 
 import { onMounted } from "vue";
 import { useLoginStore } from "@/stores/login";
+import MessageBox from "./components/MessageBox.vue";
 const loginStore = useLoginStore();
 onMounted(() => {
   loginStore.loadData();
@@ -17,6 +18,7 @@ onMounted(() => {
     @logout="loginStore.logout"
     :login-name="loginStore.loginName"
   />
+  <MessageBox></MessageBox>
 </template>
 
 <style scoped></style>
