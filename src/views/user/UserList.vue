@@ -15,7 +15,7 @@ const editUser = (user: User) => {
 </script>
 
 <template>
-  <v--container>
+  <v-container>
     <v-row>
       <v-col cols="3" offset="9">
         <v-btn color="primary" :prepend-icon="mdiPlus" @click="addNew"
@@ -60,7 +60,7 @@ const editUser = (user: User) => {
         </v-table>
       </v-col>
     </v-row>
-  </v--container>
+  </v-container>
 </template>
 
 <style scoped></style>

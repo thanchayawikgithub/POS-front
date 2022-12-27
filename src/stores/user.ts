@@ -4,6 +4,7 @@ import type User from "@/types/User";
 
 export const useUserStore = defineStore("user", () => {
   const dialog = ref(false);
+  const isTable = ref(true);
   const editedUser = ref<User>({ id: -1, login: "", name: "", password: "" });
   let lastId = 4;
   const users = ref<User[]>([
@@ -37,5 +38,14 @@ export const useUserStore = defineStore("user", () => {
   const clear = () => {
     editedUser.value = { id: -1, login: "", name: "", password: "" };
   };
-  return { users, deleteUser, dialog, editedUser, clear, saveUser, editUser };
+  return {
+    users,
+    deleteUser,
+    dialog,
+    editedUser,
+    clear,
+    saveUser,
+    editUser,
+    isTable,
+  };
 });
