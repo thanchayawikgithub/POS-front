@@ -8,9 +8,24 @@ export const useUserStore = defineStore("user", () => {
   const editedUser = ref<User>({ id: -1, login: "", name: "", password: "" });
   let lastId = 4;
   const users = ref<User[]>([
-    { id: 1, login: "admin", name: "Administrrator", password: "12345678" },
-    { id: 2, login: "user1", name: "User1", password: "12345678" },
-    { id: 3, login: "user2", name: "User2", password: "12345678" },
+    {
+      id: 1,
+      login: "admin",
+      name: "Administrator",
+      password: "Pass@1234",
+    },
+    {
+      id: 2,
+      login: "user1",
+      name: "User 1",
+      password: "Pass@1234",
+    },
+    {
+      id: 3,
+      login: "user2",
+      name: "User 2",
+      password: "Pass@1234",
+    },
   ]);
   const login = (loginName: string, password: string): boolean => {
     const index = users.value.findIndex((item) => item.login === loginName);
