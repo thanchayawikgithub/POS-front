@@ -2,6 +2,6 @@
 
 <template>
   <div>
-    <h1>Tong</h1>
+    <h1>Bai Tong</h1>
   </div>
 </template>
