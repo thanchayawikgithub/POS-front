@@ -1,4 +1,4 @@
 <script setup lang="ts"></script>
 <template>
-  <div>Hi</div>
+  <h1>Hi</h1>
 </template>

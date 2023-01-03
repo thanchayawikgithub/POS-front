@@ -55,6 +55,7 @@ const logout = () => {
           :prepend-icon="mdiAccountMultiple"
           title="Shared with me"
           value="shared"
+          to="/shared with me"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiStar"
