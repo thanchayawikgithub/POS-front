@@ -6,6 +6,7 @@ import {
   mdiAccountMultiple,
   mdiStar,
   mdiAccount,
+  mdiCart,
 } from "@mdi/js";
 import { useLoginStore } from "@/stores/login";
 const loginStore = useLoginStore();
@@ -61,6 +62,12 @@ const logout = () => {
           :prepend-icon="mdiStar"
           title="Starred"
           value="starred"
+        ></v-list-item>
+        <v-list-item
+          :prepend-icon="mdiCart"
+          title="Cart"
+          value="cart"
+          to="/cart"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
