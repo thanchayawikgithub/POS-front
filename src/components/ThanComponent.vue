@@ -1,6 +1,6 @@
 <script setup lang="ts"></script>
 <template>
   <div>
-    <h1>Than</h1>
+    <h1>Thann</h1>
   </div>
 </template>
