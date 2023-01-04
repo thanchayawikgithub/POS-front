@@ -72,7 +72,7 @@ const logout = () => {
       </v-list>
     </v-navigation-drawer>
     <v-main>
-      <v-container><RouterView></RouterView></v-container>
+      <RouterView></RouterView>
     </v-main>
   </v-app>
 </template>
