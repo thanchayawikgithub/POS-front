@@ -69,18 +69,18 @@ const tab: string[] = ["Drink", "Bakery", "Food"];
                   :key="item.name"
                   :value="item"
                 >
-                  <v-card width="350px" height="300px" class="ma-5">
-                    <v-img src=""></v-img>
-                    <v-card-title>{{ item.name }}</v-card-title>
-                    <v-card-actions>
-                      <v-btn>Add</v-btn>
-                    </v-card-actions>
+                <v-btn width="350px" height="300px" class="ma-5">
+                  <v-card width="340px" height="190px" class="ma-5" >
+                    <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
+                    
                   </v-card>
+                </v-btn>
                 </v-col>
               </v-row>
             </v-window-item>
           </v-window>
         </v-card>
+
       </v-col>
       <v-col cols="4">
         <v-card height="800px" style="border: 3px solid">
@@ -90,5 +90,7 @@ const tab: string[] = ["Drink", "Bakery", "Food"];
         </v-card>
       </v-col>
     </v-row>
+    
   </v-container>
+  
 </template>
