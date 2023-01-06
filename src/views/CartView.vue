@@ -5,9 +5,17 @@ import ButtonCart from "@/components/order/ButtonCart.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
+import MenuDrink from "@/components/menu/MenuDrink.vue";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
-const drink = ref([{ name: "Coffee" }, { name: "Milk" }]);
+const drink = ref([
+  { name: "Latte", price: "55" },
+  { name: "Milk", price: "45" },
+  { name: "Mocca", price: "55" },
+  { name: "Amaricano", price: "55" },
+  { name: "Cappuccino", price: "55" },
+  { name: "Espresso", price: "55" },
+]);
 const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
 const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
@@ -22,9 +30,9 @@ const menuStore = useMenuStore();
     <v-row>
       <v-col cols="8">
         <v-card style="border: 3px solid" height="800px">
-          <!-- <v-card-title class="text-center justify-center py-6">
+          <v-card-title class="text-center justify-center py-6">
             <h1 class="font-weight-bold text-h2"></h1>
-          </v-card-title> -->
+          </v-card-title>
 
           <v-tabs v-model="tab" grow>
             <v-tab
@@ -39,14 +47,6 @@ const menuStore = useMenuStore();
 
           <v-window v-model="tab">
             <v-window-item v-for="item in type" :key="item" :value="item">
-              <!-- <v-card flat>
-                <v-card-item>{{ item }}</v-card-item>
-              </v-card> -->
-              <!-- <v-card
-                v-for="item in drink"
-                :key="item.name"
-                :value="item"
-              ></v-card> -->
               <v-row>
                 <v-col
                   cols="12"
@@ -55,11 +55,16 @@ const menuStore = useMenuStore();
                   :key="item.name"
                   :value="item"
                 >
-                  <v-btn width="350px" height="300px" class="ma-5">
-                    <v-card width="340px" height="190px" class="ma-5">
+                  <v-btn width="300px" height="250px" class="ma-5">
+                    <v-card width="300px" height="250px" class="mx-auto">
                       <v-img
+                        height="170"
+                        class="align-end"
                         src="https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png"
-                      ></v-img>
+                      >
+                      </v-img>
+                      <v-card-title>{{ item.name }} </v-card-title>
+                      <v-card-subtitle>Price:{{ item.price }}</v-card-subtitle>
                     </v-card>
                   </v-btn>
                 </v-col>
