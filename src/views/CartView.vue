@@ -45,6 +45,22 @@ const menuStore = useMenuStore();
             </v-tab>
           </v-tabs>
 
+          <v-row>
+            <v-col cols="12">
+              <v-card class="mx-auto" max-width="100%">
+                <v-card-text>
+                  <v-text-field
+                    density="compact"
+                    variant="outlined"
+                    label="Search"
+                    :append-inner-icon="mdiMagnify"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
           <v-window v-model="tab">
             <v-window-item v-for="item in type" :key="item" :value="item">
               <v-row>
