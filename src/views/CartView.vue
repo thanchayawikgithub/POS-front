@@ -1,36 +1,17 @@
-<script lang="ts">
+<script setup lang="ts">
+import OrderList from "@/components/order/OrderList.vue";
+import TotalMoney from "@/components/order/TotalMoney.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
-import { mdiCoffee, mdiMagnify } from "@mdi/js";
-import OrderList from "@/components/order/OrderList.vue";
-import TotalMoney from "@/components/order/TotalMoney.vue";
+import { mdiMagnify } from "@mdi/js";
+const tab = ref("Menu");
+const type = ref(["Drink", "Bakery", "Food"]);
+const drink = ref([{ name: "Coffee" }, { name: "Milk" }]);
+const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
+const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
-const tab: string[] = ["Drink", "Bakery", "Food"];
-const arr = [];
-export default {
-  data() {
-    return {
-      tab: "Menu",
-      type: ["Drink", "Bakery", "Food"],
-      drink: [{ name: "Coffee" }, { name: "Milk" }],
-      food: [{ name: "Salad" }, { name: "Sanwich" }],
-      bakery: [{ name: "cake" }, { name: "waffle" }],
-      // types: [
-      //   {
-      //     drink: [{ name: "Coffee" }, { name: "Milk" }],
-      //   },
-      //   {
-      //     food: [{ name: "Salad" }, { name: "Sanwich" }],
-      //   },
-      //   {
-      //     bakery: [{ name: "cake" }, { name: "Waffle" }],
-      //   },
-      // ],
-    };
-  },
-  components: { OrderList, TotalMoney },
-};
+// const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 
 <template>
@@ -45,7 +26,7 @@ export default {
             <h1 class="font-weight-bold text-h2"></h1>
           </v-card-title> -->
 
-          <v-tabs :v-model="tab" grow>
+          <v-tabs v-model="tab" grow>
             <v-tab
               v-for="item in type"
               :key="item"
@@ -55,15 +36,16 @@ export default {
               {{ item }}
             </v-tab>
           </v-tabs>
-          <br />
+
           <v-row>
             <v-col cols="12">
-              <v-card class="mx-auto" color="grey-lighten-3" max-width="400">
+              <v-card class="mx-auto" max-width="100%">
                 <v-card-text>
                   <v-text-field
                     density="compact"
-                    variant="solo"
-                    label="Search templates"
+                    variant="outlined"
+                    label="Search"
+                    :append-inner-icon="mdiMagnify"
                     single-line
                     hide-details
                   ></v-text-field>
