@@ -58,7 +58,10 @@ import type Menu from "@/types/User";
     </v-container>
     <v-container>
       <v-row>
-        <v-col> </v-col>
+        <v-col cols="2"></v-col>
+        <v-col cols="5"><v-btn>Register</v-btn> </v-col>
+        <v-col cols="4"><v-btn> Search </v-btn></v-col>
+        <v-col cols="1"></v-col>
       </v-row>
     </v-container>
     <v-card>
