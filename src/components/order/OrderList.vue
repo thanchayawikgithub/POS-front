@@ -6,10 +6,16 @@ import type Menu from "@/types/User";
 <template>
   <div>
     <v-container>
-      <v-card class="pa-5" width="103%" height="100%">
+      <v-row>
+        <v-col cols="2"> </v-col>
+        <v-col cols="3" class="text-center">name</v-col>
+        <v-col cols="5" class="text-center">quantity</v-col>
+        <v-col cols="0" class="text-center">price</v-col>
+      </v-row>
+      <v-card class="pa-5" width="110%" height="100%">
         <v-row>
           <v-col cols="2">
-            <v-img height="50px" width="50px" src="mocca.jpg"></v-img>
+            <v-img height="100%" width="100%" src="mocca.jpg"></v-img>
           </v-col>
           <v-col cols="3">
             <v-card-text> Mocca</v-card-text>
@@ -22,7 +28,7 @@ import type Menu from "@/types/User";
           <v-col cols="1">
             <v-card-text>1</v-card-text>
           </v-col>
-          <v-col cols="0" align-self="auto"
+          <v-col cols="0"
             ><v-card-actions class="justify-left">
               <v-btn color="secondary"> + </v-btn>
             </v-card-actions>
@@ -31,10 +37,10 @@ import type Menu from "@/types/User";
         </v-row>
       </v-card>
       <br />
-      <v-card class="pa-5" width="103%" height="100%">
+      <v-card class="pa-5" width="110%" height="100%">
         <v-row>
           <v-col cols="2">
-            <v-img height="50px" width="50px" src="americano.jpg"></v-img>
+            <v-img height="100%" width="100%" src="americano.jpg"></v-img>
           </v-col>
           <v-col cols="3">
             <v-card-text> Amaricano</v-card-text>
@@ -56,10 +62,11 @@ import type Menu from "@/types/User";
         </v-row>
       </v-card>
     </v-container>
-
+    <br />
     <v-card>
       <v-divider></v-divider>
     </v-card>
+    <br />
   </div>
 
   <div></div>

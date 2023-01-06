@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
+import ButtonCart from "@/components/order/ButtonCart.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
@@ -74,7 +75,7 @@ const menuStore = useMenuStore();
                   <v-btn width="350px" height="300px" class="ma-5">
                     <v-card width="340px" height="190px" class="ma-5">
                       <v-img
-                        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                        src="https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png"
                       ></v-img>
                     </v-card>
                   </v-btn>
@@ -91,6 +92,7 @@ const menuStore = useMenuStore();
           </h2>
           <OrderList />
           <TotalMoney />
+          <ButtonCart />
         </v-card>
       </v-col>
     </v-row>
