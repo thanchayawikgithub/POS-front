@@ -1,4 +1,12 @@
 <script lang="ts">
+import { useMenuStore } from "@/stores/Menu";
+import type Menu from "@/types/Menu";
+import { ref } from "vue";
+import { mdiCoffee } from "@mdi/js";
+import OrderList from "@/components/order/OrderList.vue";
+const menuStore = useMenuStore();
+const tab: string[] = ["Drink", "Bakery", "Food"];
+const arr = [];
 export default {
   data() {
     return {
@@ -20,12 +28,8 @@ export default {
       // ],
     };
   },
+  components: { OrderList },
 };
-import { useMenuStore } from "@/stores/Menu";
-import type Menu from "@/types/Menu";
-import { ref } from "vue";
-const menuStore = useMenuStore();
-const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 
 <template>
@@ -87,6 +91,7 @@ const tab: string[] = ["Drink", "Bakery", "Food"];
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
+          <OrderList />
         </v-card>
       </v-col>
     </v-row>
