@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OrderList from "@/components/order/OrderList.vue";
+import TotalMoney from "@/components/order/TotalMoney.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
@@ -72,6 +73,7 @@ const menuStore = useMenuStore();
             Cart
           </h2>
           <OrderList />
+          <TotalMoney />
         </v-card>
       </v-col>
     </v-row>
