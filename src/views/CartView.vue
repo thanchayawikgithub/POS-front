@@ -4,6 +4,7 @@ import type Menu from "@/types/Menu";
 import { ref } from "vue";
 import { mdiCoffee } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
+
 const menuStore = useMenuStore();
 const tab: string[] = ["Drink", "Bakery", "Food"];
 const arr = [];
@@ -33,7 +34,7 @@ export default {
 </script>
 
 <template>
-  <v-container style="padding: 0">
+  <v-container class="pl-7 pr-7">
     <v-row class="justify-center ma-10">
       <h1 class="font-weight-bold text-h2">Menu</h1>
     </v-row>
@@ -54,7 +55,7 @@ export default {
               {{ item }}
             </v-tab>
           </v-tabs>
-
+          <v-row><h1 style="padding-left: 20px">ยูทำตรงนี้</h1> </v-row>
           <v-window v-model="tab">
             <v-window-item v-for="item in type" :key="item" :value="item">
               <!-- <v-card flat>
@@ -73,10 +74,11 @@ export default {
                   :key="item.name"
                   :value="item"
                 >
-                  <v-btn width="350px" height="300px" class="ma-5">
-                    <v-card width="340px" height="190px" class="ma-5">
+                  <v-btn width="320" height="300px" class="ma-5">
+                    <v-card width="320px" height="180px" class="ma-5">
                       <v-img
                         src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                        cover
                       ></v-img>
                     </v-card>
                   </v-btn>
