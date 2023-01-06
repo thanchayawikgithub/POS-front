@@ -6,13 +6,16 @@ import ThanComponent from "@/components/ThanComponent.vue";
 import WinComponent from "@/components/WinComponent.vue";
 import TongComponent from "@/components/TongComponent.vue";
 import YutaComponent from "@/components/YutaComponent.vue";
+import TabComponent from "@/components/TabComponent.vue";
 </script>
+
 <template>
-  <BenzComponent />
+  <!-- <BenzComponent />
   <TanComponents />
   <TeeComponents />
   <ThanComponent />
   <WinComponent />
   <TongComponent />
-  <YutaComponent />
+  <YutaComponent /> -->
+  <TabComponent></TabComponent>
 </template>
