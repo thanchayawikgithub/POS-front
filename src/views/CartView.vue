@@ -74,11 +74,10 @@ export default {
                   :key="item.name"
                   :value="item"
                 >
-                  <v-btn width="320" height="300px" class="ma-5">
-                    <v-card width="320px" height="180px" class="ma-5">
+                  <v-btn width="350px" height="300px" class="ma-5">
+                    <v-card width="340px" height="190px" class="ma-5">
                       <v-img
                         src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
-                        cover
                       ></v-img>
                     </v-card>
                   </v-btn>
