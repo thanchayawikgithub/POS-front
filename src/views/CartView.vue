@@ -5,6 +5,7 @@ import { ref } from "vue";
 import { mdiCoffee } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
+import ButtonCart from "@/components/order/ButtonCart.vue";
 const menuStore = useMenuStore();
 const tab: string[] = ["Drink", "Bakery", "Food"];
 const arr = [];
@@ -29,7 +30,7 @@ export default {
       // ],
     };
   },
-  components: { OrderList, TotalMoney },
+  components: { OrderList, TotalMoney, ButtonCart },
 };
 </script>
 
@@ -94,6 +95,7 @@ export default {
           </h2>
           <OrderList />
           <TotalMoney />
+          <ButtonCart />
         </v-card>
       </v-col>
     </v-row>
