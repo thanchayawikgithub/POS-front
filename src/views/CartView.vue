@@ -1,7 +1,10 @@
-<script lang="ts">
+<script setup lang="ts">
+import OrderList from "@/components/order/OrderList.vue";
+import TotalMoney from "@/components/order/TotalMoney.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
+<<<<<<< HEAD
 import { mdiCoffee } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
@@ -32,10 +35,19 @@ export default {
   },
   components: { OrderList, TotalMoney, ButtonCart },
 };
+=======
+const tab = ref("Menu");
+const type = ref(["Drink", "Bakery", "Food"]);
+const drink = ref([{ name: "Coffee" }, { name: "Milk" }]);
+const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
+const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
+const menuStore = useMenuStore();
+// const tab: string[] = ["Drink", "Bakery", "Food"];
+>>>>>>> 673a41018ec215919116e3383a4436cece6038bd
 </script>
 
 <template>
-  <v-container class="pl-7 pr-7">
+  <v-container style="padding: 0">
     <v-row class="justify-center ma-10">
       <h1 class="font-weight-bold text-h2">Menu</h1>
     </v-row>
@@ -46,7 +58,7 @@ export default {
             <h1 class="font-weight-bold text-h2"></h1>
           </v-card-title> -->
 
-          <v-tabs :v-model="tab" grow>
+          <v-tabs v-model="tab" grow>
             <v-tab
               v-for="item in type"
               :key="item"
@@ -56,7 +68,7 @@ export default {
               {{ item }}
             </v-tab>
           </v-tabs>
-          <v-row><h1 style="padding-left: 20px">ยูทำตรงนี้</h1> </v-row>
+
           <v-window v-model="tab">
             <v-window-item v-for="item in type" :key="item" :value="item">
               <!-- <v-card flat>
