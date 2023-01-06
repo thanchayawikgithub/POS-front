@@ -1,41 +1,10 @@
 <script setup lang="ts">
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
+import ButtonCart from "@/components/order/ButtonCart.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
-<<<<<<< HEAD
-import { mdiCoffee } from "@mdi/js";
-import OrderList from "@/components/order/OrderList.vue";
-import TotalMoney from "@/components/order/TotalMoney.vue";
-import ButtonCart from "@/components/order/ButtonCart.vue";
-const menuStore = useMenuStore();
-const tab: string[] = ["Drink", "Bakery", "Food"];
-const arr = [];
-export default {
-  data() {
-    return {
-      tab: "Menu",
-      type: ["Drink", "Bakery", "Food"],
-      drink: [{ name: "Coffee" }, { name: "Milk" }],
-      food: [{ name: "Salad" }, { name: "Sanwich" }],
-      bakery: [{ name: "cake" }, { name: "waffle" }],
-      // types: [
-      //   {
-      //     drink: [{ name: "Coffee" }, { name: "Milk" }],
-      //   },
-      //   {
-      //     food: [{ name: "Salad" }, { name: "Sanwich" }],
-      //   },
-      //   {
-      //     bakery: [{ name: "cake" }, { name: "Waffle" }],
-      //   },
-      // ],
-    };
-  },
-  components: { OrderList, TotalMoney, ButtonCart },
-};
-=======
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 const drink = ref([{ name: "Coffee" }, { name: "Milk" }]);
@@ -43,7 +12,6 @@ const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
 const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
->>>>>>> 673a41018ec215919116e3383a4436cece6038bd
 </script>
 
 <template>
