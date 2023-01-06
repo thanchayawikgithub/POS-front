@@ -2,7 +2,7 @@
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
-import { mdiCoffee } from "@mdi/js";
+import { mdiCoffee, mdiMagnify } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
 const menuStore = useMenuStore();
@@ -55,7 +55,22 @@ export default {
               {{ item }}
             </v-tab>
           </v-tabs>
-
+          <br />
+          <v-row>
+            <v-col cols="12">
+              <v-card class="mx-auto" color="grey-lighten-3" max-width="400">
+                <v-card-text>
+                  <v-text-field
+                    density="compact"
+                    variant="solo"
+                    label="Search templates"
+                    single-line
+                    hide-details
+                  ></v-text-field>
+                </v-card-text>
+              </v-card>
+            </v-col>
+          </v-row>
           <v-window v-model="tab">
             <v-window-item v-for="item in type" :key="item" :value="item">
               <!-- <v-card flat>
