@@ -6,9 +6,9 @@ import type Menu from "@/types/User";
 <template>
   <div>
     <v-container>
-      <v-card class="pa-5" width="600px" height="100">
+      <v-card class="pa-5" width="103%" height="100%">
         <v-row>
-          <v-col cols="1">
+          <v-col cols="2">
             <v-img height="50px" width="50px" src="mocca.jpg"></v-img>
           </v-col>
           <v-col cols="3">
@@ -31,9 +31,9 @@ import type Menu from "@/types/User";
         </v-row>
       </v-card>
       <br />
-      <v-card class="pa-5" width="600px" height="100">
+      <v-card class="pa-5" width="103%" height="100%">
         <v-row>
-          <v-col cols="1">
+          <v-col cols="2">
             <v-img height="50px" width="50px" src="americano.jpg"></v-img>
           </v-col>
           <v-col cols="3">
@@ -56,14 +56,7 @@ import type Menu from "@/types/User";
         </v-row>
       </v-card>
     </v-container>
-    <v-container>
-      <v-row>
-        <v-col cols="2"></v-col>
-        <v-col cols="5"><v-btn>Register</v-btn> </v-col>
-        <v-col cols="4"><v-btn> Search </v-btn></v-col>
-        <v-col cols="1"></v-col>
-      </v-row>
-    </v-container>
+
     <v-card>
       <v-divider></v-divider>
     </v-card>
