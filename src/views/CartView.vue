@@ -4,6 +4,7 @@ import type Menu from "@/types/Menu";
 import { ref } from "vue";
 import { mdiCoffee } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
+import TotalMoney from "@/components/order/TotalMoney.vue";
 const menuStore = useMenuStore();
 const tab: string[] = ["Drink", "Bakery", "Food"];
 const arr = [];
@@ -28,7 +29,7 @@ export default {
       // ],
     };
   },
-  components: { OrderList },
+  components: { OrderList, TotalMoney },
 };
 </script>
 
@@ -73,18 +74,18 @@ export default {
                   :key="item.name"
                   :value="item"
                 >
-                <v-btn width="350px" height="300px" class="ma-5">
-                  <v-card width="340px" height="190px" class="ma-5" >
-                    <v-img src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"></v-img>
-                    
-                  </v-card>
-                </v-btn>
+                  <v-btn width="350px" height="300px" class="ma-5">
+                    <v-card width="340px" height="190px" class="ma-5">
+                      <v-img
+                        src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                      ></v-img>
+                    </v-card>
+                  </v-btn>
                 </v-col>
               </v-row>
             </v-window-item>
           </v-window>
         </v-card>
-
       </v-col>
       <v-col cols="4">
         <v-card height="800px" style="border: 3px solid">
@@ -92,10 +93,9 @@ export default {
             Cart
           </h2>
           <OrderList />
+          <TotalMoney />
         </v-card>
       </v-col>
     </v-row>
-    
   </v-container>
-  
 </template>
