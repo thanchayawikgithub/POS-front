@@ -1,31 +1,17 @@
-<script lang="ts">
-export default {
-  data() {
-    return {
-      tab: "Menu",
-      type: ["Drink", "Bakery", "Food"],
-      drink: [{ name: "Coffee" }, { name: "Milk" }],
-      food: [{ name: "Salad" }, { name: "Sanwich" }],
-      bakery: [{ name: "cake" }, { name: "waffle" }],
-      // types: [
-      //   {
-      //     drink: [{ name: "Coffee" }, { name: "Milk" }],
-      //   },
-      //   {
-      //     food: [{ name: "Salad" }, { name: "Sanwich" }],
-      //   },
-      //   {
-      //     bakery: [{ name: "cake" }, { name: "Waffle" }],
-      //   },
-      // ],
-    };
-  },
-};
+<script setup lang="ts">
+import OrderList from "@/components/order/OrderList.vue";
+import TotalMoney from "@/components/order/TotalMoney.vue";
+import ButtonCart from "@/components/order/ButtonCart.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
+const tab = ref("Menu");
+const type = ref(["Drink", "Bakery", "Food"]);
+const drink = ref([{ name: "Coffee" }, { name: "Milk" }]);
+const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
+const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
-const tab: string[] = ["Drink", "Bakery", "Food"];
+// const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 
 <template>
@@ -40,7 +26,7 @@ const tab: string[] = ["Drink", "Bakery", "Food"];
             <h1 class="font-weight-bold text-h2"></h1>
           </v-card-title> -->
 
-          <v-tabs :v-model="tab" grow>
+          <v-tabs v-model="tab" grow>
             <v-tab
               v-for="item in type"
               :key="item"
@@ -87,6 +73,9 @@ const tab: string[] = ["Drink", "Bakery", "Food"];
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
+          <OrderList />
+          <TotalMoney />
+          <ButtonCart />
         </v-card>
       </v-col>
     </v-row>
