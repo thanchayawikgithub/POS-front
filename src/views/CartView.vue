@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import OrderList from "@/components/order/OrderList.vue";
 import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
@@ -70,6 +71,7 @@ const menuStore = useMenuStore();
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
+          <OrderList />
         </v-card>
       </v-col>
     </v-row>
