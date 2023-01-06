@@ -4,7 +4,7 @@ import type Menu from "@/types/Menu";
 import { ref } from "vue";
 import { mdiCoffee } from "@mdi/js";
 import OrderList from "@/components/order/OrderList.vue";
-
+import TotalMoney from "@/components/order/TotalMoney.vue";
 const menuStore = useMenuStore();
 const tab: string[] = ["Drink", "Bakery", "Food"];
 const arr = [];
@@ -29,7 +29,7 @@ export default {
       // ],
     };
   },
-  components: { OrderList },
+  components: { OrderList, TotalMoney },
 };
 </script>
 
@@ -93,6 +93,7 @@ export default {
             Cart
           </h2>
           <OrderList />
+          <TotalMoney />
         </v-card>
       </v-col>
     </v-row>
