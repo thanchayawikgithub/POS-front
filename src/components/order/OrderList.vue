@@ -6,6 +6,12 @@ import type Menu from "@/types/User";
 <template>
   <div>
     <v-container>
+      <v-row>
+        <v-col cols="2"> </v-col>
+        <v-col cols="3" class="text-center">name</v-col>
+        <v-col cols="5" class="text-center">quantity</v-col>
+        <v-col cols="0" class="text-center">price</v-col>
+      </v-row>
       <v-card class="pa-5" width="110%" height="100%">
         <v-row>
           <v-col cols="2">
