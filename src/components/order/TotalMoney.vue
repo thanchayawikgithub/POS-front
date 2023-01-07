@@ -4,12 +4,14 @@
     <v-container>
       <v-row class="text-center">
         <v-col
-          ><v-btn width="100%" variant="outlined" rounded>
+          ><v-btn width="100%" rounded color="#B86824" class="font-btn">
             Register Member
           </v-btn>
         </v-col>
         <v-col>
-          <v-btn width="100%" variant="outlined" rounded> Search </v-btn>
+          <v-btn width="100%" rounded color="#EA9A56" class="font-btn">
+            Search
+          </v-btn>
         </v-col>
       </v-row>
     </v-container>
@@ -39,5 +41,8 @@
 <style scoped>
 .tab {
   margin-top: 90px;
+}
+.font-btn {
+  font-weight: bold;
 }
 </style>
