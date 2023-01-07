@@ -18,20 +18,24 @@
     <v-table>
       <tbody>
         <tr>
-          <td>Member :</td>
-          <td class="">12345678</td>
+          <td style="width: 70%">Member :</td>
+          <td class="text-lg-right">12345678</td>
+          <td class="text-lg-right"></td>
         </tr>
         <tr>
           <td>Price :</td>
-          <td>130</td>
+          <td class="text-lg-right">130</td>
+          <td class="text-lg-right">Baht</td>
         </tr>
         <tr>
           <td>Discount :</td>
-          <td>5</td>
+          <td class="text-lg-right">5</td>
+          <td class="text-lg-right">Baht</td>
         </tr>
         <tr>
           <td>Total :</td>
-          <td>125</td>
+          <td class="text-lg-right">125</td>
+          <td class="text-lg-right">Baht</td>
         </tr>
       </tbody>
     </v-table>
@@ -43,6 +47,9 @@
   margin-top: 90px;
 }
 .font-btn {
+  font-weight: bold;
+}
+td {
   font-weight: bold;
 }
 </style>
