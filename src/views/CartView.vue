@@ -58,7 +58,7 @@ const menuStore = useMenuStore();
             </v-col>
 
             <v-col cols="4">
-              <v-card class="mx-auto" width="370px" flat>
+              <v-card class="mx-auto" width="335px" flat>
                 <v-card-text>
                   <v-text-field
                     hight="80px"
