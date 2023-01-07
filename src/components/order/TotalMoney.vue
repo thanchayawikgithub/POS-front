@@ -4,7 +4,7 @@
     <tbody>
       <tr>
         <td>Member :</td>
-        <td>XXXXXXX</td>
+        <td>XXXXXXXX</td>
       </tr>
       <tr>
         <td>Discount :</td>

@@ -43,7 +43,7 @@ import type Menu from "@/types/User";
             <v-img height="100%" width="100%" src="americano.jpg"></v-img>
           </v-col>
           <v-col cols="3">
-            <v-card-text> Amaricano</v-card-text>
+            <v-card-text> Americano</v-card-text>
           </v-col>
           <v-col cols="1"
             ><v-card-actions class="justify-center">

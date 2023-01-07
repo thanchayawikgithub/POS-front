@@ -6,13 +6,14 @@ import { useMenuStore } from "@/stores/Menu";
 import type Menu from "@/types/Menu";
 import { ref } from "vue";
 import MenuDrink from "@/components/menu/MenuDrink.vue";
+import { mdiMagnify } from "@mdi/js";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 const drink = ref([
   { name: "Latte", price: "55" },
   { name: "Milk", price: "45" },
   { name: "Mocca", price: "55" },
-  { name: "Amaricano", price: "55" },
+  { name: "Americano", price: "55" },
   { name: "Cappuccino", price: "55" },
   { name: "Espresso", price: "55" },
 ]);
