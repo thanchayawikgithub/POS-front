@@ -9,14 +9,14 @@ export const useMenuStore = defineStore("menu", () => {
       type: "drink",
       name: "Coffee",
       price: 60,
-      pic: "asas",
+      pic: "https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png",
     },
     {
       id: 2,
       type: "drink",
       name: "Milk",
       price: 55,
-      pic: "sdsd",
+      pic: "milk.jpg",
     },
   ]);
   const menuTab: Array<String> = ["Drink", "Bakery", "Food"];
