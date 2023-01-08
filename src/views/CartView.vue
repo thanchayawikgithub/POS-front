@@ -17,6 +17,8 @@ const drink = ref([
   { name: "Cappuccino", price: "55" },
   { name: "Espresso", price: "55" },
 ]);
+const selected = ref(["Recommend"]);
+const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
 const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
@@ -31,10 +33,6 @@ const menuStore = useMenuStore();
     <v-row>
       <v-col cols="8">
         <v-card style="border: 3px solid" height="800px">
-          <v-card-title class="text-center justify-center py-6">
-            <h1 class="font-weight-bold text-h2"></h1>
-          </v-card-title>
-
           <v-tabs v-model="tab" grow>
             <v-tab
               v-for="item in type"
@@ -47,10 +45,23 @@ const menuStore = useMenuStore();
           </v-tabs>
 
           <v-row>
-            <v-col cols="12">
-              <v-card class="mx-auto" max-width="100%">
+            <v-col cols="8" class="d-flex">
+              <v-select
+                :items="drinktype"
+                label="Type"
+                class="pa-3"
+                variant="outlined"
+                height="80px"
+                v-model="selected"
+              >
+              </v-select>
+            </v-col>
+
+            <v-col cols="4">
+              <v-card class="mx-auto" width="335px" flat>
                 <v-card-text>
                   <v-text-field
+                    hight="80px"
                     density="compact"
                     variant="outlined"
                     label="Search"

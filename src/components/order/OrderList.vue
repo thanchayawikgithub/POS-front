@@ -30,11 +30,10 @@ function dec() {
   <div>
     <v-container>
       <v-row>
-        <v-col cols="4" class="text-right"><h5>name</h5></v-col>
-        <v-col cols="2" class="text-left"><h5></h5></v-col>
-        <v-col cols="3" class="text-center"><h5>quantity</h5></v-col>
-        <v-col cols="0" class="text-left"><h5></h5></v-col>
-        <v-col cols="2" class="text-right"><h5>price</h5></v-col>
+        <v-col cols="2"> </v-col>
+        <v-col cols="3" class="text-center"><h5>Name</h5></v-col>
+        <v-col cols="5" class="text-center"><h5>Quantity</h5></v-col>
+        <v-col cols="0" class="text-center"><h5>Price</h5></v-col>
       </v-row>
       <v-card
         class="pa-5"
