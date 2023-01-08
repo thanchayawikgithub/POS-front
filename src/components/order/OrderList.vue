@@ -31,9 +31,15 @@ function dec() {
     <v-container>
       <v-row>
         <v-col cols="2"> </v-col>
-        <v-col cols="3" class="text-center"><h5>Name</h5></v-col>
-        <v-col cols="5" class="text-center"><h5>Quantity</h5></v-col>
-        <v-col cols="0" class="text-center"><h5>Price</h5></v-col>
+        <v-col cols="3" class="text-center">
+          <h5>Name</h5>
+        </v-col>
+        <v-col cols="5" class="text-center">
+          <h5>Quantity</h5>
+        </v-col>
+        <v-col cols="0" class="text-center">
+          <h5>Price</h5>
+        </v-col>
       </v-row>
       <v-card
         class="pa-5"
@@ -63,7 +69,7 @@ function dec() {
             </v-card-actions>
           </v-col>
           <v-col cols="3" class="text-center"
-            ><v-card-text>{{ item.price }}</v-card-text></v-col
+            ><v-card-text>{{ item.price * count }}</v-card-text></v-col
           >
         </v-row>
       </v-card>
