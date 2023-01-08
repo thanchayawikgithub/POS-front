@@ -3,6 +3,7 @@ import { ref } from "vue";
 import type { VForm } from "vuetify/components";
 import { useLoginStore } from "@/stores/login";
 import ButtonCart from "@/components/order/ButtonCart.vue";
+import { mdiEye, mdiEyeOff } from "@mdi/js";
 
 const loginStore = useLoginStore();
 const emit = defineEmits<{
@@ -21,6 +22,8 @@ const login = async () => {
 const reset = () => {
   form.value?.reset();
 };
+
+const show2 = ref(true);
 </script>
 <template>
   <v-app>
@@ -49,17 +52,29 @@ const reset = () => {
               color="#FFF5EA"
               flat
             >
+              <v-img src="logo.png" width="100px" class="mx-auto"></v-img>
               <v-card-title
                 primary-title
                 class="text-center text-h6 font-weight-bold"
               >
-                Login
+                <h3
+                  style="
+                    font-weight: bolder;
+                    font-family: cursive;
+                    color: #665540;
+                  "
+                >
+                  Welcome to D-coffee
+                </h3>
+                <h4 style="font-family: cursive; color: #665540">
+                  Plaese login to your account
+                </h4>
               </v-card-title>
 
               <v-card-text>
                 <v-form ref="form" v-model="valid">
                   <v-text-field
-                    label="Login Name"
+                    label="Name"
                     v-model="loginName"
                     variant="outlined"
                     :rules="[
@@ -72,8 +87,11 @@ const reset = () => {
                   ></v-text-field>
                   <v-text-field
                     label="Password"
-                    type="Password"
+                    :append-inner-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :type="show2 ? 'text' : 'password'"
                     v-model="password"
+                    @click:append-inner="show2 = !show2"
+                    class="input-group--focused"
                     variant="outlined"
                     :rules="[
                       (v) => !!v || 'Password is required',
@@ -89,8 +107,22 @@ const reset = () => {
               </v-card-text>
 
               <v-card-actions class="justify-center">
-                <v-btn color="success" @click="login">Login</v-btn>
-                <v-btn color="error" @click="reset">Clear</v-btn>
+                <v-btn
+                  variant="flat"
+                  width="150px"
+                  color="success"
+                  style="border-radius: 10px"
+                  @click="login"
+                  >Login</v-btn
+                >
+                <v-btn
+                  color="error"
+                  variant="flat"
+                  width="150px"
+                  style="border-radius: 10px"
+                  @click="reset"
+                  >Clear</v-btn
+                >
               </v-card-actions>
             </v-card>
           </v-col>
