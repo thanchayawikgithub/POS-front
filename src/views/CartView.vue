@@ -26,13 +26,16 @@ const menuStore = useMenuStore();
 </script>
 
 <template>
-  <v-container style="padding: 0">
+  <v-container class="bg">
     <v-row class="justify-center ma-10">
-      <h1 class="font-weight-bold text-h2">Menu</h1>
+      <v-img
+        src="https://media.discordapp.net/attachments/410789993628434435/1061722316041625710/image.png"
+        height="150px"
+      ></v-img>
     </v-row>
     <v-row>
       <v-col cols="8">
-        <v-card style="border: 3px solid" height="800px">
+        <v-card style="border: 3px solid" height="800px" class="bg2">
           <v-tabs v-model="tab" grow>
             <v-tab
               v-for="item in type"
@@ -58,7 +61,7 @@ const menuStore = useMenuStore();
             </v-col>
 
             <v-col cols="4">
-              <v-card class="mx-auto" width="335px" flat>
+              <v-card class="mx-auto bg2" width="335px" flat>
                 <v-card-text>
                   <v-text-field
                     hight="80px"
@@ -84,15 +87,18 @@ const menuStore = useMenuStore();
                   :value="item"
                 >
                   <v-btn width="300px" height="250px" class="ma-5">
-                    <v-card width="300px" height="250px" class="mx-auto">
+                    <v-card width="300px" height="250px" class="mx-auto card">
                       <v-img
-                        height="170"
-                        class="align-end"
+                        class="align-end image"
                         src="https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png"
                       >
                       </v-img>
-                      <v-card-title>{{ item.name }} </v-card-title>
-                      <v-card-subtitle>Price:{{ item.price }}</v-card-subtitle>
+                      <v-card-title class="title"
+                        >{{ item.name }}
+                      </v-card-title>
+                      <v-card-subtitle class="price"
+                        >Price:{{ item.price }}</v-card-subtitle
+                      >
                     </v-card>
                   </v-btn>
                 </v-col>
@@ -102,7 +108,7 @@ const menuStore = useMenuStore();
         </v-card>
       </v-col>
       <v-col cols="4">
-        <v-card height="800px" style="border: 3px solid">
+        <v-card height="800px" style="border: 3px solid" class="bg2">
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
@@ -114,3 +120,80 @@ const menuStore = useMenuStore();
     </v-row>
   </v-container>
 </template>
+<style scoped>
+.bg {
+  background-color: #dac7b4;
+}
+.bg2 {
+  background-color: #af9070;
+}
+.card {
+  box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: all 120ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+
+  padding-bottom: 4em;
+}
+
+.card::after {
+  content: "Add to Cart";
+  padding-top: 0.7em;
+  padding-left: 1.25em;
+  position: absolute;
+  left: 0;
+  bottom: -60px;
+  background: #00ac7c;
+  color: #fff;
+  height: 3em;
+  width: 100%;
+  transition: all 80ms;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.card .title {
+  font-family: sans-serif;
+  font-size: 1.1em;
+  position: absolute;
+  left: 0.625em;
+  bottom: 1em;
+  font-weight: bold;
+}
+
+.card .price {
+  font-family: sans-serif;
+  font-size: 1em;
+  position: absolute;
+  left: 0.625em;
+  bottom: 0.625em;
+}
+
+.card:hover::after {
+  bottom: 0;
+}
+
+.card:active {
+  transform: scale(0.98);
+}
+
+.card:active::after {
+  content: "Added !";
+  height: 3.125em;
+}
+
+.text {
+  max-width: 55px;
+}
+
+.image {
+  background: #dac7b4;
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+}
+</style>

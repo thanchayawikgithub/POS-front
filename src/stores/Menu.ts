@@ -15,7 +15,7 @@ export const useMenuStore = defineStore("menu", () => {
       id: 2,
       type: "drink",
       name: "Milk",
-      price: 55,
+      price: 45,
       pic: "milk.jpg",
     },
   ]);
