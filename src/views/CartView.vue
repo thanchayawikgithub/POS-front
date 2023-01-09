@@ -26,13 +26,7 @@ const menuStore = useMenuStore();
 </script>
 
 <template>
-  <v-container class="bg">
-    <v-row class="justify-center ma-10">
-      <v-img
-        src="https://media.discordapp.net/attachments/410789993628434435/1061722316041625710/image.png"
-        height="150px"
-      ></v-img>
-    </v-row>
+  <v-container class="bg" fluid>
     <v-row>
       <v-col cols="8">
         <v-card style="border: 3px solid" height="800px" class="bg2">
