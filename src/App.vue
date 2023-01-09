@@ -11,7 +11,7 @@ onMounted(() => {
 });
 </script>
 
-<template>
+<template style="background-color: #dac7b4">
   <LoginView v-if="!loginStore.isLogin" />
   <MainView
     v-if="loginStore.isLogin"

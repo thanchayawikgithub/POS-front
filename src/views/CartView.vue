@@ -26,7 +26,7 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 </script>
 
 <template>
-  <v-container class="bg" fluid>
+  <v-container class="bg fullscreen" fluid>
     <v-row>
       <v-col cols="8">
         <v-card style="border: 3px solid" height="800px" class="bg2">
@@ -115,6 +115,14 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
   </v-container>
 </template>
 <style scoped>
+.fullscreen {
+  width: 100vw;
+  height: 100vh;
+}
+.halfscreen {
+  height: 50vh;
+  width: 50vw;
+}
 .bg {
   background-color: #dac7b4;
 }
