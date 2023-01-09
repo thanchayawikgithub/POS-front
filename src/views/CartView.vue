@@ -2,10 +2,10 @@
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
 import ButtonCart from "@/components/order/ButtonCart.vue";
-import { useMenuStore } from "@/stores/Menu";
-import type Menu from "@/types/Menu";
+// import { useMenuStore } from "@/stores/Menu";
+// import type Menu from "@/types/Menu";
 import { ref } from "vue";
-import MenuDrink from "@/components/menu/MenuDrink.vue";
+// import MenuDrink from "@/components/menu/MenuDrink.vue";
 import { mdiMagnify } from "@mdi/js";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
@@ -19,9 +19,9 @@ const drink = ref([
 ]);
 const selected = ref(["Recommend"]);
 const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
-const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
-const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
-const menuStore = useMenuStore();
+// const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
+// const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
+// const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 

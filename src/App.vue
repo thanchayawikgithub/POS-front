@@ -5,7 +5,6 @@ import LoginView from "./views/LoginView.vue";
 import { onMounted } from "vue";
 import { useLoginStore } from "@/stores/login";
 import MessageBox from "./components/MessageBox.vue";
-import ShowName from "./views/ShowName.vue";
 const loginStore = useLoginStore();
 onMounted(() => {
   loginStore.loadData();
