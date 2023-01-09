@@ -59,7 +59,9 @@ function dec() {
           </v-col>
           <v-col cols="1" class="text-right"
             ><v-card-actions class="justify-center">
-              <v-btn color="error" @click="dec()"> - </v-btn>
+              <v-btn color="#CC0000" @click="dec()" style="font-weight: bolder">
+                -
+              </v-btn>
             </v-card-actions></v-col
           >
           <v-col cols="2" class="text-center">
@@ -67,7 +69,9 @@ function dec() {
           </v-col>
           <v-col cols="1" class="text-left"
             ><v-card-actions class="justify-center">
-              <v-btn color="secondary" @click="inc()"> + </v-btn>
+              <v-btn color="#009900" @click="inc()" style="font-weight: bolder">
+                +
+              </v-btn>
             </v-card-actions>
           </v-col>
           <v-col cols="3" class="text-center"
