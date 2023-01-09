@@ -42,12 +42,13 @@ function dec() {
         </v-col>
       </v-row>
       <v-card
-        class="pa-5 mb-1"
+        class="pa-5 mb-2 mt-3"
         width="100%"
         height="100%"
         v-for="item in menuStores.menu"
         :key="item.id"
-        flat
+        color="#dac7b4"
+        style="border-radius: 5px; border: 2px solid"
       >
         <v-row>
           <v-col cols="2">

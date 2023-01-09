@@ -15,7 +15,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-table>
+    <v-table style="background-color: #af9070">
       <tbody>
         <tr>
           <td style="width: 70%">Member :</td>
