@@ -41,38 +41,35 @@ function dec() {
           <h5>Price</h5>
         </v-col>
       </v-row>
-      <v-card
-        class="pa-5"
-        width="110%"
-        height="100%"
-        v-for="item in menuStores.menu"
-        :key="item.id"
-      >
-        <v-row>
-          <v-col cols="2">
-            <v-img height="100%" width="100%" :src="item.pic"></v-img>
-          </v-col>
-          <v-col cols="3">
-            <v-card-text> {{ item.name }}</v-card-text>
-          </v-col>
-          <v-col cols="1" class="text-right"
-            ><v-card-actions class="justify-center">
-              <v-btn color="error" @click="dec()"> - </v-btn>
-            </v-card-actions></v-col
-          >
-          <v-col cols="2" class="text-center">
-            <v-card-text>{{ count }}</v-card-text>
-          </v-col>
-          <v-col cols="1" class="text-left"
-            ><v-card-actions class="justify-center">
-              <v-btn color="secondary" @click="inc()"> + </v-btn>
-            </v-card-actions>
-          </v-col>
-          <v-col cols="3" class="text-center"
-            ><v-card-text>{{ item.price * count }}</v-card-text></v-col
-          >
-        </v-row>
-      </v-card>
+      <div v-for="item in menuStores.menu" :key="item.id">
+        <v-card class="pa-5" width="110%" height="100%">
+          <v-row>
+            <v-col cols="2">
+              <v-img height="100%" width="100%" :src="item.pic"></v-img>
+            </v-col>
+            <v-col cols="3">
+              <v-card-text> {{ item.name }}</v-card-text>
+            </v-col>
+            <v-col cols="1" class="text-right"
+              ><v-card-actions class="justify-center">
+                <v-btn color="error" @click="dec()"> - </v-btn>
+              </v-card-actions></v-col
+            >
+            <v-col cols="2" class="text-center">
+              <v-card-text>{{ count }}</v-card-text>
+            </v-col>
+            <v-col cols="1" class="text-left"
+              ><v-card-actions class="justify-center">
+                <v-btn color="secondary" @click="inc()"> + </v-btn>
+              </v-card-actions>
+            </v-col>
+            <v-col cols="3" class="text-center"
+              ><v-card-text>{{ item.price * count }}</v-card-text></v-col
+            >
+          </v-row>
+        </v-card>
+      </div>
+
       <br />
     </v-container>
 

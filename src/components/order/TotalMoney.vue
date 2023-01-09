@@ -24,7 +24,7 @@
         </tr>
         <tr>
           <td>Price :</td>
-          <td class="text-lg-right">130</td>
+          <td class="text-lg-right">105</td>
           <td class="text-lg-right">Baht</td>
         </tr>
         <tr>
@@ -34,7 +34,7 @@
         </tr>
         <tr>
           <td>Total :</td>
-          <td class="text-lg-right">125</td>
+          <td class="text-lg-right">100</td>
           <td class="text-lg-right">Baht</td>
         </tr>
       </tbody>
