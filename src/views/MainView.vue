@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import {
-  mdiWeatherSunny,
-  mdiWeatherNight,
   mdiAccountMultiple,
   mdiStar,
   mdiAccount,
@@ -13,10 +11,6 @@ import { useLoginStore } from "@/stores/login";
 const loginStore = useLoginStore();
 
 const theme = ref("light");
-
-function onClick() {
-  theme.value = theme.value === "light" ? "dark" : "light";
-}
 
 const logout = () => {
   loginStore.logout();

@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { mdiCoffee } from "@mdi/js";
+// import { mdiCoffee } from "@mdi/js";
 import { ref } from "vue";
-import type Menu from "@/types/User";
+// import type Menu from "@/types/User";
 import { useMenuStore } from "@/stores/Menu";
 const menuStores = useMenuStore();
 const props = withDefaults(
