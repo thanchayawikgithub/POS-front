@@ -4,7 +4,11 @@
   <v-container>
     <v-row class="text-center">
       <v-col>
-        <v-btn width="50%" height="45" rounded class="eiei" color="#8B5927"
+        <v-btn
+          style="height: 5vh; width: 12vw"
+          rounded
+          class="eiei"
+          color="#8B5927"
           >PAY</v-btn
         >
       </v-col>
