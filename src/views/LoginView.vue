@@ -23,7 +23,7 @@ const reset = () => {
   form.value?.reset();
 };
 
-const show2 = ref(true);
+const show2 = ref(false);
 </script>
 <template>
   <v-app>

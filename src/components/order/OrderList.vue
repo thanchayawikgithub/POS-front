@@ -31,22 +31,23 @@ function dec() {
     <v-container>
       <v-row>
         <v-col cols="2"> </v-col>
-        <v-col cols="3" class="text-center">
+        <v-col cols="2" class="text-center pl-10">
           <h5>Name</h5>
         </v-col>
-        <v-col cols="5" class="text-center">
+        <v-col cols="5" class="text-center pl-15">
           <h5>Quantity</h5>
         </v-col>
-        <v-col cols="0" class="text-center">
+        <v-col cols="2" class="text-center pl-9">
           <h5>Price</h5>
         </v-col>
       </v-row>
       <v-card
-        class="pa-5"
-        width="110%"
+        class="pa-5 mb-1"
+        width="100%"
         height="100%"
         v-for="item in menuStores.menu"
         :key="item.id"
+        flat
       >
         <v-row>
           <v-col cols="2">
@@ -73,7 +74,6 @@ function dec() {
           >
         </v-row>
       </v-card>
-      <br />
     </v-container>
 
     <v-card>
