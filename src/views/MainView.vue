@@ -25,9 +25,6 @@ const logout = () => {
 
 <template>
   <v-app :theme="theme">
-    <v-app-bar>
-      <v-spacer></v-spacer>
-    </v-app-bar>
     <v-navigation-drawer expand-on-hover rail>
       <v-list>
         <v-list-item
