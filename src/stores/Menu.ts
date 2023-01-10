@@ -18,6 +18,20 @@ export const useMenuStore = defineStore("menu", () => {
       price: 45,
       pic: "milk.png",
     },
+    {
+      id: 3,
+      type: "drink",
+      name: "Milk2",
+      price: 45,
+      pic: "milk.png",
+    },
+    {
+      id: 4,
+      type: "drink",
+      name: "Milk3",
+      price: 45,
+      pic: "milk.png",
+    },
   ]);
   const menuTab: Array<String> = ["Drink", "Bakery", "Food"];
   return { menu, menuTab };

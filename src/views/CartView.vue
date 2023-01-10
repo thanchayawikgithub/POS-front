@@ -2,10 +2,10 @@
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
 import ButtonCart from "@/components/order/ButtonCart.vue";
-import { useMenuStore } from "@/stores/Menu";
-import type Menu from "@/types/Menu";
+// import { useMenuStore } from "@/stores/Menu";
+// import type Menu from "@/types/Menu";
 import { ref } from "vue";
-import MenuDrink from "@/components/menu/MenuDrink.vue";
+// import MenuDrink from "@/components/menu/MenuDrink.vue";
 import { mdiMagnify } from "@mdi/js";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
@@ -16,32 +16,30 @@ const drink = ref([
   { name: "Americano", price: "55" },
   { name: "Cappuccino", price: "55" },
   { name: "Espresso", price: "55" },
+  { name: "Espresso", price: "55" },
 ]);
 const selected = ref(["Recommend"]);
 const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
-const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
-const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
-const menuStore = useMenuStore();
+// const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
+// const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
+// const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 
 <template>
-  <v-container class="bg">
-    <v-row class="justify-center ma-10">
-      <v-img
-        src="https://media.discordapp.net/attachments/410789993628434435/1061722316041625710/image.png"
-        height="150px"
-      ></v-img>
-    </v-row>
+  <v-container class="bg fullscreen" fluid>
     <v-row>
       <v-col cols="8">
-        <v-card style="border: 3px solid" height="800px" class="bg2">
-          <v-tabs v-model="tab" grow>
+        <v-card
+          style="border: 3px solid; height: 110vh; overflow-y: auto"
+          class="bg2"
+        >
+          <v-tabs v-model="tab" grow style="height: 10vh">
             <v-tab
               v-for="item in type"
               :key="item"
               :value="item"
-              style="font-weight: bold; font-size: 20px"
+              style="font-weight: bold; font-size: 20px; height: 7vh"
             >
               {{ item }}
             </v-tab>
@@ -61,10 +59,10 @@ const menuStore = useMenuStore();
             </v-col>
 
             <v-col cols="4">
-              <v-card class="mx-auto bg2" width="335px" flat>
+              <v-card class="mx-auto bg2" style="height: 10vh" flat>
                 <v-card-text>
                   <v-text-field
-                    hight="80px"
+                    style="height: 9vh"
                     density="compact"
                     variant="outlined"
                     label="Search"
@@ -86,10 +84,17 @@ const menuStore = useMenuStore();
                   :key="item.name"
                   :value="item"
                 >
-                  <v-btn width="300px" height="250px" class="ma-5">
-                    <v-card width="300px" height="250px" class="mx-auto card">
+                  <v-btn
+                    style="width: 36vh; height: 35vh; background-color: #663300"
+                    class="ma-5"
+                  >
+                    <v-card
+                      style="width: 36vh; height: 35vh"
+                      class="mx-auto card"
+                    >
                       <v-img
                         class="align-end image"
+                        style="height: 30vh; width: 30wd"
                         src="https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png"
                       >
                       </v-img>
@@ -108,7 +113,11 @@ const menuStore = useMenuStore();
         </v-card>
       </v-col>
       <v-col cols="4">
-        <v-card height="800px" style="border: 3px solid" class="bg2">
+        <v-card
+          height="800px"
+          style="border: 3px solid; height: 110vh"
+          class="bg2"
+        >
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
@@ -121,6 +130,14 @@ const menuStore = useMenuStore();
   </v-container>
 </template>
 <style scoped>
+.fullscreen {
+  width: 150vw;
+  height: 118vh;
+}
+.halfscreen {
+  height: 50vh;
+  width: 50vw;
+}
 .bg {
   background-color: #dac7b4;
 }
@@ -146,7 +163,7 @@ const menuStore = useMenuStore();
   position: absolute;
   left: 0;
   bottom: -60px;
-  background: #00ac7c;
+  background: #443300;
   color: #fff;
   height: 3em;
   width: 100%;

@@ -5,14 +5,13 @@ import LoginView from "./views/LoginView.vue";
 import { onMounted } from "vue";
 import { useLoginStore } from "@/stores/login";
 import MessageBox from "./components/MessageBox.vue";
-import ShowName from "./views/ShowName.vue";
 const loginStore = useLoginStore();
 onMounted(() => {
   loginStore.loadData();
 });
 </script>
 
-<template>
+<template style="background-color: #dac7b4">
   <LoginView v-if="!loginStore.isLogin" />
   <MainView
     v-if="loginStore.isLogin"

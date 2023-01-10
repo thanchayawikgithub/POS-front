@@ -2,13 +2,11 @@
 import { ref } from "vue";
 import type { VForm } from "vuetify/components";
 import { useLoginStore } from "@/stores/login";
-import ButtonCart from "@/components/order/ButtonCart.vue";
-import { mdiEye, mdiEyeOff } from "@mdi/js";
 
 const loginStore = useLoginStore();
-const emit = defineEmits<{
-  (e: "login", userName: string): void;
-}>();
+// const emit = defineEmits<{
+//   (e: "login", userName: string): void;
+// }>();
 const loginName = ref("");
 const password = ref("");
 const valid = ref(true);

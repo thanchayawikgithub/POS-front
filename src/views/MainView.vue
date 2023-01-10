@@ -1,21 +1,16 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import {
-  mdiWeatherSunny,
-  mdiWeatherNight,
   mdiAccountMultiple,
   mdiStar,
   mdiAccount,
   mdiCart,
+  mdiLogout,
 } from "@mdi/js";
 import { useLoginStore } from "@/stores/login";
 const loginStore = useLoginStore();
 
 const theme = ref("light");
-
-function onClick() {
-  theme.value = theme.value === "light" ? "dark" : "light";
-}
 
 const logout = () => {
   loginStore.logout();
@@ -24,22 +19,13 @@ const logout = () => {
 
 <template>
   <v-app :theme="theme">
-    <v-app-bar>
-      <v-spacer></v-spacer>
-
-      <v-btn
-        :prepend-icon="theme === 'light' ? mdiWeatherSunny : mdiWeatherNight"
-        @click="onClick"
-        >Toggle Theme</v-btn
-      >
-      <v-btn @click="logout">Logout</v-btn>
-    </v-app-bar>
-    <v-navigation-drawer expand-on-hover permanent>
+    <v-navigation-drawer expand-on-hover rail style="background-color: #685444">
       <v-list>
         <v-list-item
-          prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
+          style="color: bisque"
+          prepend-avatar="./public/than.png"
           :title="loginStore.loginName"
-          subtitle="sandra_a88@gmailcom"
+          subtitle="wanonvonteen@gmail.com"
         ></v-list-item>
       </v-list>
 
@@ -51,23 +37,34 @@ const logout = () => {
           title="Users"
           value="users"
           to="/user"
+          style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiAccountMultiple"
           title="Shared with me"
           value="shared"
           to="/shared with me"
+          style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiStar"
           title="Starred"
           value="starred"
+          style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiCart"
           title="Cart"
           value="cart"
           to="/cart"
+          style="color: bisque"
+        ></v-list-item>
+        <v-list-item
+          :prepend-icon="mdiLogout"
+          title="Logout"
+          value="Logout"
+          @click="logout"
+          style="color: #ef4949"
         ></v-list-item>
       </v-list>
     </v-navigation-drawer>
