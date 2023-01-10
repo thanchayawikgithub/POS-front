@@ -1,6 +1,9 @@
 <script setup lang="ts"></script>
 <template>
   <div class="tab">
+    <v-card>
+      <v-divider></v-divider>
+    </v-card>
     <v-container>
       <v-row class="text-center">
         <v-col
@@ -15,7 +18,7 @@
         </v-col>
       </v-row>
     </v-container>
-    <v-table>
+    <v-table style="background-color: #af9070">
       <tbody>
         <tr>
           <td style="width: 70%">Member :</td>

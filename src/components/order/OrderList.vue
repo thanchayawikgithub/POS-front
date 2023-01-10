@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { mdiCoffee } from "@mdi/js";
 import { ref } from "vue";
-import type Menu from "@/types/User";
 import { useMenuStore } from "@/stores/Menu";
 const menuStores = useMenuStore();
 const props = withDefaults(
@@ -27,57 +26,58 @@ function dec() {
 }
 </script>
 <template>
-  <div>
+  <div style="height: 33vh" overflow>
     <v-container>
       <v-row>
         <v-col cols="2"> </v-col>
-        <v-col cols="3" class="text-center">
+        <v-col cols="3" class="pl-10">
           <h5>Name</h5>
         </v-col>
-        <v-col cols="5" class="text-center">
+        <v-col cols="5" class="text-center pl-15">
           <h5>Quantity</h5>
         </v-col>
-        <v-col cols="0" class="text-center">
+        <v-col cols="2" class="text-center pl-9">
           <h5>Price</h5>
         </v-col>
       </v-row>
-      <div v-for="item in menuStores.menu" :key="item.id">
-        <v-card class="pa-5" width="110%" height="100%">
-          <v-row>
-            <v-col cols="2">
-              <v-img height="100%" width="100%" :src="item.pic"></v-img>
-            </v-col>
-            <v-col cols="3">
-              <v-card-text> {{ item.name }}</v-card-text>
-            </v-col>
-            <v-col cols="1" class="text-right"
-              ><v-card-actions class="justify-center">
-                <v-btn color="error" @click="dec()"> - </v-btn>
-              </v-card-actions></v-col
-            >
-            <v-col cols="2" class="text-center">
-              <v-card-text>{{ count }}</v-card-text>
-            </v-col>
-            <v-col cols="1" class="text-left"
-              ><v-card-actions class="justify-center">
-                <v-btn color="secondary" @click="inc()"> + </v-btn>
-              </v-card-actions>
-            </v-col>
-            <v-col cols="3" class="text-center"
-              ><v-card-text>{{ item.price * count }}</v-card-text></v-col
-            >
-          </v-row>
-        </v-card>
-      </div>
-
-      <br />
+      <v-card
+        class="pa-5 mb-2 mt-3"
+        width="100%"
+        height="100%"
+        v-for="item in menuStores.menu"
+        :key="item.id"
+        color="#dac7b4"
+        style="border-radius: 5px; border: 2px solid"
+      >
+        <v-row>
+          <v-col cols="2">
+            <v-img height="100%" width="100%" :src="item.pic"></v-img>
+          </v-col>
+          <v-col cols="3">
+            <v-card-text> {{ item.name }}</v-card-text>
+          </v-col>
+          <v-col cols="1" class="text-right"
+            ><v-card-actions class="justify-center">
+              <v-btn color="error" @click="dec()"> - </v-btn>
+            </v-card-actions></v-col
+          >
+          <v-col cols="2" class="text-center">
+            <v-card-text>{{ count }}</v-card-text>
+          </v-col>
+          <v-col cols="1" class="text-left"
+            ><v-card-actions class="justify-center">
+              <v-btn color="secondary" @click="inc()"> + </v-btn>
+            </v-card-actions>
+          </v-col>
+          <v-col cols="3" class="text-center"
+            ><v-card-text>{{ item.price * count }}</v-card-text></v-col
+          >
+        </v-row>
+      </v-card>
     </v-container>
 
-    <v-card>
-      <v-divider></v-divider>
-    </v-card>
     <br />
   </div>
-
-  <div></div>
 </template>
+
+<script scope></script>
