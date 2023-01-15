@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { defineStore } from "pinia";
 import type Menu from "@/types/Menu";
 
@@ -104,5 +104,13 @@ export const useMenuStore = defineStore("menu", () => {
     const index = orderList.value.findIndex((menu) => menu.id === item.id);
     orderList.value.splice(index, 1);
   };
-  return { menu, orderList, addCart, addQty, delQty };
+
+  const totalPrice = computed(function () {
+    return orderList.value.reduce(
+      (sum, item) => sum + item.price * item.qty,
+      0
+    );
+  });
+
+  return { menu, orderList, addCart, addQty, delQty, totalPrice };
 });

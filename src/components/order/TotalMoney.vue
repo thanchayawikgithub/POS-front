@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useMenuStore } from "@/stores/Menu";
+const menuStore = useMenuStore();
+</script>
 <template>
   <v-container>
     <v-row class="text-center">
@@ -23,17 +26,17 @@
       </tr>
       <tr>
         <td>Price :</td>
-        <td class="text-lg-right">130</td>
+        <td class="text-lg-right">{{ menuStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
       <tr>
         <td>Discount :</td>
-        <td class="text-lg-right">5</td>
+        <td class="text-lg-right">0</td>
         <td class="text-lg-right">Baht</td>
       </tr>
       <tr>
         <td>Total :</td>
-        <td class="text-lg-right">125</td>
+        <td class="text-lg-right">{{ menuStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
     </tbody>
