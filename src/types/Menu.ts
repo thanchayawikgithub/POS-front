@@ -4,4 +4,5 @@ export default interface Menu {
   name: string;
   price: number;
   pic: string;
+  qty: number;
 }

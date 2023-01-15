@@ -2,7 +2,7 @@
 import OrderList from "@/components/order/OrderList.vue";
 import TotalMoney from "@/components/order/TotalMoney.vue";
 import ButtonCart from "@/components/order/ButtonCart.vue";
-// import { useMenuStore } from "@/stores/Menu";
+import { useMenuStore } from "@/stores/Menu";
 // import type Menu from "@/types/Menu";
 import { ref } from "vue";
 // import MenuDrink from "@/components/menu/MenuDrink.vue";
@@ -22,7 +22,7 @@ const selected = ref(["Recommend"]);
 const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 // const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
 // const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
-// const menuStore = useMenuStore();
+const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
 </script>
 
@@ -80,13 +80,14 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
                 <v-col
                   cols="12"
                   md="4"
-                  v-for="item in drink"
-                  :key="item.name"
+                  v-for="item in menuStore.menu"
+                  :key="item.id"
                   :value="item"
                 >
                   <v-btn
                     style="width: 36vh; height: 35vh; background-color: #663300"
                     class="ma-5"
+                    @click="menuStore.addCart(item)"
                   >
                     <v-card
                       style="width: 36vh; height: 35vh"
@@ -94,8 +95,8 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
                     >
                       <v-img
                         class="align-end image"
-                        style="height: 30vh; width: 30wd"
-                        src="https://static.vecteezy.com/system/resources/previews/011/048/030/non_2x/iced-coffee-watercolor-set-free-png.png"
+                        style="height: 30vh; width: 30vw"
+                        :src="item.pic"
                       >
                       </v-img>
                       <v-card-title class="title"
@@ -121,6 +122,7 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart
           </h2>
+
           <OrderList />
           <TotalMoney />
           <ButtonCart />

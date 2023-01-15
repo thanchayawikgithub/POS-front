@@ -3,28 +3,7 @@
 import { ref } from "vue";
 // import type Menu from "@/types/User";
 import { useMenuStore } from "@/stores/Menu";
-const menuStores = useMenuStore();
-const props = withDefaults(
-  defineProps<{
-    rating: number;
-  }>(),
-  {
-    rating: 1,
-  }
-);
-const emits = defineEmits<{
-  (e: "change", rating: number): void;
-}>();
-
-const count = ref(props.rating);
-function inc() {
-  count.value++;
-  emits("change", count.value);
-}
-function dec() {
-  count.value--;
-  emits("change", count.value);
-}
+const menuStore = useMenuStore();
 </script>
 <template>
   <div>
@@ -53,7 +32,7 @@ function dec() {
         </v-row>
         <v-card
           class="pa-3 mb-2 mt-3"
-          v-for="item in menuStores.menu"
+          v-for="item in menuStore.orderList"
           :key="item.id"
           color="#dac7b4"
           style="
@@ -74,7 +53,7 @@ function dec() {
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#CC0000"
-                  @click="dec()"
+                  @click="menuStore.delQty(item)"
                   style="font-weight: bolder"
                 >
                   -
@@ -82,13 +61,13 @@ function dec() {
               </v-card-actions></v-col
             >
             <v-col cols="2" class="text-center">
-              <v-card-text>{{ count }}</v-card-text>
+              <v-card-text>{{ item.qty }}</v-card-text>
             </v-col>
             <v-col cols="1" class="text-left"
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#009900"
-                  @click="inc()"
+                  @click="menuStore.addQty(item)"
                   style="font-weight: bolder"
                 >
                   +
@@ -96,7 +75,7 @@ function dec() {
               </v-card-actions>
             </v-col>
             <v-col cols="3" class="text-center"
-              ><v-card-text>{{ item.price * count }}</v-card-text></v-col
+              ><v-card-text>{{ item.price * item.qty }}</v-card-text></v-col
             >
           </v-row>
         </v-card>
