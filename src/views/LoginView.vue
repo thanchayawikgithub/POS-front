@@ -7,6 +7,7 @@ const loginStore = useLoginStore();
 // const emit = defineEmits<{
 //   (e: "login", userName: string): void;
 // }>();
+const userType = ref("Employee");
 const loginName = ref("");
 const password = ref("");
 const valid = ref(true);
@@ -69,7 +70,7 @@ const show2 = ref(false);
                 </h4>
               </v-card-title>
 
-              <v-card-text>
+              <v-card-text class="pa-0">
                 <v-form ref="form" v-model="valid">
                   <v-text-field
                     label="Name"
@@ -104,23 +105,38 @@ const show2 = ref(false);
                 <pre></pre>
               </v-card-text>
 
-              <v-card-actions class="justify-center">
-                <v-btn
-                  variant="flat"
-                  width="150px"
-                  color="success"
-                  style="border-radius: 10px"
-                  @click="login"
-                  >Login</v-btn
-                >
-                <v-btn
-                  color="error"
-                  variant="flat"
-                  width="150px"
-                  style="border-radius: 10px"
-                  @click="reset"
-                  >Clear</v-btn
-                >
+              <v-card-actions class="justify-center pa-0">
+                <v-container>
+                  <v-row>
+                    <v-switch
+                      v-model="userType"
+                      hide-details
+                      inset
+                      true-value="Owner"
+                      false-value="Employee"
+                      color="green"
+                      :label="`Position: ${userType}`"
+                    ></v-switch>
+                  </v-row>
+                  <v-row>
+                    <v-btn
+                      variant="flat"
+                      width="150px"
+                      color="success"
+                      style="border-radius: 10px"
+                      @click="login"
+                      >Login</v-btn
+                    >
+                    <v-btn
+                      color="error"
+                      variant="flat"
+                      width="150px"
+                      style="border-radius: 10px"
+                      @click="reset"
+                      >Clear</v-btn
+                    >
+                  </v-row>
+                </v-container>
               </v-card-actions>
             </v-card>
           </v-col>
