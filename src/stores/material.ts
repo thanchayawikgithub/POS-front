@@ -53,7 +53,6 @@ export const useMaterialStore = defineStore("material", () => {
       } else {
         const res = await materialService.saveMaterial(editedMaterial.value);
       }
-
       dialog.value = false;
       await getMaterials();
     } catch (e) {

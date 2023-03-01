@@ -18,7 +18,7 @@ async function save() {
         <span class="text-h5">Material Profile</span>
       </v-card-title>
       <v-card-text>
-        <v-from ref="from">
+        <v-form ref="form">
           <v-container>
             <v-row>
               <v-col cols="12">
@@ -66,8 +66,7 @@ async function save() {
               </v-col>
             </v-row>
           </v-container>
-        </v-from>
-
+        </v-form>
         <small>*indicates required field</small>
       </v-card-text>
       <v-card-actions>
