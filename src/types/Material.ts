@@ -1,8 +1,8 @@
 export default interface Material {
-  id: number;
-  name: string;
-  min_quantity: number;
-  quantity: number;
-  unit: number;
-  price_per_unit: number;
+  mat_id?: number;
+  mat_name: string;
+  mat_min_quantity: number;
+  mat_quantity: number;
+  mat_unit: number;
+  mat_price_per_unit: number;
 }
