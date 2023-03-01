@@ -45,7 +45,7 @@ onMounted(async () => {
               <td>{{ item.mat_min_quantity }}</td>
               <td>{{ item.mat_quantity }}</td>
               <td>{{ item.mat_unit }}</td>
-              <td>{{ item.mat_price_per_unit }}</td>
+              <td>{{ item.mat_price_per_unit }}$</td>
               <td>
                 <v-btn
                   :icon="mdiPencil"

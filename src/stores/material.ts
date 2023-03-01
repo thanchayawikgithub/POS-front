@@ -8,6 +8,7 @@ import { useMessageStore } from "./message";
 export const useMaterialStore = defineStore("material", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
+  const isTable = ref(true);
   const dialog = ref(false);
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material>({
@@ -85,5 +86,6 @@ export const useMaterialStore = defineStore("material", () => {
     saveMaterial,
     editMaterial,
     deleteMaterial,
+    isTable,
   };
 });
