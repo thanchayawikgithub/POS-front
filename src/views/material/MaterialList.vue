@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import { useMaterialStore } from "@/stores/material";
 import { onMounted } from "vue";
+import MaterialDialog from "./MaterialDialog.vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
 
 const materialStore = useMaterialStore();
@@ -11,6 +12,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <MaterialDialog />
   <v-container>
     <v-row>
       <v-col cols="5" offset="11">
@@ -45,18 +47,18 @@ onMounted(async () => {
               <td>{{ item.mat_unit }}</td>
               <td>{{ item.mat_price_per_unit }}</td>
               <td>
-                <!-- <v-btn
+                <v-btn
                   :icon="mdiPencil"
                   color="secondary"
                   class="ma-1"
-                  @click="editUser(item)"
+                  @click="materialStore.editMaterial(item)"
                 ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
                   color="error"
                   class="ma-1"
-                  @click="deleteUser(item.id)"
-                ></v-btn> -->
+                  @click="materialStore.deleteMaterial(item.mat_id!)"
+                ></v-btn>
               </td>
             </tr>
           </tbody>

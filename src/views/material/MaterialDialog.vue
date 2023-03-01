@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { useMaterialStore } from "@/stores/material";
-import { onMounted, ref } from "vue";
+import { ref } from "vue";
 import type { VForm } from "vuetify/components";
-
+const form = ref<VForm | null>(null);
 const materialStore = useMaterialStore();
-
-onMounted(async () => {
-  await materialStore.getMaterials();
-});
+async function save() {
+  const { valid } = await form.value!.validate();
+  if (valid) {
+    await materialStore.saveMaterial();
+  }
+}
 </script>
 <template>
   <v-dialog v-model="materialStore.dialog" persistent width="1024">
@@ -23,7 +25,7 @@ onMounted(async () => {
                 <v-text-field
                   label="Name*"
                   required
-                  v-model="materialStore.editMaterials.mat_name"
+                  v-model="materialStore.editedMaterial.mat_name"
                   :rules="[
                     (v) => !!v || 'Item is required',
                     (v) => v.length >= 3 || 'Length must more than 3',
@@ -34,7 +36,7 @@ onMounted(async () => {
                 <v-text-field
                   label="Min Quantity*"
                   required
-                  v-model="materialStore.editMaterials.mat_min_quantity"
+                  v-model="materialStore.editedMaterial.mat_min_quantity"
                   :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
@@ -42,7 +44,7 @@ onMounted(async () => {
                 <v-text-field
                   label="Quantity*"
                   required
-                  v-model="materialStore.editMaterials.mat_quantity"
+                  v-model="materialStore.editedMaterial.mat_quantity"
                   :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
@@ -50,7 +52,7 @@ onMounted(async () => {
                 <v-text-field
                   label="Unit*"
                   required
-                  v-model="materialStore.editMaterials.mat_unit"
+                  v-model="materialStore.editedMaterial.mat_unit"
                   :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
@@ -58,7 +60,7 @@ onMounted(async () => {
                 <v-text-field
                   label="Price Per Unit*"
                   required
-                  v-model="materialStore.editMaterials.mat_price_per_unit"
+                  v-model="materialStore.editedMaterial.mat_price_per_unit"
                   :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
@@ -77,13 +79,7 @@ onMounted(async () => {
         >
           Close
         </v-btn>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click="materialStore.dialog = false"
-        >
-          Save
-        </v-btn>
+        <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

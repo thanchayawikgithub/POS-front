@@ -60,6 +60,13 @@ const logout = () => {
           style="color: bisque"
         ></v-list-item>
         <v-list-item
+          :prepend-icon="mdiCart"
+          title="Material"
+          value="Material"
+          to="/material"
+          style="color: bisque"
+        ></v-list-item>
+        <v-list-item
           :prepend-icon="mdiLogout"
           title="Logout"
           value="Logout"

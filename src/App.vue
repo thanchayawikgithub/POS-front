@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import MainView from "./views/MainView.vue";
 import LoginView from "./views/LoginView.vue";
-
+import LoadingDialog from "./components/LoadingDialog.vue";
+import MessageDialog from "./components/MessageDialog.vue";
 import { onMounted } from "vue";
 import { useLoginStore } from "@/stores/login";
 import MessageBox from "./components/MessageBox.vue";
@@ -19,5 +20,7 @@ onMounted(() => {
     :login-name="loginStore.loginName"
   />
   <MessageBox></MessageBox>
+  <LoadingDialog></LoadingDialog>
+  <MessageDialog></MessageDialog>
 </template>
 <style scoped></style>
