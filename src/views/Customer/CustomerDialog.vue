@@ -55,15 +55,6 @@ async function save() {
                   :rules="[(v) => !!v || 'Item is required']"
                 ></v-text-field>
               </v-col>
-
-              <v-col cols="12">
-                <v-text-field
-                  label="Start Date*"
-                  required
-                  v-model="customerStore.editedCustomer.customer_startDate"
-                  :rules="[(v) => !!v || 'Item is required']"
-                ></v-text-field>
-              </v-col>
             </v-row>
           </v-container>
         </v-form>

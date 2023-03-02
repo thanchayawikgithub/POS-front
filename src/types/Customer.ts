@@ -3,5 +3,7 @@ export default interface Customer {
   customer_name: string;
   customer_tel: string;
   customer_point: number;
-  customer_startDate: Date;
+  createdDate?: Date;
+  updatedDate?: Date;
+  deletedDate?: Date;
 }

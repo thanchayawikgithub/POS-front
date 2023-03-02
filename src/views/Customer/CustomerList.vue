@@ -43,7 +43,7 @@ onMounted(async () => {
               <td>{{ item.customer_name }}</td>
               <td>{{ item.customer_tel }}</td>
               <td>{{ item.customer_point }}</td>
-              <td>{{ item.customer_startDate }}</td>
+              <td>{{ item.createdDate }}</td>
 
               <td>
                 <v-btn
