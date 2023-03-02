@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import {
-  mdiAccountMultiple,
+  mdiFaceMan,
   mdiStar,
   mdiAccount,
   mdiCart,
@@ -41,10 +41,10 @@ const logout = () => {
           style="color: bisque"
         ></v-list-item>
         <v-list-item
-          :prepend-icon="mdiAccountMultiple"
-          title="Shared with me"
-          value="shared"
-          to="/shared with me"
+          :prepend-icon="mdiFaceMan"
+          title="Customer"
+          value="customer"
+          to="/customers"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
