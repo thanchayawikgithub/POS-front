@@ -7,6 +7,7 @@ import {
   mdiCart,
   mdiLogout,
   mdiStoreEditOutline,
+  mdiFaceAgent,
 } from "@mdi/js";
 import { useLoginStore } from "@/stores/login";
 const loginStore = useLoginStore();
@@ -65,6 +66,13 @@ const logout = () => {
           title="Material"
           value="Material"
           to="/material"
+          style="color: bisque"
+        ></v-list-item>
+        <v-list-item
+          :prepend-icon="mdiFaceAgent"
+          title="Employee"
+          value="Employee"
+          to="/employee"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
