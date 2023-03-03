@@ -4,15 +4,11 @@ import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
 import type User from "@/types/User";
 const userStore = useUserStore();
-const deleteUser = (index: number): void => {
-  userStore.deleteUser(index);
-};
+
 const addNew = () => {
   userStore.dialog = true;
 };
-const editUser = (user: User) => {
-  userStore.editUser(user);
-};
+
 onMounted(async () => {
   await userStore.getUsers();
 });
