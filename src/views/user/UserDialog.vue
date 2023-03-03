@@ -30,7 +30,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Login*"
-                    v-model="userStore.editedUser.login"
+                    v-model="userStore.editedUser.user_login"
                     required
                     :rules="[
                       (v) => !!v || 'Login จะต้องไม่มีชช่องว่าง',
@@ -43,7 +43,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Name"
-                    v-model="userStore.editedUser.name"
+                    v-model="userStore.editedUser.user_name"
                     :rules="[
                       (v) => !!v || 'Name จะต้องไม่มีชช่องว่าง',
                       (v) =>
@@ -56,7 +56,7 @@ const clear = () => {
                 <v-col cols="12">
                   <v-text-field
                     label="Password*"
-                    v-model="userStore.editedUser.password"
+                    v-model="userStore.editedUser.user_password"
                     type="password"
                     required
                     :rules="[
@@ -70,6 +70,13 @@ const clear = () => {
                         ) ||
                         'Password จะต้องมีตัวอักษรเล็กใหญ่และประกอบด้วยอักขระพิเศษ',
                     ]"
+                  ></v-text-field>
+                </v-col>
+
+                <v-col cols="12">
+                  <v-text-field
+                    label="Role"
+                    v-model="userStore.editedUser.user_role"
                   ></v-text-field>
                 </v-col>
               </v-row>

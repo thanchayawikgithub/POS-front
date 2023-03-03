@@ -1,6 +1,10 @@
+import type Employee from "./Employee";
+
 export default interface User {
-  id: number;
-  login: string;
-  name: string;
-  password: string;
+  user_id?: number;
+  user_login: string;
+  user_name: string;
+  user_password: string;
+  user_role: string;
+  // employee_id?: Employee;
 }

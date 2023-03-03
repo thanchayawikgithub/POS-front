@@ -1,68 +1,104 @@
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { defineStore } from "pinia";
 import type User from "@/types/User";
+import userService from "@/services/user";
+import { useLoadingStore } from "./loading";
+import { useMessageStore } from "./message";
 
 export const useUserStore = defineStore("user", () => {
+  const loadingStore = useLoadingStore();
+  const messageStore = useMessageStore();
   const dialog = ref(false);
   const isTable = ref(true);
-  const editedUser = ref<User>({ id: -1, login: "", name: "", password: "" });
-  let lastId = 4;
-  const users = ref<User[]>([
-    {
-      id: 1,
-      login: "admin",
-      name: "Administrator",
-      password: "Pass@1234",
-    },
-    {
-      id: 2,
-      login: "user1",
-      name: "User 1",
-      password: "Pass@1234",
-    },
-    {
-      id: 3,
-      login: "user2",
-      name: "User 2",
-      password: "Pass@1234",
-    },
-  ]);
+  const editedUser = ref<User>({
+    user_login: "",
+    user_name: "",
+    user_password: "",
+    user_role: "",
+  });
+
+  const users = ref<User[]>([]);
+
+  watch(dialog, (newDialog, oldDialog) => {
+    if (!newDialog) {
+      editedUser.value = {
+        user_login: "",
+        user_name: "",
+        user_password: "",
+        user_role: "",
+      };
+    }
+  });
+
   const login = (loginName: string, password: string): boolean => {
-    const index = users.value.findIndex((item) => item.login === loginName);
+    const index = users.value.findIndex(
+      (item) => item.user_login === loginName
+    );
     if (index >= 0) {
       const user = users.value[index];
-      if (user.password === password) {
+      if (user.user_password === password) {
         return true;
       }
       return false;
     }
     return false;
   };
-  const saveUser = () => {
-    if (editedUser.value.id < 0) {
-      editedUser.value.id = lastId++;
-      users.value.push(editedUser.value);
-    } else {
-      const index = users.value.findIndex(
-        (item) => item.id === editedUser.value.id
-      );
-      users.value[index] = editedUser.value;
+  async function getUsers() {
+    loadingStore.isLoading = true;
+    try {
+      const res = await userService.getUsers();
+      users.value = res.data;
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Employee ได้");
     }
-    dialog.value = false;
-    clear();
-  };
+    loadingStore.isLoading = false;
+  }
+
+  async function saveUser() {
+    loadingStore.isLoading = true;
+    try {
+      if (editedUser.value.user_id) {
+        const res = await userService.updateUser(
+          editedUser.value.user_id,
+          editedUser.value
+        );
+      } else {
+        const res = await userService.saveUser(editedUser.value);
+      }
+      dialog.value = false;
+      await getUsers();
+    } catch (e) {
+      messageStore.showError("ไม่สามารถบันทึก Employee ได้");
+      console.log(e);
+    }
+    loadingStore.isLoading = false;
+  }
 
   const editUser = (user: User) => {
-    editedUser.value = { ...user };
+    editedUser.value = JSON.parse(JSON.stringify(user));
     dialog.value = true;
   };
 
-  const deleteUser = (id: number): void => {
-    const index = users.value.findIndex((item) => item.id === id);
-    users.value.splice(index, 1);
+  const deleteUser = async (id: number): Promise<void> => {
+    loadingStore.isLoading = true;
+    try {
+      const res = await userService.deleteUser(id);
+      await getUsers();
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถลบ Employee ได้");
+    }
+    loadingStore.isLoading = false;
   };
   const clear = () => {
-    editedUser.value = { id: -1, login: "", name: "", password: "" };
+    editedUser.value = {
+      user_login: "",
+      user_name: "",
+      user_password: "",
+      user_role: "",
+    };
   };
   return {
     users,
@@ -74,5 +110,6 @@ export const useUserStore = defineStore("user", () => {
     editUser,
     isTable,
     login,
+    getUsers,
   };
 });

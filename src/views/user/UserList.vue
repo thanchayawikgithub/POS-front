@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from "../../stores/user";
+import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
 import type User from "@/types/User";
 const userStore = useUserStore();
@@ -12,6 +13,9 @@ const addNew = () => {
 const editUser = (user: User) => {
   userStore.editUser(user);
 };
+onMounted(async () => {
+  await userStore.getUsers();
+});
 </script>
 
 <template>
@@ -32,27 +36,29 @@ const editUser = (user: User) => {
               <th>login</th>
               <th>name</th>
               <th>password</th>
+              <th>role</th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in userStore.users" :key="item.id">
-              <td>{{ item.id }}</td>
-              <td>{{ item.login }}</td>
-              <td>{{ item.name }}</td>
-              <td>{{ item.password }}</td>
+            <tr v-for="item in userStore.users" :key="item.user_id">
+              <td>{{ item.user_id }}</td>
+              <td>{{ item.user_login }}</td>
+              <td>{{ item.user_name }}</td>
+              <td>{{ item.user_password }}</td>
+              <td>{{ item.user_role }}</td>
               <td>
                 <v-btn
                   :icon="mdiPencil"
                   color="secondary"
                   class="ma-1"
-                  @click="editUser(item)"
+                  @click="userStore.editUser(item)"
                 ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
                   color="error"
                   class="ma-1"
-                  @click="deleteUser(item.id)"
+                  @click="userStore.deleteUser(item.user_id!)"
                 ></v-btn>
               </td>
             </tr>
