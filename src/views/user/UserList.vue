@@ -2,7 +2,6 @@
 import { useUserStore } from "../../stores/user";
 import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
-import type User from "@/types/User";
 const userStore = useUserStore();
 
 const addNew = () => {
