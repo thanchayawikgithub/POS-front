@@ -50,8 +50,9 @@ const logout = () => {
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiStar"
-          title="Starred"
-          value="starred"
+          title="Store"
+          value="store"
+          to="/stores"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
