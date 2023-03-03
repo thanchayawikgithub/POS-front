@@ -1,12 +1,23 @@
 <script setup lang="ts">
+import { useCustomerStore } from "@/stores/customer";
 import { useMenuStore } from "@/stores/Menu";
+import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
+
 const menuStore = useMenuStore();
+const customerStore = useCustomerStore();
 </script>
 <template>
+  <CustomerDialog />
   <v-container>
     <v-row class="text-center">
       <v-col
-        ><v-btn style="width: 12vw" rounded color="#B86824" class="font-btn">
+        ><v-btn
+          style="width: 12vw"
+          rounded
+          color="#B86824"
+          class="font-btn"
+          @click="customerStore.dialog = true"
+        >
           Register Member
         </v-btn>
       </v-col>
