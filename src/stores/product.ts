@@ -2,6 +2,7 @@ import type Product from "@/types/Product";
 import { defineStore } from "pinia";
 import { ref, watch } from "vue";
 import { useLoadingStore } from "./loading";
+import productService from "@/services/product";
 import { useMessageStore } from "./message";
 
 export const useProductStore = defineStore("product", () => {
@@ -37,34 +38,34 @@ export const useProductStore = defineStore("product", () => {
       };
     }
   });
-  async function getCustomer() {
+  async function getProducts() {
     loadingStore.isLoading = true;
     try {
-      const res = await customerService.getCustomers();
-      customers.value = res.data;
+      const res = await productService.getProducts();
+      products.value = res.data;
       console.log(res);
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถดึงข้อมูล Customer ได้");
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
     }
     loadingStore.isLoading = false;
   }
 
-  async function saveCustomer() {
+  async function saveProduct() {
     loadingStore.isLoading = true;
     try {
-      if (editedCustomer.value.customer_id) {
-        const res = await customerService.updateCustomers(
-          editedCustomer.value.customer_id,
-          editedCustomer.value
+      if (editedProduct.value.product_id) {
+        const res = await productService.updateProduct(
+          editedProduct.value.product_id,
+          editedProduct.value
         );
       } else {
-        const res = await customerService.saveCustomers(editedCustomer.value);
+        const res = await productService.saveProduct(editedProduct.value);
       }
       dialog.value = false;
-      await getCustomer();
+      await getProducts();
     } catch (e) {
-      messageStore.showError("ไม่สามารถบันทึก Customer ได้");
+      messageStore.showError("ไม่สามารถบันทึก Product ได้");
       console.log(e);
     }
     loadingStore.isLoading = false;
@@ -72,25 +73,25 @@ export const useProductStore = defineStore("product", () => {
   async function deleteCustomer(id: number) {
     loadingStore.isLoading = true;
     try {
-      const res = await customerService.deleteCustomers(id);
-      await getCustomer();
+      const res = await productService.deleteProduct(id);
+      await getProducts();
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถลบ Customer ได้");
+      messageStore.showError("ไม่สามารถลบ Product ได้");
     }
     loadingStore.isLoading = false;
   }
-  function editCustomer(customer: Customer) {
-    editedCustomer.value = JSON.parse(JSON.stringify(customer));
+  function editProduct(product: Product) {
+    editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
   }
   return {
-    customers,
-    getCustomer,
+    products,
+    getProducts,
     dialog,
-    editedCustomer,
-    saveCustomer,
-    editCustomer,
+    editedProduct,
+    saveProduct,
+    editProduct,
     deleteCustomer,
     isTable,
   };
