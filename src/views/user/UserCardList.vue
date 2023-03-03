@@ -23,10 +23,21 @@ const editUser = (user: User) => {
           >
         </v-card>
       </v-col>
-      <v-col cols="12" md="4" v-for="item in userStore.users" :key="item.id"
+      <v-col
+        cols="12"
+        md="4"
+        v-for="item in userStore.users"
+        :key="item.user_id"
         ><v-card height="150px" width="100%">
-          <v-card-title> {{ item.login }} ({{ item.id }})</v-card-title>
-          <v-card-text> {{ item.name }} [{{ item.password }}] </v-card-text>
+          <v-card-title>
+            {{ item.user_login }} ({{ item.user_id }})</v-card-title
+          >
+          <v-card-text>
+            {{ item.user_name }} [{{ item.user_password }}]
+          </v-card-text>
+          <v-card-text>
+            {{ item.user_role }}
+          </v-card-text>
           <v-card-actions class="justify-center">
             <v-btn color="error" @click="deleteUser"> Delete </v-btn>
 
