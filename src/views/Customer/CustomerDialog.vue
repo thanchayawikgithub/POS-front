@@ -52,7 +52,9 @@ async function save() {
                   label="Point*"
                   required
                   v-model="customerStore.editedCustomer.customer_point"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[
+                    (v) => v >= 0 || 'poin must be equal to or greater than 0',
+                  ]"
                 ></v-text-field>
               </v-col>
             </v-row>
