@@ -10,7 +10,8 @@ import {
   mdiFaceAgent,
 } from "@mdi/js";
 import { useLoginStore } from "@/stores/login";
-const loginStore = useLoginStore();
+import { useAuthStore } from "@/stores/auth";
+const loginStore = useAuthStore();
 
 const theme = ref("light");
 
@@ -26,7 +27,7 @@ const logout = () => {
         <v-list-item
           style="color: bisque"
           prepend-avatar="./public/than.png"
-          :title="loginStore.loginName"
+          :title="loginStore.authName"
           subtitle="wanonvonteen@gmail.com"
         ></v-list-item>
       </v-list>

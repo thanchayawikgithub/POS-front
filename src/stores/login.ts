@@ -2,7 +2,7 @@ import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import { useUserStore } from "./user";
 import { useMessageStore } from "./message";
-export const useLoginStore = defineStore("counter", () => {
+export const useLoginStore = defineStore("login", () => {
   const useMessage = useMessageStore();
   const userStore = useUserStore();
   const loginName = ref("");

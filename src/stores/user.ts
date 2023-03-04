@@ -30,10 +30,8 @@ export const useUserStore = defineStore("user", () => {
     }
   });
 
-  const login = (loginName: string, password: string): boolean => {
-    const index = users.value.findIndex(
-      (item) => item.user_login === loginName
-    );
+  const login = (username: string, password: string): boolean => {
+    const index = users.value.findIndex((item) => item.user_login === username);
     if (index >= 0) {
       const user = users.value[index];
       if (user.user_password === password) {
@@ -81,7 +79,7 @@ export const useUserStore = defineStore("user", () => {
     dialog.value = true;
   };
 
-  const deleteUser = async (id: number): Promise<void> => {
+  async function deleteUser(id: number) {
     loadingStore.isLoading = true;
     try {
       const res = await userService.deleteUser(id);
@@ -91,7 +89,7 @@ export const useUserStore = defineStore("user", () => {
       messageStore.showError("ไม่สามารถลบ Employee ได้");
     }
     loadingStore.isLoading = false;
-  };
+  }
   const clear = () => {
     editedUser.value = {
       user_login: "",

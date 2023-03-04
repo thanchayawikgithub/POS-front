@@ -1,18 +1,18 @@
 import type Product from "@/types/Product";
 import http from "./axios";
 function getProducts() {
-  return http.get("/users");
+  return http.get("/products");
 }
 function saveProduct(product: Product) {
-  return http.post("/users", product);
+  return http.post("/products", product);
 }
 
 function updateProduct(id: number, product: Product) {
-  return http.patch(`/users/${id}`, product);
+  return http.patch(`/products/${id}`, product);
 }
 
 function deleteProduct(id: number) {
-  return http.delete(`/users/${id}`);
+  return http.delete(`/products/${id}`);
 }
 
 export default { getProducts, saveProduct, updateProduct, deleteProduct };

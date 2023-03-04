@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import type { VForm } from "vuetify/components";
-import { useLoginStore } from "@/stores/login";
+// import { useLoginStore } from "@/stores/login";
+import { mdiEye, mdiEyeOff } from "@mdi/js";
+import { useAuthStore } from "@/stores/auth";
 
-const loginStore = useLoginStore();
+const authStore = useAuthStore();
+// const loginStore = useLoginStore();
 // const emit = defineEmits<{
 //   (e: "login", userName: string): void;
 // }>();
@@ -15,7 +18,7 @@ const form = ref<InstanceType<typeof VForm> | null>(null);
 const login = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    loginStore.login(loginName.value, password.value);
+    authStore.login(loginName.value, password.value);
   }
 };
 const reset = () => {
@@ -86,7 +89,7 @@ const show2 = ref(false);
                   ></v-text-field>
                   <v-text-field
                     label="Password"
-                    :append-inner-icon="show2 ? 'mdi-eye' : 'mdi-eye-off'"
+                    :append-inner-icon="show2 ? mdiEye : mdiEyeOff"
                     :type="show2 ? 'text' : 'password'"
                     v-model="password"
                     @click:append-inner="show2 = !show2"
