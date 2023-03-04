@@ -11,6 +11,7 @@ export const useProductStore = defineStore("product", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const products = ref<Product[]>([]);
+  const orderList = ref<Product[]>([]);
   const editedProduct = ref<Product>({
     product_name: "",
 
@@ -85,6 +86,7 @@ export const useProductStore = defineStore("product", () => {
     editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
   }
+
   return {
     products,
     getProducts,
