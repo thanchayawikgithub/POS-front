@@ -32,11 +32,9 @@ const addNew = () => {
         md="4"
         v-for="item in customerStore.customers"
         :key="item.customer_id"
-        ><v-card height="200px" width="100%">
-          <v-card-title>
-            No.{{ item.customer_id }}({{ item.customer_name }})
-          </v-card-title>
-
+        ><v-card height="250px" width="100%">
+          <v-card-title> ID: {{ item.customer_id }} </v-card-title>
+          <v-card-title> Name: {{ item.customer_name }}</v-card-title>
           <v-card-text> Tel.{{ item.customer_tel }} </v-card-text>
           <v-card-text> Point:{{ item.customer_point }} </v-card-text>
 

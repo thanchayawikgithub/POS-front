@@ -12,10 +12,9 @@ onMounted(async () => {
 
 <template>
   <customerDialog />
-
   <v-container>
-    <v-row>
-      <v-col cols="5" offset="10">
+    <v-row justify="end">
+      <v-col cols="2" offset="12">
         <v-btn
           color="primary"
           :prepend-icon="mdiPlus"
@@ -24,7 +23,6 @@ onMounted(async () => {
         >
       </v-col>
     </v-row>
-
     <v-row cols="12">
       <v-col>
         <v-table>
@@ -69,4 +67,8 @@ onMounted(async () => {
     </v-row>
   </v-container>
 </template>
-<style scoped></style>
+<style scoped>
+td {
+  text-align: center;
+}
+</style>

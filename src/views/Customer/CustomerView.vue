@@ -16,7 +16,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-app>
+  <v-container justify="center">
     <v-row>
       <CustomerList v-if="customerStore.isTable"></CustomerList>
       <CustomerCard v-if="!customerStore.isTable"></CustomerCard>
@@ -31,8 +31,7 @@ onMounted(async () => {
         :icon="mdiCardOutline"
         flat
         @click="customerStore.isTable = false"
-      ></v-btn>
-    </v-row>
-  </v-app>
+      ></v-btn> </v-row
+  ></v-container>
 </template>
 <style scoped></style>
