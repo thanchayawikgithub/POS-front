@@ -13,22 +13,24 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container>
-    <v-row>
-      <MaterialList v-if="materialStore.isTable"></MaterialList>
-      <MaterialCardList v-if="!materialStore.isTable"></MaterialCardList>
-      <MaterialDialog></MaterialDialog>
-    </v-row>
-    <v-row class="justify-center">
-      <v-btn :icon="mdiTable" flat @click="materialStore.isTable = true">
-      </v-btn>
-      <v-btn
-        :icon="mdiCardOutline"
-        flat
-        @click="materialStore.isTable = false"
-      ></v-btn>
-    </v-row>
-  </v-container>
+  <v-app>
+    <v-container>
+      <v-row>
+        <MaterialList v-if="materialStore.isTable"></MaterialList>
+        <MaterialCardList v-if="!materialStore.isTable"></MaterialCardList>
+        <MaterialDialog></MaterialDialog>
+      </v-row>
+      <v-row class="justify-center">
+        <v-btn :icon="mdiTable" flat @click="materialStore.isTable = true">
+        </v-btn>
+        <v-btn
+          :icon="mdiCardOutline"
+          flat
+          @click="materialStore.isTable = false"
+        ></v-btn>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <style scoped></style>

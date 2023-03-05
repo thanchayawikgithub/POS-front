@@ -12,80 +12,73 @@ import {
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
 
-const theme = ref("light");
-
 const logout = () => {
   authStore.logout();
 };
 </script>
 
 <template>
-  <v-app :theme="theme">
-    <v-navigation-drawer expand-on-hover rail style="background-color: #685444">
-      <v-list>
-        <v-list-item
-          style="color: bisque"
-          prepend-avatar="./public/than.png"
-          subtitle="wanonvonteen@gmail.com"
-        ></v-list-item>
-      </v-list>
+  <v-navigation-drawer expand-on-hover rail style="background-color: #685444">
+    <v-list>
+      <v-list-item
+        style="color: bisque"
+        prepend-avatar="./public/than.png"
+        subtitle="wanonn@gmail.com"
+      ></v-list-item>
+    </v-list>
 
-      <v-divider></v-divider>
+    <v-divider></v-divider>
 
-      <v-list density="compact" nav>
-        <v-list-item
-          :prepend-icon="mdiAccount"
-          title="Users"
-          value="users"
-          to="/user"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiFaceMan"
-          title="Customer"
-          value="customer"
-          to="/customers"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiStar"
-          title="Store"
-          value="store"
-          to="/stores"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiCart"
-          title="Cart"
-          value="cart"
-          to="/cart"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiStoreEditOutline"
-          title="Material"
-          value="Material"
-          to="/material"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiFaceAgent"
-          title="Employee"
-          value="Employee"
-          to="/employee"
-          style="color: bisque"
-        ></v-list-item>
-        <v-list-item
-          :prepend-icon="mdiLogout"
-          title="Logout"
-          value="Logout"
-          @click="logout"
-          style="color: #ef4949"
-        ></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
-    <v-main>
-      <RouterView></RouterView>
-    </v-main>
-  </v-app>
+    <v-list density="compact" nav>
+      <v-list-item
+        :prepend-icon="mdiAccount"
+        title="Users"
+        value="users"
+        to="/users"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiFaceMan"
+        title="Customer"
+        value="customer"
+        to="/customers"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiStar"
+        title="Store"
+        value="store"
+        to="/stores"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiCart"
+        title="Cart"
+        value="cart"
+        to="/carts"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiStoreEditOutline"
+        title="Material"
+        value="Material"
+        to="/materials"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiFaceAgent"
+        title="Employee"
+        value="Employee"
+        to="/employees"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiLogout"
+        title="Logout"
+        value="Logout"
+        @click="logout"
+        style="color: #ef4949"
+      ></v-list-item>
+    </v-list>
+  </v-navigation-drawer>
 </template>

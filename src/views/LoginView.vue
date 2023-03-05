@@ -28,10 +28,8 @@ const reset = () => {
 const show2 = ref(false);
 </script>
 <template>
-  <v-app>
-    <v-img
-      src="https://img.freepik.com/premium-vector/seamless-background-hand-drawn-coffee-equipment_108231-235.jpg?w=1380"
-    >
+  <v-main>
+    <v-img src="./public/bglogin.png">
       <v-card
         width="1000px"
         height="500"
@@ -41,7 +39,7 @@ const show2 = ref(false);
         <v-row>
           <v-col cols="6">
             <v-card height="500" width="600" color="#C4945C">
-              <v-img src="coffee.png" height="1000" class="ms-2">
+              <v-img src="./public/coffee.png" height="1000" class="ms-2">
               </v-img> </v-card
           ></v-col>
 
@@ -54,7 +52,11 @@ const show2 = ref(false);
               color="#FFF5EA"
               flat
             >
-              <v-img src="logo.png" width="100px" class="mx-auto"></v-img>
+              <v-img
+                src="./public/logo.png"
+                width="100px"
+                class="mx-auto"
+              ></v-img>
               <v-card-title
                 primary-title
                 class="text-center text-h6 font-weight-bold"
@@ -108,7 +110,7 @@ const show2 = ref(false);
 
               <v-card-actions class="justify-center pa-0">
                 <v-container>
-                  <v-row>
+                  <v-row class="mx-4">
                     <v-switch
                       v-model="userType"
                       hide-details
@@ -119,7 +121,7 @@ const show2 = ref(false);
                       :label="`Position: ${userType}`"
                     ></v-switch>
                   </v-row>
-                  <v-row>
+                  <v-row class="mx-4">
                     <v-btn
                       variant="flat"
                       width="150px"
@@ -144,6 +146,6 @@ const show2 = ref(false);
         </v-row>
       </v-card>
     </v-img>
-  </v-app>
+  </v-main>
 </template>
 <style scoped></style>

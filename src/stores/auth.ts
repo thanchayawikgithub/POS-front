@@ -25,7 +25,7 @@ export const useAuthStore = defineStore("auth", () => {
       localStorage.setItem("token", res.data.access_token);
       // localStorage.setItem("loginName", username);
       console.log("Success");
-      router.push("/");
+      router.push("/users");
     } catch (e) {
       messageStore.showError("Username หรือ Password ไม่ถูกต้อง");
     }

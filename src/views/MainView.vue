@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<!-- <script setup lang="ts">
 import { ref } from "vue";
 import {
   mdiFaceMan,
@@ -43,36 +43,36 @@ const logout = () => {
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiFaceMan"
-          title="Customer"
-          value="customer"
-          to="/customers"
+          title="Customers"
+          value="customers"
+          to="/customer"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiStar"
-          title="Store"
-          value="store"
+          title="Stores"
+          value="stores"
           to="/stores"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiCart"
-          title="Cart"
-          value="cart"
+          title="Carts"
+          value="carts"
           to="/cart"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiStoreEditOutline"
-          title="Material"
-          value="Material"
+          title="Materials"
+          value="Materials"
           to="/material"
           style="color: bisque"
         ></v-list-item>
         <v-list-item
           :prepend-icon="mdiFaceAgent"
-          title="Employee"
-          value="Employee"
+          title="Employees"
+          value="Employees"
           to="/employee"
           style="color: bisque"
         ></v-list-item>
@@ -89,4 +89,4 @@ const logout = () => {
       <RouterView></RouterView>
     </v-main>
   </v-app>
-</template>
+</template> -->

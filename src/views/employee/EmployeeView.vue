@@ -8,22 +8,24 @@ const employeeStore = useEmployeeStore();
 </script>
 
 <template>
-  <v-container>
-    <v-row>
-      <EmployeeList v-if="employeeStore.isTable"></EmployeeList>
-      <EmployeeCardList v-if="!employeeStore.isTable"></EmployeeCardList>
-      <EmployeeDialog></EmployeeDialog>
-    </v-row>
-    <v-row class="justify-center">
-      <v-btn :icon="mdiTable" flat @click="employeeStore.isTable = true">
-      </v-btn>
-      <v-btn
-        :icon="mdiCardOutline"
-        flat
-        @click="employeeStore.isTable = false"
-      ></v-btn>
-    </v-row>
-  </v-container>
+  <v-app>
+    <v-container>
+      <v-row>
+        <EmployeeList v-if="employeeStore.isTable"></EmployeeList>
+        <EmployeeCardList v-if="!employeeStore.isTable"></EmployeeCardList>
+        <EmployeeDialog></EmployeeDialog>
+      </v-row>
+      <v-row class="justify-center">
+        <v-btn :icon="mdiTable" flat @click="employeeStore.isTable = true">
+        </v-btn>
+        <v-btn
+          :icon="mdiCardOutline"
+          flat
+          @click="employeeStore.isTable = false"
+        ></v-btn>
+      </v-row>
+    </v-container>
+  </v-app>
   <!-- <div class="text-h1">Employee View</div> -->
 </template>
 

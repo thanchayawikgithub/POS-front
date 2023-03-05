@@ -23,6 +23,7 @@ const router = createRouter({
       components: {
         default: LoginView,
       },
+
       meta: {
         layout: "FullLayout",
       },
@@ -41,7 +42,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/user",
+      path: "/users",
       name: "user",
 
       components: {
@@ -69,7 +70,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/cart",
+      path: "/carts",
       name: "cart",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -84,7 +85,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/material",
+      path: "/materials",
       name: "material",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -99,7 +100,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/employee",
+      path: "/employees",
       name: "employee",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
@@ -115,7 +116,7 @@ const router = createRouter({
     },
     {
       path: "/stores",
-      name: "store",
+      name: "stores",
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
