@@ -4,6 +4,7 @@ import UserDialog from "./UserDialog.vue";
 import UserCardList from "./UserCardList.vue";
 import { useUserStore } from "../../stores/user";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
+import UserCheckDialog from "./UserCheckDialog.vue";
 const userStore = useUserStore();
 </script>
 
@@ -13,6 +14,7 @@ const userStore = useUserStore();
       <v-row>
         <UserList v-if="userStore.isTable"></UserList>
         <UserCardList v-if="!userStore.isTable"></UserCardList>
+        <UserCheckDialog></UserCheckDialog>
         <UserDialog></UserDialog>
       </v-row>
       <v-row class="justify-center">

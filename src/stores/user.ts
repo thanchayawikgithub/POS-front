@@ -8,6 +8,8 @@ import { useMessageStore } from "./message";
 export const useUserStore = defineStore("user", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
+  const checkDialog = ref();
+  const deleteDialog = ref(false);
   const dialog = ref(false);
   const isTable = ref(true);
   const editedUser = ref<User>({
@@ -109,5 +111,7 @@ export const useUserStore = defineStore("user", () => {
     isTable,
     login,
     getUsers,
+    checkDialog,
+    deleteDialog,
   };
 });
