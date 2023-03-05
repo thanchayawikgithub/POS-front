@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
-
+import { mdiDelete, mdiPencil } from "@mdi/js";
 onMounted(async () => {
   await customerStore.getCustomer();
 });
@@ -17,10 +17,10 @@ const addNew = () => {
       <v-col cols="12" md="4"
         ><v-card>
           <v-btn
-            height="200px"
+            height="250px"
             width="100%"
             class="text-h3"
-            style="background-color: rosybrown"
+            style="background-color: #af9070"
             @click="addNew"
             >+</v-btn
           >
@@ -40,6 +40,7 @@ const addNew = () => {
 
           <v-card-actions class="justify-center">
             <v-btn
+              :prepend-icon="mdiDelete"
               color="error"
               @click="
                 (customerStore.deleteDialog = true),
@@ -48,7 +49,11 @@ const addNew = () => {
               >Delete</v-btn
             >
 
-            <v-btn color="secondary" @click="customerStore.editCustomer(item)">
+            <v-btn
+              :prepend-icon="mdiPencil"
+              color="secondary"
+              @click="customerStore.editCustomer(item)"
+            >
               Edit
             </v-btn>
           </v-card-actions>
