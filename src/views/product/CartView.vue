@@ -12,15 +12,15 @@ import { useProductStore } from "@/stores/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
-const drink = ref([
-  { name: "Latte", price: "55" },
-  { name: "Milk", price: "45" },
-  { name: "Mocca", price: "55" },
-  { name: "Americano", price: "55" },
-  { name: "Cappuccino", price: "55" },
-  { name: "Espresso", price: "55" },
-  { name: "Espresso", price: "55" },
-]);
+// const drink = ref([
+//   { name: "Latte", price: "55" },
+//   { name: "Milk", price: "45" },
+//   { name: "Mocca", price: "55" },
+//   { name: "Americano", price: "55" },
+//   { name: "Cappuccino", price: "55" },
+//   { name: "Espresso", price: "55" },
+//   { name: "Espresso", price: "55" },
+// ]);
 
 const selected = ref(["Recommend"]);
 const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
@@ -39,11 +39,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-main class="bg">
-    <v-row>
+  <v-main class="bg pl-0 pt-2">
+    <v-row class="ml-0">
       <v-col cols="7">
         <v-card
-          style="border: 3px solid; height: 98vh; width: 55vw"
+          style="border: 3px solid; height: 97vh; width: 58vw"
           class="bg2"
         >
           <v-tabs v-model="tab" grow style="height: 10vh">
@@ -134,9 +134,9 @@ onMounted(async () => {
       <v-col cols="4" class="mx-12">
         <v-card
           height="900px"
-          width="70vh"
-          style="border: 3px solid; height: 98vh"
-          class="bg2"
+          width="75vh"
+          style="border: 3px solid; height: 97vh"
+          class="bg2 ml-0"
         >
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
             Cart

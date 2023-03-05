@@ -5,7 +5,7 @@
     <v-row class="text-center">
       <v-col>
         <v-btn
-          style="height: 5vh; width: 12vw"
+          style="height: 5vh; width: 20vw"
           rounded
           class="eiei"
           color="#8B5927"

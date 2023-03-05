@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCustomerStore } from "@/stores/customer";
 import { useProductStore } from "@/stores/product";
-import CustomerDialog from "@/views/customer/CustomerDialog.vue";
+import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
 
 const productStore = useProductStore();
 const customerStore = useCustomerStore();
@@ -12,7 +12,7 @@ const customerStore = useCustomerStore();
     <v-row class="text-center">
       <v-col
         ><v-btn
-          style="width: 12vw"
+          style="width: 13vw"
           rounded
           color="#B86824"
           class="font-btn"
@@ -28,10 +28,10 @@ const customerStore = useCustomerStore();
       </v-col>
     </v-row>
   </v-container>
-  <v-table style="background-color: #af9070; width: 30vw; height: 25vh">
+  <v-table style="background-color: #af9070; width: 35vw; height: 24vh">
     <tbody>
       <tr>
-        <td style="width: 70%">Member :</td>
+        <td style="width: 100%">Member :</td>
         <td class="text-lg-right">12345678</td>
         <td class="text-lg-right"></td>
       </tr>
