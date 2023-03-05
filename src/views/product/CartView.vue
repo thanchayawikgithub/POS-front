@@ -30,6 +30,7 @@ const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
   await categoryStore.getCategory();
   await productStore.getProducts();
@@ -108,6 +109,7 @@ onMounted(async () => {
                       <v-img
                         class="align-end image"
                         style="height: 30vh; width: 30vw"
+                        :src="`${backendURL}/products/image/${item.product_image}`"
                       >
                       </v-img>
                       <v-card-title class="title"
