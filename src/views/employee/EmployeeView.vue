@@ -4,6 +4,7 @@ import EmployeeDialog from "./EmployeeDialog.vue";
 import EmployeeCardList from "./EmployeeCardList.vue";
 import { useEmployeeStore } from "../../stores/employee";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
+import EmployeeCheckDialog from "./EmployeeCheckDialog.vue";
 const employeeStore = useEmployeeStore();
 </script>
 
@@ -13,6 +14,7 @@ const employeeStore = useEmployeeStore();
       <v-row>
         <EmployeeList v-if="employeeStore.isTable"></EmployeeList>
         <EmployeeCardList v-if="!employeeStore.isTable"></EmployeeCardList>
+        <EmployeeCheckDialog></EmployeeCheckDialog>
         <EmployeeDialog></EmployeeDialog>
       </v-row>
       <v-row class="justify-center">

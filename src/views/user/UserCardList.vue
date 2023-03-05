@@ -18,7 +18,7 @@ const editUser = (user: User) => {
     <v-row>
       <v-col cols="12" md="4"
         ><v-card>
-          <v-btn height="150px" width="100%" class="text-h3" @click="addNew"
+          <v-btn height="200px" width="100%" class="text-h3" @click="addNew"
             >+</v-btn
           >
         </v-card>
@@ -28,7 +28,7 @@ const editUser = (user: User) => {
         md="4"
         v-for="item in userStore.users"
         :key="item.user_id"
-        ><v-card height="150px" width="100%">
+        ><v-card height="200px" width="100%">
           <v-card-title>
             {{ item.user_login }} ({{ item.user_id }})</v-card-title
           >
