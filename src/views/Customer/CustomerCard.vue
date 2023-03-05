@@ -43,7 +43,10 @@ const addNew = () => {
           <v-card-actions class="justify-center">
             <v-btn
               color="error"
-              @click="customerStore.deleteCustomer(item.customer_id!)"
+              @click="
+                (customerStore.deleteDialog = true),
+                  (customerStore.checkDialog = item.customer_id!)
+              "
               >Delete</v-btn
             >
 

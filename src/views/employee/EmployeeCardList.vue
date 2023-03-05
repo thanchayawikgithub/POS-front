@@ -45,10 +45,12 @@ const addNew = () => {
           <v-card-actions class="justify-center">
             <v-btn
               color="error"
-              @click="employeeStore.deleteEmployee(item.employee_id!)"
+              @click="
+                (employeeStore.deleteDialog = true),
+                  (employeeStore.checkDialog = item.employee_id!)
+              "
+              >Delete</v-btn
             >
-              Delete
-            </v-btn>
 
             <v-btn color="secondary" @click="employeeStore.editEmployee(item)">
               Edit

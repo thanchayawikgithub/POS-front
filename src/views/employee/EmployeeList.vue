@@ -64,7 +64,10 @@ onMounted(async () => {
                   :icon="mdiDelete"
                   color="error"
                   class="ma-1"
-                  @click="employeeStore.deleteEmployee(item.employee_id!)"
+                  @click="
+                    (employeeStore.deleteDialog = true),
+                      (employeeStore.checkDialog = item.employee_id!)
+                  "
                 ></v-btn>
               </td>
             </tr>
