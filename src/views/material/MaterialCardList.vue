@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useMaterialStore } from "../../stores/material";
-
+import { mdiDelete, mdiPencil } from "@mdi/js";
 import { onMounted } from "vue";
 const materialStore = useMaterialStore();
 
@@ -21,7 +21,7 @@ const addNew = () => {
             height="200px"
             width="100%"
             class="text-h3"
-            style="background-color: rosybrown"
+            style="background-color: #af9070"
             @click="addNew"
             >+</v-btn
           >
@@ -46,6 +46,7 @@ const addNew = () => {
           <v-card-actions class="justify-center">
             <v-btn
               color="error"
+              :prepend-icon="mdiDelete"
               @click="
                 (materialStore.deleteDialog = true),
                   (materialStore.checkDialog = item.mat_id!)
@@ -53,7 +54,11 @@ const addNew = () => {
               >Delete</v-btn
             >
 
-            <v-btn color="secondary" @click="materialStore.editMaterial(item)">
+            <v-btn
+              :prepend-icon="mdiPencil"
+              color="secondary"
+              @click="materialStore.editMaterial(item)"
+            >
               Edit
             </v-btn>
           </v-card-actions>
