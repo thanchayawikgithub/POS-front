@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref } from "vue";
 import { defineStore } from "pinia";
 import auth from "@/services/auth";
 import { useLoadingStore } from "./loading";
@@ -9,11 +9,7 @@ export const useAuthStore = defineStore("auth", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
   const authName = ref("");
-  const loginName = ref("");
 
-  const islogin = computed(() => {
-    return loginName.value !== "";
-  });
   const isLogin = () => {
     const user = localStorage.getItem("user");
     if (user) {
@@ -41,12 +37,12 @@ export const useAuthStore = defineStore("auth", () => {
     // authName.value = "";
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-
     router.replace("/login");
   };
-  const loadData = () => {
-    loginName.value = localStorage.getItem("loginName") || "";
-  };
 
-  return { login, logout, isLogin, loadData, authName, islogin };
+  // const loadData = () => {
+  //   loginName.value = localStorage.getItem("loginName") || "";
+  // };
+
+  return { login, logout, isLogin, authName };
 });

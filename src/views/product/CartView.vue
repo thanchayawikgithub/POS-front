@@ -19,6 +19,7 @@ const drink = ref([
   { name: "Espresso", price: "55" },
   { name: "Espresso", price: "55" },
 ]);
+
 const selected = ref(["Recommend"]);
 const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 // const food = ref([{ name: "Salad" }, { name: "Sandwich" }]);
@@ -28,7 +29,8 @@ const menuStore = useMenuStore();
 </script>
 
 <template>
-  <v-container class="bg fullscreen" fluid>
+  <!-- แก้ nav bar ยืดไม่สุด -->
+  <v-container class="bg fullscreen">
     <v-row>
       <v-col cols="8">
         <v-card

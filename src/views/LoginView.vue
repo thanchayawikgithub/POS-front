@@ -11,14 +11,14 @@ const authStore = useAuthStore();
 //   (e: "login", userName: string): void;
 // }>();
 const userType = ref("Employee");
-const loginName = ref("");
+const username = ref("");
 const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
 const login = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    authStore.login(loginName.value, password.value);
+    authStore.login(username.value, password.value);
   }
 };
 const reset = () => {
@@ -77,7 +77,7 @@ const show2 = ref(false);
                 <v-form ref="form" v-model="valid">
                   <v-text-field
                     label="Name"
-                    v-model="loginName"
+                    v-model="username"
                     variant="outlined"
                     :rules="[
                       (v) => !!v || 'Login Name is required',
@@ -104,8 +104,6 @@ const show2 = ref(false);
                     required
                   ></v-text-field>
                 </v-form>
-
-                <pre></pre>
               </v-card-text>
 
               <v-card-actions class="justify-center pa-0">
