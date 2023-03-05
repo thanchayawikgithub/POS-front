@@ -6,6 +6,7 @@ import { mdiTable, mdiCardOutline } from "@mdi/js";
 
 import CustomerDialog from "./CustomerDialog.vue";
 import CustomerCard from "./CustomerCard.vue";
+import CustomerCheckDialog from "./CustomerCheckDialog.vue";
 
 const customerStore = useCustomerStore();
 
@@ -21,6 +22,7 @@ onMounted(async () => {
       <CustomerCard v-if="!customerStore.isTable"></CustomerCard>
 
       <CustomerDialog></CustomerDialog>
+      <CustomerCheckDialog></CustomerCheckDialog>
     </v-row>
     <v-row class="justify-center">
       <v-btn :icon="mdiTable" flat @click="customerStore.isTable = true">

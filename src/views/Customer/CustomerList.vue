@@ -59,7 +59,10 @@ onMounted(async () => {
                     :icon="mdiDelete"
                     color="error"
                     class="ma-1"
-                    @click="customerStore.deleteCustomer(item.customer_id!)"
+                    @click="
+                      (customerStore.deleteDialog = true),
+                        (customerStore.checkDialog = item.customer_id!)
+                    "
                   ></v-btn>
                 </td>
               </tr>

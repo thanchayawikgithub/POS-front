@@ -8,6 +8,8 @@ import { useMessageStore } from "./message";
 export const useCustomerStore = defineStore("customer", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
+  const checkDialog = ref();
+  const deleteDialog = ref(false);
   const isTable = ref(true);
   const dialog = ref(false);
   const customers = ref<Customer[]>([]);
@@ -82,5 +84,7 @@ export const useCustomerStore = defineStore("customer", () => {
     editCustomer,
     deleteCustomer,
     isTable,
+    checkDialog,
+    deleteDialog,
   };
 });
