@@ -23,6 +23,14 @@ async function save() {
             <v-row>
               <v-col cols="12">
                 <v-text-field
+                  label="User ID*"
+                  required
+                  v-model="employeeStore.editedEmployee.userId"
+                  :rules="[(v) => !!v || 'Item is required']"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
                   label="Name*"
                   required
                   v-model="employeeStore.editedEmployee.employee_name"

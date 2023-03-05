@@ -12,6 +12,7 @@ export const useEmployeeStore = defineStore("employee", () => {
   const dialog = ref(false);
   const employees = ref<Employee[]>([]);
   const editedEmployee = ref<Employee>({
+    userId: 0,
     employee_name: "",
     employee_province: "",
     employee_district: "",
@@ -24,6 +25,7 @@ export const useEmployeeStore = defineStore("employee", () => {
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
       editedEmployee.value = {
+        userId: 0,
         employee_name: "",
         employee_province: "",
         employee_district: "",

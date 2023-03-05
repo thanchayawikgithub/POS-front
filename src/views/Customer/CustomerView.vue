@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { useCustomerStore } from "@/stores/customer";
-import CustomerList from "./CustomerList.vue";
+import CustomerList from "@/views/Customer/CustomerList.vue";
 import { onMounted } from "vue";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
 
-import CustomerDialog from "./CustomerDialog.vue";
-import CustomerCard from "./CustomerCard.vue";
-import CustomerCheckDialog from "./CustomerCheckDialog.vue";
+import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
+import CustomerCard from "@/views/Customer/CustomerCard.vue";
+import CustomerCheckDialog from "@/views/Customer/CustomerCheckDialog.vue";
 
 const customerStore = useCustomerStore();
 

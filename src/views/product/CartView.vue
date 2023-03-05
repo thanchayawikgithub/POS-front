@@ -186,7 +186,7 @@ onMounted(async () => {
   bottom: -60px;
   background: #443300;
   color: #fff;
-  height: 3em;
+  height: 7vh;
   width: 100%;
   transition: all 80ms;
   font-weight: 600;

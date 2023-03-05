@@ -13,5 +13,5 @@ export default interface Employee {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  user?: User;
+  userId?: User;
 }

@@ -2,7 +2,7 @@
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
-import CustomerDialog from "./CustomerDialog.vue";
+import customerDialog from "@/views/Customer/CustomerDialog.vue";
 const customerStore = useCustomerStore();
 
 onMounted(async () => {
@@ -11,66 +11,62 @@ onMounted(async () => {
 </script>
 
 <template>
-  <CustomerDialog />
-  <v-app>
-    <v-container>
-      <v-row>
-        <v-col cols="5" offset="10">
-          <v-btn
-            color="primary"
-            :prepend-icon="mdiPlus"
-            @click="customerStore.dialog = true"
-            >Add New</v-btn
-          >
-        </v-col>
-      </v-row>
+  <customerDialog />
 
-      <v-row cols="12">
-        <v-col>
-          <v-table>
-            <thead>
-              <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Tel</th>
-                <th>Point</th>
-                <th>Start Date</th>
-                <th>Operations</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr
-                v-for="item of customerStore.customers"
-                :key="item.customer_id"
-              >
-                <td>{{ item.customer_id }}</td>
-                <td>{{ item.customer_name }}</td>
-                <td>{{ item.customer_tel }}</td>
-                <td>{{ item.customer_point }}</td>
-                <td>{{ item.createdDate }}</td>
-                <td>
-                  <v-btn
-                    :icon="mdiPencil"
-                    color="secondary"
-                    class="ma-1"
-                    @click="customerStore.editCustomer(item)"
-                  ></v-btn>
-                  <v-btn
-                    :icon="mdiDelete"
-                    color="error"
-                    class="ma-1"
-                    @click="
-                      (customerStore.deleteDialog = true),
-                        (customerStore.checkDialog = item.customer_id!)
-                    "
-                  ></v-btn>
-                </td>
-              </tr>
-            </tbody>
-          </v-table>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-app>
+  <v-container>
+    <v-row>
+      <v-col cols="5" offset="10">
+        <v-btn
+          color="primary"
+          :prepend-icon="mdiPlus"
+          @click="customerStore.dialog = true"
+          >Add New</v-btn
+        >
+      </v-col>
+    </v-row>
+
+    <v-row cols="12">
+      <v-col>
+        <v-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Tel</th>
+              <th>Point</th>
+              <th>Start Date</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item of customerStore.customers" :key="item.customer_id">
+              <td>{{ item.customer_id }}</td>
+              <td>{{ item.customer_name }}</td>
+              <td>{{ item.customer_tel }}</td>
+              <td>{{ item.customer_point }}</td>
+              <td>{{ item.createdDate }}</td>
+              <td>
+                <v-btn
+                  :icon="mdiPencil"
+                  color="secondary"
+                  class="ma-1"
+                  @click="customerStore.editCustomer(item)"
+                ></v-btn>
+                <v-btn
+                  :icon="mdiDelete"
+                  color="error"
+                  class="ma-1"
+                  @click="
+                    (customerStore.deleteDialog = true),
+                      (customerStore.checkDialog = item.customer_id!)
+                  "
+                ></v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 <style scoped></style>
