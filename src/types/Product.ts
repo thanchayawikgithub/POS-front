@@ -20,4 +20,6 @@ export default interface Product {
   product_deletedAt?: Date;
 
   category?: Category;
+
+  product_qty?: number;
 }

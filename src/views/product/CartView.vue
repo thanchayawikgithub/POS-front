@@ -4,9 +4,11 @@ import TotalMoney from "@/components/order/TotalMoney.vue";
 import ButtonCart from "@/components/order/ButtonCart.vue";
 import { useMenuStore } from "@/stores/Menu";
 // import type Menu from "@/types/Menu";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 // import MenuDrink from "@/components/menu/MenuDrink.vue";
 import { mdiMagnify } from "@mdi/js";
+import { useCategoryStore } from "@/stores/category";
+import { useProductStore } from "@/stores/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -26,6 +28,13 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 // const bakery = ref([{ name: "cake" }, { name: "waffle" }]);
 const menuStore = useMenuStore();
 // const tab: string[] = ["Drink", "Bakery", "Food"];
+const categoryStore = useCategoryStore();
+const productStore = useProductStore();
+onMounted(async () => {
+  await categoryStore.getCategory();
+  await productStore.getProducts();
+  console.log(categoryStore.categorys);
+});
 </script>
 
 <template>
@@ -39,12 +48,12 @@ const menuStore = useMenuStore();
         >
           <v-tabs v-model="tab" grow style="height: 10vh">
             <v-tab
-              v-for="item in type"
-              :key="item"
+              v-for="item of categoryStore.categorys"
+              :key="item.category_id"
               :value="item"
               style="font-weight: bold; font-size: 20px; height: 7vh"
             >
-              {{ item }}
+              {{ item.category_name }}
             </v-tab>
           </v-tabs>
 
@@ -83,14 +92,14 @@ const menuStore = useMenuStore();
                 <v-col
                   cols="12"
                   md="4"
-                  v-for="item in menuStore.menu"
-                  :key="item.id"
+                  v-for="item in productStore.products"
+                  :key="item.product_id"
                   :value="item"
                 >
                   <v-btn
                     style="width: 36vh; height: 35vh; background-color: #663300"
                     class="ma-5"
-                    @click="menuStore.addCart(item)"
+                    @click="productStore.addCart(item)"
                   >
                     <v-card
                       style="width: 36vh; height: 35vh"
@@ -99,14 +108,13 @@ const menuStore = useMenuStore();
                       <v-img
                         class="align-end image"
                         style="height: 30vh; width: 30vw"
-                        :src="item.pic"
                       >
                       </v-img>
                       <v-card-title class="title"
-                        >{{ item.name }}
+                        >{{ item.product_name }}
                       </v-card-title>
                       <v-card-subtitle class="price"
-                        >Price:{{ item.price }}</v-card-subtitle
+                        >Price:{{ item.product_price }}</v-card-subtitle
                       >
                     </v-card>
                   </v-btn>

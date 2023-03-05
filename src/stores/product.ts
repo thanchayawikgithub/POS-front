@@ -1,6 +1,6 @@
 import type Product from "@/types/Product";
 import { defineStore } from "pinia";
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useLoadingStore } from "./loading";
 import productService from "@/services/product";
 import { useMessageStore } from "./message";
@@ -71,7 +71,8 @@ export const useProductStore = defineStore("product", () => {
     }
     loadingStore.isLoading = false;
   }
-  async function deleteCustomer(id: number) {
+
+  async function deleteProduct(id: number) {
     loadingStore.isLoading = true;
     try {
       const res = await productService.deleteProduct(id);
@@ -87,6 +88,46 @@ export const useProductStore = defineStore("product", () => {
     dialog.value = true;
   }
 
+  const addCart = (item: Product) => {
+    if (orderList.value.includes(item)) {
+      addQty(item);
+    } else {
+      item.product_qty = 1;
+      orderList.value.push(item);
+    }
+  };
+
+  const addQty = (item: Product) => {
+    item.product_qty!++;
+  };
+
+  const delQty = (item: Product) => {
+    if (item.product_qty! > 1) {
+      item.product_qty!--;
+    } else {
+      removeCart(item);
+      resetQty(item);
+    }
+  };
+
+  const resetQty = (item: Product) => {
+    item.product_qty! = 1;
+  };
+
+  const removeCart = (item: Product) => {
+    const index = orderList.value.findIndex(
+      (product) => product.product_id === item.product_id
+    );
+    orderList.value.splice(index, 1);
+  };
+
+  const totalPrice = computed(function () {
+    return orderList.value.reduce(
+      (sum, item) => sum + item.product_price * item.product_qty!,
+      0
+    );
+  });
+
   return {
     products,
     getProducts,
@@ -94,7 +135,12 @@ export const useProductStore = defineStore("product", () => {
     editedProduct,
     saveProduct,
     editProduct,
-    deleteCustomer,
+    deleteProduct,
     isTable,
+    orderList,
+    addCart,
+    addQty,
+    delQty,
+    totalPrice,
   };
 });
