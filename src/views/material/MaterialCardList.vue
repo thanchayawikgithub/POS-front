@@ -46,10 +46,12 @@ const addNew = () => {
           <v-card-actions class="justify-center">
             <v-btn
               color="error"
-              @click="materialStore.deleteMaterial(item.mat_id!)"
+              @click="
+                (materialStore.deleteDialog = true),
+                  (materialStore.checkDialog = item.mat_id!)
+              "
+              >Delete</v-btn
             >
-              Delete
-            </v-btn>
 
             <v-btn color="secondary" @click="materialStore.editMaterial(item)">
               Edit
