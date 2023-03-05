@@ -4,32 +4,34 @@ import { ref } from "vue";
 // import type Menu from "@/types/User";
 import { useProductStore } from "@/stores/product";
 const productStore = useProductStore();
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 <template>
   <div>
     <v-container fluid>
+      <v-row>
+        <v-col cols="1 "> </v-col>
+        <v-col cols="4" class="text-center pl-12">
+          <h5>Name</h5>
+        </v-col>
+        <v-col cols="4  " class="text-center pl-3">
+          <h5>Quantity</h5>
+        </v-col>
+        <v-col cols="2" class="text-center pl-7">
+          <h5>Price</h5>
+        </v-col>
+      </v-row>
       <v-card
         style="
-          height: 50vh;
-          width: 29vw;
+          height: 42vh;
+          width: 35vw;
           overflow-y: auto;
+
           background-color: #af9070;
         "
         class="pl-0"
         flat
       >
-        <v-row>
-          <v-col cols="1"> </v-col>
-          <v-col cols="4" class="text-center pl-4">
-            <h5>Name</h5>
-          </v-col>
-          <v-col cols="3" class="text-center pl-2">
-            <h5>Quantity</h5>
-          </v-col>
-          <v-col cols="3" class="text-center pl-5">
-            <h5>Price</h5>
-          </v-col>
-        </v-row>
         <v-card
           class="pa-3 mb-2 mt-3"
           v-for="item in productStore.orderList"
@@ -38,15 +40,19 @@ const productStore = useProductStore();
           style="
             border-radius: 5px;
             border: 2px solid;
-            width: 27vw;
+            width: 30vw;
             height: 11vh;
           "
         >
           <v-row>
             <v-col cols="2">
-              <v-img height="100%" width="100%"></v-img>
+              <v-img
+                height="90%"
+                width="90%"
+                :src="`${backendURL}/products/image/${item.product_image}`"
+              ></v-img>
             </v-col>
-            <v-col cols="3">
+            <v-col cols="3" class="pl-0">
               <v-card-text> {{ item.product_name }}</v-card-text>
             </v-col>
             <v-col cols="1" class="text-right"

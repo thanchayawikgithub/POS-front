@@ -39,12 +39,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <!-- แก้ nav bar ยืดไม่สุด -->
-  <v-container class="bg fullscreen">
+  <v-main class="bg">
     <v-row>
-      <v-col cols="8">
+      <v-col cols="7">
         <v-card
-          style="border: 3px solid; height: 110vh; overflow-y: auto"
+          style="border: 3px solid; height: 98vh; width: 55vw"
           class="bg2"
         >
           <v-tabs v-model="tab" grow style="height: 10vh">
@@ -87,8 +86,14 @@ onMounted(async () => {
               </v-card>
             </v-col>
           </v-row>
-          <v-window v-model="tab">
-            <v-window-item v-for="item in type" :key="item" :value="item">
+
+          <v-window v-model="tab" style="overflow-y: auto">
+            <v-window-item
+              v-for="item in type"
+              :key="item"
+              :value="item"
+              style="height: 70vh"
+            >
               <v-row>
                 <v-col
                   cols="12"
@@ -98,17 +103,17 @@ onMounted(async () => {
                   :value="item"
                 >
                   <v-btn
-                    style="width: 36vh; height: 35vh; background-color: #663300"
-                    class="ma-5"
+                    style="width: 33vh; height: 28vh; background-color: #663300"
+                    class="ma-5 mt-0"
                     @click="productStore.addCart(item)"
                   >
                     <v-card
-                      style="width: 36vh; height: 35vh"
+                      style="width: 33vh; height: 30vh"
                       class="mx-auto card"
                     >
                       <v-img
-                        class="align-end image"
-                        style="height: 30vh; width: 30vw"
+                        class="align-end image mt-0"
+                        style="height: 15vh; width: 20vw"
                         :src="`${backendURL}/products/image/${item.product_image}`"
                       >
                       </v-img>
@@ -126,10 +131,11 @@ onMounted(async () => {
           </v-window>
         </v-card>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="4" class="mx-12">
         <v-card
-          height="800px"
-          style="border: 3px solid; height: 110vh"
+          height="900px"
+          width="70vh"
+          style="border: 3px solid; height: 98vh"
           class="bg2"
         >
           <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
@@ -142,12 +148,12 @@ onMounted(async () => {
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
+  </v-main>
 </template>
 <style scoped>
 .fullscreen {
   width: 150vw;
-  height: 118vh;
+  height: 100vh;
 }
 .halfscreen {
   height: 50vh;
