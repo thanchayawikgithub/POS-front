@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import {
   mdiFaceMan,
-  mdiStar,
+  mdiStorefront,
   mdiAccount,
   mdiCart,
   mdiLogout,
@@ -45,7 +45,7 @@ const logout = () => {
         style="color: bisque"
       ></v-list-item>
       <v-list-item
-        :prepend-icon="mdiStar"
+        :prepend-icon="mdiStorefront"
         title="Store"
         value="store"
         to="/stores"
