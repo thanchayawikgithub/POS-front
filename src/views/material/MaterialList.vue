@@ -57,7 +57,10 @@ onMounted(async () => {
                   :icon="mdiDelete"
                   color="error"
                   class="ma-1"
-                  @click="materialStore.deleteMaterial(item.mat_id!)"
+                  @click="
+                    (materialStore.deleteDialog = true),
+                      (materialStore.checkDialog = item.mat_id!)
+                  "
                 ></v-btn>
               </td>
             </tr>

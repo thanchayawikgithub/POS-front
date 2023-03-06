@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useEmployeeStore } from "../../stores/employee";
-
+import { mdiDelete, mdiPencil } from "@mdi/js";
 import { onMounted } from "vue";
 const employeeStore = useEmployeeStore();
 
@@ -21,7 +21,7 @@ const addNew = () => {
             height="200px"
             width="100%"
             class="text-h3"
-            style="background-color: rosybrown"
+            style="background-color: #af9070"
             @click="addNew"
             >+</v-btn
           >
@@ -44,6 +44,7 @@ const addNew = () => {
           <v-card-text>(Price Per Unit:{{ item.employee_id }}$)</v-card-text>
           <v-card-actions class="justify-center">
             <v-btn
+              :prepend-icon="mdiDelete"
               color="error"
               @click="
                 (employeeStore.deleteDialog = true),
@@ -52,7 +53,11 @@ const addNew = () => {
               >Delete</v-btn
             >
 
-            <v-btn color="secondary" @click="employeeStore.editEmployee(item)">
+            <v-btn
+              :prepend-icon="mdiPencil"
+              color="secondary"
+              @click="employeeStore.editEmployee(item)"
+            >
               Edit
             </v-btn>
           </v-card-actions>
