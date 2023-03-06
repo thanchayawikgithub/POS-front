@@ -87,7 +87,7 @@ onMounted(async () => {
             </v-col>
           </v-row>
 
-          <v-window v-model="tab" style="overflow-y: auto">
+          <v-window v-model="tab" style="overflow-y: auto; width: 60vw">
             <v-window-item
               v-for="item in type"
               :key="item"
@@ -103,8 +103,8 @@ onMounted(async () => {
                   :value="item"
                 >
                   <v-btn
-                    style="width: 33vh; height: 28vh; background-color: #663300"
-                    class="ma-5 mt-0"
+                    style="width: 33vh; height: 29vh; background-color: #663300"
+                    class="ma-2 mt-2 ml-4"
                     @click="productStore.addCart(item)"
                   >
                     <v-card
@@ -113,7 +113,7 @@ onMounted(async () => {
                     >
                       <v-img
                         class="align-end image mt-0"
-                        style="height: 15vh; width: 20vw"
+                        style="height: 14vh; width: 20vw"
                         :src="`${backendURL}/products/image/${item.product_image}`"
                       >
                       </v-img>
@@ -183,7 +183,7 @@ onMounted(async () => {
   padding-left: 1.25em;
   position: absolute;
   left: 0;
-  bottom: -60px;
+  bottom: -65px;
   background: #443300;
   color: #fff;
   height: 7vh;
