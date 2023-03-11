@@ -3,7 +3,7 @@ import { useStoreStore } from "@/stores/Store";
 import StoreList from "@/views/Store/StoreList.vue";
 import { onMounted } from "vue";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
-import StoreCrad from "@/views/Store/StoreCrad.vue";
+import StoreCard from "@/views/Store/StoreCardList.vue";
 
 const storeStore = useStoreStore();
 
@@ -17,7 +17,7 @@ onMounted(async () => {
     <v-container>
       <v-row>
         <StoreList v-if="storeStore.isTable"></StoreList>
-        <StoreCrad v-if="!storeStore.isTable"></StoreCrad>
+        <StoreCard v-if="!storeStore.isTable"></StoreCard>
         <StoreDialog></StoreDialog>
       </v-row>
 
