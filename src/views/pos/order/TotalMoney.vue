@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { useCustomerStore } from "@/stores/customer";
-import { useProductStore } from "@/stores/product";
+import { useOrderStore } from "@/stores/order";
 import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
 
-const productStore = useProductStore();
+const orderStore = useOrderStore();
 const customerStore = useCustomerStore();
 </script>
 <template>
@@ -37,7 +37,7 @@ const customerStore = useCustomerStore();
       </tr>
       <tr>
         <td>Price :</td>
-        <td class="text-lg-right">{{ productStore.totalPrice }}</td>
+        <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
       <tr>
@@ -47,7 +47,7 @@ const customerStore = useCustomerStore();
       </tr>
       <tr>
         <td>Total :</td>
-        <td class="text-lg-right">{{ productStore.totalPrice }}</td>
+        <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
     </tbody>

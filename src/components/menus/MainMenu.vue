@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import {
   mdiFaceMan,
   mdiStorefront,
@@ -53,9 +52,9 @@ const logout = () => {
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiCart"
-        title="Cart"
-        value="cart"
-        to="/carts"
+        title="Point of sell"
+        value="pos"
+        to="/pos"
         style="color: bisque"
       ></v-list-item>
       <v-list-item

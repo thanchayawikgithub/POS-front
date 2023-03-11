@@ -1,9 +1,7 @@
 <script setup lang="ts">
-// import { mdiCoffee } from "@mdi/js";
-import { ref } from "vue";
-// import type Menu from "@/types/User";
-import { useProductStore } from "@/stores/product";
-const productStore = useProductStore();
+import { useOrderStore } from "@/stores/order";
+
+const orderStore = useOrderStore();
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 <template>
@@ -26,7 +24,6 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           height: 42vh;
           width: 37vw;
           overflow-y: auto;
-
           background-color: #af9070;
         "
         class="pl-0"
@@ -34,7 +31,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
       >
         <v-card
           class="pa-3 mb-2 mt-3 ml-0"
-          v-for="item in productStore.orderList"
+          v-for="item in orderStore.orderList"
           :key="item.product_id"
           color="#dac7b4"
           style="
@@ -59,7 +56,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#CC0000"
-                  @click="productStore.delQty(item)"
+                  @click="orderStore.delQty(item)"
                   style="font-weight: bolder"
                 >
                   -
@@ -73,7 +70,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#009900"
-                  @click="productStore.addQty(item)"
+                  @click="orderStore.addQty(item)"
                   style="font-weight: bolder"
                 >
                   +
