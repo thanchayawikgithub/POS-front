@@ -47,8 +47,8 @@ export const useEmployeeStore = defineStore("employee", () => {
       (item) => item.employee_login === username
     );
     if (index >= 0) {
-      const user = employees.value[index];
-      if (user.employee_password === password) {
+      const employee = employees.value[index];
+      if (employee.employee_password === password) {
         return true;
       }
       return false;

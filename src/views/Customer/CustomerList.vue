@@ -2,7 +2,7 @@
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
-import customerDialog from "@/views/Customer/CustomerDialog.vue";
+import customerDialog from "@/views/customer/CustomerDialog.vue";
 const customerStore = useCustomerStore();
 
 onMounted(async () => {

@@ -5,7 +5,6 @@ import {
   mdiCart,
   mdiLogout,
   mdiStoreEditOutline,
-  mdiFaceAgent,
   mdiGlassCocktail,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
@@ -21,7 +20,7 @@ const logout = () => {
       <v-list-item
         style="color: bisque"
         prepend-avatar="./public/than.png"
-        title="wanonn@gmail.com"
+        title="Staff@gmail.com"
       ></v-list-item>
     </v-list>
 
@@ -61,13 +60,6 @@ const logout = () => {
         title="Material"
         value="Material"
         to="/materials"
-        style="color: bisque"
-      ></v-list-item>
-      <v-list-item
-        :prepend-icon="mdiFaceAgent"
-        title="Employee"
-        value="Employee"
-        to="/employees"
         style="color: bisque"
       ></v-list-item>
       <v-list-item

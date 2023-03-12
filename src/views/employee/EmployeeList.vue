@@ -13,9 +13,9 @@ onMounted(async () => {
 
 <template>
   <EmployeeDialog />
-  <v-container>
-    <v-row>
-      <v-col cols="5" offset="11">
+  <v-container
+    ><v-row>
+      <v-col offset="10">
         <v-btn
           color="primary"
           :prepend-icon="mdiPlus"
@@ -24,8 +24,8 @@ onMounted(async () => {
         >
       </v-col>
     </v-row>
-    <v-row cols="12">
-      <v-col>
+    <v-row>
+      <v-col cols="12" class="ma-2 pa-2">
         <v-table>
           <thead>
             <tr>
@@ -55,7 +55,7 @@ onMounted(async () => {
               <td>{{ item.employee_login }}</td>
               <td>{{ item.employee_password }}</td>
               <td>{{ item.employee_position }}</td>
-              <td>{{ item.employee_hourly_wage }} $</td>
+              <td>{{ item.employee_hourly_wage }}$</td>
 
               <td>
                 <v-btn
@@ -77,9 +77,12 @@ onMounted(async () => {
             </tr>
           </tbody>
         </v-table>
-      </v-col>
-    </v-row>
-  </v-container>
+      </v-col> </v-row
+  ></v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+th {
+  text-align: center;
+}
+</style>

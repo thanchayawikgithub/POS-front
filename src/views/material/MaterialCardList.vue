@@ -18,7 +18,7 @@ const addNew = () => {
       <v-col cols="12" md="4"
         ><v-card>
           <v-btn
-            height="200px"
+            height="230px"
             width="100%"
             class="text-h3"
             style="background-color: #af9070"
@@ -32,35 +32,33 @@ const addNew = () => {
         md="4"
         v-for="item in materialStore.materials"
         :key="item.mat_id"
-        ><v-card height="200px" width="100%">
-          <v-card-title>
-            NO.{{ item.mat_id }}({{ item.mat_name }})</v-card-title
-          >
+        ><v-card height="230px" width="100%">
+          <v-card-title> NO.{{ item.mat_id }} {{ item.mat_name }}</v-card-title>
           <v-card-text>
-            (Min:{{ item.mat_min_quantity }})( Qty:{{ item.mat_quantity }}) (
-            Unit:{{ item.mat_unit }})
+            Min:{{ item.mat_min_quantity }} || Qty:{{ item.mat_quantity }} ||
+            Unit:{{ item.mat_unit }}
           </v-card-text>
           <v-card-text
-            >(Price Per Unit:{{ item.mat_price_per_unit }}$)</v-card-text
+            >Price Per Unit:{{ item.mat_price_per_unit }}$</v-card-text
           >
           <v-card-actions class="justify-center">
             <v-btn
+              variant="flat"
+              :icon="mdiPencil"
+              color="secondary"
+              class="ma-5"
+              @click="materialStore.editMaterial(item)"
+            ></v-btn>
+            <v-btn
+              variant="flat"
+              :icon="mdiDelete"
               color="error"
-              :prepend-icon="mdiDelete"
+              class="ma-5"
               @click="
                 (materialStore.deleteDialog = true),
                   (materialStore.checkDialog = item.mat_id!)
               "
-              >Delete</v-btn
-            >
-
-            <v-btn
-              :prepend-icon="mdiPencil"
-              color="secondary"
-              @click="materialStore.editMaterial(item)"
-            >
-              Edit
-            </v-btn>
+            ></v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

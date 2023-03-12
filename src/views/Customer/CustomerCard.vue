@@ -17,7 +17,7 @@ const addNew = () => {
       <v-col cols="12" md="4"
         ><v-card>
           <v-btn
-            height="250px"
+            height="300px"
             width="100%"
             class="text-h3"
             style="background-color: #af9070"
@@ -32,7 +32,7 @@ const addNew = () => {
         md="4"
         v-for="item in customerStore.customers"
         :key="item.customer_id"
-        ><v-card height="250px" width="100%">
+        ><v-card height="300px" width="100%">
           <v-card-title> ID: {{ item.customer_id }} </v-card-title>
           <v-card-title> Name: {{ item.customer_name }}</v-card-title>
           <v-card-text> Tel.{{ item.customer_tel }} </v-card-text>
@@ -40,22 +40,22 @@ const addNew = () => {
 
           <v-card-actions class="justify-center">
             <v-btn
-              :prepend-icon="mdiDelete"
+              variant="flat"
+              :icon="mdiPencil"
+              color="secondary"
+              class="ma-5"
+              @click="customerStore.editCustomer(item)"
+            ></v-btn>
+            <v-btn
+              variant="flat"
+              :icon="mdiDelete"
               color="error"
+              class="ma-5"
               @click="
                 (customerStore.deleteDialog = true),
                   (customerStore.checkDialog = item.customer_id!)
               "
-              >Delete</v-btn
-            >
-
-            <v-btn
-              :prepend-icon="mdiPencil"
-              color="secondary"
-              @click="customerStore.editCustomer(item)"
-            >
-              Edit
-            </v-btn>
+            ></v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

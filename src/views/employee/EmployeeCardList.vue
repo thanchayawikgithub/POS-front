@@ -2,7 +2,6 @@
 import { useEmployeeStore } from "../../stores/employee";
 import { mdiDelete, mdiPencil } from "@mdi/js";
 import { onMounted } from "vue";
-import employee from "@/services/employee";
 const employeeStore = useEmployeeStore();
 
 onMounted(async () => {
@@ -19,8 +18,8 @@ const addNew = () => {
       <v-col cols="12" md="4"
         ><v-card>
           <v-btn
-            height="200px"
             width="100%"
+            height="330px"
             class="text-h3"
             style="background-color: #af9070"
             @click="addNew"
@@ -33,39 +32,39 @@ const addNew = () => {
         md="4"
         v-for="item in employeeStore.employees"
         :key="item.employee_id"
-        ><v-card height="200px" width="100%">
+        ><v-card class="card">
           <v-card-title>
-            Name:{{ item.employee_name }}({{ item.employee_position }}) (Tel:{{
-              item.employee_tel
+            Name:{{ item.employee_name }}({{
+              item.employee_position
             }})</v-card-title
-          >
+          ><v-card-subtitle>Tel:{{ item.employee_tel }}</v-card-subtitle>
           <v-card-text>
-            (Province:{{ item.employee_province }})( District:{{
-              item.employee_district
-            }})( subdistrict:{{ item.employee_subdistrict }}) <br />
-            (Email:{{ item.employee_email }}) (Login:{{ item.employee_login }})
-            ( Password:{{ item.employee_password }})
+            Province:{{ item.employee_province }}<br />
+            District:{{ item.employee_district }} <br />
+            subdistrict:{{ item.employee_subdistrict }}<br />
+            Email:{{ item.employee_email }}<br />
+            Login:{{ item.employee_login }}<br />
+            Password:{{ item.employee_password }}<br />
+            Hourly:{{ item.employee_hourly_wage }}$
           </v-card-text>
-
-          <v-card-text>(Hourly:{{ item.employee_hourly_wage }}$)</v-card-text>
           <v-card-actions class="justify-center">
             <v-btn
-              :prepend-icon="mdiDelete"
+              variant="flat"
+              :icon="mdiPencil"
+              color="secondary"
+              class="ma-5"
+              @click="employeeStore.editEmployee(item)"
+            ></v-btn>
+            <v-btn
+              variant="flat"
+              :icon="mdiDelete"
               color="error"
+              class="ma-5"
               @click="
                 (employeeStore.deleteDialog = true),
                   (employeeStore.checkDialog = item.employee_id!)
               "
-              >Delete</v-btn
-            >
-
-            <v-btn
-              :prepend-icon="mdiPencil"
-              color="secondary"
-              @click="employeeStore.editEmployee(item)"
-            >
-              Edit
-            </v-btn>
+            ></v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -73,4 +72,12 @@ const addNew = () => {
   </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+.card {
+  width: 100%;
+  height: 330px;
+  background: white;
+  border-radius: 10px;
+  transition: border-radius 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+</style>

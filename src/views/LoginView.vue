@@ -4,13 +4,11 @@ import type { VForm } from "vuetify/components";
 // import { useLoginStore } from "@/stores/login";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
-
 const authStore = useAuthStore();
 // const loginStore = useLoginStore();
 // const emit = defineEmits<{
 //   (e: "login", userName: string): void;
 // }>();
-const userType = ref("Employee");
 const username = ref("");
 const password = ref("");
 const valid = ref(true);
@@ -29,7 +27,7 @@ const show2 = ref(false);
 </script>
 <template>
   <v-main>
-    <v-img src="./public/bglogin.png">
+    <v-img src="/bglogin.png">
       <v-card
         width="1000px"
         height="500"
@@ -39,7 +37,7 @@ const show2 = ref(false);
         <v-row>
           <v-col cols="6">
             <v-card height="500" width="600" color="#C4945C">
-              <v-img src="./public/coffee.png" height="1000" class="ms-2">
+              <v-img src="/coffee.png" height="1000" class="ms-2">
               </v-img> </v-card
           ></v-col>
 
@@ -52,11 +50,7 @@ const show2 = ref(false);
               color="#FFF5EA"
               flat
             >
-              <v-img
-                src="./public/logo.png"
-                width="100px"
-                class="mx-auto"
-              ></v-img>
+              <v-img src="/logo.png" width="100px" class="mx-auto"></v-img>
               <v-card-title
                 primary-title
                 class="text-center text-h6 font-weight-bold"
@@ -71,7 +65,7 @@ const show2 = ref(false);
                   Welcome to D-coffee
                 </h3>
                 <h4 style="font-family: cursive; color: #665540">
-                  Plaese login to your account
+                  Please login to your account
                 </h4>
               </v-card-title>
 
@@ -110,17 +104,7 @@ const show2 = ref(false);
 
               <v-card-actions class="justify-center pa-0">
                 <v-container>
-                  <v-row class="mx-4">
-                    <v-switch
-                      v-model="userType"
-                      hide-details
-                      inset
-                      true-value="Owner"
-                      false-value="Employee"
-                      color="green"
-                      :label="`Position: ${userType}`"
-                    ></v-switch>
-                  </v-row>
+                  <v-row class="mx-4"> </v-row>
                   <v-row class="mx-4">
                     <v-btn
                       variant="flat"
