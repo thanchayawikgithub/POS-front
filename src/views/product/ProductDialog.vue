@@ -54,7 +54,7 @@ onMounted(async () => {
                   required
                   v-model="productStore.editedProduct.product_size"
                   :rules="[
-                    (v) => v >= 0 || 'Size must be equal to or greater than 0',
+                    (v) => v > 0 || 'Size must be equal to or greater than 0',
                   ]"
                 ></v-text-field>
               </v-col>

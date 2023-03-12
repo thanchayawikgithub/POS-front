@@ -66,8 +66,8 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                   color="error"
                   class="ma-1"
                   @click="
-                    productsStore.deleteProduct(productsStore.checkDialog),
-                      (productsStore.deleteDialog = false)
+                    (productsStore.deleteDialog = true),
+                      (productsStore.checkDialog = item.product_id!)
                   "
                 ></v-btn>
               </td>
