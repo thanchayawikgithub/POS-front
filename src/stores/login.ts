@@ -1,16 +1,16 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { useUserStore } from "./user";
+import { useEmployeeStore } from "./employee";
 import { useMessageStore } from "./message";
 export const useLoginStore = defineStore("login", () => {
   const useMessage = useMessageStore();
-  const userStore = useUserStore();
+  const employeeStore = useEmployeeStore();
   const loginName = ref("");
   const isLogin = computed(() => {
     return loginName.value !== "";
   });
   const login = (userName: string, password: string): void => {
-    if (userStore.login(userName, password)) {
+    if (employeeStore.login(userName, password)) {
       loginName.value = userName;
       localStorage.setItem("loginName", userName);
     } else {

@@ -114,5 +114,6 @@ export const useEmployeeStore = defineStore("employee", () => {
     isTable,
     checkDialog,
     deleteDialog,
+    login,
   };
 });
