@@ -7,6 +7,7 @@ import {
   mdiLogout,
   mdiStoreEditOutline,
   mdiFaceAgent,
+  mdiGlassCocktail,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
@@ -55,6 +56,13 @@ const logout = () => {
         title="Point of sell"
         value="pos"
         to="/pos"
+        style="color: bisque"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiGlassCocktail"
+        title="Product"
+        value="product"
+        to="/products"
         style="color: bisque"
       ></v-list-item>
       <v-list-item

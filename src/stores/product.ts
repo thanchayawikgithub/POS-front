@@ -9,6 +9,7 @@ export const useProductStore = defineStore("product", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
   const dialog = ref(false);
+  const isTable = ref(true);
   const products = ref<Product[]>([]);
   const editedProduct = ref<Product>({
     product_name: "",
@@ -94,5 +95,6 @@ export const useProductStore = defineStore("product", () => {
     saveProduct,
     editProduct,
     deleteProduct,
+    isTable,
   };
 });
