@@ -14,7 +14,7 @@ const customerStore = useCustomerStore();
         ><v-btn
           style="width: 13vw"
           rounded
-          color="#B86824"
+          color="#f6ad8d"
           class="font-btn"
           @click="customerStore.dialog = true"
         >
@@ -22,13 +22,13 @@ const customerStore = useCustomerStore();
         </v-btn>
       </v-col>
       <v-col>
-        <v-btn style="width: 13vw" rounded color="#EA9A56" class="font-btn">
+        <v-btn style="width: 13vw" rounded color="#f6ad8d" class="font-btn">
           Search
         </v-btn>
       </v-col>
     </v-row>
   </v-container>
-  <v-table style="background-color: #af9070; width: 35vw; height: 24vh">
+  <v-table style="background-color: #e7e7e7; width: 35vw; height: 24vh">
     <tbody>
       <tr>
         <td style="width: 100%">Member :</td>

@@ -18,10 +18,10 @@ const employee: { employee_name: string; employee_email: string } =
 </script>
 
 <template>
-  <v-navigation-drawer expand-on-hover rail style="background-color: #685444">
+  <v-navigation-drawer expand-on-hover rail style="background-color: #655a54">
     <v-list>
       <v-list-item
-        style="color: bisque"
+        style="color: #f0e3dd"
         prepend-avatar="./public/than.png"
         :title="employee.employee_name"
         :subtitle="employee.employee_email"
@@ -36,42 +36,42 @@ const employee: { employee_name: string; employee_email: string } =
         title="Customer"
         value="customer"
         to="/customers"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiStorefront"
         title="Store"
         value="store"
         to="/stores"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiCart"
         title="Point of sell"
         value="pos"
         to="/pos"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiGlassCocktail"
         title="Product"
         value="product"
         to="/products"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiStoreEditOutline"
         title="Material"
         value="Material"
         to="/materials"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiFaceAgent"
         title="Employee"
         value="Employee"
         to="/employees"
-        style="color: bisque"
+        style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiLogout"

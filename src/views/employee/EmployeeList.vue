@@ -13,9 +13,9 @@ onMounted(async () => {
 
 <template>
   <EmployeeDialog />
-  <v-container
+  <v-container class="pl-0"
     ><v-row>
-      <v-col offset="10">
+      <v-col offset="11">
         <v-btn
           color="primary"
           :prepend-icon="mdiPlus"
@@ -24,8 +24,8 @@ onMounted(async () => {
         >
       </v-col>
     </v-row>
-    <v-row>
-      <v-col cols="12" class="ma-2 pa-2">
+    <v-row style="width: 83vw">
+      <v-col cols="12">
         <v-table>
           <thead>
             <tr>

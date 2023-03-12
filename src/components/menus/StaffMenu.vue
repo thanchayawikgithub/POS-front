@@ -15,7 +15,7 @@ const logout = () => {
 </script>
 
 <template>
-  <v-navigation-drawer expand-on-hover rail style="background-color: #685444">
+  <v-navigation-drawer expand-on-hover rail style="background-color: #84776f">
     <v-list>
       <v-list-item
         style="color: bisque"

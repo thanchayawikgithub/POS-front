@@ -91,7 +91,7 @@ onMounted(async () => {
                   :value="item"
                 >
                   <v-btn
-                    style="width: 33vh; height: 29vh; background-color: #663300"
+                    style="width: 33vh; height: 29vh; background-color: #84776f"
                     class="ma-2 mt-2 ml-4"
                     @click="orderStore.addCart(item)"
                   >
@@ -148,10 +148,10 @@ onMounted(async () => {
   width: 50vw;
 }
 .bg {
-  background-color: #dac7b4;
+  background-color: #e7e7e7;
 }
 .bg2 {
-  background-color: #af9070;
+  background-color: #e7e7e7;
 }
 .card {
   box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
@@ -160,7 +160,7 @@ onMounted(async () => {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #fff;
+  background: #ffffff;
 
   padding-bottom: 4em;
 }
@@ -172,7 +172,7 @@ onMounted(async () => {
   position: absolute;
   left: 0;
   bottom: -65px;
-  background: #443300;
+  background: #84776f;
   color: #fff;
   height: 7vh;
   width: 100%;
@@ -216,7 +216,7 @@ onMounted(async () => {
 }
 
 .image {
-  background: #dac7b4;
+  background: #ffffff;
   width: 100%;
   height: 100%;
   display: grid;

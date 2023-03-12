@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useOrderStore } from "@/stores/order";
-
+import { mdiTrashCanOutline } from "@mdi/js";
 const orderStore = useOrderStore();
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
@@ -15,7 +15,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-col cols="5" class="text-center pl-16">
           <h5>Quantity</h5>
         </v-col>
-        <v-col cols="3" class="text-center pl-2">
+        <v-col cols="2  " class="text-center pl-2">
           <h5>Price</h5>
         </v-col>
       </v-row>
@@ -24,7 +24,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           height: 42vh;
           width: 37vw;
           overflow-y: auto;
-          background-color: #af9070;
+          background-color: #e7e7e7;
         "
         class="pl-0"
         flat
@@ -33,7 +33,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           class="pa-3 mb-2 mt-3 ml-0"
           v-for="item in orderStore.orderList"
           :key="item.product_id"
-          color="#dac7b4"
+          color="#f2f2f0"
           style="
             border-radius: 5px;
             border: 2px solid;
@@ -77,11 +77,20 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                 </v-btn>
               </v-card-actions>
             </v-col>
-            <v-col cols="3" class="text-center"
+            <v-col cols="2" class="text-center"
               ><v-card-text>{{
                 item.product_price * item.product_amount!
               }}</v-card-text></v-col
             >
+            <v-col cols="1" class="text-center">
+              <v-btn
+                :icon="mdiTrashCanOutline"
+                @click="orderStore.removeCart(item)"
+                style="font-weight: bolder"
+                variant="plain"
+              >
+              </v-btn>
+            </v-col>
           </v-row>
         </v-card>
       </v-card>

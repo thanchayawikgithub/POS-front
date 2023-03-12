@@ -48,8 +48,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               <td>{{ item.categoryId }}</td>
               <td>
                 <v-img
-                  class="align-end image mt-0"
-                  style="height: 5vh; width: 10vw"
+                  style="height: 7vh; width: 3vw"
                   :src="`${backendURL}/products/image/${item.product_image}`"
                 >
                 </v-img>

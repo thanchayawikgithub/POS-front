@@ -11,7 +11,7 @@ const orderStore = useOrderStore();
           style="height: 5vh; width: 20vw"
           rounded
           class="eiei"
-          color="#8B5927"
+          color="#df8057"
           @click="orderStore.openOrder()"
           >PAY</v-btn
         >
