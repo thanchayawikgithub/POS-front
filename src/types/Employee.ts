@@ -1,5 +1,3 @@
-import type User from "./User";
-
 export default interface Employee {
   employee_id?: number;
   employee_name: string;
