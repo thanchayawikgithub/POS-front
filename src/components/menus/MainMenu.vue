@@ -31,13 +31,6 @@ const logout = () => {
 
     <v-list density="compact" nav>
       <v-list-item
-        :prepend-icon="mdiAccount"
-        title="Users"
-        value="users"
-        to="/users"
-        style="color: bisque"
-      ></v-list-item>
-      <v-list-item
         :prepend-icon="mdiFaceMan"
         title="Customer"
         value="customer"
