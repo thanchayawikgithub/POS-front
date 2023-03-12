@@ -4,14 +4,17 @@ import { ref, watch } from "vue";
 import { useLoadingStore } from "./loading";
 import productService from "@/services/product";
 import { useMessageStore } from "./message";
+import type Category from "@/types/Category";
 
 export const useProductStore = defineStore("product", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
   const dialog = ref(false);
   const isTable = ref(true);
+  const checkDialog = ref();
+  const deleteDialog = ref(false);
   const products = ref<Product[]>([]);
-  const editedProduct = ref<Product>({
+  const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
 
     product_type: "",
@@ -20,7 +23,11 @@ export const useProductStore = defineStore("product", () => {
 
     product_price: 0,
 
-    product_image: "",
+    categoryId: 1,
+
+    product_image: "no_img_available.jpg",
+
+    files: [],
   });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -34,7 +41,11 @@ export const useProductStore = defineStore("product", () => {
 
         product_price: 0,
 
-        product_image: "",
+        categoryId: 1,
+
+        product_image: "no_img_available.jpg",
+
+        files: [],
       };
     }
   });
@@ -60,6 +71,7 @@ export const useProductStore = defineStore("product", () => {
           editedProduct.value
         );
       } else {
+        console.log(editedProduct.value);
         const res = await productService.saveProduct(editedProduct.value);
       }
       dialog.value = false;
@@ -82,6 +94,7 @@ export const useProductStore = defineStore("product", () => {
     }
     loadingStore.isLoading = false;
   }
+
   function editProduct(product: Product) {
     editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
@@ -96,5 +109,7 @@ export const useProductStore = defineStore("product", () => {
     editProduct,
     deleteProduct,
     isTable,
+    checkDialog,
+    deleteDialog,
   };
 });

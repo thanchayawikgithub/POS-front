@@ -2,6 +2,7 @@
 import { useProductStore } from "@/stores/product";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
 import { onMounted } from "vue";
+import ProductList from "./ProductList.vue";
 
 const productsStore = useProductStore();
 onMounted(async () => {
@@ -13,8 +14,7 @@ onMounted(async () => {
   <v-app>
     <v-container>
       <v-row>
-        <StoreList v-if="productsStore.isTable"></StoreList>
-        <StoreCard v-if="!productsStore.isTable"></StoreCard>
+        <ProductList v-if="productsStore.isTable"></ProductList>
         <StoreDialog></StoreDialog>
       </v-row>
 

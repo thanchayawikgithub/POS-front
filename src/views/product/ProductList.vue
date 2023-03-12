@@ -1,13 +1,80 @@
 <script setup lang="ts">
 import { useProductStore } from "@/stores/product";
 import { onMounted } from "vue";
-
+import { mdiPlus, mdiDelete, mdiPencil } from "@mdi/js";
+import ProductDialog from "./ProductDialog.vue";
 const productsStore = useProductStore();
 onMounted(async () => {
   await productsStore.getProducts();
 });
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 
 <template>
-  <div></div>
+  <ProductDialog></ProductDialog>
+  <v-container>
+    <v-row justify="end">
+      <v-col cols="2" offset="12">
+        <v-btn
+          color="primary"
+          :prepend-icon="mdiPlus"
+          @click="productsStore.dialog = true"
+          >Add New</v-btn
+        >
+      </v-col>
+    </v-row>
+    <v-row cols="12">
+      <v-col>
+        <v-table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Size</th>
+              <th>Price</th>
+              <th>Category</th>
+              <th>Image</th>
+              <th>Operations</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item of productsStore.products" :key="item.product_id">
+              <td>{{ item.product_id }}</td>
+              <td>{{ item.product_name }}</td>
+              <td>{{ item.product_type }}</td>
+              <td>{{ item.product_size }}</td>
+              <td>{{ item.product_price }}</td>
+              <td>{{ item.categoryId }}</td>
+              <td>
+                <v-img
+                  class="align-end image mt-0"
+                  style="height: 5vh; width: 10vw"
+                  :src="`${backendURL}/products/image/${item.product_image}`"
+                >
+                </v-img>
+              </td>
+              <td>
+                <v-btn
+                  :icon="mdiPencil"
+                  color="secondary"
+                  class="ma-1"
+                  @click="productsStore.editProduct(item)"
+                ></v-btn>
+                <v-btn
+                  :icon="mdiDelete"
+                  color="error"
+                  class="ma-1"
+                  @click="
+                    productsStore.deleteProduct(productsStore.checkDialog),
+                      (productsStore.deleteDialog = false)
+                  "
+                ></v-btn>
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>

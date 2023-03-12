@@ -1,5 +1,3 @@
-import type Category from "./Category";
-
 export default interface Product {
   product_id?: number;
 
@@ -11,15 +9,15 @@ export default interface Product {
 
   product_price: number;
 
-  product_image: string;
+  categoryId: number;
+
+  product_image?: string;
 
   product_createdAt?: Date;
 
   product_updatedAt?: Date;
 
   product_deletedAt?: Date;
-
-  category?: Category;
 
   product_qty?: number;
 }
