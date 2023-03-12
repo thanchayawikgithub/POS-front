@@ -89,7 +89,6 @@ onMounted(async () => {
               </v-col>
             </v-row>
           </v-container>
-          <div>{{ productStore.editedProduct }}</div>
         </v-form>
         <small>*indicates required field</small>
       </v-card-text>

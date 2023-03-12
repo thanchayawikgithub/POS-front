@@ -4,6 +4,10 @@ import http from "./axios";
 function getProducts() {
   return http.get("/products");
 }
+
+function getProductsByCategory(category: number) {
+  return http.get(`/products/category/${category}`);
+}
 function saveProduct(product: Product & { files: File[] }) {
   const formData = new FormData();
   formData.append("product_name", product.product_name);
@@ -41,4 +45,10 @@ function deleteProduct(id: number) {
   return http.delete(`/products/${id}`);
 }
 
-export default { getProducts, saveProduct, updateProduct, deleteProduct };
+export default {
+  getProducts,
+  saveProduct,
+  updateProduct,
+  deleteProduct,
+  getProductsByCategory,
+};
