@@ -2,6 +2,7 @@
 import { useEmployeeStore } from "../../stores/employee";
 import { mdiDelete, mdiPencil } from "@mdi/js";
 import { onMounted } from "vue";
+import employee from "@/services/employee";
 const employeeStore = useEmployeeStore();
 
 onMounted(async () => {
@@ -34,14 +35,19 @@ const addNew = () => {
         :key="item.employee_id"
         ><v-card height="200px" width="100%">
           <v-card-title>
-            NO.{{ item.employee_id }}({{ item.employee_id }})</v-card-title
+            Name:{{ item.employee_name }}({{ item.employee_position }}) (Tel:{{
+              item.employee_tel
+            }})</v-card-title
           >
           <v-card-text>
-            (Min:{{ item.employee_id }})( Qty:{{ item.employee_id }}) ( Unit:{{
-              item.employee_id
-            }})
+            (Province:{{ item.employee_province }})( District:{{
+              item.employee_district
+            }})( subdistrict:{{ item.employee_subdistrict }}) <br />
+            (Email:{{ item.employee_email }}) (Login:{{ item.employee_login }})
+            ( Password:{{ item.employee_password }})
           </v-card-text>
-          <v-card-text>(Price Per Unit:{{ item.employee_id }}$)</v-card-text>
+
+          <v-card-text>(Hourly:{{ item.employee_hourly_wage }}$)</v-card-text>
           <v-card-actions class="justify-center">
             <v-btn
               :prepend-icon="mdiDelete"
