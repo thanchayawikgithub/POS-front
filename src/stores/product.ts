@@ -15,6 +15,7 @@ export const useProductStore = defineStore("product", () => {
   const checkDialog = ref();
   const deleteDialog = ref(false);
   const products = ref<Product[]>([]);
+  const category = ref(1);
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
 
@@ -127,5 +128,7 @@ export const useProductStore = defineStore("product", () => {
     isTable,
     checkDialog,
     deleteDialog,
+    category,
+    getProductsByCategory,
   };
 });
