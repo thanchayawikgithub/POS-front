@@ -13,6 +13,8 @@ const authStore = useAuthStore();
 const logout = () => {
   authStore.logout();
 };
+const employee: { employee_name: string; employee_email: string } =
+  authStore.getEmployee();
 </script>
 
 <template>
@@ -21,7 +23,8 @@ const logout = () => {
       <v-list-item
         style="color: bisque"
         prepend-avatar="./public/than.png"
-        title="wanonn@gmail.com"
+        :title="employee.employee_name"
+        :subtitle="employee.employee_email"
       ></v-list-item>
     </v-list>
 

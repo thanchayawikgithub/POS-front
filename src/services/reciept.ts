@@ -3,7 +3,17 @@ import http from "./axios";
 function getReciept() {
   return http.get("/reciepts");
 }
-function saveReciept(reciept: Reciept) {
+function saveReciept(reciept: {
+  recieptDetails: { productId: number; rcd_amount: number }[];
+  rec_queue: number;
+  rec_time: number;
+  rec_discount: number;
+  rec_received: number;
+  rec_payment: string;
+  employeeId: number;
+  customerId: number;
+  storeId: number;
+}) {
   return http.post("/reciepts", reciept);
 }
 

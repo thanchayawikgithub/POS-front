@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { useCustomerStore } from "@/stores/customer";
 import { useOrderStore } from "@/stores/order";
-import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
+import CustomerDialog from "@/views/customer/CustomerDialog.vue";
 
 const orderStore = useOrderStore();
 const customerStore = useCustomerStore();

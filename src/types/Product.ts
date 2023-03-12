@@ -19,5 +19,5 @@ export default interface Product {
 
   product_deletedAt?: Date;
 
-  product_qty?: number;
+  product_amount?: number;
 }

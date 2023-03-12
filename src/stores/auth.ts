@@ -10,6 +10,12 @@ export const useAuthStore = defineStore("auth", () => {
   const messageStore = useMessageStore();
   const authName = ref("");
 
+  const getEmployee = () => {
+    const employeeString = localStorage.getItem("employee");
+    if (!employeeString) return null;
+    const employee = JSON.parse(employeeString ?? "");
+    return employee;
+  };
   const isLogin = () => {
     const employee = localStorage.getItem("employee");
     if (employee) {
@@ -44,5 +50,5 @@ export const useAuthStore = defineStore("auth", () => {
   //   loginName.value = localStorage.getItem("loginName") || "";
   // };
 
-  return { login, logout, isLogin, authName };
+  return { login, logout, isLogin, authName, getEmployee };
 });

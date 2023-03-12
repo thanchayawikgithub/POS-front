@@ -56,7 +56,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#CC0000"
-                  @click="orderStore.delQty(item)"
+                  @click="orderStore.delAmount(item)"
                   style="font-weight: bolder"
                 >
                   -
@@ -64,13 +64,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               </v-card-actions></v-col
             >
             <v-col cols="2" class="text-center">
-              <v-card-text>{{ item.product_qty }}</v-card-text>
+              <v-card-text>{{ item.product_amount }}</v-card-text>
             </v-col>
             <v-col cols="1" class="text-left"
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#009900"
-                  @click="orderStore.addQty(item)"
+                  @click="orderStore.addAmount(item)"
                   style="font-weight: bolder"
                 >
                   +
@@ -79,7 +79,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             </v-col>
             <v-col cols="3" class="text-center"
               ><v-card-text>{{
-                item.product_price * item.product_qty!
+                item.product_price * item.product_amount!
               }}</v-card-text></v-col
             >
           </v-row>

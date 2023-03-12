@@ -3,36 +3,50 @@ import { defineStore } from "pinia";
 import type Product from "@/types/Product";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
-import recieptDetailService from "@/services/recieptDetail";
+import { useAuthStore } from "./auth";
+import recieptService from "@/services/reciept";
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
+  const authStore = useAuthStore();
+  const dialog = ref(false);
+  async function getOrder() {
+    loadingStore.isLoading = true;
+    try {
+      const res = await recieptService.getReciept();
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล order ได้");
+    }
+  }
+  const clearOrder = () => {
+    orderList.value = [];
+  };
   const addCart = (item: Product) => {
     if (orderList.value.includes(item)) {
-      addQty(item);
+      addAmount(item);
     } else {
-      item.product_qty = 1;
+      item.product_amount = 1;
       orderList.value.push(item);
     }
-    console.log(orderList.value);
   };
 
-  const addQty = (item: Product) => {
-    item.product_qty!++;
+  const addAmount = (item: Product) => {
+    item.product_amount!++;
   };
 
-  const delQty = (item: Product) => {
-    if (item.product_qty! > 1) {
-      item.product_qty!--;
+  const delAmount = (item: Product) => {
+    if (item.product_amount! > 1) {
+      item.product_amount!--;
     } else {
       removeCart(item);
-      resetQty(item);
+      resetAmount(item);
     }
   };
 
-  const resetQty = (item: Product) => {
-    item.product_qty! = 1;
+  const resetAmount = (item: Product) => {
+    item.product_amount! = 1;
   };
 
   const removeCart = (item: Product) => {
@@ -44,18 +58,47 @@ export const useOrderStore = defineStore("order", () => {
 
   const totalPrice = computed(function () {
     return orderList.value.reduce(
-      (sum, item) => sum + item.product_price * item.product_qty!,
+      (sum, item) => sum + item.product_price * item.product_amount!,
       0
     );
   });
 
-  async function saveOrder() {
+  async function openOrder() {
+    const employee: { employee_id: number } = authStore.getEmployee();
+    const recieptDetails = orderList.value.map(
+      (item) =>
+        <
+          {
+            productId: number;
+            rcd_amount: number;
+          }
+        >{
+          productId: item.product_id,
+          rcd_amount: item.product_amount,
+        }
+    );
+
+    const reciept = {
+      rec_queue: 1,
+      rec_time: 15,
+      rec_discount: 0,
+      rec_received: 200,
+      rec_payment: "cash",
+      employeeId: employee.employee_id,
+      storeId: 1,
+      customerId: 1,
+      recieptDetails: recieptDetails,
+    };
     loadingStore.isLoading = true;
     try {
-      // const res = await recieptDetailService.saveRecieptDetail();
+      console.log(reciept);
+      const res = await recieptService.saveReciept(reciept);
+      dialog.value = false;
+      clearOrder();
+      // await getOrder();
     } catch (e) {
-      messageStore.showError("ไม่สามารถบันทึก Product ได้");
       console.log(e);
+      messageStore.showError("ไม่สามารถบันทึก Order ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -63,10 +106,11 @@ export const useOrderStore = defineStore("order", () => {
   return {
     orderList,
     addCart,
-    addQty,
-    delQty,
-    resetQty,
+    addAmount,
+    delAmount,
+    resetAmount,
     removeCart,
     totalPrice,
+    openOrder,
   };
 });
