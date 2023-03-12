@@ -1,7 +1,7 @@
 import type Store from "@/types/Store";
 import { defineStore } from "pinia";
 import { ref } from "vue";
-import StoreService from "@/services/Store";
+import StoreService from "@/services/store";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 
