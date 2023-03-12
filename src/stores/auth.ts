@@ -11,8 +11,8 @@ export const useAuthStore = defineStore("auth", () => {
   const authName = ref("");
 
   const isLogin = () => {
-    const user = localStorage.getItem("user");
-    if (user) {
+    const employee = localStorage.getItem("employee");
+    if (employee) {
       return true;
     }
     return false;
@@ -21,11 +21,11 @@ export const useAuthStore = defineStore("auth", () => {
     loadingStore.isLoading = true;
     try {
       const res = await auth.login(username, password);
-      localStorage.setItem("user", JSON.stringify(res.data.user));
+      localStorage.setItem("employee", JSON.stringify(res.data.employee));
       localStorage.setItem("token", res.data.access_token);
       // localStorage.setItem("loginName", username);
       console.log("Success");
-      router.push("/users");
+      router.push("/");
     } catch (e) {
       messageStore.showError("Username หรือ Password ไม่ถูกต้อง");
     }
@@ -35,7 +35,7 @@ export const useAuthStore = defineStore("auth", () => {
   };
   const logout = () => {
     // authName.value = "";
-    localStorage.removeItem("user");
+    localStorage.removeItem("employee");
     localStorage.removeItem("token");
     router.replace("/login");
   };
