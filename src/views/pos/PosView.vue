@@ -20,7 +20,8 @@ const productStore = useProductStore();
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
   await categoryStore.getCategorys();
-  await productStore.getProducts();
+  //await productStore.getProducts();
+  await productStore.getProductsByCategory(productStore.category);
   console.log(categoryStore.categorys);
 });
 </script>
@@ -33,11 +34,11 @@ onMounted(async () => {
           style="border: 3px solid; height: 97vh; width: 58vw"
           class="bg2"
         >
-          <v-tabs v-model="tab" grow style="height: 10vh">
+          <v-tabs v-model="productStore.category" grow style="height: 10vh">
             <v-tab
               v-for="item of categoryStore.categorys"
               :key="item.category_id"
-              :value="item"
+              :value="item.category_id"
               style="font-weight: bold; font-size: 20px; height: 7vh"
             >
               {{ item.category_name }}

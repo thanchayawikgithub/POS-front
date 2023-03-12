@@ -5,6 +5,7 @@ import { useLoadingStore } from "./loading";
 import productService from "@/services/product";
 import { useMessageStore } from "./message";
 import type Category from "@/types/Category";
+import category from "@/services/category";
 
 export const useProductStore = defineStore("product", () => {
   const loadingStore = useLoadingStore();
@@ -14,6 +15,7 @@ export const useProductStore = defineStore("product", () => {
   const checkDialog = ref();
   const deleteDialog = ref(false);
   const products = ref<Product[]>([]);
+  const category = ref(1);
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
 
@@ -49,6 +51,21 @@ export const useProductStore = defineStore("product", () => {
       };
     }
   });
+  watch(category, async (newCategory, oldCategory) => {
+    await getProductsByCategory(newCategory);
+  });
+  async function getProductsByCategory(category: number) {
+    loadingStore.isLoading = true;
+    try {
+      const res = await productService.getProductsByCategory(category);
+      products.value = res.data;
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
+    }
+    loadingStore.isLoading = false;
+  }
   async function getProducts() {
     loadingStore.isLoading = true;
     try {
@@ -111,5 +128,7 @@ export const useProductStore = defineStore("product", () => {
     isTable,
     checkDialog,
     deleteDialog,
+    category,
+    getProductsByCategory,
   };
 });
