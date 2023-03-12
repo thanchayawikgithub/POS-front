@@ -41,19 +41,6 @@ const router = createRouter({
       },
     },
     {
-      path: "/users",
-      name: "user",
-
-      components: {
-        default: () => import("../views/user/UserView.vue"),
-        menu: () => import("@/components/menus/MainMenu.vue"),
-      },
-      meta: {
-        layout: "MainLayout",
-        requiresAuth: true,
-      },
-    },
-    {
       path: "/customers",
       name: "customer",
       // route level code-splitting

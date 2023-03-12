@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { useUserStore } from "@/stores/user";
+import { useProductStore } from "@/stores/product";
 
-const userStore = useUserStore();
+const materialStore = useProductStore();
 </script>
 <template>
   <v-row justify="center">
-    <v-dialog v-model="userStore.deleteDialog" persistent width="600">
+    <v-dialog v-model="materialStore.deleteDialog" persistent width="600">
       <v-card>
         <v-card-title class="text-h5"> Delete data. </v-card-title>
         <v-card-text> Are you sure you want to delete!!!</v-card-text>
@@ -14,7 +14,7 @@ const userStore = useUserStore();
           <v-btn
             color="red"
             variant="text"
-            @click="userStore.deleteDialog = false"
+            @click="materialStore.deleteDialog = false"
           >
             cancel
           </v-btn>
@@ -22,8 +22,8 @@ const userStore = useUserStore();
             color="green-darken-1"
             variant="text"
             @click="
-              userStore.deleteUser(userStore.checkDialog),
-                (userStore.deleteDialog = false)
+              materialStore.deleteProduct(materialStore.checkDialog),
+                (materialStore.deleteDialog = false)
             "
             >ok
           </v-btn>

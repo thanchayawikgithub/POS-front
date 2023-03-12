@@ -15,7 +15,7 @@ function saveProduct(product: Product & { files: File[] }) {
   formData.append("product_size", product.product_size);
   formData.append("product_price", `${product.product_price}`);
   formData.append("file", product.files[0]);
-  formData.append("product_categoryId", `${product.categoryId}`);
+  formData.append("categoryId", `${product.categoryId}`);
 
   return http.post("/products", formData, {
     headers: {

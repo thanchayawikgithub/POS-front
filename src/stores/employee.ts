@@ -22,6 +22,8 @@ export const useEmployeeStore = defineStore("employee", () => {
     employee_email: "",
     employee_position: "",
     employee_hourly_wage: 0,
+    employee_login: "",
+    employee_password: "",
   });
   watch(dialog, (newDialog, oldDialog) => {
     if (!newDialog) {
@@ -34,9 +36,25 @@ export const useEmployeeStore = defineStore("employee", () => {
         employee_email: "",
         employee_position: "",
         employee_hourly_wage: 0,
+        employee_login: "",
+        employee_password: "",
       };
     }
   });
+
+  const login = (username: string, password: string): boolean => {
+    const index = employees.value.findIndex(
+      (item) => item.employee_login === username
+    );
+    if (index >= 0) {
+      const user = employees.value[index];
+      if (user.employee_password === password) {
+        return true;
+      }
+      return false;
+    }
+    return false;
+  };
   async function getEmployees() {
     loadingStore.isLoading = true;
     try {

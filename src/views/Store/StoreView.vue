@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useStoreStore } from "@/stores/store";
+import { useStoreStore } from "@/stores/Store";
 import StoreList from "@/views/Store/StoreList.vue";
 import { onMounted } from "vue";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
