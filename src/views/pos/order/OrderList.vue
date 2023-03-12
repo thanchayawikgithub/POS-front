@@ -44,7 +44,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           <v-row>
             <v-col cols="2">
               <v-img
-                height="90%"
+                height="7vh"
                 width="90%"
                 :src="`${backendURL}/products/image/${item.product_image}`"
               ></v-img>
