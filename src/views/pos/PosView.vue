@@ -19,7 +19,7 @@ const categoryStore = useCategoryStore();
 const productStore = useProductStore();
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
-  await categoryStore.getCategory();
+  await categoryStore.getCategorys();
   await productStore.getProducts();
   console.log(categoryStore.categorys);
 });

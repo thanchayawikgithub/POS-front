@@ -36,6 +36,8 @@ onMounted(async () => {
               <th>Subdistrict</th>
               <th>Tel</th>
               <th>Email</th>
+              <th>Login</th>
+              <th>Password</th>
               <th>Position</th>
               <th>Hourly Wage</th>
               <th>Operations</th>
@@ -50,6 +52,8 @@ onMounted(async () => {
               <td>{{ item.employee_subdistrict }}</td>
               <td>{{ item.employee_tel }}</td>
               <td>{{ item.employee_email }}</td>
+              <td>{{ item.employee_login }}</td>
+              <td>{{ item.employee_password }}</td>
               <td>{{ item.employee_position }}</td>
               <td>{{ item.employee_hourly_wage }} $</td>
 

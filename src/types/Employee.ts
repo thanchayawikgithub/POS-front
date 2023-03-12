@@ -10,8 +10,9 @@ export default interface Employee {
   employee_email: string;
   employee_position: string;
   employee_hourly_wage: number;
+  employee_login: string;
+  employee_password: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  userId?: User;
 }
