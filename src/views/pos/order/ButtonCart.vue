@@ -1,4 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useOrderStore } from "@/stores/order";
+const orderStore = useOrderStore();
+</script>
 
 <template>
   <v-container>
@@ -9,6 +12,7 @@
           rounded
           class="eiei"
           color="#8B5927"
+          @click="orderStore"
           >PAY</v-btn
         >
       </v-col>
