@@ -9,6 +9,25 @@ const materialStore = useMaterialStore();
 onMounted(async () => {
   await materialStore.getMaterials();
 });
+
+function statusColor(quantity: number, min: number) {
+  if (quantity === 0) {
+    return "red";
+  } else if (quantity >= min) {
+    return "green";
+  } else if (quantity < min) {
+    return "yellow";
+  }
+}
+function statusText(quantity: number, min: number) {
+  if (quantity === 0) {
+    return "Sold Out";
+  } else if (quantity >= min) {
+    return "In Stock";
+  } else if (quantity < min) {
+    return "Low Stock";
+  }
+}
 </script>
 
 <template>
@@ -29,24 +48,43 @@ onMounted(async () => {
         <v-table>
           <thead>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Min Quantity</th>
-              <th>Quantity</th>
-              <th>Unit</th>
-              <th>Price Per Unit</th>
-              <th>Operations</th>
+              <th class="text-center">ID</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Min Quantity</th>
+              <th class="text-center">Quantity</th>
+              <th class="text-center">Unit</th>
+              <th class="text-center">Price Per Unit</th>
+              <th class="text-center">Status</th>
+              <th class="text-center">Operations</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item of materialStore.materials" :key="item.mat_id">
-              <td>{{ item.mat_id }}</td>
+              <td class="text-center">{{ item.mat_id }}</td>
               <td>{{ item.mat_name }}</td>
-              <td>{{ item.mat_min_quantity }}</td>
-              <td>{{ item.mat_quantity }}</td>
-              <td>{{ item.mat_unit }}</td>
-              <td>{{ item.mat_price_per_unit }}$</td>
+              <td class="text-center">{{ item.mat_min_quantity }}</td>
+              <td class="text-center">{{ item.mat_quantity }}</td>
+              <td class="text-center">{{ item.mat_unit }}</td>
+              <td class="text-center">฿ {{ item.mat_price_per_unit }}</td>
               <td>
+                <v-card
+                  height="4vh"
+                  width="6vw"
+                  align="center"
+                  :color="statusColor(item.mat_quantity, item.mat_min_quantity)"
+                  style="color: aquamarine"
+                  class="mx-auto"
+                >
+                  <v-card-subtitle
+                    class="pt-1"
+                    style="font-size: 11px; font-weight: bold"
+                    >{{
+                      statusText(item.mat_quantity, item.mat_min_quantity)
+                    }}</v-card-subtitle
+                  >
+                </v-card>
+              </td>
+              <td class="text-center">
                 <v-btn
                   :icon="mdiPencil"
                   color="secondary"

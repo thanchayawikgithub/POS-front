@@ -52,7 +52,7 @@ onMounted(async () => {
                 label="Type"
                 class="pa-3"
                 variant="outlined"
-                height="80px"
+                style="height: 7vh"
                 v-model="selected"
               >
               </v-select>
@@ -62,7 +62,7 @@ onMounted(async () => {
               <v-card class="mx-auto bg2" style="height: 10vh" flat>
                 <v-card-text>
                   <v-text-field
-                    style="height: 9vh"
+                    style="height: 7vh"
                     density="compact"
                     variant="outlined"
                     label="Search"

@@ -17,7 +17,7 @@ export const useMaterialStore = defineStore("material", () => {
     mat_name: "",
     mat_min_quantity: 0,
     mat_quantity: 0,
-    mat_unit: 0,
+    mat_unit: "",
     mat_price_per_unit: 0,
   });
 
@@ -27,7 +27,7 @@ export const useMaterialStore = defineStore("material", () => {
         mat_name: "",
         mat_min_quantity: 0,
         mat_quantity: 0,
-        mat_unit: 0,
+        mat_unit: "",
         mat_price_per_unit: 0,
       };
     }
