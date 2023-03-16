@@ -12,6 +12,7 @@ export const useMaterialStore = defineStore("material", () => {
   const deleteDialog = ref(false);
   const isTable = ref(true);
   const dialog = ref(false);
+  const checkMaterial = ref(false);
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material>({
     mat_name: "",
@@ -91,5 +92,6 @@ export const useMaterialStore = defineStore("material", () => {
     isTable,
     checkDialog,
     deleteDialog,
+    checkMaterial,
   };
 });

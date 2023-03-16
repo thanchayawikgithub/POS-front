@@ -55,7 +55,7 @@ onMounted(async () => {
               <td>{{ item.employee_login }}</td>
               <td>{{ item.employee_password }}</td>
               <td>{{ item.employee_position }}</td>
-              <td>{{ item.employee_hourly_wage }}$</td>
+              <td>฿ {{ item.employee_hourly_wage }}</td>
 
               <td>
                 <v-btn

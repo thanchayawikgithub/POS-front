@@ -74,7 +74,10 @@ async function save() {
                   label="Email*"
                   required
                   v-model="employeeStore.editedEmployee.employee_email"
-                  :rules="[(v) => !!v || 'Item is required']"
+                  :rules="[
+                    (v) => !!v || 'Item is required',
+                    (v) => /^[^@]+@\w+(\.\w+)+\w$/.test(v) || 'Invalid e-mail',
+                  ]"
                 ></v-text-field>
               </v-col>
               <v-col cols="12">

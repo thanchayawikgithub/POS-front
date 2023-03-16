@@ -8,6 +8,7 @@ import { useOrderStore } from "@/stores/order";
 import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
+import product from "@/services/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -17,6 +18,7 @@ const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
 const orderStore = useOrderStore();
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
+
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
   await categoryStore.getCategorys();
@@ -52,26 +54,23 @@ onMounted(async () => {
                 label="Type"
                 class="pa-3"
                 variant="outlined"
-                style="height: 7vh"
                 v-model="selected"
+                density="comfortable"
+                style="height: 11vh"
               >
               </v-select>
             </v-col>
 
             <v-col cols="4">
-              <v-card class="mx-auto bg2" style="height: 10vh" flat>
-                <v-card-text>
-                  <v-text-field
-                    style="height: 7vh"
-                    density="compact"
-                    variant="outlined"
-                    label="Search"
-                    :append-inner-icon="mdiMagnify"
-                    single-line
-                    hide-details
-                  ></v-text-field>
-                </v-card-text>
-              </v-card>
+              <v-text-field
+                style="height: 7vh"
+                density="comfortable"
+                variant="outlined"
+                label="Search"
+                :append-inner-icon="mdiMagnify"
+                clearable
+                class="pa-3"
+              ></v-text-field>
             </v-col>
           </v-row>
 

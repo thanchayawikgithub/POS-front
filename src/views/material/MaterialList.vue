@@ -34,7 +34,14 @@ function statusText(quantity: number, min: number) {
   <MaterialDialog />
   <v-container>
     <v-row>
-      <v-col cols="5" offset="11">
+      <v-col cols="6" offset="8">
+        <v-btn
+          class="mr-4"
+          color="primary"
+          :prepend-icon="mdiPlus"
+          @click="materialStore.dialog = true"
+          >Check Material</v-btn
+        >
         <v-btn
           color="primary"
           :prepend-icon="mdiPlus"

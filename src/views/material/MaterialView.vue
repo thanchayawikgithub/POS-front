@@ -5,7 +5,7 @@ import MaterialDialog from "./MaterialDialog.vue";
 import MaterialList from "./MaterialList.vue";
 import MaterialCardList from "./MaterialCardList.vue";
 import { mdiTable, mdiCardOutline } from "@mdi/js";
-import MaterialCheckDialog from "./MaterialCheckDialog.vue";
+import MaterialCheckDialog from "./CheckMaterialCheckDialog.vue";
 const materialStore = useMaterialStore();
 
 onMounted(async () => {
