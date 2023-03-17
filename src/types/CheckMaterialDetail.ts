@@ -1,4 +1,4 @@
-import type CheckMaterial from "./checkMaterial";
+import type CheckMaterial from "./CheckMaterial";
 import type Material from "./Material";
 
 export default interface CheckMaterialDetail {

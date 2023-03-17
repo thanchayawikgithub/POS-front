@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useProductStore } from "@/stores/product";
 import { onMounted } from "vue";
+import { sortBy } from "sort-by-typescript";
+
 import { mdiPlus, mdiDelete, mdiPencil } from "@mdi/js";
 import ProductDialog from "./ProductDialog.vue";
 const productsStore = useProductStore();
@@ -8,6 +10,11 @@ onMounted(async () => {
   await productsStore.getProducts();
 });
 const backendURL = import.meta.env.VITE_BACKEND_URL;
+
+// function change(index: number, rating: number) {
+//   console.log("action" + index + " :" + rating);
+//   productsStore.getProducts.[index].rating = rating;
+// }
 </script>
 
 <template>
@@ -25,7 +32,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
     </v-row>
     <v-row cols="12">
       <v-col>
-        <v-table>
+        <v-table striped hover>
           <thead>
             <tr>
               <th>ID</th>

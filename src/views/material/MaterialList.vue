@@ -3,8 +3,11 @@ import { useMaterialStore } from "@/stores/material";
 import { onMounted } from "vue";
 import MaterialDialog from "./MaterialDialog.vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import CheckMaterialDialog from "./CheckMaterialDialog.vue";
+import { useCheckMaterialDetailStore } from "@/stores/checkMaterialDetail";
 
 const materialStore = useMaterialStore();
+const checkMaterialDetail = useCheckMaterialDetailStore();
 
 onMounted(async () => {
   await materialStore.getMaterials();
@@ -32,6 +35,7 @@ function statusText(quantity: number, min: number) {
 
 <template>
   <MaterialDialog />
+  <CheckMaterialDialog></CheckMaterialDialog>
   <v-container>
     <v-row>
       <v-col cols="6" offset="8">
@@ -39,7 +43,7 @@ function statusText(quantity: number, min: number) {
           class="mr-4"
           color="primary"
           :prepend-icon="mdiPlus"
-          @click="materialStore.dialog = true"
+          @click="checkMaterialDetail.dialog = true"
           >Check Material</v-btn
         >
         <v-btn

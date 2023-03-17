@@ -1,4 +1,4 @@
-import type CheckMaterial from "@/types/checkMaterial";
+import type CheckMaterial from "@/types/CheckMaterial";
 import http from "./axios";
 function getCheckMaterials() {
   return http.get("/check_materials");
