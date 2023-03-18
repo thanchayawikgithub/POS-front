@@ -5,4 +5,6 @@ export default interface Material {
   mat_quantity: number;
   mat_unit: string;
   mat_price_per_unit: number;
+  mat_remain?: number;
+  mat_exp?: Date;
 }

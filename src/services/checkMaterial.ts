@@ -3,7 +3,14 @@ import http from "./axios";
 function getCheckMaterials() {
   return http.get("/check_materials");
 }
-function saveCheckMaterial(check_material: CheckMaterial) {
+function saveCheckMaterial(check_material: {
+  checkMaterialDetails: {
+    MaterialId: number;
+    cmd_qty_remain: number;
+    cmd_qty_expire: Date;
+  }[];
+  EmployeeId: number;
+}) {
   return http.post("/check_materials", check_material);
 }
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useProductStore } from "@/stores/product";
 import { onMounted } from "vue";
-import { sortBy } from "sort-by-typescript";
 
 import { mdiPlus, mdiDelete, mdiPencil } from "@mdi/js";
 import ProductDialog from "./ProductDialog.vue";

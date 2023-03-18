@@ -3,6 +3,10 @@ import http from "./axios";
 function getMaterials() {
   return http.get("/materials");
 }
+
+function getMaterialsById() {
+  return http.get("/materials/:id");
+}
 function saveMaterial(material: Material) {
   return http.post("/materials", material);
 }
@@ -15,4 +19,10 @@ function deleteMaterial(id: number) {
   return http.delete(`/materials/${id}`);
 }
 
-export default { getMaterials, saveMaterial, updateMaterial, deleteMaterial };
+export default {
+  getMaterials,
+  saveMaterial,
+  updateMaterial,
+  deleteMaterial,
+  getMaterialsById,
+};
