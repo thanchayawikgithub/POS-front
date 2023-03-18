@@ -16,6 +16,11 @@ export const useProductStore = defineStore("product", () => {
   const deleteDialog = ref(false);
   const products = ref<Product[]>([]);
   const category = ref(1);
+  const page = ref(1);
+  const take = ref(10);
+  const keyword = ref("");
+  const lastPage = ref(0);
+
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
 
@@ -51,8 +56,23 @@ export const useProductStore = defineStore("product", () => {
       };
     }
   });
+
   watch(category, async (newCategory, oldCategory) => {
     await getProductsByCategory(newCategory);
+  });
+
+  watch(page, async (newPage, oldPage) => {
+    await getProducts();
+  });
+
+  watch(keyword, async (newKeyword, oldKeyword) => {
+    await getProducts();
+  });
+
+  watch(lastPage, async (newLastPage, oldLastPage) => {
+    if (newLastPage < page.value) {
+      page.value = 1;
+    }
   });
   async function getProductsByCategory(category: number) {
     loadingStore.isLoading = true;
@@ -69,9 +89,14 @@ export const useProductStore = defineStore("product", () => {
   async function getProducts() {
     loadingStore.isLoading = true;
     try {
-      const res = await productService.getProducts();
-      products.value = res.data;
-      console.log(res);
+      const res = await productService.getProducts({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+      });
+      products.value = res.data.data;
+      lastPage.value = res.data.lastPage;
+      console.log(products.value);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
@@ -130,5 +155,8 @@ export const useProductStore = defineStore("product", () => {
     deleteDialog,
     category,
     getProductsByCategory,
+    lastPage,
+    page,
+    keyword,
   };
 });

@@ -5,6 +5,7 @@ import { useAuthStore } from "./auth";
 import checkMaterialService from "../services/checkMaterial";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
+import { useMaterialStore } from "./material";
 
 export const useCheckMaterialStore = defineStore("checkMaterial", () => {
   const loadingStore = useLoadingStore();
@@ -15,6 +16,7 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
   const checkMaterialList = ref<Material[]>([]);
   const material = ref<Material>();
   const authStore = useAuthStore();
+  const materialStore = useMaterialStore();
 
   const addList = () => {
     if (!material.value || checkMaterialList.value.includes(material.value)) {
@@ -62,12 +64,11 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
       console.log(checkMaterial);
       const res = await checkMaterialService.saveCheckMaterial(checkMaterial);
       dialog.value = false;
-
-      // await getOrder();
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถบันทึก checkMaterial ได้");
     }
+    await materialStore.getMaterials();
     loadingStore.isLoading = false;
     clearList();
   }

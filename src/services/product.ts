@@ -1,8 +1,8 @@
 import type Category from "@/types/Category";
 import type Product from "@/types/Product";
 import http from "./axios";
-function getProducts() {
-  return http.get("/products");
+function getProducts(params: any) {
+  return http.get("/products", { params: params });
 }
 
 function getProductsByCategory(category: number) {

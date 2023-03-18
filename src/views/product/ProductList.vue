@@ -79,6 +79,10 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             </tr>
           </tbody>
         </v-table>
+        <v-pagination
+          :length="productsStore.lastPage"
+          v-model="productsStore.page"
+        ></v-pagination>
       </v-col>
     </v-row>
   </v-container>

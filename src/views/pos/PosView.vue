@@ -65,6 +65,7 @@ onMounted(async () => {
 
             <v-col cols="4">
               <v-text-field
+                v-model="productStore.keyword"
                 style="height: 7vh"
                 density="comfortable"
                 variant="outlined"
