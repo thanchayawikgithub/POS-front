@@ -10,6 +10,7 @@ export const useOrderStore = defineStore("order", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
   const authStore = useAuthStore();
+  const payDialog = ref(false);
   const dialog = ref(false);
   async function getOrder() {
     loadingStore.isLoading = true;
@@ -112,5 +113,6 @@ export const useOrderStore = defineStore("order", () => {
     removeCart,
     totalPrice,
     openOrder,
+    payDialog,
   };
 });

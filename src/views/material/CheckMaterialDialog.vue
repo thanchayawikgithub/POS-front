@@ -25,21 +25,32 @@ const materialStore = useMaterialStore();
                   :items="materialStore.materials"
                   item-title="mat_name"
                   item-value="mat_id"
-                  placeholder="Select or Search Material"
+                  label="Select or Search Material"
                 ></v-combobox>
               </v-col>
               <v-col>
-                <v-btn color="primary" @click="checkMaterialStore.addList()"
-                  >Add New</v-btn
+                <v-btn
+                  color="green"
+                  style="width: 8vw"
+                  @click="checkMaterialStore.addList()"
+                  >Add</v-btn
                 >
               </v-col>
             </v-row>
-            <v-table>
+          </v-container>
+
+          <v-container class="overflow-y-auto">
+            <v-table style="height: 50vh">
               <v-row
                 v-for="item of checkMaterialStore.checkMaterialList"
                 :key="item.mat_id"
+                style="width: 61vw"
               >
-                <v-col cols="6">{{ item.mat_name }}</v-col>
+                <v-col cols="6"
+                  ><v-text-field readonly>{{
+                    item.mat_name
+                  }}</v-text-field></v-col
+                >
                 <v-col cols="2">
                   <v-text-field
                     label="Quantity*"
@@ -51,13 +62,14 @@ const materialStore = useMaterialStore();
                 <v-col cols="3">
                   <v-text-field
                     v-model="item.mat_exp"
-                    label="Date"
+                    label="Date*"
                     type="Date"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="1">
+                <v-col cols="0">
                   <v-btn
                     :icon="mdiTrashCanOutline"
+                    class="mt-3"
                     style="font-weight: bolder"
                     variant="plain"
                     @click="checkMaterialStore.delList(item)"
@@ -72,7 +84,7 @@ const materialStore = useMaterialStore();
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          color="blue-darken-1"
+          color="red-darken-1"
           variant="text"
           @click="
             (checkMaterialStore.dialog = false), checkMaterialStore.clearList()

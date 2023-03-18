@@ -8,6 +8,7 @@ import { useOrderStore } from "@/stores/order";
 import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
+import PayDialog from "./PayDialog.vue";
 import product from "@/services/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
@@ -29,6 +30,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <PayDialog></PayDialog>
   <v-main class="bg pl-0 pt-2">
     <v-row class="ml-0">
       <v-col cols="7">
