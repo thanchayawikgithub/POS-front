@@ -8,6 +8,8 @@ function saveReciept(reciept: {
   rec_queue: number;
   rec_time: number;
   rec_discount: number;
+  rec_total: number;
+  rec_changed: number;
   rec_received: number;
   rec_payment: string;
   employeeId: number;

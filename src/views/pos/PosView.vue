@@ -9,6 +9,7 @@ import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
 import PayDialog from "./PayDialog.vue";
+import SuccessDialog from "./SuccessDialog.vue";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -33,6 +34,7 @@ onMounted(async () => {
 
 <template>
   <PayDialog></PayDialog>
+  <SuccessDialog></SuccessDialog>
   <v-main class="bg pl-0 pt-2">
     <v-row class="ml-0">
       <v-col cols="7">

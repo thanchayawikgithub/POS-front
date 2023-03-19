@@ -12,6 +12,10 @@ export const useOrderStore = defineStore("order", () => {
   const authStore = useAuthStore();
   const payDialog = ref(false);
   const dialog = ref(false);
+  const paymentMethod = ref("");
+  const received = ref(0);
+  const changed = ref(0);
+  const successDialog = ref(false);
   async function getOrder() {
     loadingStore.isLoading = true;
     try {
@@ -83,8 +87,10 @@ export const useOrderStore = defineStore("order", () => {
       rec_queue: 1,
       rec_time: 15,
       rec_discount: 0,
-      rec_received: 200,
-      rec_payment: "cash",
+      rec_total: totalPrice.value,
+      rec_received: received.value,
+      rec_payment: paymentMethod.value,
+      rec_changed: totalPrice.value - received.value,
       employeeId: employee.employee_id,
       storeId: 1,
       customerId: 1,
@@ -114,5 +120,9 @@ export const useOrderStore = defineStore("order", () => {
     totalPrice,
     openOrder,
     payDialog,
+    paymentMethod,
+    received,
+    changed,
+    successDialog,
   };
 });
