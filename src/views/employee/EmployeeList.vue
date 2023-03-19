@@ -12,7 +12,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <EmployeeDialog />
   <v-container class="pl-0"
     ><v-row>
       <v-col offset="11">

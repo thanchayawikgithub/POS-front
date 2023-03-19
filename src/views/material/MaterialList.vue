@@ -34,7 +34,6 @@ function statusText(quantity: number, min: number) {
 </script>
 
 <template>
-  <MaterialDialog />
   <CheckMaterialDialog></CheckMaterialDialog>
   <v-container>
     <v-row>

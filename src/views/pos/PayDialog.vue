@@ -58,8 +58,11 @@ const orderStore = useOrderStore();
             ><v-col align="center" style="font-size: 21px"
               >Total : {{ orderStore.totalPrice }} Baht</v-col
             ></v-row
-          ><v-img src="./public/QR.jpg" height="300px"></v-img
-        ></v-container>
+          ><v-img src="./public/QR.jpg" height="300px"></v-img>
+          <v-row class="justify-center"
+            ><v-btn @click="orderStore.calChanged()">Submit</v-btn></v-row
+          ></v-container
+        >
       </v-expand-transition>
 
       <v-card-actions>
@@ -68,7 +71,9 @@ const orderStore = useOrderStore();
           color="blue-darken-1"
           variant="text"
           @click="
-            (orderStore.payDialog = false), (orderStore.paymentMethod = '')
+            (orderStore.payDialog = false),
+              (orderStore.paymentMethod = ''),
+              (orderStore.received = 0)
           "
         >
           Close

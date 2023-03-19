@@ -18,16 +18,6 @@ onMounted(async () => {
         <ProductList v-if="productsStore.isTable"></ProductList>
         <ProductCheckDialog></ProductCheckDialog>
       </v-row>
-
-      <v-row class="justify-center">
-        <v-btn :icon="mdiTable" flat @click="productsStore.isTable = true">
-        </v-btn>
-        <v-btn
-          :icon="mdiCardOutline"
-          flat
-          @click="productsStore.isTable = false"
-        ></v-btn>
-      </v-row>
     </v-container>
   </v-app>
 </template>

@@ -2,7 +2,7 @@
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
-import customerDialog from "@/views/customer/CustomerDialog.vue";
+
 const customerStore = useCustomerStore();
 
 onMounted(async () => {
@@ -11,7 +11,6 @@ onMounted(async () => {
 </script>
 
 <template>
-  <customerDialog />
   <v-container>
     <v-row justify="end">
       <v-col cols="2" offset="12">

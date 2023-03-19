@@ -124,6 +124,7 @@ export const useOrderStore = defineStore("order", () => {
       payDialog.value = false;
       successDialog.value = true;
       openOrder();
+      received.value = 0;
     }
   };
 
