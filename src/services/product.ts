@@ -5,9 +5,10 @@ function getProducts(params: any) {
   return http.get("/products", { params: params });
 }
 
-function getProductsByCategory(category: number) {
-  return http.get(`/products/category/${category}`);
+function getProductsByCategory(category: number, keyword?: string) {
+  return http.get(`/products/category/${category}?keyword=${keyword}`);
 }
+
 function saveProduct(product: Product & { files: File[] }) {
   const formData = new FormData();
   formData.append("product_name", product.product_name);

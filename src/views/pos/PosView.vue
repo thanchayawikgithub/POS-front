@@ -9,7 +9,6 @@ import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
 import PayDialog from "./PayDialog.vue";
-import product from "@/services/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -24,7 +23,10 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
   await categoryStore.getCategorys();
   //await productStore.getProducts();
-  await productStore.getProductsByCategory(productStore.category);
+  await productStore.getProductsByCategory(
+    productStore.category,
+    productStore.getByCatKeyword
+  );
   console.log(categoryStore.categorys);
 });
 </script>
@@ -65,7 +67,7 @@ onMounted(async () => {
 
             <v-col cols="4">
               <v-text-field
-                v-model="productStore.keyword"
+                v-model="productStore.getByCatKeyword"
                 style="height: 7vh"
                 density="comfortable"
                 variant="outlined"

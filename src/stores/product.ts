@@ -20,6 +20,7 @@ export const useProductStore = defineStore("product", () => {
   const take = ref(10);
   const keyword = ref("");
   const lastPage = ref(0);
+  const getByCatKeyword = ref("");
 
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
@@ -58,7 +59,7 @@ export const useProductStore = defineStore("product", () => {
   });
 
   watch(category, async (newCategory, oldCategory) => {
-    await getProductsByCategory(newCategory);
+    await getProductsByCategory(newCategory, getByCatKeyword.value);
   });
 
   watch(page, async (newPage, oldPage) => {
@@ -69,15 +70,21 @@ export const useProductStore = defineStore("product", () => {
     await getProducts();
   });
 
+  watch(getByCatKeyword, async (newGetByCatKeyword, oldGetByCatKeyword) => {
+    await getProductsByCategory(category.value, newGetByCatKeyword);
+    console.log(getByCatKeyword);
+  });
+
   watch(lastPage, async (newLastPage, oldLastPage) => {
     if (newLastPage < page.value) {
       page.value = 1;
     }
   });
-  async function getProductsByCategory(category: number) {
+
+  async function getProductsByCategory(category: number, keyword?: string) {
     loadingStore.isLoading = true;
     try {
-      const res = await productService.getProductsByCategory(category);
+      const res = await productService.getProductsByCategory(category, keyword);
       products.value = res.data;
       console.log(res);
     } catch (e) {
@@ -158,5 +165,6 @@ export const useProductStore = defineStore("product", () => {
     lastPage,
     page,
     keyword,
+    getByCatKeyword,
   };
 });
