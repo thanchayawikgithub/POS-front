@@ -22,7 +22,13 @@ const customerStore = useCustomerStore();
         </v-btn>
       </v-col>
       <v-col>
-        <v-btn style="width: 13vw" rounded color="#f6ad8d" class="font-btn">
+        <v-btn
+          style="width: 13vw"
+          rounded
+          color="#f6ad8d"
+          class="font-btn"
+          @click="customerStore.searchDialog = true"
+        >
           Search
         </v-btn>
       </v-col>
@@ -32,7 +38,9 @@ const customerStore = useCustomerStore();
     <tbody>
       <tr>
         <td style="width: 100%">Member :</td>
-        <td class="text-lg-right">12345678</td>
+        <td class="text-lg-right">
+          {{ customerStore.customer?.customer_name }}
+        </td>
         <td class="text-lg-right"></td>
       </tr>
       <tr>

@@ -13,6 +13,10 @@ export const useCustomerStore = defineStore("customer", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const customers = ref<Customer[]>([]);
+  const customer = ref<Customer>();
+  const searchDialog = ref(false);
+  const customerTel = ref("");
+
   const editedCustomer = ref<Customer>({
     customer_name: "",
     customer_tel: "",
@@ -75,6 +79,24 @@ export const useCustomerStore = defineStore("customer", () => {
     editedCustomer.value = JSON.parse(JSON.stringify(customer));
     dialog.value = true;
   }
+
+  async function getCustomerByTel(tel: string) {
+    try {
+      const res = await customerService.getCustomerByTel(tel);
+      customer.value = res.data;
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Customer ได้");
+    }
+    loadingStore.isLoading = false;
+  }
+
+  async function searchCustomer() {
+    searchDialog.value = false;
+    await getCustomerByTel(customerTel.value);
+  }
+
   return {
     customers,
     getCustomer,
@@ -86,5 +108,10 @@ export const useCustomerStore = defineStore("customer", () => {
     isTable,
     checkDialog,
     deleteDialog,
+    getCustomerByTel,
+    searchDialog,
+    customerTel,
+    searchCustomer,
+    customer,
   };
 });

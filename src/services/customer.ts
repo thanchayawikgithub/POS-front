@@ -3,6 +3,11 @@ import http from "./axios";
 function getCustomers() {
   return http.get("/customers");
 }
+
+function getCustomerByTel(tel: string) {
+  return http.get(`/customers/tel/${tel}`);
+}
+
 function saveCustomers(customer: Customer) {
   return http.post("/customers", customer);
 }
@@ -17,4 +22,5 @@ export default {
   saveCustomers,
   updateCustomers,
   deleteCustomers,
+  getCustomerByTel,
 };

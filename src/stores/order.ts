@@ -5,6 +5,8 @@ import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 import { useAuthStore } from "./auth";
 import recieptService from "@/services/reciept";
+import { useCustomerStore } from "./customer";
+import type Customer from "@/types/Customer";
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
   const loadingStore = useLoadingStore();
@@ -16,6 +18,7 @@ export const useOrderStore = defineStore("order", () => {
   const received = ref(0);
   const changed = ref(0);
   const successDialog = ref(false);
+  const customerStore = useCustomerStore();
   async function getOrder() {
     loadingStore.isLoading = true;
     try {
@@ -70,6 +73,8 @@ export const useOrderStore = defineStore("order", () => {
 
   async function openOrder() {
     const employee: { employee_id: number } = authStore.getEmployee();
+    const customer = customerStore.customer?.customer_id;
+
     const recieptDetails = orderList.value.map(
       (item) =>
         <
@@ -88,12 +93,12 @@ export const useOrderStore = defineStore("order", () => {
       rec_time: 15,
       rec_discount: 0,
       rec_total: totalPrice.value,
-      rec_received: received.value,
+      rec_received: +received.value,
       rec_payment: paymentMethod.value,
-      rec_changed: totalPrice.value - received.value,
+      rec_changed: changed.value,
       employeeId: employee.employee_id,
       storeId: 1,
-      customerId: 1,
+      customerId: customer !== undefined ? customer : 0,
       recieptDetails: recieptDetails,
     };
     loadingStore.isLoading = true;
@@ -102,14 +107,35 @@ export const useOrderStore = defineStore("order", () => {
       const res = await recieptService.saveReciept(reciept);
       dialog.value = false;
       clearOrder();
-      // await getOrder();
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถบันทึก Order ได้");
     }
+    customerStore.customer = undefined;
+    console.log(customerStore.customer);
     loadingStore.isLoading = false;
   }
 
+  const calChanged = () => {
+    if (received.value < totalPrice.value) {
+      messageStore.showError("กรุณาใส่จำนวนเงินใหม่อีกครั้ง");
+    } else {
+      changed.value = received.value - totalPrice.value;
+      payDialog.value = false;
+      successDialog.value = true;
+      openOrder();
+    }
+  };
+
+  const pay = () => {
+    if (orderList.value.length === 0) {
+      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+    } else if (!customerStore.customer) {
+      messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
+    } else {
+      payDialog.value = true;
+    }
+  };
   return {
     orderList,
     addCart,
@@ -124,5 +150,7 @@ export const useOrderStore = defineStore("order", () => {
     received,
     changed,
     successDialog,
+    calChanged,
+    pay,
   };
 });

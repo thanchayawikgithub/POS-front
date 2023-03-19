@@ -48,13 +48,7 @@ const orderStore = useOrderStore();
             </v-col>
           </v-row>
           <v-row class="justify-center"
-            ><v-btn
-              @click="
-                (orderStore.payDialog = false),
-                  (orderStore.successDialog = true)
-              "
-              >Submit</v-btn
-            ></v-row
+            ><v-btn @click="orderStore.calChanged()">Submit</v-btn></v-row
           >
         </v-container>
       </v-expand-transition>

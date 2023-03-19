@@ -12,7 +12,7 @@ const orderStore = useOrderStore();
           rounded
           class="eiei"
           color="#df8057"
-          @click="orderStore.payDialog = true"
+          @click="orderStore.pay()"
           >PAY</v-btn
         >
       </v-col>
