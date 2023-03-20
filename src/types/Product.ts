@@ -20,4 +20,6 @@ export default interface Product {
   product_deletedAt?: Date;
 
   product_amount?: number;
+
+  product_categoryName?: string;
 }

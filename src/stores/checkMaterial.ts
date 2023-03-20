@@ -36,6 +36,7 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
 
   const clearList = () => {
     checkMaterialList.value = [];
+    material.value = undefined;
   };
 
   async function openCheckMaterial() {

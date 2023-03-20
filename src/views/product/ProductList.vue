@@ -2,7 +2,7 @@
 import { useProductStore } from "@/stores/product";
 import { onMounted } from "vue";
 
-import { mdiPlus, mdiDelete, mdiPencil } from "@mdi/js";
+import { mdiPlus, mdiDelete, mdiPencil, mdiMagnify } from "@mdi/js";
 import ProductDialog from "./ProductDialog.vue";
 const productsStore = useProductStore();
 onMounted(async () => {
@@ -29,6 +29,18 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         >
       </v-col>
     </v-row>
+    <v-row justify="end"
+      ><v-text-field
+        v-model="productsStore.keyword"
+        style="height: 7vh"
+        density="comfortable"
+        variant="outlined"
+        label="Search"
+        :append-inner-icon="mdiMagnify"
+        clearable
+        class="pa-3"
+      ></v-text-field
+    ></v-row>
     <v-row cols="12">
       <v-col>
         <v-table striped hover>
