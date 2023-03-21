@@ -1,5 +1,5 @@
 import type Product from "./Product";
-import type Reciept from "./Reciept";
+import type Reciept from "./Receipt";
 
 export default interface RecieptDetail {
   rcd_id?: number;

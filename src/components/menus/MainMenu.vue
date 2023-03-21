@@ -7,6 +7,7 @@ import {
   mdiStoreEditOutline,
   mdiFaceAgent,
   mdiGlassCocktail,
+  mdiReceiptTextOutline,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
@@ -57,6 +58,13 @@ const employee: { employee_name: string; employee_email: string } =
         title="Product"
         value="product"
         to="/products"
+        style="color: #f0e3dd"
+      ></v-list-item>
+      <v-list-item
+        :prepend-icon="mdiReceiptTextOutline"
+        title="Receipt"
+        value="receipt"
+        to="/receipt"
         style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item

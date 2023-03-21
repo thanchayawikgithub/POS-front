@@ -3,6 +3,9 @@ import http from "./axios";
 function getReciept() {
   return http.get("/reciepts");
 }
+function getLastReceipt() {
+  return http.get("/reciepts/lastReceipt");
+}
 function saveReciept(reciept: {
   recieptDetails: { productId: number; rcd_amount: number }[];
   rec_queue: number;
@@ -32,4 +35,5 @@ export default {
   saveReciept,
   updateReciept,
   deleteReciept,
+  getLastReceipt,
 };

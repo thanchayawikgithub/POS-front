@@ -11,6 +11,7 @@ import ButtonCart from "./order/ButtonCart.vue";
 import PayDialog from "./PayDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
+import ReceiptDialog from "./ReceiptDialog.vue";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -36,6 +37,7 @@ onMounted(async () => {
 <template>
   <PayDialog></PayDialog>
   <SuccessDialog></SuccessDialog>
+  <ReceiptDialog></ReceiptDialog>
   <CustomerSearchDialog></CustomerSearchDialog>
   <v-main class="bg pl-0 pt-2">
     <v-row class="ml-0">

@@ -17,32 +17,10 @@ const materialStore = useMaterialStore();
       </v-card-title>
       <v-card-text>
         <v-form ref="form">
-          <v-container>
-            <v-row>
-              <v-col cols="10">
-                <v-combobox
-                  v-model="checkMaterialStore.material"
-                  :items="materialStore.materials"
-                  item-title="mat_name"
-                  item-value="mat_id"
-                  label="Select or Search Material"
-                ></v-combobox>
-              </v-col>
-              <v-col>
-                <v-btn
-                  color="green"
-                  style="width: 8vw"
-                  @click="checkMaterialStore.addList()"
-                  >Add</v-btn
-                >
-              </v-col>
-            </v-row>
-          </v-container>
-
           <v-container class="overflow-y-auto">
             <v-table style="height: 50vh">
               <v-row
-                v-for="item of checkMaterialStore.checkMaterialList"
+                v-for="item of materialStore.materials"
                 :key="item.mat_id"
                 style="width: 61vw"
               >

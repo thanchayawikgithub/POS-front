@@ -4,9 +4,10 @@ import type Product from "@/types/Product";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 import { useAuthStore } from "./auth";
-import recieptService from "@/services/reciept";
+import recieptService from "@/services/receipt";
 import { useCustomerStore } from "./customer";
-import type Customer from "@/types/Customer";
+import { useReceiptStore } from "./receipt";
+
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
   const loadingStore = useLoadingStore();
@@ -19,6 +20,7 @@ export const useOrderStore = defineStore("order", () => {
   const changed = ref(0);
   const successDialog = ref(false);
   const customerStore = useCustomerStore();
+  const receiptStore = useReceiptStore();
   async function getOrder() {
     loadingStore.isLoading = true;
     try {
@@ -112,19 +114,20 @@ export const useOrderStore = defineStore("order", () => {
       messageStore.showError("ไม่สามารถบันทึก Order ได้");
     }
     customerStore.customer = undefined;
-    console.log(customerStore.customer);
     loadingStore.isLoading = false;
   }
 
-  const calChanged = () => {
+  const calChanged = async () => {
     if (received.value < totalPrice.value) {
       messageStore.showError("กรุณาใส่จำนวนเงินใหม่อีกครั้ง");
     } else {
       changed.value = received.value - totalPrice.value;
       payDialog.value = false;
-      successDialog.value = true;
-      openOrder();
+      // successDialog.value = true;
+      await openOrder();
       received.value = 0;
+      await receiptStore.getLastReceipt();
+      receiptStore.showDialog = true;
     }
   };
 

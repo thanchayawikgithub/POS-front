@@ -1,5 +1,8 @@
+import type Customer from "./Customer";
+import type Employee from "./Employee";
 import type Product from "./Product";
 import type RecieptDetail from "./RecieptDetail";
+import type Store from "./Store";
 
 export default interface Reciept {
   rec_id?: number;
@@ -22,7 +25,9 @@ export default interface Reciept {
   rec_updatedAt: Date;
   rec_deletedAt: Date;
 
-  products: Product;
+  store: Store;
+  customer: Customer;
 
+  employee: Employee;
   recieptDetail: RecieptDetail[];
 }
