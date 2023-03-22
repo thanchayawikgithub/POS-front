@@ -18,6 +18,9 @@ export const useReceiptStore = defineStore("receipt", () => {
       const res = await receiptService.getReciept();
       receipts.value = res.data;
       console.log(res);
+      receipts.value.forEach((receipt, index) => {
+        receipts.value[index] = { ...receipt, show: false };
+      });
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Receipt ได้");

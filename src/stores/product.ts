@@ -4,8 +4,6 @@ import { ref, watch } from "vue";
 import { useLoadingStore } from "./loading";
 import productService from "@/services/product";
 import { useMessageStore } from "./message";
-import type Category from "@/types/Category";
-import category from "@/services/category";
 
 export const useProductStore = defineStore("product", () => {
   const loadingStore = useLoadingStore();

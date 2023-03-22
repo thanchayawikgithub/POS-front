@@ -1,13 +1,15 @@
 <script lang="ts" setup>
 import { useMaterialStore } from "@/stores/material";
 import { onMounted } from "vue";
-import MaterialDialog from "./MaterialDialog.vue";
+
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
 import CheckMaterialDialog from "./CheckMaterialDialog.vue";
 import { useCheckMaterialStore } from "@/stores/checkMaterial";
+import { useVendorStore } from "@/stores/vendor";
 
 const materialStore = useMaterialStore();
 const checkMaterialStore = useCheckMaterialStore();
+const vendorStore = useVendorStore();
 
 onMounted(async () => {
   await materialStore.getMaterials();
@@ -48,7 +50,7 @@ function statusText(quantity: number, min: number) {
         <v-btn
           color="primary"
           :prepend-icon="mdiPlus"
-          @click="materialStore.dialog = true"
+          @click="vendorStore.dialog = true"
           >Add New</v-btn
         >
       </v-col>

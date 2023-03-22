@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useProductStore } from "@/stores/product";
-import { mdiTable, mdiCardOutline } from "@mdi/js";
+
 import { onMounted } from "vue";
 import ProductList from "./ProductList.vue";
 import ProductCheckDialog from "./ProductCheckDialog.vue";

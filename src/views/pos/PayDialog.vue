@@ -47,6 +47,7 @@ const orderStore = useOrderStore();
               ></v-text-field>
             </v-col>
           </v-row>
+
           <v-row class="justify-center"
             ><v-btn @click="orderStore.calChanged()">Submit</v-btn></v-row
           >
@@ -60,7 +61,7 @@ const orderStore = useOrderStore();
             ></v-row
           ><v-img src="./public/QR.jpg" height="300px"></v-img>
           <v-row class="justify-center"
-            ><v-btn @click="orderStore.calChanged()">Submit</v-btn></v-row
+            ><v-btn @click="orderStore.payDialog = false">Submit</v-btn></v-row
           ></v-container
         >
       </v-expand-transition>

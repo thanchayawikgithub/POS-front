@@ -3,7 +3,7 @@ import { useMaterialStore } from "@/stores/material";
 import { onMounted } from "vue";
 import MaterialDialog from "./MaterialDialog.vue";
 import MaterialList from "./MaterialList.vue";
-
+import BuyMaterialDialog from "./ฺฺBuyMaterialDialog.vue";
 import MaterialCheckDialog from "./MaterialCheckDialog.vue";
 const materialStore = useMaterialStore();
 
@@ -16,6 +16,7 @@ onMounted(async () => {
   <v-app>
     <v-container>
       <v-row>
+        <BuyMaterialDialog></BuyMaterialDialog>
         <MaterialList></MaterialList>
 
         <MaterialCheckDialog></MaterialCheckDialog>

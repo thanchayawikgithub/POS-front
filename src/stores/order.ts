@@ -1,4 +1,4 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 import type Product from "@/types/Product";
 import { useLoadingStore } from "./loading";
@@ -140,6 +140,7 @@ export const useOrderStore = defineStore("order", () => {
       payDialog.value = true;
     }
   };
+
   return {
     orderList,
     addCart,

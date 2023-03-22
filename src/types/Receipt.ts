@@ -1,6 +1,5 @@
 import type Customer from "./Customer";
 import type Employee from "./Employee";
-import type Product from "./Product";
 import type RecieptDetail from "./RecieptDetail";
 import type Store from "./Store";
 
@@ -30,4 +29,6 @@ export default interface Reciept {
 
   employee: Employee;
   recieptDetail: RecieptDetail[];
+
+  show?: boolean;
 }
