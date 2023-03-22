@@ -57,10 +57,12 @@ const Click = (rec: Reciept) => {
               <v-row align="center" justify="center" cols="12"
                 ><v-col cols="8"
                   ><v-row cols="12"
-                    ><v-col cols="3" class="text-end">Product Name</v-col>
+                    ><v-col cols="5" style="padding-left: 6vw"
+                      >Product Name</v-col
+                    >
                     <v-col cols="3" class="text-end">Product Price</v-col>
-                    <v-col cols="3" class="text-end">Amount</v-col>
-                    <v-col cols="3" class="text-end">Total</v-col></v-row
+                    <v-col cols="2" class="text-end">Amount</v-col>
+                    <v-col cols="2" class="text-end">Total</v-col></v-row
                   ></v-col
                 >
                 <v-col cols="4"></v-col>
@@ -70,7 +72,7 @@ const Click = (rec: Reciept) => {
                   ><v-col cols="8"
                     ><v-row cols="12"
                       ><v-col
-                        cols="3"
+                        cols="5"
                         class="text-start"
                         style="padding-left: 11vw"
                         >{{ rcd.rcd_name }}</v-col
@@ -78,10 +80,10 @@ const Click = (rec: Reciept) => {
                       <v-col cols="3" class="text-end">{{
                         rcd.rcd_price
                       }}</v-col>
-                      <v-col cols="3" class="text-end">{{
+                      <v-col cols="2" class="text-end">{{
                         rcd.rcd_amount
                       }}</v-col>
-                      <v-col cols="3" class="text-end">{{
+                      <v-col cols="2" class="text-end">{{
                         rcd.rcd_total
                       }}</v-col></v-row
                     ></v-col
