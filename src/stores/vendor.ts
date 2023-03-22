@@ -1,9 +1,11 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 import type Vendor from "@/types/Vendor";
+import type VendorMat from "@/types/VendorMat";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
+  const selectedMat = ref<VendorMat>();
   const vendorMats = ref<Vendor[]>([
     {
       vendor_id: 1,
@@ -64,5 +66,39 @@ export const useVendorStore = defineStore("vendor", () => {
       ],
     },
   ]);
-  return { dialog, vendorMats };
+  const orderList = ref<VendorMat[]>([]);
+
+  const addCart = (item: VendorMat) => {
+    if (orderList.value.includes(item)) {
+      addAmount(item);
+    } else {
+      item.v_mat_amount = 1;
+      orderList.value.push(item);
+    }
+  };
+
+  const addAmount = (item: VendorMat) => {
+    item.v_mat_amount!++;
+  };
+
+  const delAmount = (item: VendorMat) => {
+    if (item.v_mat_amount! > 1) {
+      item.v_mat_amount!--;
+    } else {
+      removeCart(item);
+      resetAmount(item);
+    }
+  };
+
+  const resetAmount = (item: VendorMat) => {
+    item.v_mat_amount! = 1;
+  };
+
+  const removeCart = (item: VendorMat) => {
+    const index = orderList.value.findIndex(
+      (material) => material.v_mat_amount === item.v_mat_amount
+    );
+    orderList.value.splice(index, 1);
+  };
+  return { dialog, vendorMats, orderList, addCart, selectedMat };
 });
