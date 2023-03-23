@@ -1,4 +1,5 @@
 <script lang="ts" setup>
+import receipt from "@/services/receipt";
 import { useReceiptStore } from "@/stores/receipt";
 
 const receiptStore = useReceiptStore();
@@ -7,12 +8,29 @@ const receiptStore = useReceiptStore();
   <v-dialog v-model="receiptStore.showDialog" persistent width="650"
     ><v-card class="receipt">
       <v-card-title></v-card-title>
-      <v-card-title style="font-size: 40px; font-weight: 800"
+      <v-card-title
+        style="font-size: 40px; font-weight: 800; text-align: center"
         >D-Coffee</v-card-title
-      ><v-card-text style="font-size: 16px; font-weight: 600" class="pb-1"
-        >Here is your receipt:</v-card-text
+      ><v-card-text style="font-size: 16px; font-weight: 400" class="pb-0 pt-1"
+        >Here is your receipt: TAX ID #{{
+          receiptStore.lastReceipt?.rec_id
+        }}</v-card-text
+      ><v-card-text style="font-size: 14px; font-weight: 400" class="pb-0 pt-0"
+        >Date:
+        {{
+          JSON.stringify(receiptStore.lastReceipt?.rec_createdAt).substring(
+            1,
+            11
+          )
+        }}
+        {{
+          JSON.stringify(receiptStore.lastReceipt?.rec_createdAt).substring(
+            12,
+            17
+          )
+        }}</v-card-text
       >
-      <v-card-text style="font-size: 14px; font-weight: 600" class="pt-1">
+      <v-card-text style="font-size: 14px; font-weight: 400" class="pt-0 pb-0">
         Customer :
         {{ receiptStore.lastReceipt?.customer.customer_name }}
       </v-card-text>

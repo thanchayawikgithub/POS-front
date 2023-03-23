@@ -2,7 +2,7 @@
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
 import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
-
+const date = new Date();
 const customerStore = useCustomerStore();
 
 onMounted(async () => {
@@ -41,7 +41,10 @@ onMounted(async () => {
               <td>{{ item.customer_name }}</td>
               <td>{{ item.customer_tel }}</td>
               <td>{{ item.customer_point }}</td>
-              <td>{{ item.createdDate }}</td>
+              <td>
+                {{ JSON.stringify(item.createdDate).substring(1, 11) }}
+                {{ JSON.stringify(item.createdDate).substring(11, 17) }}
+              </td>
               <td>
                 <v-btn
                   :icon="mdiPencil"
