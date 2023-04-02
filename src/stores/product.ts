@@ -19,6 +19,7 @@ export const useProductStore = defineStore("product", () => {
   const keyword = ref("");
   const lastPage = ref(0);
   const getByCatKeyword = ref("");
+  const getByTypeKeyword = ref("");
 
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
@@ -164,5 +165,6 @@ export const useProductStore = defineStore("product", () => {
     page,
     keyword,
     getByCatKeyword,
+    getByTypeKeyword,
   };
 });

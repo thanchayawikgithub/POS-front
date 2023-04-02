@@ -9,14 +9,16 @@ import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
 import PayDialog from "./PayDialog.vue";
+import PosDialog from "./PosDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
+import product from "@/services/product";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
 const selected = ref(["Recommend"]);
-const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda"]);
+const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda Drink"]);
 
 const orderStore = useOrderStore();
 const categoryStore = useCategoryStore();
@@ -35,6 +37,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <PosDialog></PosDialog>
   <PayDialog></PayDialog>
   <SuccessDialog></SuccessDialog>
   <ReceiptDialog></ReceiptDialog>
@@ -64,7 +67,7 @@ onMounted(async () => {
                 label="Type"
                 class="pa-3"
                 variant="outlined"
-                v-model="selected"
+                v-model="productStore.getByTypeKeyword"
                 density="comfortable"
                 style="height: 11vh"
               >
@@ -96,14 +99,18 @@ onMounted(async () => {
                 <v-col
                   cols="12"
                   md="4"
-                  v-for="item in productStore.products"
-                  :key="item.product_id"
-                  :value="item"
+                  v-for="item in productStore.products.filter(
+                    (products) =>
+                      products.product_type === productStore.getByTypeKeyword
+                  )"
+                  :key="item.product_type"
                 >
                   <v-btn
                     style="width: 33vh; height: 29vh; background-color: #84776f"
-                    class="ma-2 mt-2 ml-4"
-                    @click="orderStore.addCart(item)"
+                    class="ma-2 mt-2 ml-3"
+                    @click="
+                      orderStore.addOrder(item), (orderStore.posDialog = true)
+                    "
                   >
                     <v-card
                       style="width: 33vh; height: 30vh"

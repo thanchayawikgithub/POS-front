@@ -1,11 +1,14 @@
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 import type Vendor from "@/types/Vendor";
 import type VendorMat from "@/types/VendorMat";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
+
   const selectedMat = ref<VendorMat>();
+  const vendorMat = ref(1);
+
   const vendorMats = ref<Vendor[]>([
     {
       vendor_id: 1,
@@ -100,5 +103,22 @@ export const useVendorStore = defineStore("vendor", () => {
     );
     orderList.value.splice(index, 1);
   };
-  return { dialog, vendorMats, orderList, addCart, selectedMat };
+  const totalPrice = computed(function () {
+    return orderList.value.reduce(
+      (sum, item) => sum + item.v_mat_price * item.v_mat_amount!,
+      0
+    );
+  });
+  return {
+    dialog,
+    vendorMats,
+    orderList,
+    addCart,
+    addAmount,
+    delAmount,
+    selectedMat,
+    vendorMat,
+    totalPrice,
+    removeCart,
+  };
 });

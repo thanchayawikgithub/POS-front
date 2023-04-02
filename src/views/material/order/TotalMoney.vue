@@ -1,14 +1,12 @@
 <script setup lang="ts">
 import { useCustomerStore } from "@/stores/customer";
-import { useOrderStore } from "@/stores/order";
-import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
+import { useVendorStore } from "@/stores/vendor";
 
-const orderStore = useOrderStore();
+const vendorStore = useVendorStore();
 const customerStore = useCustomerStore();
 </script>
 <template>
-  <CustomerDialog />
-  <v-container>
+  <!-- <v-container>
     <v-row class="text-center">
       <v-col
         ><v-btn
@@ -33,29 +31,29 @@ const customerStore = useCustomerStore();
         </v-btn>
       </v-col>
     </v-row>
-  </v-container>
-  <v-table style="background-color: #e7e7e7; width: 35vw; height: 24vh">
+  </v-container> -->
+  <v-table style="width: 35vw; height: 24vh">
     <tbody>
-      <tr>
+      <!-- <tr>
         <td style="width: 100%">Member :</td>
         <td class="text-lg-right">
           {{ customerStore.customer?.customer_name }}
         </td>
         <td class="text-lg-right"></td>
-      </tr>
+      </tr> -->
       <tr>
         <td>Price :</td>
-        <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
+        <td class="text-lg-right">{{ vendorStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>Discount :</td>
         <td class="text-lg-right">0</td>
         <td class="text-lg-right">Baht</td>
-      </tr>
+      </tr> -->
       <tr>
         <td>Total :</td>
-        <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
+        <td class="text-lg-right">{{ vendorStore.totalPrice }}</td>
         <td class="text-lg-right">Baht</td>
       </tr>
     </tbody>

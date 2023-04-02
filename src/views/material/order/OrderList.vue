@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { useOrderStore } from "@/stores/order";
+import { useVendorStore } from "@/stores/vendor";
 import { mdiTrashCanOutline } from "@mdi/js";
-const orderStore = useOrderStore();
-const backendURL = import.meta.env.VITE_BACKEND_URL;
+const vendorStore = useVendorStore();
+// const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 <template>
   <div>
@@ -21,42 +21,43 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
       </v-row>
       <v-card
         style="
-          height: 40vh;
+          height: 30vh;
           width: 37vw;
           overflow-y: auto;
-          background-color: #e7e7e7;
+          /* background-color: #e7e7e7; */
         "
         class="pl-0"
         flat
       >
         <v-card
-          class="pa-3 mb-2 mt-3 ml-0"
-          v-for="item in orderStore.orderList"
-          :key="item.product_id"
-          color="#f2f2f0"
+          v-for="item in vendorStore.orderList"
+          :key="item.v_mat_id"
+          class="pa-3 mb-2 mt-3 ml-0 pt-0"
           style="
             border-radius: 5px;
             border: 2px solid;
-            width: 33vw;
-            height: 11vh;
+            width: 30vw;
+            height: 8vh;
           "
         >
           <v-row>
-            <v-col cols="2">
+            <!-- <v-col cols="2">
               <v-img
                 height="7vh"
                 width="90%"
                 :src="`${backendURL}/products/image/${item.product_image}`"
               ></v-img>
-            </v-col>
+            </v-col> -->
             <v-col cols="3" class="pl-0">
-              <v-card-text> {{ item.product_name }}</v-card-text>
+              <v-card-text style="font-size: small">
+                {{ item.v_mat_name }}</v-card-text
+              >
             </v-col>
             <v-col cols="1" class="text-right"
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#CC0000"
-                  @click="orderStore.delAmount(item)"
+                  @click="vendorStore.delAmount(item)"
                   style="font-weight: bolder"
                 >
                   -
@@ -64,28 +65,30 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               </v-card-actions></v-col
             >
             <v-col cols="2" class="text-center">
-              <v-card-text>{{ item.product_amount }}</v-card-text>
+              <v-card-text style="font-size: small">{{
+                item.v_mat_amount
+              }}</v-card-text>
             </v-col>
             <v-col cols="1" class="text-left"
               ><v-card-actions class="justify-center">
                 <v-btn
                   color="#009900"
-                  @click="orderStore.addAmount(item)"
+                  @click="vendorStore.addAmount(item)"
                   style="font-weight: bolder"
                 >
                   +
                 </v-btn>
               </v-card-actions>
             </v-col>
-            <v-col cols="2" class="text-center"
-              ><v-card-text>{{
-                item.product_price * item.product_amount!
+            <v-col cols="3" class="text-center"
+              ><v-card-text style="font-size: small">{{
+                item.v_mat_price * item.v_mat_amount!
               }}</v-card-text></v-col
             >
             <v-col cols="1" class="text-center">
               <v-btn
                 :icon="mdiTrashCanOutline"
-                @click="orderStore.removeCart(item)"
+                @click="vendorStore.removeCart(item)"
                 style="font-weight: bolder"
                 variant="plain"
               >
@@ -102,4 +105,21 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
   </div>
 </template>
 
-<script scope></script>
+<style scoped>
+.card .title {
+  font-family: sans-serif;
+  font-size: 0.9em;
+  position: absolute;
+  left: 0em;
+  bottom: 1em;
+  font-weight: bold;
+}
+
+.card .price {
+  font-family: sans-serif;
+  font-size: 0.87em;
+  position: absolute;
+  left: 0em;
+  bottom: 0.625em;
+}
+</style>

@@ -18,9 +18,11 @@ export const useOrderStore = defineStore("order", () => {
   const paymentMethod = ref("");
   const received = ref(0);
   const changed = ref(0);
+  const posDialog = ref(false);
   const successDialog = ref(false);
   const customerStore = useCustomerStore();
   const receiptStore = useReceiptStore();
+  const Order = ref<Product[]>([]);
   async function getOrder() {
     loadingStore.isLoading = true;
     try {
@@ -40,6 +42,9 @@ export const useOrderStore = defineStore("order", () => {
       item.product_amount = 1;
       orderList.value.push(item);
     }
+  };
+  const addOrder = (item: Product) => {
+    Order.value.push(item);
   };
 
   const addAmount = (item: Product) => {
@@ -157,5 +162,8 @@ export const useOrderStore = defineStore("order", () => {
     successDialog,
     calChanged,
     pay,
+    posDialog,
+    addOrder,
+    Order,
   };
 });
