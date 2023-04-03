@@ -20,17 +20,6 @@ import ReceiptDialog from "./ReceiptDialog.vue";
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
-const selected = ref(["Recommend"]);
-const drinktype = ref([
-  "Recommend",
-  "Coffee",
-  "Milk",
-  "Tea",
-  "Soda Drink",
-  "Cake",
-  "Thai Food",
-]);
-
 const orderStore = useOrderStore();
 const categoryStore = useCategoryStore();
 const productStore = useProductStore();
@@ -39,9 +28,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 onMounted(async () => {
   await categoryStore.getCategorys();
   //await productStore.getProducts();
+  productStore.selectedType = productStore.type.find(
+    (type) => type.type_id === productStore.category
+  );
   await productStore.getProductsByCategory(
     productStore.category,
-    productStore.getByCatKeyword
+    productStore.getByCatKeyword,
+    productStore.getByTypeKeyword
   );
   console.log(categoryStore.categorys);
 });
@@ -76,8 +69,9 @@ onMounted(async () => {
           <v-row>
             <v-col cols="8" class="d-flex">
               <v-select
-                :items="drinktype"
-                :values="selected"
+                :items="productStore.selectedType?.type_list"
+                item-title="type_name"
+                item-value="type_name"
                 label="Type"
                 class="pa-3"
                 variant="outlined"
@@ -96,7 +90,6 @@ onMounted(async () => {
                 variant="outlined"
                 label="Search"
                 :append-inner-icon="mdiMagnify"
-                clearable
                 class="pa-3"
               ></v-text-field>
             </v-col>
@@ -113,11 +106,8 @@ onMounted(async () => {
                 <v-col
                   cols="12"
                   md="4"
-                  v-for="item in productStore.products.filter(
-                    (products) =>
-                      products.product_type === productStore.getByTypeKeyword
-                  )"
-                  :key="item.product_type"
+                  v-for="item in productStore.products"
+                  :key="item.product_id"
                 >
                   <v-btn
                     style="width: 33vh; height: 29vh; background-color: #84776f"

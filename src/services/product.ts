@@ -5,12 +5,14 @@ function getProducts(params: any) {
   return http.get("/products", { params: params });
 }
 
-function getProductsByCategory(category: number, keyword?: string) {
-  return http.get(`/products/category/${category}?keyword=${keyword}`);
-}
-
-function getProductsByType(product: number, keyword?: string) {
-  return http.get(`/products/${product}?keyword=${keyword}`);
+function getProductsByCategory(
+  category: number,
+  keyword?: string,
+  type?: string
+) {
+  return http.get(
+    `/products/category/${category}?keyword=${keyword}&type=${type}`
+  );
 }
 
 function saveProduct(product: Product & { files: File[] }) {
@@ -56,5 +58,4 @@ export default {
   updateProduct,
   deleteProduct,
   getProductsByCategory,
-  getProductsByType,
 };

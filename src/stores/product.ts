@@ -19,7 +19,82 @@ export const useProductStore = defineStore("product", () => {
   const keyword = ref("");
   const lastPage = ref(0);
   const getByCatKeyword = ref("");
-  const getByTypeKeyword = ref("Coffee");
+  const getByTypeKeyword = ref("All");
+  const selectedType = ref<{
+    type_id: number;
+    type_list: { type_id: number; type_name: string }[];
+  }>();
+  const type = ref<
+    { type_id: number; type_list: { type_id: number; type_name: string }[] }[]
+  >([
+    {
+      type_id: 1,
+      type_list: [
+        {
+          type_id: 1,
+          type_name: "All",
+        },
+        {
+          type_id: 2,
+          type_name: "Coffee",
+        },
+        {
+          type_id: 3,
+          type_name: "Tea",
+        },
+        {
+          type_id: 4,
+          type_name: "Milk",
+        },
+        {
+          type_id: 5,
+          type_name: "Soda Drink",
+        },
+      ],
+    },
+    {
+      type_id: 2,
+      type_list: [
+        {
+          type_id: 1,
+          type_name: "All",
+        },
+        {
+          type_id: 2,
+          type_name: "Cake",
+        },
+        {
+          type_id: 3,
+          type_name: "Bread",
+        },
+        {
+          type_id: 4,
+          type_name: "Cookie",
+        },
+      ],
+    },
+    {
+      type_id: 3,
+      type_list: [
+        {
+          type_id: 1,
+          type_name: "All",
+        },
+        {
+          type_id: 2,
+          type_name: "Japanese Food",
+        },
+        {
+          type_id: 3,
+          type_name: "Italian Food",
+        },
+        {
+          type_id: 4,
+          type_name: "Thai Food",
+        },
+      ],
+    },
+  ]);
 
   const editedProduct = ref<Product & { files: File[] }>({
     product_name: "",
@@ -58,7 +133,18 @@ export const useProductStore = defineStore("product", () => {
   });
 
   watch(category, async (newCategory, oldCategory) => {
-    await getProductsByCategory(newCategory, getByCatKeyword.value);
+    getByTypeKeyword.value = "All";
+    getByCatKeyword.value = "";
+    selectedType.value = type.value.find(
+      (type) => type.type_id === category.value
+    );
+    await getProductsByCategory(
+      newCategory,
+      getByCatKeyword.value,
+      getByTypeKeyword.value
+    );
+
+    console.log(selectedType);
   });
 
   watch(page, async (newPage, oldPage) => {
@@ -70,8 +156,21 @@ export const useProductStore = defineStore("product", () => {
   });
 
   watch(getByCatKeyword, async (newGetByCatKeyword, oldGetByCatKeyword) => {
-    await getProductsByCategory(category.value, newGetByCatKeyword);
+    await getProductsByCategory(
+      category.value,
+      newGetByCatKeyword,
+      getByTypeKeyword.value
+    );
     console.log(getByCatKeyword);
+  });
+
+  watch(getByTypeKeyword, async (newGetByTypeKeyword, oldGetByTypeKeyword) => {
+    await getProductsByCategory(
+      category.value,
+      getByCatKeyword.value,
+      newGetByTypeKeyword
+    );
+    console.log(getByTypeKeyword);
   });
 
   watch(lastPage, async (newLastPage, oldLastPage) => {
@@ -80,10 +179,18 @@ export const useProductStore = defineStore("product", () => {
     }
   });
 
-  async function getProductsByCategory(category: number, keyword?: string) {
+  async function getProductsByCategory(
+    category: number,
+    keyword?: string,
+    type?: string
+  ) {
     loadingStore.isLoading = true;
     try {
-      const res = await productService.getProductsByCategory(category, keyword);
+      const res = await productService.getProductsByCategory(
+        category,
+        keyword,
+        type
+      );
       products.value = res.data;
       console.log(res);
     } catch (e) {
@@ -92,6 +199,7 @@ export const useProductStore = defineStore("product", () => {
     }
     loadingStore.isLoading = false;
   }
+
   async function getProducts() {
     loadingStore.isLoading = true;
     try {
@@ -166,5 +274,7 @@ export const useProductStore = defineStore("product", () => {
     keyword,
     getByCatKeyword,
     getByTypeKeyword,
+    type,
+    selectedType,
   };
 });
