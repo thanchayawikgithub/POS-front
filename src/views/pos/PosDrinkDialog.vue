@@ -1,18 +1,16 @@
 <script lang="ts" setup>
 import { useOrderStore } from "@/stores/order";
-import { useProductStore } from "@/stores/product";
 
-import { mdiSpoonSugar, mdiFoodOutline } from "@mdi/js";
+import { mdiSpoonSugar, mdiCoffeeOutline, mdiResize } from "@mdi/js";
 import { ref } from "vue";
 const orderStore = useOrderStore();
 const selection = ref(3);
-const productStore = useProductStore();
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 
 <template>
-  <v-dialog v-model="orderStore.posDialog" persistent width="600">
+  <v-dialog v-model="orderStore.posDrinkDialog" persistent width="600">
     <v-card
       v-for="item in orderStore.Order"
       :key="item.product_id"
@@ -26,7 +24,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               class="mx-auto pl-7 mb-0"
               flat
             >
-              <v-avatar size="130px" style="background-color: aliceblue">
+              <v-avatar size="130px" style="background-color: white">
                 <v-img
                   class="ml-2 mt-2"
                   style="height: 70px"
@@ -72,7 +70,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             class="pl-0"
                             size="x-large"
                             height="6vh"
-                            :prepend-icon="mdiFoodOutline"
+                            :prepend-icon="mdiCoffeeOutline"
                           ></v-btn
                         ></v-card>
                       </v-col>
@@ -127,7 +125,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             class="pl-0"
                             size="x-large"
                             height="6vh"
-                            :prepend-icon="mdiFoodOutline"
+                            :prepend-icon="mdiResize"
                           ></v-btn
                         ></v-card>
                       </v-col>
@@ -255,7 +253,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-btn
           color="darken-1"
           variant="plain"
-          @click="(orderStore.posDialog = false), orderStore.Order.pop()"
+          @click="(orderStore.posDrinkDialog = false), orderStore.Order.pop()"
         >
           Close
         </v-btn>
@@ -265,7 +263,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           variant="flat"
           color="#655a54"
           @click="
-            (orderStore.posDialog = false), orderStore.Order.pop();
+            (orderStore.posDrinkDialog = false), orderStore.Order.pop();
             orderStore.addCart(item);
           "
         >

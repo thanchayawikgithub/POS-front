@@ -9,6 +9,10 @@ function getProductsByCategory(category: number, keyword?: string) {
   return http.get(`/products/category/${category}?keyword=${keyword}`);
 }
 
+function getProductsByType(product: number, keyword?: string) {
+  return http.get(`/products/${product}?keyword=${keyword}`);
+}
+
 function saveProduct(product: Product & { files: File[] }) {
   const formData = new FormData();
   formData.append("product_name", product.product_name);
@@ -52,4 +56,5 @@ export default {
   updateProduct,
   deleteProduct,
   getProductsByCategory,
+  getProductsByType,
 };

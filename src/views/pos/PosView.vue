@@ -9,7 +9,10 @@ import OrderList from "./order/OrderList.vue";
 import TotalMoney from "./order/TotalMoney.vue";
 import ButtonCart from "./order/ButtonCart.vue";
 import PayDialog from "./PayDialog.vue";
-import PosDialog from "./PosDialog.vue";
+import PosDrinkDialog from "./PosDrinkDialog.vue";
+import PosBakeryDialog from "./PosBakeryDialog.vue";
+import PosFoodDialog from "./PosFoodDialog.vue";
+
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
@@ -25,6 +28,7 @@ const drinktype = ref([
   "Tea",
   "Soda Drink",
   "Cake",
+  "Thai Food",
 ]);
 
 const orderStore = useOrderStore();
@@ -44,7 +48,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <PosDialog></PosDialog>
+  <PosBakeryDialog></PosBakeryDialog>
+  <PosDrinkDialog></PosDrinkDialog>
+  <PosFoodDialog></PosFoodDialog>
   <PayDialog></PayDialog>
   <SuccessDialog></SuccessDialog>
   <ReceiptDialog></ReceiptDialog>
@@ -71,6 +77,7 @@ onMounted(async () => {
             <v-col cols="8" class="d-flex">
               <v-select
                 :items="drinktype"
+                :values="selected"
                 label="Type"
                 class="pa-3"
                 variant="outlined"
@@ -116,7 +123,16 @@ onMounted(async () => {
                     style="width: 33vh; height: 29vh; background-color: #84776f"
                     class="ma-2 mt-2 ml-3"
                     @click="
-                      orderStore.addOrder(item), (orderStore.posDialog = true)
+                      if (item.categoryId === 1) {
+                        orderStore.addOrder(item);
+                        orderStore.posDrinkDialog = true;
+                      } else if (item.categoryId === 2) {
+                        orderStore.addOrder(item);
+                        orderStore.posBakeryDialog = true;
+                      } else if (item.categoryId === 3) {
+                        orderStore.addOrder(item);
+                        orderStore.posFoodDialog = true;
+                      }
                     "
                   >
                     <v-card

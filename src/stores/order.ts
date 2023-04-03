@@ -18,7 +18,9 @@ export const useOrderStore = defineStore("order", () => {
   const paymentMethod = ref("");
   const received = ref(0);
   const changed = ref(0);
-  const posDialog = ref(false);
+  const posDrinkDialog = ref(false);
+  const posBakeryDialog = ref(false);
+  const posFoodDialog = ref(false);
   const successDialog = ref(false);
   const customerStore = useCustomerStore();
   const receiptStore = useReceiptStore();
@@ -162,8 +164,10 @@ export const useOrderStore = defineStore("order", () => {
     successDialog,
     calChanged,
     pay,
-    posDialog,
+    posDrinkDialog,
     addOrder,
     Order,
+    posBakeryDialog,
+    posFoodDialog,
   };
 });
