@@ -18,7 +18,14 @@ const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
 const selected = ref(["Recommend"]);
-const drinktype = ref(["Recommend", "Coffee", "Milk", "Tea", "Soda Drink"]);
+const drinktype = ref([
+  "Recommend",
+  "Coffee",
+  "Milk",
+  "Tea",
+  "Soda Drink",
+  "Cake",
+]);
 
 const orderStore = useOrderStore();
 const categoryStore = useCategoryStore();
@@ -118,15 +125,38 @@ onMounted(async () => {
                     >
                       <v-img
                         class="align-end image mt-0"
-                        style="height: 14vh; width: 20vw"
+                        style="height: 11vh; width: 20vw"
                         :src="`${backendURL}/products/image/${item.product_image}`"
                       >
                       </v-img>
-                      <v-card-title class="title"
+                      <v-card-title class="title mb-2"
                         >{{ item.product_name }}
                       </v-card-title>
-                      <v-card-subtitle class="price"
-                        >Price:{{ item.product_price }}</v-card-subtitle
+                      <v-card-title
+                        style="font-size: x-small; font-weight: 100"
+                        class="title mb-1"
+                        >{{ item.product_type }}
+                      </v-card-title>
+                      <v-card-title class="price"
+                        ><v-btn-toggle
+                          variant="outlined"
+                          divided
+                          class="pt-1"
+                          color="#df8057"
+                          style="height: 4vh; width: 15vw; border: 10px"
+                        >
+                          <v-btn style="width: 3vw; font-size: xx-small"
+                            >HOT <br />฿{{ item.product_price - 5 }}</v-btn
+                          >
+                          <v-btn style="width: 3vw; font-size: xx-small"
+                            >ICED<br />
+                            ฿{{ item.product_price }}</v-btn
+                          >
+                          <v-btn style="width: 3vw; font-size: xx-small"
+                            >SMOOTHIE<br />
+                            ฿{{ item.product_price + 5 }}</v-btn
+                          >
+                        </v-btn-toggle></v-card-title
                       >
                     </v-card>
                   </v-btn>
@@ -202,8 +232,8 @@ onMounted(async () => {
   font-family: sans-serif;
   font-size: 1.1em;
   position: absolute;
-  left: 0.625em;
-  bottom: 1em;
+  left: 0em;
+  bottom: 2em;
   font-weight: bold;
 }
 
@@ -211,8 +241,8 @@ onMounted(async () => {
   font-family: sans-serif;
   font-size: 1em;
   position: absolute;
-  left: 0.625em;
-  bottom: 0.625em;
+  left: 0em;
+  bottom: 0.1em;
 }
 
 .card:hover::after {
