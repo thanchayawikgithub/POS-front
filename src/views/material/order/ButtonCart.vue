@@ -13,7 +13,7 @@ const vendorStore = useVendorStore();
           rounded
           class="eiei"
           color="#df8057"
-          @click="vendorStore.dialog = false"
+          @click="vendorStore.openBill()"
           >PAY</v-btn
         >
       </v-col>

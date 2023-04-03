@@ -2,13 +2,22 @@ import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
 import type Vendor from "@/types/Vendor";
 import type VendorMat from "@/types/VendorMat";
+import { useAuthStore } from "./auth";
+import { useLoadingStore } from "./loading";
+import billService from "@/services/bill";
+import { useMessageStore } from "./message";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
-
+  const authStore = useAuthStore();
+  const loadingStore = useLoadingStore();
   const selectedMat = ref<VendorMat>();
-  const vendorMat = ref(1);
 
+  const messageStore = useMessageStore();
+  const received = ref(0);
+  const changed = ref(0);
+  const selectedVendorMats = ref<Vendor>();
+  const selectedVendor = ref(1);
   const vendorMats = ref<Vendor[]>([
     {
       vendor_id: 1,
@@ -18,16 +27,19 @@ export const useVendorStore = defineStore("vendor", () => {
           v_mat_id: 1,
           v_mat_name: "Coffee Beans",
           v_mat_price: 200,
+          v_mat_vendor_name: "Makro",
         },
         {
           v_mat_id: 2,
           v_mat_name: "Chocolate",
           v_mat_price: 250,
+          v_mat_vendor_name: "Makro",
         },
         {
           v_mat_id: 3,
           v_mat_name: "Green Tea Powder",
           v_mat_price: 180,
+          v_mat_vendor_name: "Makro",
         },
       ],
     },
@@ -39,16 +51,19 @@ export const useVendorStore = defineStore("vendor", () => {
           v_mat_id: 4,
           v_mat_name: "Sugar",
           v_mat_price: 120,
+          v_mat_vendor_name: "Lotus",
         },
         {
           v_mat_id: 5,
           v_mat_name: "Lemon",
           v_mat_price: 100,
+          v_mat_vendor_name: "Lotus",
         },
         {
           v_mat_id: 6,
           v_mat_name: "Milk",
           v_mat_price: 80,
+          v_mat_vendor_name: "Lotus",
         },
       ],
     },
@@ -60,16 +75,22 @@ export const useVendorStore = defineStore("vendor", () => {
           v_mat_id: 7,
           v_mat_name: "Thai Tea Powder",
           v_mat_price: 130,
+          v_mat_vendor_name: "Big C",
         },
         {
           v_mat_id: 8,
           v_mat_name: "Cake Powder",
           v_mat_price: 220,
+          v_mat_vendor_name: "Big C",
         },
       ],
     },
   ]);
   const orderList = ref<VendorMat[]>([]);
+
+  watch(selectedVendor, async (newselectedVendor, oldveselectedVendor) => {
+    console.log(newselectedVendor);
+  });
 
   const addCart = (item: VendorMat) => {
     if (orderList.value.includes(item)) {
@@ -109,7 +130,56 @@ export const useVendorStore = defineStore("vendor", () => {
       0
     );
   });
+
+  async function openBill() {
+    const employee: { employee_id: number } = authStore.getEmployee();
+
+    const billDetails = orderList.value.map(
+      (item) =>
+        <
+          {
+            materialId: number;
+            bill_detail_amount: number;
+          }
+        >{
+          materialId: item.v_mat_id,
+          bill_detail_amount: item.v_mat_amount,
+        }
+    );
+
+    const selectedVendorName = computed(() => {
+      const vendor = vendorMats.value.find(
+        (vendor) => vendor.vendor_id === selectedVendor.value
+      );
+      return vendor ? vendor.vendor_name : "";
+    });
+    const bill = {
+      employeeId: employee.employee_id,
+      bill_shop_name: selectedVendorName.value,
+      bill_total: totalPrice.value,
+      bill_buy: received.value,
+      bill_change: changed.value,
+      billDetails: billDetails,
+    };
+    loadingStore.isLoading = true;
+    try {
+      console.log(bill);
+      const res = await billService.saveBill(bill);
+      dialog.value = false;
+      clearOrder();
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถบันทึก Order ได้");
+    }
+    loadingStore.isLoading = false;
+  }
+
+  const clearOrder = () => {
+    orderList.value = [];
+  };
+
   return {
+    selectedVendorMats,
     dialog,
     vendorMats,
     orderList,
@@ -117,8 +187,9 @@ export const useVendorStore = defineStore("vendor", () => {
     addAmount,
     delAmount,
     selectedMat,
-    vendorMat,
+    selectedVendor,
     totalPrice,
     removeCart,
+    openBill,
   };
 });

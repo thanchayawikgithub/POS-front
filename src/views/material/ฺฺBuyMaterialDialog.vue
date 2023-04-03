@@ -16,52 +16,44 @@ const vendorStore = useVendorStore();
         ><v-container>
           <v-row class="ml-0">
             <v-col cols="6">
-              <v-tabs v-model="vendorStore.vendorMat">
+              <v-tabs v-model="vendorStore.selectedVendor">
                 <v-tab
-                  v-for="item in vendorStore.vendorMats"
-                  :key="item.vendor_id"
-                  :value="item.vendor_id"
-                  style="font-weight: bold; font-size: 10px"
+                  v-for="(vendor, index) in vendorStore.vendorMats"
+                  :key="index"
+                  :value="vendor.vendor_id"
                 >
-                  {{ item.vendor_name }}
+                  {{ vendor.vendor_name }}
                 </v-tab>
               </v-tabs>
 
-              <v-window v-model="tab" style="overflow-y: auto">
+              <v-window
+                v-model="vendorStore.selectedVendor"
+                style="overflow-y: auto"
+              >
                 <v-window-item
-                  v-for="items in vendorStore.vendorMats"
-                  :key="items.vendor_id"
+                  v-for="(vendor, index) in vendorStore.vendorMats"
+                  :key="index"
+                  :value="vendor.vendor_id"
                 >
-                  <v-card style="height: 68vh; width: 45vw" flat>
-                    <v-row>
-                      <v-col>
-                        <v-row>
-                          <v-card style="height: 90vh" flat>
-                            <v-btn
-                              style="width: 20vh; height: 29vh"
-                              class="ma-3 mt-5 ml-4"
-                              v-for="item in items.vendorMat"
-                              :key="item.v_mat_id"
-                              @click="vendorStore.addCart(item)"
-                            >
-                              <v-card
-                                style="width: 20vh; height: 29vh"
-                                class="mx-auto card"
-                                ><v-card-title class="title"
-                                  >{{ item.v_mat_name }}
-                                </v-card-title>
-                                <v-card-subtitle class="price"
-                                  >Price: ฿{{
-                                    item.v_mat_price
-                                  }}</v-card-subtitle
-                                >
-                              </v-card>
-                            </v-btn>
-                          </v-card></v-row
+                  <v-row>
+                    <v-col
+                      v-for="(vendorMat, index) in vendor.vendorMat"
+                      :key="index"
+                      cols="6"
+                    >
+                      <v-card>
+                        <v-card-title>{{ vendorMat.v_mat_name }}</v-card-title>
+                        <v-card-text
+                          >Price: ฿{{ vendorMat.v_mat_price }}</v-card-text
                         >
-                      </v-col>
-                    </v-row>
-                  </v-card>
+                        <v-card-actions>
+                          <v-btn @click="vendorStore.addCart(vendorMat)"
+                            >Add to Cart</v-btn
+                          >
+                        </v-card-actions>
+                      </v-card>
+                    </v-col>
+                  </v-row>
                 </v-window-item>
               </v-window>
             </v-col>

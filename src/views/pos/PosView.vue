@@ -16,7 +16,7 @@ import PosFoodDialog from "./PosFoodDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
-import product from "@/services/product";
+
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 

@@ -41,11 +41,6 @@ const customerStore = useCustomerStore();
         </td>
         <td class="text-lg-right"></td>
       </tr> -->
-      <tr>
-        <td>Price :</td>
-        <td class="text-lg-right">{{ vendorStore.totalPrice }}</td>
-        <td class="text-lg-right">Baht</td>
-      </tr>
       <!-- <tr>
         <td>Discount :</td>
         <td class="text-lg-right">0</td>
