@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useVendorStore } from "@/stores/vendor";
 import { mdiTrashCanOutline } from "@mdi/js";
+import { ref } from "vue";
 const vendorStore = useVendorStore();
+const dis = ref(false);
 // const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 <template>

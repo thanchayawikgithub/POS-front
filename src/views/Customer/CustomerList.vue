@@ -43,7 +43,7 @@ onMounted(async () => {
               <td>{{ item.customer_point }}</td>
               <td>
                 {{ JSON.stringify(item.createdDate).substring(1, 11) }}
-                {{ JSON.stringify(item.createdDate).substring(11, 17) }}
+                {{ JSON.stringify(item.createdDate).substring(12, 17) }}
               </td>
               <td>
                 <v-btn

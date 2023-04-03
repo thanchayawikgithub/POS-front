@@ -122,7 +122,7 @@ export const useVendorStore = defineStore("vendor", () => {
     const index = orderList.value.findIndex(
       (material) => material.v_mat_amount === item.v_mat_amount
     );
-    orderList.value.splice(index, 1);
+    orderList.value.pop();
   };
   const totalPrice = computed(function () {
     return orderList.value.reduce(
@@ -132,46 +132,50 @@ export const useVendorStore = defineStore("vendor", () => {
   });
 
   async function openBill() {
-    const employee: { employee_id: number } = authStore.getEmployee();
+    if (orderList.value.length === 0) {
+      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+    } else {
+      const employee: { employee_id: number } = authStore.getEmployee();
 
-    const billDetails = orderList.value.map(
-      (item) =>
-        <
-          {
-            materialId: number;
-            bill_detail_amount: number;
+      const billDetails = orderList.value.map(
+        (item) =>
+          <
+            {
+              materialId: number;
+              bill_detail_amount: number;
+            }
+          >{
+            materialId: item.v_mat_id,
+            bill_detail_amount: item.v_mat_amount,
           }
-        >{
-          materialId: item.v_mat_id,
-          bill_detail_amount: item.v_mat_amount,
-        }
-    );
-
-    const selectedVendorName = computed(() => {
-      const vendor = vendorMats.value.find(
-        (vendor) => vendor.vendor_id === selectedVendor.value
       );
-      return vendor ? vendor.vendor_name : "";
-    });
-    const bill = {
-      employeeId: employee.employee_id,
-      bill_shop_name: selectedVendorName.value,
-      bill_total: totalPrice.value,
-      bill_buy: received.value,
-      bill_change: changed.value,
-      billDetails: billDetails,
-    };
-    loadingStore.isLoading = true;
-    try {
-      console.log(bill);
-      const res = await billService.saveBill(bill);
-      dialog.value = false;
-      clearOrder();
-    } catch (e) {
-      console.log(e);
-      messageStore.showError("ไม่สามารถบันทึก Order ได้");
+
+      const selectedVendorName = computed(() => {
+        const vendor = vendorMats.value.find(
+          (vendor) => vendor.vendor_id === selectedVendor.value
+        );
+        return vendor ? vendor.vendor_name : "";
+      });
+      const bill = {
+        employeeId: employee.employee_id,
+        bill_shop_name: selectedVendorName.value,
+        bill_total: totalPrice.value,
+        bill_buy: received.value,
+        bill_change: changed.value,
+        billDetails: billDetails,
+      };
+      loadingStore.isLoading = true;
+      try {
+        console.log(bill);
+        const res = await billService.saveBill(bill);
+        dialog.value = false;
+        clearOrder();
+      } catch (e) {
+        console.log(e);
+        messageStore.showError("ไม่สามารถบันทึก Order ได้");
+      }
+      loadingStore.isLoading = false;
     }
-    loadingStore.isLoading = false;
   }
 
   const clearOrder = () => {
@@ -191,5 +195,6 @@ export const useVendorStore = defineStore("vendor", () => {
     totalPrice,
     removeCart,
     openBill,
+    clearOrder,
   };
 });

@@ -14,16 +14,6 @@ onMounted(async () => {
     <v-row cols="12">
       <v-col>
         <v-table>
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Name</th>
-              <th>Province</th>
-              <th>District</th>
-              <th>Sub_district</th>
-              <th>tel</th>
-            </tr>
-          </thead>
           <tbody>
             <tr v-for="item of storeStore.stores" :key="item.store_id">
               <td>{{ item.store_id }}</td>
