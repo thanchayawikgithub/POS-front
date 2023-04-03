@@ -267,7 +267,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             orderStore.addCart(item);
           "
         >
-          Add | {{ item.product_price }}
+          Add | ฿{{ item.product_price }}
         </v-btn>
       </v-card-actions>
     </v-card></v-dialog

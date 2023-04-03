@@ -8,6 +8,7 @@ import {
   mdiFaceAgent,
   mdiGlassCocktail,
   mdiReceiptTextOutline,
+  mdiHomeOutline,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 const authStore = useAuthStore();
@@ -32,6 +33,13 @@ const employee: { employee_name: string; employee_email: string } =
     <v-divider></v-divider>
 
     <v-list density="compact" nav>
+      <v-list-item
+        :prepend-icon="mdiHomeOutline"
+        title="Home"
+        value="Home"
+        to="/"
+        style="color: #f0e3dd"
+      ></v-list-item>
       <v-list-item
         :prepend-icon="mdiFaceMan"
         title="Customer"

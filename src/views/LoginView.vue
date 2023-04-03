@@ -26,10 +26,10 @@ const reset = () => {
 const show2 = ref(false);
 </script>
 <template>
-  <v-container class="my-container" fluid>
+  <v-container class="my-container h-screen" fluid full-height>
     <v-card
       width="1000px"
-      height="500px"
+      height="490px"
       class="mx-auto ma-16"
       style="border-radius: 20px"
     >

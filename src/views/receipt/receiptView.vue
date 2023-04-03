@@ -17,9 +17,14 @@ const Click = (rec: Reciept) => {
 
 <template>
   <v-container fluid>
-    <v-card
+    <v-card style="height: 93vh" color="#e7e7e7"
       ><v-card-text
-        ><v-row align="center" justify="center" class="text-center">
+        ><v-row
+          align="center"
+          justify="center"
+          class="text-center"
+          style="background-color: #655a54; color: #f0e3dd"
+        >
           <v-col cols="1" class="font-weight-bold text-uppercase">ID</v-col>
           <v-col cols="2" class="font-weight-bold text-uppercase"
             >Store Name</v-col
