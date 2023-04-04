@@ -112,11 +112,7 @@ const vendorStore = useVendorStore();
                     :append-icon="mdiBackspaceOutline"
                     @click="
                       vendorStore.clearOrder();
-                      if (vendorStore.orderList.length <= 0) {
-                        dis = false;
-                      } else {
-                        dis = true;
-                      }
+                      dis = false;
                     "
                   ></v-btn>
                 </v-row>
@@ -260,7 +256,16 @@ const vendorStore = useVendorStore();
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn flat width="8vw" color="red" @Click="vendorStore.dialog = false">
+        <v-btn
+          flat
+          width="8vw"
+          color="red"
+          @Click="
+            (vendorStore.dialog = false),
+              vendorStore.clearOrder(),
+              (dis = false)
+          "
+        >
           close
         </v-btn>
       </v-card-actions>
