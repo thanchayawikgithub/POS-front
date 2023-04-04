@@ -17,7 +17,7 @@ const Click = (rec: Reciept) => {
 
 <template>
   <v-container fluid>
-    <v-card style="height: 93vh" color="#e7e7e7"
+    <v-card style="height: 93vh; overflow-y: auto" color="#e7e7e7"
       ><v-card-text
         ><v-row
           align="center"

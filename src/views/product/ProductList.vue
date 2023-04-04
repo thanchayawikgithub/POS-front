@@ -20,17 +20,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
   <ProductDialog></ProductDialog>
   <v-container>
     <v-row justify="end">
-      <v-col cols="2" offset="12">
-        <v-btn
-          color="primary"
-          :prepend-icon="mdiPlus"
-          @click="productsStore.dialog = true"
-          >Add New</v-btn
-        >
-      </v-col>
-    </v-row>
-    <v-row justify="end"
-      ><v-text-field
+      <v-text-field
         v-model="productsStore.keyword"
         style="height: 7vh"
         density="comfortable"
@@ -40,7 +30,15 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         clearable
         class="pa-3"
       ></v-text-field
-    ></v-row>
+      ><v-col cols="2" offset="12">
+        <v-btn
+          color="primary"
+          :prepend-icon="mdiPlus"
+          @click="productsStore.dialog = true"
+          >Add New</v-btn
+        >
+      </v-col></v-row
+    >
     <v-row cols="12">
       <v-col>
         <v-table striped hover>

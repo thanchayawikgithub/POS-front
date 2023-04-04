@@ -11,18 +11,19 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container>
+  <v-container style="background-color: #e7e7e7">
     <v-row justify="end">
       <v-col cols="2" offset="12">
         <v-btn
-          color="primary"
+          color="#f6ad8d"
+          style="font-weight: bold"
           :prepend-icon="mdiPlus"
           @click="customerStore.dialog = true"
-          >Add New</v-btn
+          >Add Customer</v-btn
         >
       </v-col>
     </v-row>
-    <v-row cols="12">
+    <v-row>
       <v-col>
         <v-table>
           <thead>

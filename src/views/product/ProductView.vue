@@ -15,7 +15,7 @@ onMounted(async () => {
   <v-app>
     <v-container>
       <v-row>
-        <ProductList v-if="productsStore.isTable"></ProductList>
+        <ProductList></ProductList>
         <ProductCheckDialog></ProductCheckDialog>
       </v-row>
     </v-container>
