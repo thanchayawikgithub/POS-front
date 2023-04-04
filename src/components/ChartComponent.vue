@@ -32,10 +32,12 @@ const config:  ChartConfiguration= {
   data: data,
   options: {},
 };
+
+
 onMounted(() => {
-  const canvasTag = <ChartItem>document.getElementById("myChart");
+  const canvasTag = <ChartItem>document.getElementById("myChart")
   const myChart = new Chart(canvasTag, config);
-});
+  })
 </script>
 <template>
   <canvas id="myChart"></canvas>

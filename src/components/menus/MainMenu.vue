@@ -72,7 +72,7 @@ const employee: { employee_name: string; employee_email: string } =
         :prepend-icon="mdiReceiptTextOutline"
         title="Receipt"
         value="receipt"
-        to="/receipt"
+        to="/receipts"
         style="color: #f0e3dd"
       ></v-list-item>
       <v-list-item
