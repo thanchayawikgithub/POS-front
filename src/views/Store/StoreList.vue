@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import { useStoreStore } from "@/stores/Store";
-
+import { onMounted } from "vue";
 import { mdiMapMarker, mdiPhone, mdiCalendarRange } from "@mdi/js";
 const storeStore = useStoreStore();
+
+onMounted(async () => {
+  await storeStore.getStore();
+});
 </script>
 
 <template>

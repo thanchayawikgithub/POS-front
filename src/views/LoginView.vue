@@ -36,7 +36,7 @@ const show2 = ref(false);
       <v-row>
         <v-col cols="6">
           <v-card height="500px" width="600px" color="#C4945C">
-            <v-img src="/coffee.png" height="1000px" class="ms-2">
+            <v-img src="/coffee2.png" height="1000px" class="ms-2">
             </v-img> </v-card
         ></v-col>
 
