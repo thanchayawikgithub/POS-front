@@ -13,6 +13,7 @@ export const useMaterialStore = defineStore("material", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const checkMaterial = ref(false);
+  const payMaterial = ref(false);
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material>({
     mat_name: "",
@@ -81,6 +82,7 @@ export const useMaterialStore = defineStore("material", () => {
     editedMaterial.value = JSON.parse(JSON.stringify(material));
     dialog.value = true;
   }
+
   return {
     materials,
     getMaterials,
@@ -93,5 +95,6 @@ export const useMaterialStore = defineStore("material", () => {
     checkDialog,
     deleteDialog,
     checkMaterial,
+    payMaterial,
   };
 });

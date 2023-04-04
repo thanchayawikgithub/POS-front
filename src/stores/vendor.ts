@@ -6,16 +6,19 @@ import { useAuthStore } from "./auth";
 import { useLoadingStore } from "./loading";
 import billService from "@/services/bill";
 import { useMessageStore } from "./message";
+import material from "@/services/material";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
   const authStore = useAuthStore();
   const loadingStore = useLoadingStore();
   const selectedMat = ref<VendorMat>();
-
+  const payMaterial = ref(false);
+  const paymentMethod = ref("");
   const messageStore = useMessageStore();
   const received = ref(0);
   const changed = ref(0);
+  const dis = ref(false);
   const selectedVendorMats = ref<Vendor>();
   const selectedVendor = ref(1);
   const vendorMats = ref<Vendor[]>([
@@ -132,56 +135,70 @@ export const useVendorStore = defineStore("vendor", () => {
   });
 
   async function openBill() {
-    if (orderList.value.length === 0) {
-      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
-    } else {
-      const employee: { employee_id: number } = authStore.getEmployee();
+    const employee: { employee_id: number } = authStore.getEmployee();
 
-      const billDetails = orderList.value.map(
-        (item) =>
-          <
-            {
-              materialId: number;
-              bill_detail_amount: number;
-            }
-          >{
-            materialId: item.v_mat_id,
-            bill_detail_amount: item.v_mat_amount,
+    const billDetails = orderList.value.map(
+      (item) =>
+        <
+          {
+            materialId: number;
+            bill_detail_amount: number;
           }
+        >{
+          materialId: item.v_mat_id,
+          bill_detail_amount: item.v_mat_amount,
+        }
+    );
+
+    const selectedVendorName = computed(() => {
+      const vendor = vendorMats.value.find(
+        (vendor) => vendor.vendor_id === selectedVendor.value
       );
-
-      const selectedVendorName = computed(() => {
-        const vendor = vendorMats.value.find(
-          (vendor) => vendor.vendor_id === selectedVendor.value
-        );
-        return vendor ? vendor.vendor_name : "";
-      });
-      const bill = {
-        employeeId: employee.employee_id,
-        bill_shop_name: selectedVendorName.value,
-        bill_total: totalPrice.value,
-        bill_buy: received.value,
-        bill_change: changed.value,
-        billDetails: billDetails,
-      };
-      loadingStore.isLoading = true;
-      try {
-        console.log(bill);
-        const res = await billService.saveBill(bill);
-        dialog.value = false;
-        clearOrder();
-      } catch (e) {
-        console.log(e);
-        messageStore.showError("ไม่สามารถบันทึก Order ได้");
-      }
-      loadingStore.isLoading = false;
+      return vendor ? vendor.vendor_name : "";
+    });
+    const bill = {
+      employeeId: employee.employee_id,
+      bill_shop_name: selectedVendorName.value,
+      bill_total: totalPrice.value,
+      bill_buy: received.value,
+      bill_change: changed.value,
+      billDetails: billDetails,
+    };
+    loadingStore.isLoading = true;
+    try {
+      console.log(bill);
+      const res = await billService.saveBill(bill);
+      dialog.value = false;
+      clearOrder();
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถบันทึก Order ได้");
     }
+    loadingStore.isLoading = false;
   }
-
+  const calChanged = async () => {
+    if (received.value < totalPrice.value) {
+      messageStore.showError("กรุณาใส่จำนวนเงินใหม่อีกครั้ง");
+    } else {
+      changed.value = received.value - totalPrice.value;
+      payMaterial.value = false;
+      openBill(), (dialog.value = false);
+      clearOrder();
+      dis.value = false;
+      received.value = 0;
+    }
+  };
   const clearOrder = () => {
     orderList.value = [];
   };
-
+  const pay = () => {
+    if (orderList.value.length === 0) {
+      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+    } else {
+      payMaterial.value = true;
+      received.value = 0;
+    }
+  };
   return {
     selectedVendorMats,
     dialog,
@@ -196,5 +213,12 @@ export const useVendorStore = defineStore("vendor", () => {
     removeCart,
     openBill,
     clearOrder,
+    payMaterial,
+    paymentMethod,
+    received,
+    changed,
+    calChanged,
+    pay,
+    dis,
   };
 });

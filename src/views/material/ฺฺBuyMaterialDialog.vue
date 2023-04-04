@@ -2,13 +2,14 @@
 import { useVendorStore } from "@/stores/vendor";
 import { mdiTrashCanOutline, mdiBackspaceOutline } from "@mdi/js";
 import { ref } from "vue";
+import MaterialPayDialog from "./MaterialPayDialog.vue";
 
 const tab = ref();
-const dis = ref(false);
 
 const vendorStore = useVendorStore();
 </script>
 <template>
+  <MaterialPayDialog></MaterialPayDialog>
   <v-dialog v-model="vendorStore.dialog" persistent width="1280">
     <v-card height="1000px" style="background-color: #e7e7e7">
       <v-card-title>Buy Material </v-card-title>
@@ -21,7 +22,7 @@ const vendorStore = useVendorStore();
                 v-for="(vendor, index) in vendorStore.vendorMats"
                 :key="index"
                 :value="vendor.vendor_id"
-                :disabled="dis"
+                :disabled="vendorStore.dis"
               >
                 {{ vendor.vendor_name }}
               </v-tab>
@@ -52,23 +53,23 @@ const vendorStore = useVendorStore();
                       @click="
                         if (vendor.vendor_id === 1) {
                           if (vendorStore.orderList.length >= 0) {
-                            dis = true;
+                            vendorStore.dis = true;
                           } else if (vendorStore.orderList.length < 0) {
-                            dis = false;
+                            vendorStore.dis = false;
                           }
                           vendorStore.addCart(vendorMat);
                         } else if (vendor.vendor_id === 2) {
                           if (vendorStore.orderList.length >= 0) {
-                            dis = true;
+                            vendorStore.dis = true;
                           } else if (vendorStore.orderList.length < 0) {
-                            dis = false;
+                            vendorStore.dis = false;
                           }
                           vendorStore.addCart(vendorMat);
                         } else if (vendor.vendor_id === 3) {
                           if (vendorStore.orderList.length >= 0) {
-                            dis = true;
+                            vendorStore.dis = true;
                           } else if (vendorStore.orderList.length < 0) {
-                            dis = false;
+                            vendorStore.dis = false;
                           }
                           vendorStore.addCart(vendorMat);
                         }
@@ -112,7 +113,7 @@ const vendorStore = useVendorStore();
                     :append-icon="mdiBackspaceOutline"
                     @click="
                       vendorStore.clearOrder();
-                      dis = false;
+                      vendorStore.dis = false;
                     "
                   ></v-btn>
                 </v-row>
@@ -172,9 +173,9 @@ const vendorStore = useVendorStore();
                             @click="
                               vendorStore.delAmount(item);
                               if (vendorStore.orderList.length <= 0) {
-                                dis = false;
+                                vendorStore.dis = false;
                               } else {
-                                dis = true;
+                                vendorStore.dis = true;
                               }
                             "
                             style="font-weight: bolder"
@@ -210,9 +211,9 @@ const vendorStore = useVendorStore();
                           @click="
                             vendorStore.removeCart(item);
                             if (vendorStore.orderList.length <= 0) {
-                              dis = false;
+                              vendorStore.dis = false;
                             } else {
-                              dis = true;
+                              vendorStore.dis = true;
                             }
                           "
                           style="font-weight: bolder"
@@ -244,7 +245,7 @@ const vendorStore = useVendorStore();
                     rounded
                     class="fontbtn mb-12"
                     color="#df8057"
-                    @click="vendorStore.openBill()"
+                    @click="vendorStore.pay()"
                     >PAY</v-btn
                   >
                 </v-col>
@@ -263,7 +264,7 @@ const vendorStore = useVendorStore();
           @Click="
             (vendorStore.dialog = false),
               vendorStore.clearOrder(),
-              (dis = false)
+              (vendorStore.dis = false)
           "
         >
           close
