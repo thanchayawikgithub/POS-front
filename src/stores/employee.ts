@@ -13,7 +13,7 @@ export const useEmployeeStore = defineStore("employee", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const employeeLoginDialog = ref(false);
-  const employeelogoutDialog = ref(false);
+  const employeeLogoutDialog = ref(false);
   const employees = ref<Employee[]>([]);
   const editedEmployee = ref<Employee>({
     employee_name: "",
@@ -105,6 +105,7 @@ export const useEmployeeStore = defineStore("employee", () => {
     editedEmployee.value = JSON.parse(JSON.stringify(employee));
     dialog.value = true;
   }
+
   return {
     employees,
     getEmployees,
@@ -116,8 +117,8 @@ export const useEmployeeStore = defineStore("employee", () => {
     isTable,
     checkDialog,
     deleteDialog,
-    // login,
+
     employeeLoginDialog,
-    employeelogoutDialog,
+    employeeLogoutDialog,
   };
 });
