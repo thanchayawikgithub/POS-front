@@ -35,15 +35,9 @@ const config:  ChartConfiguration= {
 
 
 onMounted(() => {
-<<<<<<< HEAD
   const canvasTag = <ChartItem>document.getElementById("myChart")
   const myChart = new Chart(canvasTag, config)
 })
-=======
-  const canvasTag = <ChartItem>document.getElementById("myChart");
-  const myChart = new Chart(canvasTag, config);
-  });
->>>>>>> 2ebc1b89c599aa84d35942532e4f49cc8017ca61
 </script>
 <template>
   <canvas id="myChart"></canvas>

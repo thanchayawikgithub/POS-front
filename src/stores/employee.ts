@@ -44,19 +44,19 @@ export const useEmployeeStore = defineStore("employee", () => {
     }
   });
 
-  const login = (username: string, password: string): boolean => {
-    const index = employees.value.findIndex(
-      (item) => item.employee_login === username
-    );
-    if (index >= 0) {
-      const employee = employees.value[index];
-      if (employee.employee_password === password) {
-        return true;
-      }
-      return false;
-    }
-    return false;
-  };
+  // const login = (username: string, password: string): boolean => {
+  //   const index = employees.value.findIndex(
+  //     (item) => item.employee_login === username
+  //   );
+  //   if (index >= 0) {
+  //     const employee = employees.value[index];
+  //     if (employee.employee_password === password) {
+  //       return true;
+  //     }
+  //     return false;
+  //   }
+  //   return false;
+  // };
   async function getEmployees() {
     loadingStore.isLoading = true;
     try {
@@ -116,7 +116,7 @@ export const useEmployeeStore = defineStore("employee", () => {
     isTable,
     checkDialog,
     deleteDialog,
-    login,
+    // login,
     employeeLoginDialog,
     employeelogoutDialog,
   };
