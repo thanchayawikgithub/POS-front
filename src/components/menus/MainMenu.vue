@@ -20,7 +20,7 @@ const employee: { employee_name: string; employee_email: string } =
 </script>
 
 <template>
-  <v-navigation-drawer expand-on-hover rail style="background-color: #655a54">
+  <v-navigation-drawer expand-on-hover rail style="background-color: #a4907c">
     <v-list>
       <v-list-item
         style="color: #f0e3dd"
@@ -94,7 +94,7 @@ const employee: { employee_name: string; employee_email: string } =
         title="Logout"
         value="Logout"
         @click="logout"
-        style="color: #ef4949"
+        style="color: #b73e3e"
       ></v-list-item>
     </v-list>
   </v-navigation-drawer>

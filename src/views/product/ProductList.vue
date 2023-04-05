@@ -22,7 +22,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
     <v-row justify="end">
       <v-text-field
         v-model="productsStore.keyword"
-        style="height: 7vh"
+        style="height: 5vh"
         density="comfortable"
         variant="outlined"
         label="Search"

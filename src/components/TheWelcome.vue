@@ -45,7 +45,7 @@ const startWork = ref();
   >
     <v-row>
       <v-col cols="12" class="pl-1">
-        <v-card color="#655a54" style="width: 100vw; height: 14vh">
+        <v-card color="#a4907c" style="width: 100vw; height: 14vh">
           <v-card-text
             align="center"
             style="font-size: 40px; font-weight: 600; color: #f0e3dd"

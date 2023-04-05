@@ -5,6 +5,7 @@ import MaterialDialog from "./MaterialDialog.vue";
 import MaterialList from "./MaterialList.vue";
 import BuyMaterialDialog from "./ฺฺBuyMaterialDialog.vue";
 import MaterialCheckDialog from "./MaterialCheckDialog.vue";
+
 const materialStore = useMaterialStore();
 
 onMounted(async () => {

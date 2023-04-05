@@ -17,7 +17,7 @@ async function save() {
   <v-dialog v-model="customerStore.dialog" persistent width="1024">
     <v-card>
       <v-card-title>
-        <span class="text-h5">Customer Profile</span>
+        <span class="text-h5">Customer Register</span>
       </v-card-title>
 
       <v-card-text>
@@ -64,11 +64,7 @@ async function save() {
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click="customerStore.dialog = false"
-        >
+        <v-btn color="red" variant="text" @click="customerStore.dialog = false">
           Close
         </v-btn>
         <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
