@@ -180,7 +180,6 @@ export const useVendorStore = defineStore("vendor", () => {
       clearOrder();
       materialStore.getMaterials();
       dialog.value = false;
-     
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถบันทึก Order ได้");

@@ -3,26 +3,19 @@ import { useEmployeeStore } from "@/stores/employee";
 import { ref } from "vue";
 import type { VForm } from "vuetify/components";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
-import { useAuthStore } from "@/stores/auth";
-const authStore = useAuthStore();
-
+import { useCheckInOutStore } from "@/stores/check-in-out";
 const employeeStore = useEmployeeStore();
-async function save() {
-  const { valid } = await form.value!.validate();
-  if (valid) {
-    await employeeStore.saveEmployee();
-  }
-}
+const checkInOutStore = useCheckInOutStore();
 const username = ref("");
 const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
-const login = async () => {
+const checkIn = async () => {
   const { valid } = await form.value!.validate();
-  if (valid) {
-    authStore.login(username.value, password.value);
-  }
-  employeeStore.employeeLoginDialog = false;
+  // if (valid) {
+
+  // }
+  checkInOutStore.checkInDialog = false;
 };
 const reset = () => {
   form.value?.reset();
@@ -31,7 +24,7 @@ const reset = () => {
 const show2 = ref(false);
 </script>
 <template>
-  <v-dialog v-model="employeeStore.employeeLoginDialog" persistent width="650">
+  <v-dialog v-model="checkInOutStore.checkInDialog" persistent width="650">
     <v-card>
       <v-card-title>
         <span class="text-h5">Employee Login</span>
@@ -79,7 +72,7 @@ const show2 = ref(false);
               width="150px"
               color="success"
               style="border-radius: 10px"
-              @click="login"
+              @click="checkIn"
               >Login</v-btn
             >
             <v-btn
