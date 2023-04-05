@@ -177,8 +177,10 @@ export const useVendorStore = defineStore("vendor", () => {
     try {
       console.log(bill);
       const res = await billService.saveBill(bill);
-      dialog.value = false;
       clearOrder();
+      materialStore.getMaterials();
+      dialog.value = false;
+     
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถบันทึก Order ได้");
