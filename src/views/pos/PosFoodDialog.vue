@@ -11,11 +11,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 <template>
   <v-dialog v-model="orderStore.posFoodDialog" persistent width="600">
-    <v-card
-      v-for="item in orderStore.Order"
-      :key="item.product_id"
-      style="background-color: #e7e7e7"
-    >
+    <v-card>
       <v-container>
         <v-row>
           <v-col>
@@ -28,7 +24,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                 <v-img
                   class="ml-2 mt-2"
                   style="height: 70px"
-                  :src="`${backendURL}/products/image/${item.product_image}`"
+                  :src="`${backendURL}/products/image/${orderStore.Order?.product_image}`"
                 >
                 </v-img>
               </v-avatar>
@@ -36,12 +32,12 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             <v-card-text
               style="text-align: center; font-size: 32px; font-weight: 700"
               class="pb-1 pt-1"
-              >{{ item.product_name }}</v-card-text
+              >{{ orderStore.Order!.product_name }}</v-card-text
             >
             <v-card-text
               style="text-align: center; font-size: 13px"
               class="pt-0"
-              >{{ item.product_type }}</v-card-text
+              >{{ orderStore.Order!.product_type }}</v-card-text
             >
             <v-row class="pb-0">
               <v-col>
@@ -54,7 +50,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           color: chocolate;
                           font-weight: 700;
                         "
-                        >{{ item.product_type }} Type</v-card-text
+                        >{{ orderStore.Order!.product_type }} Type</v-card-text
                       >
                     </v-row>
                     <v-row class="mt-0">
@@ -84,16 +80,22 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           style="height: 5vh; width: 25vw; border: 1px"
                         >
                           <v-btn style="width: 6vw; font-size: x-small"
-                            >Pig ฿{{ item.product_price }}</v-btn
+                            >Pig ฿{{ orderStore.Order!.product_price }}</v-btn
                           >
                           <v-btn style="width: 6vw; font-size: x-small"
-                            >Chicken ฿{{ item.product_price }}</v-btn
+                            >Chicken ฿{{
+                              orderStore.Order!.product_price
+                            }}</v-btn
                           >
                           <v-btn style="width: 6vw; font-size: x-small"
-                            >Beef ฿{{ item.product_price + 5 }}</v-btn
+                            >Beef ฿{{
+                              orderStore.Order!.product_price + 5
+                            }}</v-btn
                           >
                           <v-btn style="width: 6vw; font-size: x-small"
-                            >Seafood ฿{{ item.product_price + 10 }}</v-btn
+                            >Seafood ฿{{
+                              orderStore.Order!.product_price + 10
+                            }}</v-btn
                           >
                         </v-btn-toggle></v-col
                       >
@@ -113,7 +115,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           color: chocolate;
                           font-weight: 700;
                         "
-                        >{{ item.product_type }} Size</v-card-text
+                        >{{ orderStore.Order!.product_type }} Size</v-card-text
                       >
                     </v-row>
 
@@ -258,7 +260,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-btn
           color="darken-1"
           variant="plain"
-          @click="(orderStore.posFoodDialog = false), orderStore.Order.pop()"
+          @click="orderStore.posFoodDialog = false"
         >
           Close
         </v-btn>
@@ -268,11 +270,11 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           variant="flat"
           color="#655a54"
           @click="
-            (orderStore.posFoodDialog = false), orderStore.Order.pop();
-            orderStore.addCart(item);
+            orderStore.posFoodDialog = false;
+            orderStore.addCart(orderStore.Order!);
           "
         >
-          Add | ฿{{ item.product_price }}
+          Add | ฿{{ orderStore.Order!.product_price }}
         </v-btn>
       </v-card-actions>
     </v-card></v-dialog

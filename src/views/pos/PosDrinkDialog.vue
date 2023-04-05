@@ -16,11 +16,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 <template>
   <v-dialog v-model="orderStore.posDrinkDialog" persistent width="600">
-    <v-card
-      v-for="item in orderStore.Order"
-      :key="item.product_id"
-      style="background-color: #e7e7e7"
-    >
+    <v-card style="background-color: #e7e7e7">
       <v-container>
         <v-row>
           <v-col>
@@ -33,7 +29,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                 <v-img
                   class="ml-2 mt-2"
                   style="height: 70px"
-                  :src="`${backendURL}/products/image/${item.product_image}`"
+                  :src="`${backendURL}/products/image/${orderStore.Order?.product_image}`"
                 >
                 </v-img>
               </v-avatar>
@@ -41,12 +37,12 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             <v-card-text
               style="text-align: center; font-size: 32px; font-weight: 700"
               class="pb-1 pt-1"
-              >{{ item.product_name }}</v-card-text
+              >{{ orderStore.Order?.product_name }}</v-card-text
             >
             <v-card-text
               style="text-align: center; font-size: 13px"
               class="pt-0"
-              >{{ item.product_type }}</v-card-text
+              >{{ orderStore.Order?.product_type }}</v-card-text
             >
             <v-row class="pb-0">
               <v-col>
@@ -59,7 +55,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           color: chocolate;
                           font-weight: 700;
                         "
-                        >{{ item.product_type }} Type</v-card-text
+                        >{{ orderStore.Order?.product_type }} Type</v-card-text
                       >
                     </v-row>
                     <v-row class="mt-0">
@@ -91,24 +87,37 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           <v-btn
                             style="width: 7vw; font-size: x-small"
                             @click="
-                              productStore.updatePrice(item.product_price - 5)
+                              orderStore.updatePrice(
+                                orderStore.Order!.product_price,
+                                'HOT'
+                              )
                             "
-                            >HOT ฿{{ item.product_price - 5 }}</v-btn
+                            >HOT ฿{{
+                              orderStore.Order!.product_price - 5
+                            }}</v-btn
                           >
 
                           <v-btn
                             style="width: 7vw; font-size: x-small"
                             @click="
-                              productStore.updatePrice(item.product_price)
+                              orderStore.updatePrice(
+                                orderStore.Order!.product_price,
+                                'ICED'
+                              )
                             "
-                            >ICED ฿{{ item.product_price }}</v-btn
+                            >ICED ฿{{ orderStore.Order?.product_price }}</v-btn
                           >
                           <v-btn
                             style="width: 7vw; font-size: x-small"
                             @click="
-                              productStore.updatePrice(item.product_price + 5)
+                              orderStore.updatePrice(
+                                orderStore.Order!.product_price,
+                                'SMOOTHIE'
+                              )
                             "
-                            >SMOOTHIE ฿{{ item.product_price + 5 }}</v-btn
+                            >SMOOTHIE ฿{{
+                              orderStore.Order!.product_price + 5
+                            }}</v-btn
                           >
                         </v-btn-toggle></v-col
                       >
@@ -128,7 +137,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           color: chocolate;
                           font-weight: 700;
                         "
-                        >{{ item.product_type }} Size</v-card-text
+                        >{{ orderStore.Order!.product_type }} Size</v-card-text
                       >
                     </v-row>
                     <v-row class="mt-0">
@@ -157,14 +166,35 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           color="#df8057"
                           style="height: 5vh; width: 22vw; border: 1px"
                         >
-                          <v-btn style="width: 7vw; font-size: small"
-                            >S (+฿0)</v-btn
+                          <v-btn
+                            style="width: 7vw; font-size: small"
+                            @click="
+                              orderStore.updateSize(
+                                orderStore.Order!.product_updatePrice!,
+                                '8 Oz.'
+                              )
+                            "
+                            >8 Oz. (+฿0)</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: small"
-                            >M (+฿5)</v-btn
+                          <v-btn
+                            style="width: 7vw; font-size: small"
+                            @click="
+                              orderStore.updateSize(
+                                orderStore.Order!.product_updatePrice!,
+                                '12 Oz.'
+                              )
+                            "
+                            >12 Oz. (+฿5)</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: small"
-                            >L (+฿10)</v-btn
+                          <v-btn
+                            style="width: 7vw; font-size: small"
+                            @click="
+                              orderStore.updateSize(
+                                orderStore.Order!.product_updatePrice!,
+                                '16 Oz.'
+                              )
+                            "
+                            >16 Oz. (+฿10)</v-btn
                           >
                         </v-btn-toggle></v-col
                       >
@@ -273,7 +303,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-btn
           color="darken-1"
           variant="plain"
-          @click="(orderStore.posDrinkDialog = false), orderStore.Order.pop()"
+          @click="orderStore.posDrinkDialog = false"
         >
           Close
         </v-btn>
@@ -283,13 +313,11 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           variant="flat"
           color="#655a54"
           @click="
-            (orderStore.posDrinkDialog = false), orderStore.Order.pop();
-            item.product_updatePrice = productStore.UpdatePrice;
-            productStore.UpdatePrice;
-            orderStore.addCart(item);
+            orderStore.posDrinkDialog = false;
+            orderStore.addCart(orderStore.Order!);
           "
         >
-          Add | ฿{{ productStore.UpdatePrice }}
+          Add | ฿{{ orderStore.Order!.product_updatePrice }}
         </v-btn>
       </v-card-actions>
     </v-card></v-dialog

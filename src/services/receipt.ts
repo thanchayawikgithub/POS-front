@@ -11,6 +11,7 @@ function saveReciept(reciept: {
     productId: number;
     rcd_amount: number;
     rcd_price: number;
+    rcd_name: string;
   }[];
   rec_queue: number;
   rec_time: number;

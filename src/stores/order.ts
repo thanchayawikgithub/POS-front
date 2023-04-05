@@ -26,7 +26,7 @@ export const useOrderStore = defineStore("order", () => {
   const customerStore = useCustomerStore();
 
   const receiptStore = useReceiptStore();
-  const Order = ref<Product[]>([]);
+  const Order = ref<Product>();
   async function getOrder() {
     loadingStore.isLoading = true;
     try {
@@ -48,7 +48,7 @@ export const useOrderStore = defineStore("order", () => {
     }
   };
   const addOrder = (item: Product) => {
-    Order.value.push(item);
+    Order.value = item;
   };
 
   const addAmount = (item: Product) => {
@@ -93,11 +93,13 @@ export const useOrderStore = defineStore("order", () => {
             productId: number;
             rcd_price: number;
             rcd_amount: number;
+            rcd_name: string;
           }
         >{
           productId: item.product_id,
           rcd_price: item.product_updatePrice,
           rcd_amount: item.product_amount,
+          rcd_name: item.product_updateName,
         }
     );
 
@@ -152,6 +154,28 @@ export const useOrderStore = defineStore("order", () => {
     }
   };
 
+  function updatePrice(price: number, name: string) {
+    if (name === "ICED") {
+      Order.value!.product_updatePrice = price;
+    } else if (name === "HOT") {
+      Order.value!.product_updatePrice = price - 5;
+    } else if (name === "SMOOTHIE") {
+      Order.value!.product_updatePrice = price + 5;
+    }
+
+    return Order.value?.product_updatePrice;
+  }
+  function updateSize(price: number, name: string) {
+    if (name === "8 Oz.") {
+      Order.value!.product_updatePrice = price;
+    } else if (name === "12 Oz.") {
+      Order.value!.product_updatePrice = price + 5;
+    } else if (name === "16 Oz.") {
+      Order.value!.product_updatePrice = price + 10;
+    }
+    return Order.value?.product_updatePrice;
+  }
+
   return {
     orderList,
     addCart,
@@ -173,5 +197,7 @@ export const useOrderStore = defineStore("order", () => {
     Order,
     posBakeryDialog,
     posFoodDialog,
+    updatePrice,
+    updateSize,
   };
 });

@@ -261,19 +261,25 @@ export const useProductStore = defineStore("product", () => {
     dialog.value = true;
   }
   const UpdatePrice = ref(0);
+  const UpdatePriceSize = ref(0);
 
-  function updatePrice(priceDifference: number) {
-    UpdatePrice.value = priceDifference;
-
-    // if (UpdatePrice.value === 0) {
-    //   UpdatePrice.value = priceDifference -= 5;
-    // } else {
-    //   UpdatePrice.value = UpdatePrice.value -= UpdatePrice.value;
-    // }
-
+  function updatePrice(priceDifference: number, nameDifference: string) {
+    if (nameDifference === "ICED") {
+      UpdatePrice.value = priceDifference;
+    } else if (nameDifference === "HOT") {
+      UpdatePrice.value = priceDifference - 5;
+    } else if (nameDifference === "SMOOTHIE") {
+      UpdatePrice.value = priceDifference + 5;
+    }
     return UpdatePrice.value;
   }
-  console.log(UpdatePrice);
+  function updateSize(priceDifference: number, nameDifference: string) {
+    if (nameDifference === "8Oz.") {
+      UpdatePriceSize.value;
+    } else if (nameDifference === "12Oz.") {
+      UpdatePriceSize.value = +5;
+    }
+  }
 
   return {
     products,

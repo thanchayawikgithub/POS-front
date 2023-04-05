@@ -158,7 +158,7 @@ function Smoothie(CatId: number, Type: String) {
                         orderStore.addOrder(item);
                         orderStore.posFoodDialog = true;
                       }
-                      productStore.updatePrice(item.product_price);
+                      orderStore.updatePrice(item.product_price, 'ICED');
                     "
                   >
                     <v-card
