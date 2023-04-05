@@ -35,9 +35,9 @@ const config:  ChartConfiguration= {
 
 
 onMounted(() => {
-  const canvasTag = <ChartItem>document.getElementById("myChart")
+  const canvasTag = <ChartItem>document.getElementById("myChart");
   const myChart = new Chart(canvasTag, config);
-  })
+  });
 </script>
 <template>
   <canvas id="myChart"></canvas>

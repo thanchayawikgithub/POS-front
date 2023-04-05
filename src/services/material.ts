@@ -11,6 +11,10 @@ function saveMaterial(material: Material) {
   return http.post("/materials", material);
 }
 
+function getMaterialsByShopName(shopName: string) {
+  return http.get(`/materials/shopName/${shopName}`);
+}
+
 function updateMaterial(id: number, material: Material) {
   return http.patch(`/materials/${id}`, material);
 }
@@ -25,4 +29,5 @@ export default {
   updateMaterial,
   deleteMaterial,
   getMaterialsById,
+  getMaterialsByShopName,
 };
