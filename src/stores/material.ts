@@ -5,15 +5,18 @@ import materialService from "@/services/material";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
 import { useVendorStore } from "./vendor";
+import { useCheckMaterialStore } from "./checkMaterial";
 
 export const useMaterialStore = defineStore("material", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
+  const checkMaterialStore = useCheckMaterialStore();
   const checkDialog = ref();
   const deleteDialog = ref(false);
   const isTable = ref(true);
   const dialog = ref(false);
   const checkMaterial = ref(false);
+
   const vendorStore = useVendorStore();
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material>({
@@ -44,6 +47,7 @@ export const useMaterialStore = defineStore("material", () => {
       vendorStore.venderShopName = new Set(
         materials.value.map((mat) => mat.mat_shop_name)
       );
+
       console.log(vendorStore.venderShopName);
     } catch (e) {
       console.log(e);

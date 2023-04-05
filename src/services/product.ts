@@ -20,6 +20,7 @@ function saveProduct(product: Product & { files: File[] }) {
   formData.append("product_name", product.product_name);
   formData.append("product_type", product.product_type);
   formData.append("product_size", product.product_size);
+  formData.append("product_size_unit", product.product_size_unit!);
   formData.append("product_price", `${product.product_price}`);
   formData.append("file", product.files[0]);
   formData.append("categoryId", `${product.categoryId}`);
@@ -36,6 +37,7 @@ function updateProduct(id: number, product: Product & { files: File[] }) {
   formData.append("product_name", product.product_name);
   formData.append("product_type", product.product_type);
   formData.append("product_size", product.product_size);
+  formData.append("product_size_unit", product.product_size_unit!);
   formData.append("product_price", `${product.product_price}`);
   formData.append("categoryId", `${product.categoryId}`);
   if (product.files) {

@@ -1,8 +1,10 @@
 <script lang="ts" setup>
 import receipt from "@/services/receipt";
+import { useProductStore } from "@/stores/product";
 import { useReceiptStore } from "@/stores/receipt";
 
 const receiptStore = useReceiptStore();
+const productStore = useProductStore();
 </script>
 <template>
   <v-dialog v-model="receiptStore.showDialog" persistent width="650"
@@ -53,7 +55,9 @@ const receiptStore = useReceiptStore();
                 :key="item.rcd_id"
               >
                 <td class="text-center">{{ item.rcd_name }}</td>
-                <td class="text-center">{{ item.rcd_price }}</td>
+                <td class="text-center">
+                  {{ item.rcd_price }}
+                </td>
                 <td class="text-center">{{ item.rcd_amount }}</td>
                 <td class="text-center">{{ item.rcd_total }}</td>
               </tr>

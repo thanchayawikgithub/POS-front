@@ -7,6 +7,7 @@ import { useAuthStore } from "./auth";
 import recieptService from "@/services/receipt";
 import { useCustomerStore } from "./customer";
 import { useReceiptStore } from "./receipt";
+import { useProductStore } from "./product";
 
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
@@ -23,6 +24,7 @@ export const useOrderStore = defineStore("order", () => {
   const posFoodDialog = ref(false);
   const successDialog = ref(false);
   const customerStore = useCustomerStore();
+
   const receiptStore = useReceiptStore();
   const Order = ref<Product[]>([]);
   async function getOrder() {
@@ -75,7 +77,7 @@ export const useOrderStore = defineStore("order", () => {
 
   const totalPrice = computed(function () {
     return orderList.value.reduce(
-      (sum, item) => sum + item.product_price * item.product_amount!,
+      (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
       0
     );
   });
@@ -89,10 +91,12 @@ export const useOrderStore = defineStore("order", () => {
         <
           {
             productId: number;
+            rcd_price: number;
             rcd_amount: number;
           }
         >{
           productId: item.product_id,
+          rcd_price: item.product_updatePrice,
           rcd_amount: item.product_amount,
         }
     );

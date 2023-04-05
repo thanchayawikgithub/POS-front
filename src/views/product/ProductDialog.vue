@@ -62,6 +62,14 @@ onMounted(async () => {
               </v-col>
               <v-col cols="12">
                 <v-text-field
+                  label="Size Unit*"
+                  required
+                  v-model="productStore.editedProduct.product_size_unit"
+                  :rules="[(v) => !!v || 'Item is required']"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
                   label="Price*"
                   required
                   v-model="productStore.editedProduct.product_price"

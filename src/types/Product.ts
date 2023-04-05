@@ -21,5 +21,9 @@ export default interface Product {
 
   product_amount?: number;
 
+  product_updatePrice?: number;
+
+  product_size_unit?: string;
+
   product_categoryName?: string;
 }

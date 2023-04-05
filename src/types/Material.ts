@@ -9,4 +9,5 @@ export default interface Material {
   mat_shop_name?: string;
   mat_buy_amount?: number;
   mat_exp?: Date;
+  mat_check?: number;
 }

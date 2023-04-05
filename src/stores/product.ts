@@ -20,6 +20,7 @@ export const useProductStore = defineStore("product", () => {
   const lastPage = ref(0);
   const getByCatKeyword = ref("");
   const getByTypeKeyword = ref("All");
+
   const selectedType = ref<{
     type_id: number;
     type_list: { type_id: number; type_name: string }[];
@@ -103,6 +104,8 @@ export const useProductStore = defineStore("product", () => {
 
     product_size: "",
 
+    product_size_unit: "",
+
     product_price: 0,
 
     categoryId: 1,
@@ -120,6 +123,8 @@ export const useProductStore = defineStore("product", () => {
         product_type: "",
 
         product_size: "",
+
+        product_size_unit: "",
 
         product_price: 0,
 
@@ -255,6 +260,20 @@ export const useProductStore = defineStore("product", () => {
     editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
   }
+  const UpdatePrice = ref(0);
+
+  function updatePrice(priceDifference: number) {
+    UpdatePrice.value = priceDifference;
+
+    // if (UpdatePrice.value === 0) {
+    //   UpdatePrice.value = priceDifference -= 5;
+    // } else {
+    //   UpdatePrice.value = UpdatePrice.value -= UpdatePrice.value;
+    // }
+
+    return UpdatePrice.value;
+  }
+  console.log(UpdatePrice);
 
   return {
     products,
@@ -276,5 +295,7 @@ export const useProductStore = defineStore("product", () => {
     getByTypeKeyword,
     type,
     selectedType,
+    updatePrice,
+    UpdatePrice,
   };
 });

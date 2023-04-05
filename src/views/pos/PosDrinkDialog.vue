@@ -1,10 +1,15 @@
 <script lang="ts" setup>
+import product from "@/services/product";
 import { useOrderStore } from "@/stores/order";
+import { useProductStore } from "@/stores/product";
 
 import { mdiSpoonSugar, mdiCoffeeOutline, mdiResize } from "@mdi/js";
 import { ref } from "vue";
 const orderStore = useOrderStore();
+const productStore = useProductStore();
 const selection = ref(3);
+const selectionSize = ref(0);
+const selectionType = ref(1);
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
@@ -79,16 +84,30 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           rounded="xl"
                           variant="outlined"
                           divided
+                          v-model="selectionType"
                           color="#df8057"
                           style="height: 5vh; width: 22vw; border: 1px"
                         >
-                          <v-btn style="width: 7vw; font-size: x-small"
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            @click="
+                              productStore.updatePrice(item.product_price - 5)
+                            "
                             >HOT ฿{{ item.product_price - 5 }}</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: x-small"
+
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            @click="
+                              productStore.updatePrice(item.product_price)
+                            "
                             >ICED ฿{{ item.product_price }}</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: x-small"
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            @click="
+                              productStore.updatePrice(item.product_price + 5)
+                            "
                             >SMOOTHIE ฿{{ item.product_price + 5 }}</v-btn
                           >
                         </v-btn-toggle></v-col
@@ -134,6 +153,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           rounded="xl"
                           variant="outlined"
                           divided
+                          v-model="selectionSize"
                           color="#df8057"
                           style="height: 5vh; width: 22vw; border: 1px"
                         >
@@ -264,10 +284,12 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           color="#655a54"
           @click="
             (orderStore.posDrinkDialog = false), orderStore.Order.pop();
+            item.product_updatePrice = productStore.UpdatePrice;
+            productStore.UpdatePrice;
             orderStore.addCart(item);
           "
         >
-          Add | ฿{{ item.product_price }}
+          Add | ฿{{ productStore.UpdatePrice }}
         </v-btn>
       </v-card-actions>
     </v-card></v-dialog

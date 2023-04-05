@@ -33,7 +33,7 @@ const materialStore = useMaterialStore();
                   <v-text-field
                     label="Quantity*"
                     required
-                    v-model="item.mat_remain"
+                    v-model="item.mat_check"
                     :rules="[(v) => !!v || 'Item is required']"
                   ></v-text-field>
                 </v-col>

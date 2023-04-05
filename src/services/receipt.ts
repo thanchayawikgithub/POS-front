@@ -7,7 +7,11 @@ function getLastReceipt() {
   return http.get("/reciepts/lastReceipt");
 }
 function saveReciept(reciept: {
-  recieptDetails: { productId: number; rcd_amount: number }[];
+  recieptDetails: {
+    productId: number;
+    rcd_amount: number;
+    rcd_price: number;
+  }[];
   rec_queue: number;
   rec_time: number;
   rec_discount: number;

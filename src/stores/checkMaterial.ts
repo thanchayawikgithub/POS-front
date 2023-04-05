@@ -41,7 +41,7 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
 
   async function openCheckMaterial() {
     const employee: { employee_id: number } = authStore.getEmployee();
-    const checkMaterialDetails = checkMaterialList.value.map(
+    const checkMaterialDetails = materialStore.materials.map(
       (item) =>
         <
           {
@@ -51,7 +51,7 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
           }
         >{
           MaterialId: item.mat_id,
-          cmd_qty_remain: item.mat_remain,
+          cmd_qty_remain: item.mat_check,
           cmd_qty_expire: item.mat_exp,
         }
     );

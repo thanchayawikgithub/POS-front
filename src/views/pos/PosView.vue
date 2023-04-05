@@ -46,7 +46,7 @@ function Hot(CatId: number, Type: String) {
   } else if (CatId === 1 && Type == "Tea") {
     return "Hot";
   } else if (CatId === 1 && Type == "Soda Drink") {
-    return "-";
+    return "Hot";
   } else if (CatId === 2 && Type == "Cake") {
     return "-";
   } else if (CatId === 2 && Type == "Bread") {
@@ -158,6 +158,7 @@ function Smoothie(CatId: number, Type: String) {
                         orderStore.addOrder(item);
                         orderStore.posFoodDialog = true;
                       }
+                      productStore.updatePrice(item.product_price);
                     "
                   >
                     <v-card
@@ -187,11 +188,12 @@ function Smoothie(CatId: number, Type: String) {
                           style="height: 5vh; width: 13vw; border: 10px"
                         >
                           <v-btn
-                            style="width: 4vw; font-size: medium"
+                            style="width: 4vw; font-size: xx-small"
                             v-if="item.product_type === 'Soda Drink'"
                             disabled
-                            >{{ Hot(item.categoryId, item.product_type) }}<br
-                          /></v-btn>
+                            >{{ Hot(item.categoryId, item.product_type) }}
+                            <br />-</v-btn
+                          >
                           <v-btn style="width: 4vw; font-size: xx-small" v-else
                             >{{ Hot(item.categoryId, item.product_type)
                             }}<br />฿{{ item.product_price - 5 }}</v-btn
@@ -299,7 +301,7 @@ function Smoothie(CatId: number, Type: String) {
                   </v-col>
                   <v-col cols="2" class="text-center"
                     ><v-card-text>{{
-                      item.product_price * item.product_amount!
+                      item.product_updatePrice! * item.product_amount!
                     }}</v-card-text></v-col
                   >
                   <v-col cols="1" class="text-center">
@@ -396,16 +398,20 @@ function Smoothie(CatId: number, Type: String) {
   width: 150vw;
   height: 100vh;
 }
+
 .halfscreen {
   height: 50vh;
   width: 50vw;
 }
+
 .bg {
   background-color: #e7e7e7;
 }
+
 .bg2 {
   background-color: #e7e7e7;
 }
+
 .card {
   box-shadow: 0px 1px 13px rgba(0, 0, 0, 0.1);
   cursor: pointer;
@@ -479,9 +485,11 @@ function Smoothie(CatId: number, Type: String) {
 .font-btn {
   font-weight: bold;
 }
+
 td {
   font-weight: bold;
 }
+
 .eiei {
   color: rgb(0, 0, 0);
   font-weight: bold;
