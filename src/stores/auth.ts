@@ -32,6 +32,7 @@ export const useAuthStore = defineStore("auth", () => {
       // localStorage.setItem("loginName", username);
       console.log("Success");
       router.push("/");
+      console.log("after push");
     } catch (e) {
       messageStore.showError("Username หรือ Password ไม่ถูกต้อง");
     }
@@ -50,5 +51,5 @@ export const useAuthStore = defineStore("auth", () => {
   //   loginName.value = localStorage.getItem("loginName") || "";
   // };
 
-  return { login, logout, isLogin, authName, getEmployee };
+  return { login, logout, isLogin, getEmployee };
 });

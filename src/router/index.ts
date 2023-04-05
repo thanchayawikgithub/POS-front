@@ -163,8 +163,8 @@ const router = createRouter({
 });
 
 const isLogin = () => {
-  const user = localStorage.getItem("user");
-  if (user) {
+  const employee = localStorage.getItem("employee");
+  if (employee) {
     return true;
   }
   return false;
@@ -172,6 +172,7 @@ const isLogin = () => {
 router.beforeEach((to, from) => {
   // instead of having to check every route record with
   // to.matched.some(record => record.meta.requiresAuth)
+  console.log(isLogin());
   if (to.meta.requiresAuth && !isLogin()) {
     // this route requires auth, check if logged in
     // if not, redirect to login page.

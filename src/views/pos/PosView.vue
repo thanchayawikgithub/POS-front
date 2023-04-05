@@ -2,21 +2,22 @@
 import { onMounted, ref } from "vue";
 
 import { mdiMagnify } from "@mdi/js";
+
 import { useCategoryStore } from "@/stores/category";
 import { useProductStore } from "@/stores/product";
 import { useOrderStore } from "@/stores/order";
-import OrderList from "./order/OrderList.vue";
-import TotalMoney from "./order/TotalMoney.vue";
-import ButtonCart from "./order/ButtonCart.vue";
+import { useCustomerStore } from "@/stores/customer";
+
 import PayDialog from "./PayDialog.vue";
 import PosDrinkDialog from "./PosDrinkDialog.vue";
 import PosBakeryDialog from "./PosBakeryDialog.vue";
 import PosFoodDialog from "./PosFoodDialog.vue";
-
+import { mdiTrashCanOutline } from "@mdi/js";
+import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
-
+const customerStore = useCustomerStore();
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
 
@@ -38,6 +39,16 @@ onMounted(async () => {
   );
   console.log(categoryStore.categorys);
 });
+
+function drinkHot(CatId: number, Type: String) {
+  if (CatId === 1 && Type == "Coffee") {
+    return "Hot";
+  } else if (CatId === 1 && Type == "Tea") {
+    return "Hot";
+  } else if (CatId === 1 && Type == "Soda Drink") {
+    return "-";
+  }
+}
 </script>
 
 <template>
@@ -147,19 +158,22 @@ onMounted(async () => {
                         ><v-btn-toggle
                           variant="outlined"
                           divided
-                          class="pt-1"
+                          class="pt-2 pl-2"
                           color="#df8057"
-                          style="height: 4vh; width: 15vw; border: 10px"
+                          style="height: 4vh; width: 300px; border: 10px"
                         >
-                          <v-btn style="width: 3vw; font-size: xx-small"
-                            >HOT <br />฿{{ item.product_price - 5 }}</v-btn
+                          <v-btn style="width: 91px; font-size: xx-small"
+                            >{{ drinkHot(item.categoryId, item.product_type)
+                            }}<br />฿{{ item.product_price - 5 }}</v-btn
                           >
-                          <v-btn style="width: 3vw; font-size: xx-small"
-                            >ICED<br />
+                          <v-btn style="width: 91px; font-size: xx-small"
+                            >{{ drinkHot(item.categoryId, item.product_type)
+                            }}<br />
                             ฿{{ item.product_price }}</v-btn
                           >
-                          <v-btn style="width: 3vw; font-size: xx-small"
-                            >SMOOTHIE<br />
+                          <v-btn style="width: 91px; font-size: xx-small"
+                            >{{ drinkHot(item.categoryId, item.product_type)
+                            }}<br />
                             ฿{{ item.product_price + 5 }}</v-btn
                           >
                         </v-btn-toggle></v-card-title
@@ -183,9 +197,166 @@ onMounted(async () => {
             Cart
           </h2>
 
-          <OrderList />
-          <TotalMoney />
-          <ButtonCart />
+          <v-container fluid>
+            <v-row>
+              <v-col cols="1 "> </v-col>
+              <v-col cols="3" class="text-center pl-14">
+                <h5>Name</h5>
+              </v-col>
+              <v-col cols="5" class="text-center pl-16">
+                <h5>Quantity</h5>
+              </v-col>
+              <v-col cols="2  " class="text-center pl-2">
+                <h5>Price</h5>
+              </v-col>
+            </v-row>
+            <v-card
+              style="
+                height: 40vh;
+                width: 37vw;
+                overflow-y: auto;
+                background-color: #e7e7e7;
+              "
+              class="pl-0"
+              flat
+            >
+              <v-card
+                class="pa-3 mb-2 mt-3 ml-0"
+                v-for="item in orderStore.orderList"
+                :key="item.product_id"
+                color="#f2f2f0"
+                style="
+                  border-radius: 5px;
+                  border: 2px solid;
+                  width: 33vw;
+                  height: 11vh;
+                "
+              >
+                <v-row>
+                  <v-col cols="2">
+                    <v-img
+                      height="7vh"
+                      width="90%"
+                      :src="`${backendURL}/products/image/${item.product_image}`"
+                    ></v-img>
+                  </v-col>
+                  <v-col cols="3" class="pl-0">
+                    <v-card-text> {{ item.product_name }}</v-card-text>
+                  </v-col>
+                  <v-col cols="1" class="text-right"
+                    ><v-card-actions class="justify-center">
+                      <v-btn
+                        color="#CC0000"
+                        @click="orderStore.delAmount(item)"
+                        style="font-weight: bolder"
+                      >
+                        -
+                      </v-btn>
+                    </v-card-actions></v-col
+                  >
+                  <v-col cols="2" class="text-center">
+                    <v-card-text>{{ item.product_amount }}</v-card-text>
+                  </v-col>
+                  <v-col cols="1" class="text-left"
+                    ><v-card-actions class="justify-center">
+                      <v-btn
+                        color="#009900"
+                        @click="orderStore.addAmount(item)"
+                        style="font-weight: bolder"
+                      >
+                        +
+                      </v-btn>
+                    </v-card-actions>
+                  </v-col>
+                  <v-col cols="2" class="text-center"
+                    ><v-card-text>{{
+                      item.product_price * item.product_amount!
+                    }}</v-card-text></v-col
+                  >
+                  <v-col cols="1" class="text-center">
+                    <v-btn
+                      :icon="mdiTrashCanOutline"
+                      @click="orderStore.removeCart(item)"
+                      style="font-weight: bolder"
+                      variant="plain"
+                    >
+                    </v-btn>
+                  </v-col>
+                </v-row>
+              </v-card>
+            </v-card>
+          </v-container>
+
+          <v-card>
+            <v-divider style="background-color: black"></v-divider>
+          </v-card>
+          <CustomerDialog />
+          <v-container>
+            <v-row class="text-center">
+              <v-col
+                ><v-btn
+                  style="width: 13vw"
+                  rounded
+                  color="#f6ad8d"
+                  class="font-btn"
+                  @click="customerStore.dialog = true"
+                >
+                  Register Member
+                </v-btn>
+              </v-col>
+              <v-col>
+                <v-btn
+                  style="width: 13vw"
+                  rounded
+                  color="#f6ad8d"
+                  class="font-btn"
+                  @click="customerStore.searchDialog = true"
+                >
+                  Search
+                </v-btn>
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-table style="background-color: #e7e7e7; width: 35vw; height: 24vh">
+            <tbody>
+              <tr>
+                <td style="width: 100%">Member :</td>
+                <td class="text-lg-right">
+                  {{ customerStore.customer?.customer_name }}
+                </td>
+                <td class="text-lg-right"></td>
+              </tr>
+              <tr>
+                <td>Price :</td>
+                <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
+                <td class="text-lg-right">Baht</td>
+              </tr>
+              <tr>
+                <td>Discount :</td>
+                <td class="text-lg-right">0</td>
+                <td class="text-lg-right">Baht</td>
+              </tr>
+              <tr>
+                <td>Total :</td>
+                <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
+                <td class="text-lg-right">Baht</td>
+              </tr>
+            </tbody>
+          </v-table>
+          <v-container>
+            <v-row class="text-center">
+              <v-col>
+                <v-btn
+                  style="height: 5vh; width: 20vw"
+                  rounded
+                  class="eiei"
+                  color="#df8057"
+                  @click="orderStore.pay()"
+                  >PAY</v-btn
+                >
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card>
       </v-col>
     </v-row>
@@ -274,5 +445,16 @@ onMounted(async () => {
   height: 100%;
   display: grid;
   place-items: center;
+}
+
+.font-btn {
+  font-weight: bold;
+}
+td {
+  font-weight: bold;
+}
+.eiei {
+  color: rgb(0, 0, 0);
+  font-weight: bold;
 }
 </style>

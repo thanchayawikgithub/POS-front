@@ -15,7 +15,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container style="background-color: #e7e7e7" fluid>
+  <v-container style="background-color: #e7e7e7" fluid class="h-screen">
     <CustomerList></CustomerList>
     <CustomerDialog></CustomerDialog>
     <CustomerCheckDialog></CustomerCheckDialog>
