@@ -33,7 +33,7 @@ const dis = ref(false);
       >
         <v-card
           v-for="item in vendorStore.orderList"
-          :key="item.v_mat_id"
+          :key="item.mat_id"
           class="pa-3 mb-2 mt-3 ml-0 pt-0"
           style="
             border-radius: 5px;
@@ -52,7 +52,7 @@ const dis = ref(false);
             </v-col> -->
             <v-col cols="3" class="pl-0">
               <v-card-text style="font-size: small">
-                {{ item.v_mat_name }}</v-card-text
+                {{ item.mat_name }}</v-card-text
               >
             </v-col>
             <v-col cols="1" class="text-right"
@@ -68,7 +68,7 @@ const dis = ref(false);
             >
             <v-col cols="2" class="text-center">
               <v-card-text style="font-size: small">{{
-                item.v_mat_amount
+                item.mat_buy_amount
               }}</v-card-text>
             </v-col>
             <v-col cols="1" class="text-left"
@@ -84,7 +84,7 @@ const dis = ref(false);
             </v-col>
             <v-col cols="3" class="text-center"
               ><v-card-text style="font-size: small">{{
-                item.v_mat_price * item.v_mat_amount!
+                item.mat_price_per_unit * item.mat_buy_amount!
               }}</v-card-text></v-col
             >
             <v-col cols="1" class="text-center">

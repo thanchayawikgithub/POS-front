@@ -6,5 +6,7 @@ export default interface Material {
   mat_unit: string;
   mat_price_per_unit: number;
   mat_remain?: number;
+  mat_shop_name?: string;
+  mat_buy_amount?: number;
   mat_exp?: Date;
 }

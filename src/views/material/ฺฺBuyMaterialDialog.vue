@@ -3,10 +3,18 @@ import { useVendorStore } from "@/stores/vendor";
 import { mdiTrashCanOutline, mdiBackspaceOutline } from "@mdi/js";
 import { ref } from "vue";
 import MaterialPayDialog from "./MaterialPayDialog.vue";
+import { onMounted } from "vue";
 
 const tab = ref();
 
 const vendorStore = useVendorStore();
+const selectVendor = ref();
+onMounted(async () => {
+  await vendorStore.getMaterialsByShopName(vendorStore.selectedVendor);
+  //await productStore.getProducts();
+  console.log(vendorStore.vendorMaterials);
+  console.log(vendorStore.venderShopName);
+});
 </script>
 <template>
   <MaterialPayDialog></MaterialPayDialog>
@@ -19,27 +27,26 @@ const vendorStore = useVendorStore();
           <v-col cols="6">
             <v-tabs v-model="vendorStore.selectedVendor">
               <v-tab
-                v-for="(vendor, index) in vendorStore.vendorMats"
+                v-for="(vendor, index) in vendorStore.venderShopName"
                 :key="index"
-                :value="vendor.vendor_id"
+                :value="vendor"
                 :disabled="vendorStore.dis"
               >
-                {{ vendor.vendor_name }}
+                {{ vendor }}
               </v-tab>
             </v-tabs>
 
             <v-window
-              v-model="vendorStore.selectedVendor"
+              v-model="selectVendor"
               style="overflow-y: auto; height: 68vh; width: 660px"
             >
               <v-window-item
-                v-for="(vendor, index) in vendorStore.vendorMats"
+                v-for="(vendor, index) in vendorStore.vendorMaterials"
                 :key="index"
-                :value="vendor.vendor_id"
               >
                 <v-row>
                   <v-col
-                    v-for="(vendorMat, index) in vendor.vendorMat"
+                    v-for="(vendorMat, index) in vendorStore.vendorMaterials"
                     :key="index"
                     cols="4"
                   >
@@ -51,39 +58,42 @@ const vendorStore = useVendorStore();
                       "
                       class="mt-4 ml-1"
                       @click="
-                        if (vendor.vendor_id === 1) {
-                          if (vendorStore.orderList.length >= 0) {
-                            vendorStore.dis = true;
-                          } else if (vendorStore.orderList.length < 0) {
-                            vendorStore.dis = false;
-                          }
-                          vendorStore.addCart(vendorMat);
-                        } else if (vendor.vendor_id === 2) {
-                          if (vendorStore.orderList.length >= 0) {
-                            vendorStore.dis = true;
-                          } else if (vendorStore.orderList.length < 0) {
-                            vendorStore.dis = false;
-                          }
-                          vendorStore.addCart(vendorMat);
-                        } else if (vendor.vendor_id === 3) {
-                          if (vendorStore.orderList.length >= 0) {
-                            vendorStore.dis = true;
-                          } else if (vendorStore.orderList.length < 0) {
-                            vendorStore.dis = false;
-                          }
-                          vendorStore.addCart(vendorMat);
-                        }
+                        vendorStore.addCart(vendorMat)
+                        // if (vendor.vendor_id === 1) {
+                        //   if (vendorStore.orderList.length >= 0) {
+                        //     vendorStore.dis = true;
+                        //   } else if (vendorStore.orderList.length < 0) {
+                        //     vendorStore.dis = false;
+                        //   }
+                        //   vendorStore.addCart(vendorMat);
+                        // } else if (vendor.vendor_id === 2) {
+                        //   if (vendorStore.orderList.length >= 0) {
+                        //     vendorStore.dis = true;
+                        //   } else if (vendorStore.orderList.length < 0) {
+                        //     vendorStore.dis = false;
+                        //   }
+                        //   vendorStore.addCart(vendorMat);
+                        // } else if (vendor.vendor_id === 3) {
+                        //   if (vendorStore.orderList.length >= 0) {
+                        //     vendorStore.dis = true;
+                        //   } else if (vendorStore.orderList.length < 0) {
+                        //     vendorStore.dis = false;
+                        //   }
+                        //   vendorStore.addCart(vendorMat);
+                        // }
                       "
                     >
                       <v-card
                         style="width: 175px; height: 25vh; border: 1px solid"
                         class="card"
                         ><v-card-title class="title mb-0">{{
-                          vendorMat.v_mat_name
+                          vendorMat.mat_name
                         }}</v-card-title>
 
                         <v-card-title class="price"
-                          >Price: ฿{{ vendorMat.v_mat_price }}</v-card-title
+                          >Price: ฿{{
+                            vendorMat.mat_price_per_unit
+                          }}</v-card-title
                         ></v-card
                       >
                     </v-btn>
@@ -137,6 +147,7 @@ const vendorStore = useVendorStore();
                     height: 30vh;
                     width: 37vw;
                     overflow-y: auto;
+
                     /* background-color: #e7e7e7; */
                   "
                   class="pl-0"
@@ -144,7 +155,7 @@ const vendorStore = useVendorStore();
                 >
                   <v-card
                     v-for="item in vendorStore.orderList"
-                    :key="item.v_mat_id"
+                    :key="item.mat_id"
                     class="pa-3 mb-2 mt-3 ml-0 pt-0"
                     style="
                       border-radius: 5px;
@@ -163,7 +174,7 @@ const vendorStore = useVendorStore();
                         </v-col> -->
                       <v-col cols="3" class="pl-0">
                         <v-card-text style="font-size: small">
-                          {{ item.v_mat_name }}</v-card-text
+                          {{ item.mat_name }}</v-card-text
                         >
                       </v-col>
                       <v-col cols="1" class="text-right"
@@ -186,7 +197,7 @@ const vendorStore = useVendorStore();
                       >
                       <v-col cols="2" class="text-center">
                         <v-card-text style="font-size: small">{{
-                          item.v_mat_amount
+                          item.mat_buy_amount
                         }}</v-card-text>
                       </v-col>
                       <v-col cols="1" class="text-left"
@@ -202,7 +213,7 @@ const vendorStore = useVendorStore();
                       </v-col>
                       <v-col cols="3" class="text-center"
                         ><v-card-text style="font-size: small">{{
-                          item.v_mat_price * item.v_mat_amount!
+                          item.mat_price_per_unit * item.mat_buy_amount!
                         }}</v-card-text></v-col
                       >
                       <v-col cols="1" class="text-center">

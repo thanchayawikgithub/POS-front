@@ -4,6 +4,7 @@ import { ref, watch } from "vue";
 import materialService from "@/services/material";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
+import { useVendorStore } from "./vendor";
 
 export const useMaterialStore = defineStore("material", () => {
   const loadingStore = useLoadingStore();
@@ -13,7 +14,7 @@ export const useMaterialStore = defineStore("material", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const checkMaterial = ref(false);
-  const payMaterial = ref(false);
+  const vendorStore = useVendorStore();
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material>({
     mat_name: "",
@@ -40,6 +41,10 @@ export const useMaterialStore = defineStore("material", () => {
       const res = await materialService.getMaterials();
       materials.value = res.data;
       console.log(res);
+      vendorStore.venderShopName = new Set(
+        materials.value.map((mat) => mat.mat_shop_name)
+      );
+      console.log(vendorStore.venderShopName);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Material ได้");
@@ -95,6 +100,5 @@ export const useMaterialStore = defineStore("material", () => {
     checkDialog,
     deleteDialog,
     checkMaterial,
-    payMaterial,
   };
 });

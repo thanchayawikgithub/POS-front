@@ -6,7 +6,9 @@ import { useAuthStore } from "./auth";
 import { useLoadingStore } from "./loading";
 import billService from "@/services/bill";
 import { useMessageStore } from "./message";
-import material from "@/services/material";
+import materialService from "@/services/material";
+import type Material from "@/types/Material";
+import { useMaterialStore } from "./material";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
@@ -19,8 +21,11 @@ export const useVendorStore = defineStore("vendor", () => {
   const received = ref(0);
   const changed = ref(0);
   const dis = ref(false);
-  const selectedVendorMats = ref<Vendor>();
-  const selectedVendor = ref(1);
+  const materialStore = useMaterialStore();
+
+  const selectedVendor = ref("Makro");
+  const vendorMaterials = ref<Material[]>([]);
+  const venderShopName = new Set<string | undefined>();
   const vendorMats = ref<Vendor[]>([
     {
       vendor_id: 1,
@@ -89,47 +94,51 @@ export const useVendorStore = defineStore("vendor", () => {
       ],
     },
   ]);
-  const orderList = ref<VendorMat[]>([]);
+  const orderList = ref<Material[]>([]);
+
+  // watch(selectedVendor, async (newselectedVendor, oldveselectedVendor) => {
+  //   console.log(newselectedVendor);
+  // });
 
   watch(selectedVendor, async (newselectedVendor, oldveselectedVendor) => {
     console.log(newselectedVendor);
+    getMaterialsByShopName(newselectedVendor);
   });
-
-  const addCart = (item: VendorMat) => {
+  const addCart = (item: Material) => {
     if (orderList.value.includes(item)) {
       addAmount(item);
     } else {
-      item.v_mat_amount = 1;
+      item.mat_buy_amount = 1;
       orderList.value.push(item);
     }
   };
 
-  const addAmount = (item: VendorMat) => {
-    item.v_mat_amount!++;
+  const addAmount = (item: Material) => {
+    item.mat_buy_amount!++;
   };
 
-  const delAmount = (item: VendorMat) => {
-    if (item.v_mat_amount! > 1) {
-      item.v_mat_amount!--;
+  const delAmount = (item: Material) => {
+    if (item.mat_buy_amount! > 1) {
+      item.mat_buy_amount!--;
     } else {
       removeCart(item);
       resetAmount(item);
     }
   };
 
-  const resetAmount = (item: VendorMat) => {
-    item.v_mat_amount! = 1;
+  const resetAmount = (item: Material) => {
+    item.mat_buy_amount! = 1;
   };
 
-  const removeCart = (item: VendorMat) => {
+  const removeCart = (item: Material) => {
     const index = orderList.value.findIndex(
-      (material) => material.v_mat_amount === item.v_mat_amount
+      (material) => material.mat_buy_amount === item.mat_buy_amount
     );
     orderList.value.pop();
   };
   const totalPrice = computed(function () {
     return orderList.value.reduce(
-      (sum, item) => sum + item.v_mat_price * item.v_mat_amount!,
+      (sum, item) => sum + item.mat_price_per_unit * item.mat_buy_amount!,
       0
     );
   });
@@ -145,22 +154,22 @@ export const useVendorStore = defineStore("vendor", () => {
             bill_detail_amount: number;
           }
         >{
-          materialId: item.v_mat_id,
-          bill_detail_amount: item.v_mat_amount,
+          materialId: item.mat_id,
+          bill_detail_amount: item.mat_buy_amount,
         }
     );
 
-    const selectedVendorName = computed(() => {
-      const vendor = vendorMats.value.find(
-        (vendor) => vendor.vendor_id === selectedVendor.value
-      );
-      return vendor ? vendor.vendor_name : "";
-    });
+    // const selectedVendorName = computed(() => {
+    //   const vendor = vendorMats.value.find(
+    //     (vendor) => vendor.vendor_id === selectedVendor.value
+    //   );
+    //   return vendor ? vendor.vendor_name : "";
+    // });
     const bill = {
       employeeId: employee.employee_id,
-      bill_shop_name: selectedVendorName.value,
+      bill_shop_name: selectedVendor.value,
       bill_total: totalPrice.value,
-      bill_buy: received.value,
+      bill_buy: +received.value,
       bill_change: changed.value,
       billDetails: billDetails,
     };
@@ -199,8 +208,21 @@ export const useVendorStore = defineStore("vendor", () => {
       received.value = 0;
     }
   };
+
+  async function getMaterialsByShopName(selectedVendor: string) {
+    loadingStore.isLoading = true;
+    try {
+      const res = await materialService.getMaterialsByShopName(selectedVendor);
+      vendorMaterials.value = res.data;
+      console.log(res);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Material ได้");
+    }
+    loadingStore.isLoading = false;
+  }
+
   return {
-    selectedVendorMats,
     dialog,
     vendorMats,
     orderList,
@@ -208,7 +230,6 @@ export const useVendorStore = defineStore("vendor", () => {
     addAmount,
     delAmount,
     selectedMat,
-    selectedVendor,
     totalPrice,
     removeCart,
     openBill,
@@ -219,6 +240,10 @@ export const useVendorStore = defineStore("vendor", () => {
     changed,
     calChanged,
     pay,
+    getMaterialsByShopName,
+    selectedVendor,
     dis,
+    vendorMaterials,
+    venderShopName,
   };
 });
