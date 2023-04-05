@@ -40,13 +40,37 @@ onMounted(async () => {
   console.log(categoryStore.categorys);
 });
 
-function drinkHot(CatId: number, Type: String) {
+function Hot(CatId: number, Type: String) {
   if (CatId === 1 && Type == "Coffee") {
     return "Hot";
   } else if (CatId === 1 && Type == "Tea") {
     return "Hot";
   } else if (CatId === 1 && Type == "Soda Drink") {
     return "-";
+  } else if (CatId === 2 && Type == "Cake") {
+    return "-";
+  } else if (CatId === 2 && Type == "Bread") {
+    return "-";
+  } else if (CatId === 2 && Type == "Cookie") {
+    return "-";
+  }
+}
+function Ice(CatId: number, Type: String) {
+  if (CatId === 1 && Type == "Coffee") {
+    return "Iced";
+  } else if (CatId === 1 && Type == "Tea") {
+    return "Iced";
+  } else if (CatId === 1 && Type == "Soda Drink") {
+    return "Iced";
+  }
+}
+function Smoothie(CatId: number, Type: String) {
+  if (CatId === 1 && Type == "Coffee") {
+    return "Smoothie";
+  } else if (CatId === 1 && Type == "Tea") {
+    return "Smoothie";
+  } else if (CatId === 1 && Type == "Soda Drink") {
+    return "Smoothie";
   }
 }
 </script>
@@ -158,21 +182,26 @@ function drinkHot(CatId: number, Type: String) {
                         ><v-btn-toggle
                           variant="outlined"
                           divided
-                          class="pt-2 pl-2"
+                          class="pt-2"
                           color="#df8057"
-                          style="height: 4vh; width: 300px; border: 10px"
+                          style="height: 5vh; width: 13vw; border: 10px"
                         >
-                          <v-btn style="width: 91px; font-size: xx-small"
-                            >{{ drinkHot(item.categoryId, item.product_type)
+                          <v-btn
+                            style="width: 4vw; font-size: medium"
+                            v-if="item.product_type === 'Soda Drink'"
+                            disabled
+                            >{{ Hot(item.categoryId, item.product_type) }}<br
+                          /></v-btn>
+                          <v-btn style="width: 4vw; font-size: xx-small" v-else
+                            >{{ Hot(item.categoryId, item.product_type)
                             }}<br />฿{{ item.product_price - 5 }}</v-btn
                           >
-                          <v-btn style="width: 91px; font-size: xx-small"
-                            >{{ drinkHot(item.categoryId, item.product_type)
-                            }}<br />
+                          <v-btn style="width: 4vw; font-size: xx-small"
+                            >{{ Ice(item.categoryId, item.product_type) }}<br />
                             ฿{{ item.product_price }}</v-btn
                           >
-                          <v-btn style="width: 91px; font-size: xx-small"
-                            >{{ drinkHot(item.categoryId, item.product_type)
+                          <v-btn style="width: 4vw; font-size: xx-small"
+                            >{{ Smoothie(item.categoryId, item.product_type)
                             }}<br />
                             ฿{{ item.product_price + 5 }}</v-btn
                           >
