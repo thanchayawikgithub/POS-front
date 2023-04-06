@@ -33,7 +33,6 @@ function statusText(quantity: number, min: number) {
     return "Low Stock";
   }
 }
-const startWork = ref();
 </script>
 
 <template>
@@ -60,8 +59,29 @@ const startWork = ref();
         ></v-col
       >
     </v-row>
-    <v-row style="font-size: 25px; font-weight: 700" class="ml-3"
-      >Overview
+    <v-row style="font-size: 25px; font-weight: 700" class="ml-3">
+      <v-col class="mt-3"> Overview </v-col>
+      <v-col align="right" class="mr-10 mb-2">
+        <v-btn variant="plain" class="mt-5 pl-0">
+          <v-fade-transition leave-absolute>
+            <v-btn
+              @click="checkInOutStore.checkOutDialog = true"
+              style="width: 28vw"
+              v-if="checkInOutStore.status === 'checked in'"
+              class="endbutton"
+              >Check Out</v-btn
+            >
+
+            <v-btn
+              @click="checkInOutStore.checkInDialog = true"
+              v-else
+              style="width: 28vw"
+              class="startbutton"
+              >Check In</v-btn
+            >
+          </v-fade-transition>
+        </v-btn>
+      </v-col>
     </v-row>
     <v-row class="pl-3">
       <v-col cols="4" style="width: 30vw; height: 35vh">
@@ -149,34 +169,11 @@ const startWork = ref();
           ></ChartComponent>
         </v-card>
       </v-col>
+
       <v-col cols="4" class="pb-0">
-        <v-card style="width: 28vw; height: 65vh"
+        <v-card style="width: 28vw; height: 72vh"
           ><v-card-text>Popular Product</v-card-text>
         </v-card>
-
-        <v-btn
-          variant="plain"
-          class="mt-5 pl-0"
-          @click="(employeeStore.deleteDialog = true), (startWork = !startWork)"
-        >
-          <v-fade-transition leave-absolute>
-            <v-btn
-              @click="checkInOutStore.checkOutDialog = true"
-              style="width: 28vw"
-              v-if="startWork"
-              class="endbutton"
-              >Check Out</v-btn
-            >
-
-            <v-btn
-              @click="checkInOutStore.checkInDialog = true"
-              v-else
-              style="width: 28vw"
-              class="startbutton"
-              >Check In</v-btn
-            >
-          </v-fade-transition>
-        </v-btn>
       </v-col>
     </v-row>
   </v-container>

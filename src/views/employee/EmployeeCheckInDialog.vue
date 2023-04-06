@@ -26,7 +26,7 @@ const show2 = ref(false);
   <v-dialog v-model="checkInOutStore.checkInDialog" persistent width="650">
     <v-card>
       <v-card-title>
-        <span class="text-h5">Employee Login</span>
+        <span class="text-h5">Employee Check in</span>
       </v-card-title>
       <v-card-text class="pa-0">
         <v-form ref="form" v-model="valid">
@@ -72,7 +72,7 @@ const show2 = ref(false);
               color="success"
               style="border-radius: 10px"
               @click="checkIn"
-              >Login</v-btn
+              >Check in</v-btn
             >
             <v-btn
               color="error"
@@ -84,6 +84,10 @@ const show2 = ref(false);
             >
           </v-row>
         </v-container>
+      </v-card-actions>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="checkInOutStore.checkInDialog = false">Close</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
