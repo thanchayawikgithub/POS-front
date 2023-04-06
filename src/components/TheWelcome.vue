@@ -217,7 +217,7 @@ function statusText(quantity: number, min: number) {
   letter-spacing: 2.5px;
   font-weight: 800;
   color: #fff;
-  background-color: #ec0511;
+  background-color: #23c483;
   border: none;
   border-radius: 10px;
   box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);

@@ -11,7 +11,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
 
 <template>
   <v-dialog v-model="orderStore.posFoodDialog" persistent width="600">
-    <v-card>
+    <v-card style="background-color: #e7e7e7">
       <v-container>
         <v-row>
           <v-col>
