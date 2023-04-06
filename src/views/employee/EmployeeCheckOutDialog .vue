@@ -17,6 +17,7 @@ const checkOut = async () => {
   if (valid) {
     checkInOutStore.checkOut(password.value);
   }
+  reset();
 };
 const reset = () => {
   form.value?.reset();
@@ -60,7 +61,7 @@ const show2 = ref(false);
               width="150px"
               color="success"
               style="border-radius: 10px"
-              @click="checkOut"
+              @click="checkOut()"
               >Check out</v-btn
             >
             <v-btn
@@ -68,7 +69,7 @@ const show2 = ref(false);
               variant="flat"
               width="150px"
               style="border-radius: 10px"
-              @click="reset"
+              @click="reset()"
               >Clear</v-btn
             >
           </v-row>
@@ -76,7 +77,9 @@ const show2 = ref(false);
       </v-card-actions>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="checkInOutStore.checkOutDialog = false">Close</v-btn>
+        <v-btn @click="(checkInOutStore.checkOutDialog = false), reset()"
+          >Close</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>

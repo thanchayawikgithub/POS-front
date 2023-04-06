@@ -45,7 +45,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
         password
       );
       const index = checkInOutList.value.findIndex(
-        (obj) => (obj.cio_id = check_in_out.data.cio_id)
+        (obj) => obj.cio_id === check_in_out.data.cio_id
       );
       if (index !== -1) {
         checkInOutList.value.splice(index, 1, check_in_out.data);
