@@ -235,6 +235,7 @@ function statusText(quantity: number, min: number) {
 .startbutton:active {
   transform: translateY(-1px);
 }
+
 .endbutton {
   padding: 0.1em 2em;
   font-size: 12px;

@@ -25,6 +25,8 @@ export default interface Product {
 
   product_updateName?: string;
 
+  product_updateSize?: string;
+
   product_size_unit?: string;
 
   product_categoryName?: string;

@@ -37,11 +37,18 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             <v-card-text
               style="text-align: center; font-size: 32px; font-weight: 700"
               class="pb-1 pt-1"
-              >{{ orderStore.Order?.product_name }}</v-card-text
+              >{{
+                orderStore.UpdateType + " " + orderStore.UpdateSizeText
+              }}</v-card-text
+            >
+            <v-card-text
+              style="text-align: center; font-size: 15px"
+              class="pt-2 pb-0"
+              >{{ "Sweetness Level " + orderStore.UpdateOther }}</v-card-text
             >
             <v-card-text
               style="text-align: center; font-size: 13px"
-              class="pt-0"
+              class="pt-0 pb-0"
               >{{ orderStore.Order?.product_type }}</v-card-text
             >
             <v-row class="pb-0">
@@ -88,9 +95,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             style="width: 7vw; font-size: x-small"
                             @click="
                               orderStore.updatePrice(
-                                orderStore.Order!.product_price,
-                                'HOT'
-                              )
+                                'HOT',
+                                orderStore.Order!.product_price
+                              );
+                              orderStore.updateType(
+                                'HOT',
+                                orderStore.Order!.product_name
+                              );
                             "
                             >HOT ฿{{
                               orderStore.Order!.product_price - 5
@@ -101,9 +112,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             style="width: 7vw; font-size: x-small"
                             @click="
                               orderStore.updatePrice(
-                                orderStore.Order!.product_price,
-                                'ICED'
-                              )
+                                'ICED',
+                                orderStore.Order!.product_price
+                              );
+                              orderStore.updateType(
+                                'ICED',
+                                orderStore.Order!.product_name
+                              );
                             "
                             >ICED ฿{{ orderStore.Order?.product_price }}</v-btn
                           >
@@ -111,9 +126,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             style="width: 7vw; font-size: x-small"
                             @click="
                               orderStore.updatePrice(
-                                orderStore.Order!.product_price,
-                                'SMOOTHIE'
-                              )
+                                'SMOOTHIE',
+                                orderStore.Order!.product_price
+                              );
+                              orderStore.updateType(
+                                'SMOOTHIE',
+                                orderStore.Order!.product_name
+                              );
                             "
                             >SMOOTHIE ฿{{
                               orderStore.Order!.product_price + 5
@@ -169,30 +188,24 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           <v-btn
                             style="width: 7vw; font-size: small"
                             @click="
-                              orderStore.updateSize(
-                                orderStore.Order!.product_updatePrice!,
-                                '8 Oz.'
-                              )
+                              orderStore.updateSize(0, '8 Oz.'),
+                                orderStore.updateSizeText('8 Oz.', '8')
                             "
                             >8 Oz. (+฿0)</v-btn
                           >
                           <v-btn
                             style="width: 7vw; font-size: small"
                             @click="
-                              orderStore.updateSize(
-                                orderStore.Order!.product_updatePrice!,
-                                '12 Oz.'
-                              )
+                              orderStore.updateSize(5, '12 Oz.'),
+                                orderStore.updateSizeText('12 Oz.', '12')
                             "
                             >12 Oz. (+฿5)</v-btn
                           >
                           <v-btn
                             style="width: 7vw; font-size: small"
                             @click="
-                              orderStore.updateSize(
-                                orderStore.Order!.product_updatePrice!,
-                                '16 Oz.'
-                              )
+                              orderStore.updateSize(10, '16 Oz.'),
+                                orderStore.updateSizeText('16 Oz.', '16')
                             "
                             >16 Oz. (+฿10)</v-btn
                           >
@@ -247,6 +260,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               text-align: center;
                             "
                             class="justify-center"
+                            @click="orderStore.updateOther('Not Sweet', '0%')"
                             >Not Sweet <br />0%</v-chip
                           >
                           <v-chip
@@ -256,6 +270,9 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               text-align: center;
                             "
                             class="justify-center"
+                            @click="
+                              orderStore.updateOther('Quarter Sweet', '25%')
+                            "
                             >Quarter Sweet <br />25%</v-chip
                           >
 
@@ -266,6 +283,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               text-align: center;
                             "
                             class="justify-center"
+                            @click="orderStore.updateOther('Less Sweet', '50%')"
                             >Less Sweet <br />50%</v-chip
                           >
 
@@ -276,6 +294,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               text-align: center;
                             "
                             class="justify-center"
+                            @click="orderStore.updateOther('Normal', '100%')"
                             >Normal <br />100%</v-chip
                           >
 
@@ -286,6 +305,9 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               text-align: center;
                             "
                             class="justify-center"
+                            @click="
+                              orderStore.updateOther('More Sweet', '125%')
+                            "
                             >More Sweet <br />125%</v-chip
                           >
                         </v-chip-group></v-col
@@ -315,9 +337,17 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           @click="
             orderStore.posDrinkDialog = false;
             orderStore.addCart(orderStore.Order!);
+            orderStore.Order!.product_updateName =
+              orderStore.UpdateType +
+              '' +
+              orderStore.UpdateSizeText +
+              ' ' +
+              orderStore.UpdateOther;
+            orderStore.Order!.product_updatePrice =
+              orderStore.UpdatePrice + orderStore.UpdateSize;
           "
         >
-          Add | ฿{{ orderStore.Order!.product_updatePrice }}
+          Add | ฿{{ orderStore.UpdatePrice + orderStore.UpdateSize }}
         </v-btn>
       </v-card-actions>
     </v-card></v-dialog
