@@ -39,13 +39,20 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   async function checkOut(password: string) {
     try {
       loadingStore.isLoading = true;
-      const res = await checkInOutService.updateCheckInOut(
+      const check_in_out = await checkInOutService.updateCheckInOut(
         empCheckOut.value?.cio_id!,
         empCheckOut.value?.employee.employee_login!,
         password
       );
+      const index = checkInOutList.value.findIndex(
+        (obj) => (obj.cio_id = check_in_out.data.cio_id)
+      );
+      if (index !== -1) {
+        checkInOutList.value.splice(index, 1, check_in_out.data);
+      }
       loadingStore.isLoading = false;
-      console.log(res.data);
+      console.log(check_in_out.data);
+      console.log("list", checkInOutList);
       status.value = "checked out";
       currentCheckIn.value = undefined;
       checkOutDialog.value = false;
@@ -55,6 +62,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       messageStore.showError("username หรือ password ไม่ถูกต้อง");
     }
   }
+
   return {
     checkInDialog,
     checkOutDialog,

@@ -11,6 +11,7 @@ import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
 import type checkInOut from "@/services/checkInOut";
+import { computed } from "vue";
 
 const employeeStore = useEmployeeStore();
 const materialStore = useMaterialStore();
@@ -183,6 +184,7 @@ function statusText(quantity: number, min: number) {
                       <td>{{ item.status }}</td>
                       <td>
                         <v-btn
+                          v-if="item.status === 'checked in'"
                           @click="
                             (checkInOutStore.checkOutDialog = true),
                               (checkInOutStore.empCheckOut = item)
