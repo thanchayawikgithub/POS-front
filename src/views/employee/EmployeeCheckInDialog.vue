@@ -1,10 +1,8 @@
 <script lang="ts" setup>
-import { useEmployeeStore } from "@/stores/employee";
 import { ref } from "vue";
 import type { VForm } from "vuetify/components";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { useCheckInOutStore } from "@/stores/check-in-out";
-const employeeStore = useEmployeeStore();
 const checkInOutStore = useCheckInOutStore();
 const username = ref("");
 const password = ref("");
@@ -13,8 +11,9 @@ const form = ref<InstanceType<typeof VForm> | null>(null);
 const checkIn = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    checkInOutStore.checkIn(username.value, password.value);
+    await checkInOutStore.checkIn(username.value, password.value);
   }
+  reset();
 };
 const reset = () => {
   form.value?.reset();
@@ -71,7 +70,7 @@ const show2 = ref(false);
               width="150px"
               color="success"
               style="border-radius: 10px"
-              @click="checkIn"
+              @click="checkIn()"
               >Check in</v-btn
             >
             <v-btn
@@ -79,7 +78,7 @@ const show2 = ref(false);
               variant="flat"
               width="150px"
               style="border-radius: 10px"
-              @click="reset"
+              @click="reset()"
               >Clear</v-btn
             >
           </v-row>
@@ -87,7 +86,9 @@ const show2 = ref(false);
       </v-card-actions>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn @click="checkInOutStore.checkInDialog = false">Close</v-btn>
+        <v-btn @click="(checkInOutStore.checkInDialog = false), reset()"
+          >Close</v-btn
+        >
       </v-card-actions>
     </v-card>
   </v-dialog>

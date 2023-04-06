@@ -10,6 +10,7 @@ import { useLoadingStore } from "@/stores/loading";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
+import type checkInOut from "@/services/checkInOut";
 
 const employeeStore = useEmployeeStore();
 const materialStore = useMaterialStore();
@@ -62,25 +63,12 @@ function statusText(quantity: number, min: number) {
     <v-row style="font-size: 25px; font-weight: 700" class="ml-3">
       <v-col class="mt-3"> Overview </v-col>
       <v-col align="right" class="mr-10 mb-2">
-        <v-btn variant="plain" class="mt-5 pl-0">
-          <v-fade-transition leave-absolute>
-            <v-btn
-              @click="checkInOutStore.checkOutDialog = true"
-              style="width: 28vw"
-              v-if="checkInOutStore.status === 'checked in'"
-              class="endbutton"
-              >Check Out</v-btn
-            >
-
-            <v-btn
-              @click="checkInOutStore.checkInDialog = true"
-              v-else
-              style="width: 28vw"
-              class="startbutton"
-              >Check In</v-btn
-            >
-          </v-fade-transition>
-        </v-btn>
+        <v-btn
+          @click="checkInOutStore.checkInDialog = true"
+          style="width: 28vw"
+          class="startbutton"
+          >Check In</v-btn
+        >
       </v-col>
     </v-row>
     <v-row class="pl-3">
@@ -93,20 +81,16 @@ function statusText(quantity: number, min: number) {
           <v-card-text style="font-size: 17px">Receipt</v-card-text>
           <v-card-text style="font-size: 60px" align="right">5</v-card-text>
         </v-card>
-        <v-card class="mt-5" style="width: 62vw; height: 35vh"
+        <v-card class="mt-5" style="width: 30vw; height: 35vh"
           ><v-card-text>Material Min Quantity</v-card-text>
           <v-container style="width: 62vw; height: 35vh" class="pt-0">
             <v-row>
-              <v-col cols="12">
+              <v-col cols="5">
                 <v-table style="overflow-y: auto; height: 25vh">
                   <thead>
                     <tr>
-                      <th class="text-center">ID</th>
                       <th class="text-center">Name</th>
-                      <th class="text-center">Min Quantity</th>
-                      <th class="text-center">Quantity</th>
-                      <th class="text-center">Unit</th>
-                      <th class="text-center">Price Per Unit</th>
+
                       <th class="text-center">Status</th>
                     </tr>
                   </thead>
@@ -118,14 +102,8 @@ function statusText(quantity: number, min: number) {
                       )"
                       :key="item.mat_quantity"
                     >
-                      <td class="text-center">{{ item.mat_id }}</td>
                       <td>{{ item.mat_name }}</td>
-                      <td class="text-center">{{ item.mat_min_quantity }}</td>
-                      <td class="text-center">{{ item.mat_quantity }}</td>
-                      <td class="text-center">{{ item.mat_unit }}</td>
-                      <td class="text-center">
-                        ฿ {{ item.mat_price_per_unit }}
-                      </td>
+
                       <td>
                         <v-card
                           height="4vh"
@@ -167,6 +145,57 @@ function statusText(quantity: number, min: number) {
             class="pb-10 pt-0 pl-3"
             style="width: 29vw"
           ></ChartComponent>
+        </v-card>
+        <v-card class="mt-5" style="width: 30vw; height: 35vh"
+          ><v-card-text>Employee Check In Out</v-card-text>
+          <v-container style="width: 62vw; height: 35vh" class="pt-0">
+            <v-row>
+              <v-col cols="7">
+                <v-table style="overflow-y: auto; height: 25vh; width: 30vw">
+                  <thead>
+                    <tr>
+                      <th class="text-center">Name</th>
+                      <th class="text-center">Time-in</th>
+                      <th class="text-center">Time-out</th>
+                      <th class="text-center">Status</th>
+                      <th class="text-center"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      v-for="item in checkInOutStore.checkInOutList"
+                      :key="item.cio_id"
+                    >
+                      <td>{{ item.employee.employee_name }}</td>
+                      <td>
+                        {{ JSON.stringify(item.cio_time_in).substring(1, 11) }}
+                        {{ JSON.stringify(item.cio_time_in).substring(12, 20) }}
+                      </td>
+                      <td v-if="item.cio_time_out">
+                        {{ JSON.stringify(item.cio_time_out).substring(1, 11) }}
+
+                        {{
+                          JSON.stringify(item.cio_time_out).substring(12, 20)
+                        }}
+                      </td>
+                      <td v-else></td>
+
+                      <td>{{ item.status }}</td>
+                      <td>
+                        <v-btn
+                          @click="
+                            (checkInOutStore.checkOutDialog = true),
+                              (checkInOutStore.empCheckOut = item)
+                          "
+                          >out</v-btn
+                        >
+                      </td>
+                    </tr>
+                  </tbody>
+                </v-table>
+              </v-col>
+            </v-row>
+          </v-container>
         </v-card>
       </v-col>
 

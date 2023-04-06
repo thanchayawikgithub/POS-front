@@ -5,18 +5,17 @@ import type { VForm } from "vuetify/components";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 import { useCheckInOutStore } from "@/stores/check-in-out";
-const authStore = useAuthStore();
+import { onMounted } from "vue";
 
 const checkInOutStore = useCheckInOutStore();
-const employeeStore = useEmployeeStore();
-const username = ref("");
+
 const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
 const checkOut = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    checkInOutStore.checkOut(username.value, password.value);
+    checkInOutStore.checkOut(password.value);
   }
 };
 const reset = () => {
@@ -33,19 +32,6 @@ const show2 = ref(false);
       </v-card-title>
       <v-card-text class="pa-0">
         <v-form ref="form" v-model="valid">
-          <v-text-field
-            class="mx-auto mb-2"
-            style="width: 30vw"
-            label="Name"
-            v-model="username"
-            variant="outlined"
-            :rules="[
-              (v) => !!v || 'Login Name is required',
-              (v) =>
-                v.length >= 4 || 'Name must be more than or equal 4 characters',
-            ]"
-            required
-          ></v-text-field>
           <v-text-field
             style="width: 30vw"
             label="Password"

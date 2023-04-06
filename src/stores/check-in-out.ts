@@ -13,15 +13,21 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const status = ref("");
   const currentCheckIn = ref<number>();
   const checkInOutList = ref<CheckInOut[]>([]);
+  const empCheckOut = ref<CheckInOut>();
   async function checkIn(username: string, password: string) {
     try {
       loadingStore.isLoading = true;
-      const res = await checkInOutService.saveCheckInOut(username, password);
+      const check_in_out = await checkInOutService.saveCheckInOut(
+        username,
+        password
+      );
       loadingStore.isLoading = false;
-      currentCheckIn.value = res.data.cio_id;
+      currentCheckIn.value = check_in_out.data.cio_id;
+      checkInOutList.value.push(check_in_out.data);
       status.value = "checked in";
-      console.log(res);
+      console.log(check_in_out.data);
       console.log(currentCheckIn.value);
+      console.log("check in list", checkInOutList.value);
       checkInDialog.value = false;
       messageStore.showMessage("check in success");
     } catch (error) {
@@ -30,12 +36,12 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     }
   }
 
-  async function checkOut(username: string, password: string) {
+  async function checkOut(password: string) {
     try {
       loadingStore.isLoading = true;
       const res = await checkInOutService.updateCheckInOut(
-        currentCheckIn.value!,
-        username,
+        empCheckOut.value?.cio_id!,
+        empCheckOut.value?.employee.employee_login!,
         password
       );
       loadingStore.isLoading = false;
@@ -49,5 +55,13 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       messageStore.showError("username หรือ password ไม่ถูกต้อง");
     }
   }
-  return { checkInDialog, checkOutDialog, checkIn, status, checkOut };
+  return {
+    checkInDialog,
+    checkOutDialog,
+    checkIn,
+    status,
+    checkOut,
+    checkInOutList,
+    empCheckOut,
+  };
 });
