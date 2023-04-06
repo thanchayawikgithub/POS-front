@@ -12,10 +12,9 @@ const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
 const checkIn = async () => {
   const { valid } = await form.value!.validate();
-  // if (valid) {
-
-  // }
-  checkInOutStore.checkInDialog = false;
+  if (valid) {
+    checkInOutStore.checkIn(username.value, password.value);
+  }
 };
 const reset = () => {
   form.value?.reset();

@@ -7,11 +7,13 @@ import { onMounted, ref } from "vue";
 import material from "@/services/material";
 import ChartComponent from "./ChartComponent.vue";
 import { useLoadingStore } from "@/stores/loading";
-import EmployeeLoginDialog from "@/views/employee/EmployeeLoginDialog.vue";
-import EmployeeLogoutDialog from "@/views/employee/EmployeeLogoutDialog .vue";
+import { useCheckInOutStore } from "@/stores/check-in-out";
+import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
+import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
+
 const employeeStore = useEmployeeStore();
 const materialStore = useMaterialStore();
-
+const checkInOutStore = useCheckInOutStore();
 const loadingStore = useLoadingStore();
 
 onMounted(async () => {
@@ -35,8 +37,8 @@ const startWork = ref();
 </script>
 
 <template>
-  <EmployeeLoginDialog></EmployeeLoginDialog>
-  <EmployeeLogoutDialog></EmployeeLogoutDialog>
+  <EmployeeCheckInDialog></EmployeeCheckInDialog>
+  <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
   <v-container
     class="ml-0 pt-0 px-0 h-screen"
     style="background-color: #e7e7e7"
@@ -159,7 +161,7 @@ const startWork = ref();
         >
           <v-fade-transition leave-absolute>
             <v-btn
-              @click="employeeStore.employeelogoutDialog = true"
+              @click="checkInOutStore.checkOutDialog = true"
               style="width: 28vw"
               v-if="startWork"
               class="endbutton"
@@ -167,7 +169,7 @@ const startWork = ref();
             >
 
             <v-btn
-              @click="employeeStore.employeeLoginDialog = true"
+              @click="checkInOutStore.checkInDialog = true"
               v-else
               style="width: 28vw"
               class="startbutton"
