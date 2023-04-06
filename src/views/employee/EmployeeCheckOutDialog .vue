@@ -5,19 +5,18 @@ import type { VForm } from "vuetify/components";
 import { mdiEye, mdiEyeOff } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 import { useCheckInOutStore } from "@/stores/check-in-out";
-const authStore = useAuthStore();
+import { onMounted } from "vue";
 
 const checkInOutStore = useCheckInOutStore();
-const username = ref("");
+
 const password = ref("");
 const valid = ref(true);
 const form = ref<InstanceType<typeof VForm> | null>(null);
 const checkOut = async () => {
   const { valid } = await form.value!.validate();
   if (valid) {
-    authStore.login(username.value, password.value);
+    checkInOutStore.checkOut(password.value);
   }
-  checkInOutStore.checkOutDialog = false;
 };
 const reset = () => {
   form.value?.reset();
@@ -29,23 +28,10 @@ const show2 = ref(false);
   <v-dialog v-model="checkInOutStore.checkOutDialog" persistent width="650">
     <v-card>
       <v-card-title>
-        <span class="text-h5">Employee Logout</span>
+        <span class="text-h5">Employee Check out</span>
       </v-card-title>
       <v-card-text class="pa-0">
         <v-form ref="form" v-model="valid">
-          <v-text-field
-            class="mx-auto mb-2"
-            style="width: 30vw"
-            label="Name"
-            v-model="username"
-            variant="outlined"
-            :rules="[
-              (v) => !!v || 'Login Name is required',
-              (v) =>
-                v.length >= 4 || 'Name must be more than or equal 4 characters',
-            ]"
-            required
-          ></v-text-field>
           <v-text-field
             style="width: 30vw"
             label="Password"
@@ -75,7 +61,7 @@ const show2 = ref(false);
               color="success"
               style="border-radius: 10px"
               @click="checkOut"
-              >Logout</v-btn
+              >Check out</v-btn
             >
             <v-btn
               color="error"
@@ -87,6 +73,10 @@ const show2 = ref(false);
             >
           </v-row>
         </v-container>
+      </v-card-actions>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn @click="checkInOutStore.checkOutDialog = false">Close</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
