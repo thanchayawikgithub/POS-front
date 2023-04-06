@@ -10,23 +10,30 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const checkOutDialog = ref(false);
   const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
-  const status = ref("");
-  const currentCheckIn = ref<number>();
+
   const checkInOutList = ref<CheckInOut[]>([]);
   const empCheckOut = ref<CheckInOut>();
   async function checkIn(username: string, password: string) {
     try {
+      const duplicate = checkInOutList.value.find(
+        (cio) =>
+          cio.employee.employee_name === username && cio.cio_time_out === null
+      );
+      if (duplicate) {
+        checkInDialog.value = false;
+        messageStore.showError("this employee already checked in");
+        return;
+      }
       loadingStore.isLoading = true;
       const check_in_out = await checkInOutService.saveCheckInOut(
         username,
         password
       );
       loadingStore.isLoading = false;
-      currentCheckIn.value = check_in_out.data.cio_id;
+
       checkInOutList.value.push(check_in_out.data);
-      status.value = "checked in";
       console.log(check_in_out.data);
-      console.log(currentCheckIn.value);
+
       console.log("check in list", checkInOutList.value);
       checkInDialog.value = false;
       messageStore.showMessage("check in success");
@@ -53,8 +60,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       loadingStore.isLoading = false;
       console.log(check_in_out.data);
       console.log("list", checkInOutList);
-      status.value = "checked out";
-      currentCheckIn.value = undefined;
+      empCheckOut.value = undefined;
       checkOutDialog.value = false;
       messageStore.showMessage("check out success");
     } catch (error) {
