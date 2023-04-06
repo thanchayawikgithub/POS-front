@@ -260,26 +260,26 @@ export const useProductStore = defineStore("product", () => {
     editedProduct.value = JSON.parse(JSON.stringify(product));
     dialog.value = true;
   }
-  const UpdatePrice = ref(0);
-  const UpdatePriceSize = ref(0);
+  // const UpdatePrice = ref(0);
+  // const UpdatePriceSize = ref(0);
 
-  function updatePrice(priceDifference: number, nameDifference: string) {
-    if (nameDifference === "ICED") {
-      UpdatePrice.value = priceDifference;
-    } else if (nameDifference === "HOT") {
-      UpdatePrice.value = priceDifference - 5;
-    } else if (nameDifference === "SMOOTHIE") {
-      UpdatePrice.value = priceDifference + 5;
-    }
-    return UpdatePrice.value;
-  }
-  function updateSize(priceDifference: number, nameDifference: string) {
-    if (nameDifference === "8Oz.") {
-      UpdatePriceSize.value;
-    } else if (nameDifference === "12Oz.") {
-      UpdatePriceSize.value = +5;
-    }
-  }
+  // function updatePrice(priceDifference: number, nameDifference: string) {
+  //   if (nameDifference === "ICED") {
+  //     UpdatePrice.value = priceDifference;
+  //   } else if (nameDifference === "HOT") {
+  //     UpdatePrice.value = priceDifference - 5;
+  //   } else if (nameDifference === "SMOOTHIE") {
+  //     UpdatePrice.value = priceDifference + 5;
+  //   }
+  //   return UpdatePrice.value;
+  // }
+  // function updateSize(priceDifference: number, nameDifference: string) {
+  //   if (nameDifference === "8Oz.") {
+  //     UpdatePriceSize.value;
+  //   } else if (nameDifference === "12Oz.") {
+  //     UpdatePriceSize.value = +5;
+  //   }
+  // }
 
   return {
     products,
@@ -301,7 +301,7 @@ export const useProductStore = defineStore("product", () => {
     getByTypeKeyword,
     type,
     selectedType,
-    updatePrice,
-    UpdatePrice,
+    // updatePrice,
+    // UpdatePrice,
   };
 });

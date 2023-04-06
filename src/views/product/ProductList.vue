@@ -47,7 +47,6 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               <th>ID</th>
               <th>Name</th>
               <th>Type</th>
-
               <th>Price</th>
               <th>Category</th>
               <th>Image</th>
@@ -59,7 +58,6 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               <td>{{ item.product_id }}</td>
               <td>{{ item.product_name }}</td>
               <td>{{ item.product_type }}</td>
-
               <td>{{ item.product_price }}</td>
               <td>{{ item.categoryId }}</td>
               <td>

@@ -154,26 +154,72 @@ export const useOrderStore = defineStore("order", () => {
     }
   };
 
-  function updatePrice(price: number, name: string) {
-    if (name === "ICED") {
-      Order.value!.product_updatePrice = price;
-    } else if (name === "HOT") {
-      Order.value!.product_updatePrice = price - 5;
-    } else if (name === "SMOOTHIE") {
-      Order.value!.product_updatePrice = price + 5;
+  const UpdatePrice = ref(0);
+  const UpdateSize = ref(0);
+  const UpdateSizeText = ref("");
+  const UpdateType = ref("");
+  const UpdateOther = ref("");
+
+  function updateType(add_on_name: string, name: string) {
+    if (add_on_name === "ICED") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "HOT") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "SMOOTHIE") {
+      UpdateType.value = add_on_name + " " + name;
     }
 
-    return Order.value?.product_updatePrice;
+    return UpdatePrice.value;
   }
   function updateSize(price: number, name: string) {
     if (name === "8 Oz.") {
-      Order.value!.product_updatePrice = price;
+      UpdateSize.value = price;
     } else if (name === "12 Oz.") {
-      Order.value!.product_updatePrice = price + 5;
+      UpdateSize.value = price;
     } else if (name === "16 Oz.") {
-      Order.value!.product_updatePrice = price + 10;
+      UpdateSize.value = price;
     }
-    return Order.value?.product_updatePrice;
+    return UpdateSize.value;
+  }
+  function updateSizeText(name: string, sizeName: string) {
+    if (name === "8 Oz.") {
+      UpdateSizeText.value =
+        "(" + sizeName + "  " + Order.value?.product_size_unit + ")";
+    } else if (name === "12 Oz.") {
+      UpdateSizeText.value =
+        "(" + sizeName + "  " + Order.value?.product_size_unit + ")";
+    } else if (name === "16 Oz.") {
+      UpdateSizeText.value =
+        "(" + sizeName + "  " + Order.value?.product_size_unit + ")";
+    }
+    return UpdateSizeText.value;
+  }
+
+  function updatePrice(name: string, price: number) {
+    if (name === "ICED") {
+      UpdatePrice.value = price;
+    } else if (name === "HOT") {
+      UpdatePrice.value = price - 5;
+    } else if (name === "SMOOTHIE") {
+      UpdatePrice.value = price + 5;
+    }
+
+    return UpdatePrice.value;
+  }
+  function updateOther(name: string, Othername: string) {
+    if (name === "Not Sweet") {
+      UpdateOther.value = Othername;
+    } else if (name === "Quarter Sweet") {
+      UpdateOther.value = Othername;
+    } else if (name === "Less Sweet") {
+      UpdateOther.value = Othername;
+    } else if (name === "Normal") {
+      UpdateOther.value = Othername;
+    } else if (name === "More Sweet") {
+      UpdateOther.value = Othername;
+    }
+
+    return UpdateOther.value;
   }
 
   return {
@@ -199,5 +245,13 @@ export const useOrderStore = defineStore("order", () => {
     posFoodDialog,
     updatePrice,
     updateSize,
+    UpdatePrice,
+    UpdateSize,
+    updateSizeText,
+    UpdateSizeText,
+    updateType,
+    UpdateType,
+    updateOther,
+    UpdateOther,
   };
 });

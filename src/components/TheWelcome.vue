@@ -205,6 +205,7 @@ const startWork = ref();
 .startbutton:active {
   transform: translateY(-1px);
 }
+
 .endbutton {
   padding: 0.1em 2em;
   font-size: 12px;

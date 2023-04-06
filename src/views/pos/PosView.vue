@@ -158,7 +158,10 @@ function Smoothie(CatId: number, Type: String) {
                         orderStore.addOrder(item);
                         orderStore.posFoodDialog = true;
                       }
-                      orderStore.updatePrice(item.product_price, 'ICED');
+                      orderStore.updatePrice('ICED', item.product_price);
+                      orderStore.updateType('ICED', item.product_name);
+                      orderStore.updateSizeText('8 Oz.', '8');
+                      orderStore.updateOther('Normal', '100%');
                     "
                   >
                     <v-card
@@ -231,7 +234,7 @@ function Smoothie(CatId: number, Type: String) {
           <v-container fluid>
             <v-row>
               <v-col cols="1 "> </v-col>
-              <v-col cols="3" class="text-center pl-14">
+              <v-col cols="3" class="text-center pl-0">
                 <h5>Name</h5>
               </v-col>
               <v-col cols="5" class="text-center pl-16">
@@ -264,15 +267,8 @@ function Smoothie(CatId: number, Type: String) {
                 "
               >
                 <v-row>
-                  <v-col cols="2">
-                    <v-img
-                      height="7vh"
-                      width="90%"
-                      :src="`${backendURL}/products/image/${item.product_image}`"
-                    ></v-img>
-                  </v-col>
-                  <v-col cols="3" class="pl-0">
-                    <v-card-text> {{ item.product_name }}</v-card-text>
+                  <v-col cols="5" class="pl-0">
+                    <v-card-text> {{ item.product_updateName }}</v-card-text>
                   </v-col>
                   <v-col cols="1" class="text-right"
                     ><v-card-actions class="justify-center">
