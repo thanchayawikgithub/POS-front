@@ -76,58 +76,113 @@ export const useOrderStore = defineStore("order", () => {
   };
 
   const totalPrice = computed(function () {
-    return orderList.value.reduce(
-      (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
-      0
-    );
+    if (Order.value?.categoryId === 1) {
+      return orderList.value.reduce(
+        (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
+        0
+      );
+    } else {
+      return orderList.value.reduce(
+        (sum, item) => sum + item.product_price * item.product_amount!,
+        0
+      );
+    }
   });
 
   async function openOrder() {
-    const employee: { employee_id: number } = authStore.getEmployee();
-    const customer = customerStore.customer?.customer_id;
+    if (Order.value?.categoryId === 1) {
+      const employee: { employee_id: number } = authStore.getEmployee();
+      const customer = customerStore.customer?.customer_id;
 
-    const recieptDetails = orderList.value.map(
-      (item) =>
-        <
-          {
-            productId: number;
-            rcd_price: number;
-            rcd_amount: number;
-            rcd_name: string;
+      const recieptDetails = orderList.value.map(
+        (item) =>
+          <
+            {
+              productId: number;
+              rcd_price: number;
+              rcd_amount: number;
+              rcd_name: string;
+            }
+          >{
+            productId: item.product_id,
+            rcd_price: item.product_updatePrice,
+            rcd_amount: item.product_amount,
+            rcd_name: item.product_updateName,
           }
-        >{
-          productId: item.product_id,
-          rcd_price: item.product_updatePrice,
-          rcd_amount: item.product_amount,
-          rcd_name: item.product_updateName,
-        }
-    );
+      );
 
-    const reciept = {
-      rec_queue: 1,
-      rec_time: 15,
-      rec_discount: 0,
-      rec_total: totalPrice.value,
-      rec_received: +received.value,
-      rec_payment: paymentMethod.value,
-      rec_changed: changed.value,
-      employeeId: employee.employee_id,
-      storeId: 1,
-      customerId: customer !== undefined ? customer : 0,
-      recieptDetails: recieptDetails,
-    };
-    loadingStore.isLoading = true;
-    try {
-      console.log(reciept);
-      const res = await recieptService.saveReciept(reciept);
-      dialog.value = false;
-      clearOrder();
-    } catch (e) {
-      console.log(e);
-      messageStore.showError("ไม่สามารถบันทึก Order ได้");
+      const reciept = {
+        rec_queue: 1,
+        rec_time: 15,
+        rec_discount: 0,
+        rec_total: totalPrice.value,
+        rec_received: +received.value,
+        rec_payment: paymentMethod.value,
+        rec_changed: changed.value,
+        employeeId: employee.employee_id,
+        storeId: 1,
+        customerId: customer !== undefined ? customer : 0,
+        recieptDetails: recieptDetails,
+      };
+      loadingStore.isLoading = true;
+      try {
+        console.log(reciept);
+        const res = await recieptService.saveReciept(reciept);
+        dialog.value = false;
+        clearOrder();
+      } catch (e) {
+        console.log(e);
+        messageStore.showError("ไม่สามารถบันทึก Order ได้");
+      }
+      customerStore.customer = undefined;
+      loadingStore.isLoading = false;
+    } else {
+      const employee: { employee_id: number } = authStore.getEmployee();
+      const customer = customerStore.customer?.customer_id;
+
+      const recieptDetails = orderList.value.map(
+        (item) =>
+          <
+            {
+              productId: number;
+              rcd_price: number;
+              rcd_amount: number;
+              rcd_name: string;
+            }
+          >{
+            productId: item.product_id,
+            rcd_price: item.product_price,
+            rcd_amount: item.product_amount,
+            rcd_name: item.product_name,
+          }
+      );
+
+      const reciept = {
+        rec_queue: 1,
+        rec_time: 15,
+        rec_discount: 0,
+        rec_total: totalPrice.value,
+        rec_received: +received.value,
+        rec_payment: paymentMethod.value,
+        rec_changed: changed.value,
+        employeeId: employee.employee_id,
+        storeId: 1,
+        customerId: customer !== undefined ? customer : 0,
+        recieptDetails: recieptDetails,
+      };
+      loadingStore.isLoading = true;
+      try {
+        console.log(reciept);
+        const res = await recieptService.saveReciept(reciept);
+        dialog.value = false;
+        clearOrder();
+      } catch (e) {
+        console.log(e);
+        messageStore.showError("ไม่สามารถบันทึก Order ได้");
+      }
+      customerStore.customer = undefined;
+      loadingStore.isLoading = false;
     }
-    customerStore.customer = undefined;
-    loadingStore.isLoading = false;
   }
 
   const calChanged = async () => {

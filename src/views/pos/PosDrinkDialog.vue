@@ -93,6 +93,25 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                         >
                           <v-btn
                             style="width: 7vw; font-size: x-small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Soda Drink'
+                            "
+                            disabled
+                            @click="
+                              orderStore.updatePrice(
+                                'HOT',
+                                orderStore.Order!.product_price
+                              );
+                              orderStore.updateType(
+                                'HOT',
+                                orderStore.Order!.product_name
+                              );
+                            "
+                            >HOT -
+                          </v-btn>
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            v-else
                             @click="
                               orderStore.updatePrice(
                                 'HOT',
@@ -336,7 +355,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           color="#655a54"
           @click="
             orderStore.posDrinkDialog = false;
-            orderStore.addCart(orderStore.Order!);
+
             orderStore.Order!.product_updateName =
               orderStore.UpdateType +
               '' +
@@ -345,6 +364,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               orderStore.UpdateOther;
             orderStore.Order!.product_updatePrice =
               orderStore.UpdatePrice + orderStore.UpdateSize;
+            orderStore.addCart(orderStore.Order!);
           "
         >
           Add | ฿{{ orderStore.UpdatePrice + orderStore.UpdateSize }}

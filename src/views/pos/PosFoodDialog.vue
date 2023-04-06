@@ -54,7 +54,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       >
                     </v-row>
                     <v-row class="mt-0">
-                      <v-col cols="3">
+                      <v-col cols="4">
                         <v-card
                           flat
                           style="width: 3vw; height: 6vh; border-radius: 8px"
@@ -70,32 +70,58 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           ></v-btn
                         ></v-card>
                       </v-col>
-                      <v-col cols="9"
+                      <v-col cols="8"
                         ><v-btn-toggle
                           class="ml-5"
                           rounded="xl"
                           variant="outlined"
                           divided
                           color="#df8057"
-                          style="height: 5vh; width: 25vw; border: 1px"
+                          style="height: 5vh; width: 22vw; border: 1px"
                         >
-                          <v-btn style="width: 6vw; font-size: x-small"
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
+                            >Chicken ฿{{
+                              orderStore.Order!.product_price - 5
+                            }}</v-btn
+                          >
+                          <v-btn
+                            style="width: 7vw; font-size: larger"
+                            v-else
+                            disabled
+                          >
+                            -</v-btn
+                          >
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
                             >Pig ฿{{ orderStore.Order!.product_price }}</v-btn
                           >
-                          <v-btn style="width: 6vw; font-size: x-small"
-                            >Chicken ฿{{
-                              orderStore.Order!.product_price
-                            }}</v-btn
+                          <v-btn
+                            style="width: 7vw; font-size: larger"
+                            v-else
+                            disabled
+                            >-</v-btn
                           >
-                          <v-btn style="width: 6vw; font-size: x-small"
-                            >Beef ฿{{
-                              orderStore.Order!.product_price + 5
-                            }}</v-btn
-                          >
-                          <v-btn style="width: 6vw; font-size: x-small"
+
+                          <v-btn
+                            style="width: 7vw; font-size: x-small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
                             >Seafood ฿{{
                               orderStore.Order!.product_price + 10
                             }}</v-btn
+                          ><v-btn
+                            style="width: 7vw; font-size: larger"
+                            v-else
+                            disabled
+                            >-</v-btn
                           >
                         </v-btn-toggle></v-col
                       >
@@ -147,11 +173,31 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           <v-btn disabled style="width: 7vw; font-size: large"
                             >-</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: small"
+                          <v-btn
+                            style="width: 7vw; font-size: small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
                             >M (+฿0)</v-btn
                           >
-                          <v-btn style="width: 7vw; font-size: small"
+                          <v-btn
+                            style="width: 7vw; font-size: larger"
+                            v-else
+                            disabled
+                            >-</v-btn
+                          >
+                          <v-btn
+                            style="width: 7vw; font-size: small"
+                            v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
                             >L (+฿5)</v-btn
+                          >
+                          <v-btn
+                            style="width: 7vw; font-size: larger"
+                            v-else
+                            disabled
+                            >-</v-btn
                           >
                         </v-btn-toggle></v-col
                       >
@@ -193,6 +239,9 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols="10">
                         <v-chip-group
+                          v-if="
+                              orderStore.Order!.product_type === 'Thai Food'
+                            "
                           v-model="selection"
                           color="#df8057"
                           variant="outlined"
@@ -244,6 +293,128 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             "
                             class="justify-center"
                             >Omelet <br />+฿10</v-chip
+                          >
+                        </v-chip-group>
+                        <v-chip-group
+                          v-else-if="
+                              orderStore.Order!.product_type === 'Japanese Food'
+                            "
+                          v-model="selection"
+                          color="#df8057"
+                          variant="outlined"
+                        >
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+                        </v-chip-group>
+                        <v-chip-group
+                          v-else
+                          v-model="selection"
+                          color="#df8057"
+                          variant="outlined"
+                        >
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
+                          >
+
+                          <v-chip
+                            style="
+                              width: 6vw;
+                              font-size: small;
+                              text-align: center;
+                            "
+                            class="justify-center"
+                            disabled
+                            >-</v-chip
                           >
                         </v-chip-group></v-col
                       >

@@ -47,12 +47,8 @@ function Hot(CatId: number, Type: String) {
     return "Hot";
   } else if (CatId === 1 && Type == "Soda Drink") {
     return "Hot";
-  } else if (CatId === 2 && Type == "Cake") {
-    return "-";
-  } else if (CatId === 2 && Type == "Bread") {
-    return "-";
-  } else if (CatId === 2 && Type == "Cookie") {
-    return "-";
+  } else if (CatId === 3 && Type == "Thai Food") {
+    return "Chicken";
   }
 }
 function Ice(CatId: number, Type: String) {
@@ -62,15 +58,19 @@ function Ice(CatId: number, Type: String) {
     return "Iced";
   } else if (CatId === 1 && Type == "Soda Drink") {
     return "Iced";
+  } else if (CatId === 3 && Type == "Thai Food") {
+    return "Pig";
   }
 }
 function Smoothie(CatId: number, Type: String) {
   if (CatId === 1 && Type == "Coffee") {
-    return "Smoothie";
+    return "Frappe";
   } else if (CatId === 1 && Type == "Tea") {
     return "Smoothie";
   } else if (CatId === 1 && Type == "Soda Drink") {
     return "Smoothie";
+  } else if (CatId === 3 && Type == "Thai Food") {
+    return "SeaFood";
   }
 }
 </script>
@@ -150,18 +150,19 @@ function Smoothie(CatId: number, Type: String) {
                     @click="
                       if (item.categoryId === 1) {
                         orderStore.addOrder(item);
+                        orderStore.updatePrice('ICED', item.product_price);
+                        orderStore.updateType('ICED', item.product_name);
+                        orderStore.updateSizeText('8 Oz.', '8');
+                        orderStore.updateOther('Normal', '100%');
                         orderStore.posDrinkDialog = true;
                       } else if (item.categoryId === 2) {
                         orderStore.addOrder(item);
+
                         orderStore.posBakeryDialog = true;
                       } else if (item.categoryId === 3) {
                         orderStore.addOrder(item);
                         orderStore.posFoodDialog = true;
                       }
-                      orderStore.updatePrice('ICED', item.product_price);
-                      orderStore.updateType('ICED', item.product_name);
-                      orderStore.updateSizeText('8 Oz.', '8');
-                      orderStore.updateOther('Normal', '100%');
                     "
                   >
                     <v-card
@@ -184,9 +185,10 @@ function Smoothie(CatId: number, Type: String) {
                       </v-card-title>
                       <v-card-title class="price"
                         ><v-btn-toggle
+                          v-if="item.categoryId === 1"
                           variant="outlined"
                           divided
-                          class="pt-2"
+                          class="pt-2 pl-1"
                           color="#df8057"
                           style="height: 5vh; width: 13vw; border: 10px"
                         >
@@ -196,22 +198,122 @@ function Smoothie(CatId: number, Type: String) {
                             disabled
                             >{{ Hot(item.categoryId, item.product_type) }}
                             <br />-</v-btn
+                          ><v-btn style="width: 4vw; font-size: xx-small" v-else
+                            >{{ Hot(item.categoryId, item.product_type) }}
+                            <br />
+                            ฿{{ item.product_price }}</v-btn
                           >
-                          <v-btn style="width: 4vw; font-size: xx-small" v-else
-                            >{{ Hot(item.categoryId, item.product_type)
-                            }}<br />฿{{ item.product_price - 5 }}</v-btn
-                          >
-                          <v-btn style="width: 4vw; font-size: xx-small"
+
+                          <v-btn
+                            style="
+                              width: 4vw;
+                              font-size: xx-small;
+                              border: solid 1px;
+                            "
                             >{{ Ice(item.categoryId, item.product_type) }}<br />
                             ฿{{ item.product_price }}</v-btn
                           >
+
                           <v-btn style="width: 4vw; font-size: xx-small"
                             >{{ Smoothie(item.categoryId, item.product_type)
                             }}<br />
                             ฿{{ item.product_price + 5 }}</v-btn
                           >
-                        </v-btn-toggle></v-card-title
-                      >
+                        </v-btn-toggle>
+                        <v-btn-toggle
+                          v-if="item.categoryId === 2"
+                          variant="outlined"
+                          divided
+                          class="pt-2 pl-1"
+                          color="#df8057"
+                          style="height: 5vh; width: 13vw; border: 10px"
+                        >
+                          <v-btn style="width: 4vw; font-size: small" disabled
+                            >{{
+                              Hot(item.categoryId, item.product_type)
+                            }}
+                            -</v-btn
+                          >
+
+                          <v-btn
+                            style="
+                              width: 4vw;
+                              font-size: small;
+                              border: solid 1px;
+                            "
+                            >{{ Ice(item.categoryId, item.product_type) }} ฿{{
+                              item.product_price
+                            }}</v-btn
+                          >
+
+                          <v-btn style="width: 3vw; font-size: small" disabled
+                            >{{
+                              Smoothie(item.categoryId, item.product_type)
+                            }}-</v-btn
+                          >
+                        </v-btn-toggle>
+                        <v-btn-toggle
+                          v-if="item.categoryId === 3"
+                          variant="outlined"
+                          divided
+                          class="pt-2 pl-1"
+                          color="#df8057"
+                          style="height: 5vh; width: 13vw; border: 10px"
+                        >
+                          <v-btn
+                            style="width: 4vw; font-size: xx-small"
+                            v-if="item.product_type === 'Thai Food'"
+                            >{{ Hot(item.categoryId, item.product_type) }}
+                            <br />{{ item.product_price }}</v-btn
+                          ><v-btn
+                            style="width: 4vw; font-size: small"
+                            v-else
+                            disabled
+                            >{{
+                              Hot(item.categoryId, item.product_type)
+                            }}
+                            -</v-btn
+                          >
+
+                          <v-btn
+                            v-if="item.product_type === 'Thai Food'"
+                            style="
+                              font-size: xx-small;
+                              border: solid 1px;
+                              width: 2vw;
+                            "
+                            >{{ Ice(item.categoryId, item.product_type) }}<br />
+                            ฿{{ item.product_price }}</v-btn
+                          >
+                          <v-btn
+                            v-else
+                            style="
+                              font-size: small;
+                              border: solid 1px;
+                              width: 2vw;
+                            "
+                            >{{ Ice(item.categoryId, item.product_type) }} ฿{{
+                              item.product_price
+                            }}</v-btn
+                          >
+                          <v-btn
+                            style="font-size: xx-small; width: 2vw"
+                            v-if="item.product_type === 'Thai Food'"
+                            >{{ Smoothie(item.categoryId, item.product_type)
+                            }}<br />
+                            ฿{{ item.product_price + 5 }}</v-btn
+                          >
+
+                          <v-btn
+                            style="font-size: small; width: 2vw"
+                            v-else
+                            disabled
+                            >{{
+                              Smoothie(item.categoryId, item.product_type)
+                            }}-</v-btn
+                          >
+                        </v-btn-toggle>
+                      </v-card-title>
                     </v-card>
                   </v-btn>
                 </v-col>
@@ -268,7 +370,9 @@ function Smoothie(CatId: number, Type: String) {
               >
                 <v-row>
                   <v-col cols="5" class="pl-0">
-                    <v-card-text> {{ item.product_updateName }}</v-card-text>
+                    <v-card-text v-if="item.categoryId === 1">
+                      {{ item.product_updateName }}</v-card-text
+                    ><v-card-text else> {{ item.product_name }}</v-card-text>
                   </v-col>
                   <v-col cols="1" class="text-right"
                     ><v-card-actions class="justify-center">
@@ -296,8 +400,11 @@ function Smoothie(CatId: number, Type: String) {
                     </v-card-actions>
                   </v-col>
                   <v-col cols="2" class="text-center"
-                    ><v-card-text>{{
+                    ><v-card-text v-if="item.categoryId === 1">{{
                       item.product_updatePrice! * item.product_amount!
+                    }}</v-card-text>
+                    <v-card-text v-else>{{
+                      item.product_price! * item.product_amount!
                     }}</v-card-text></v-col
                   >
                   <v-col cols="1" class="text-center">
