@@ -482,7 +482,7 @@ function Smoothie(CatId: number, Type: String) {
               <tr>
                 <td>Point :</td>
                 <td>
-                  <v-btn variant="outline" @click="orderStore.usePoint = true"
+                  <v-btn variant="outlined" @click="orderStore.usePoint = true"
                     >Use</v-btn
                   >
                 </td>
