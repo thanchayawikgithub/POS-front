@@ -8,6 +8,7 @@ import recieptService from "@/services/receipt";
 import { useCustomerStore } from "./customer";
 import { useReceiptStore } from "./receipt";
 import { useProductStore } from "./product";
+import product from "@/services/product";
 
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
@@ -39,12 +40,22 @@ export const useOrderStore = defineStore("order", () => {
   const clearOrder = () => {
     orderList.value = [];
   };
-  const addCart = (item: Product) => {
-    if (orderList.value.includes(item)) {
-      addAmount(item);
+  const addCart = (productItem: Product) => {
+    const item = JSON.parse(JSON.stringify(productItem));
+    if (item.categoryId === 1) {
+      if (orderList.value.includes(item)) {
+        addAmount(item);
+      } else {
+        item.product_amount = 1;
+        orderList.value.push(item);
+      }
     } else {
-      item.product_amount = 1;
-      orderList.value.push(item);
+      if (orderList.value.includes(item)) {
+        addAmount(item);
+      } else {
+        item.product_amount = 1;
+        orderList.value.push(item);
+      }
     }
   };
   const addOrder = (item: Product) => {
