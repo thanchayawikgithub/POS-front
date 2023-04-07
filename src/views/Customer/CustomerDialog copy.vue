@@ -47,7 +47,16 @@ async function save() {
                   ]"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12"> </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Point*"
+                  required
+                  v-model="customerStore.editedCustomer.customer_point"
+                  :rules="[
+                    (v) => v >= 0 || 'poin must be equal to or greater than 0',
+                  ]"
+                ></v-text-field>
+              </v-col>
             </v-row>
           </v-container>
         </v-form>

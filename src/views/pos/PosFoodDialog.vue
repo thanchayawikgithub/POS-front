@@ -7,10 +7,18 @@ const orderStore = useOrderStore();
 
 const selectionSize = ref(1);
 const selectionType = ref(1);
-const reset = () => {
+// const reset = () => {
+//   selectionSize.value = 1;
+//   selectionType.value = 1;
+// };
+
+function reset() {
+  orderStore.UpdateOther = "";
+  orderStore.UpdatePriceOther = 0;
   selectionSize.value = 1;
   selectionType.value = 1;
-};
+}
+
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
 
@@ -36,18 +44,24 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             </v-card>
             <v-card-text
               v-if="orderStore.Order?.product_type === 'Thai Food'"
-              style="text-align: center; font-size: 32px; font-weight: 700"
+              style="text-align: center; font-size: 25px; font-weight: 700"
               class="pb-1 pt-1"
               >{{
-                orderStore.UpdateType + " " + orderStore.UpdateSizeText
+                orderStore.UpdateType +
+                " " +
+                orderStore.UpdateSizeText +
+                " " +
+                orderStore.UpdateOther2
               }}</v-card-text
             >
+
             <v-card-text
               v-else
               style="text-align: center; font-size: 32px; font-weight: 700"
               class="pb-1 pt-1"
               >{{ orderStore.Order?.product_name }}</v-card-text
             >
+
             <v-card-text
               style="text-align: center; font-size: 13px"
               class="pt-0"
@@ -86,6 +100,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols="8"
                         ><v-btn-toggle
+                          mandatory
                           class="ml-5"
                           rounded="xl"
                           variant="outlined"
@@ -209,6 +224,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols-6
                         ><v-btn-toggle
+                          mandatory
                           rounded="xl"
                           variant="outlined"
                           divided
@@ -300,44 +316,35 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           variant="outlined"
                         >
                           <v-chip
+                            disabled
                             style="
                               width: 6vw;
-                              font-size: x-small;
+                              font-size: larger;
                               text-align: center;
                             "
                             class="justify-center mt-2"
-                            @click="
-                              orderStore.updateOther(
-                                'No Vegetable',
-                                'No Vegetable'
-                              )
-                            "
-                            >No Vegetable</v-chip
+                            >-</v-chip
                           >
                           <v-chip
+                            disabled
                             style="
                               width: 6vw;
-                              font-size: x-small;
+                              font-size: larger;
                               text-align: center;
                             "
                             class="justify-center mt-2"
-                            @click="
-                              orderStore.updateOther('No Spicy', 'No Spicy')
-                            "
-                            >No Spicy</v-chip
+                            >-</v-chip
                           >
 
                           <v-chip
+                            disabled
                             style="
                               width: 6vw;
-                              font-size: x-small;
+                              font-size: larger;
                               text-align: center;
                             "
                             class="justify-center mt-2"
-                            @click="
-                              orderStore.updateOther('Very Spicy', 'Very Spicy')
-                            "
-                            >Very Spicy</v-chip
+                            >-</v-chip
                           >
 
                           <v-chip-group color="#df8057" variant="outlined">
@@ -349,11 +356,24 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               "
                               class="justify-center"
                               @click="
-                                orderStore.updateOther(
-                                  'Fried Egg',
-                                  'Fried Egg'
-                                );
-                                orderStore.updateSize(5, 'Fried Egg');
+                                if (
+                                  orderStore.UpdateOther2.includes('Fried Egg')
+                                ) {
+                                  orderStore.updateOtherThaiFood(
+                                    0,
+                                    'Fried Egg'
+                                  );
+                                  orderStore.updateOther2('Fried Egg', '');
+                                } else {
+                                  orderStore.updateOtherThaiFood(
+                                    5,
+                                    'Fried Egg'
+                                  );
+                                  orderStore.updateOther2(
+                                    'Fried Egg',
+                                    '+ Fried Egg'
+                                  );
+                                }
                               "
                               >Fried Egg <br />+฿5</v-chip
                             >
@@ -366,8 +386,15 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                               "
                               class="justify-center"
                               @click="
-                                orderStore.updateOther('Omelet', 'Omelet');
-                                orderStore.updateSize(10, 'Omelet');
+                                if (
+                                  orderStore.UpdateOther2.includes('Omelet')
+                                ) {
+                                  orderStore.updateOtherThaiFood(0, 'Omelet');
+                                  orderStore.updateOther2('Omelet', '');
+                                } else {
+                                  orderStore.updateOtherThaiFood(10, 'Omelet');
+                                  orderStore.updateOther2('Omelet', '+ Omelet');
+                                }
                               "
                               >Omelet <br />+฿10</v-chip
                             >
@@ -504,7 +531,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-btn
           color="darken-1"
           variant="plain"
-          @click="orderStore.posFoodDialog = false"
+          @click="(orderStore.posFoodDialog = false), reset()"
         >
           Close
         </v-btn>
@@ -522,13 +549,21 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               '' +
               orderStore.UpdateSizeText +
               ' ' +
-              orderStore.UpdateOther;
+              orderStore.UpdateOther2;
             orderStore.Order!.product_updatePrice =
-              orderStore.UpdatePrice + orderStore.UpdateSize;
+              orderStore.UpdatePrice +
+              orderStore.UpdateSize +
+              orderStore.UpdatePriceOther;
             orderStore.addCart(orderStore.Order!);
+            reset();
           "
         >
-          Add | ฿ {{ orderStore.UpdatePrice + orderStore.UpdateSize }}
+          Add | ฿
+          {{
+            orderStore.UpdatePrice +
+            orderStore.UpdateSize +
+            orderStore.UpdatePriceOther
+          }}
         </v-btn>
         <v-btn
           v-else

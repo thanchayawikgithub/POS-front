@@ -185,23 +185,27 @@ export const useOrderStore = defineStore("order", () => {
   };
 
   const UpdatePrice = ref(0);
+  const UpdatePriceOther = ref(0);
   const UpdateSize = ref(0);
   const UpdateSizeText = ref("");
   const UpdateType = ref("");
   const UpdateOther = ref("");
+  const UpdateOther2 = ref("");
 
   function updateType(add_on_name: string, name: string) {
-    if (add_on_name === "ICED") {
+    if (add_on_name === "Iced") {
       UpdateType.value = add_on_name + " " + name;
-    } else if (add_on_name === "HOT") {
+    } else if (add_on_name === "Hot") {
       UpdateType.value = add_on_name + " " + name;
-    } else if (add_on_name === "SMOOTHIE") {
+    } else if (add_on_name === "Frappe") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Chicken") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Pig") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Seafood") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "Smoothie") {
       UpdateType.value = add_on_name + " " + name;
     }
     return UpdatePrice.value;
@@ -266,19 +270,27 @@ export const useOrderStore = defineStore("order", () => {
       UpdateOther.value = Othername;
     } else if (name === "More Sweet") {
       UpdateOther.value = Othername;
-    } else if (name === "No Vegetable") {
-      UpdateOther.value = Othername;
-    } else if (name === "No Spicy") {
-      UpdateOther.value = Othername;
-    } else if (name === "Very Spicy") {
-      UpdateOther.value = Othername;
-    } else if (name === "Fried Egg") {
-      UpdateOther.value = Othername;
-    } else if (name === "Omelet") {
-      UpdateOther.value = Othername;
     }
 
     return UpdateOther.value;
+  }
+  function updateOther2(name: string, Othername: string) {
+    if (name === "Fried Egg") {
+      UpdateOther2.value = Othername;
+    } else if (name === "Omelet") {
+      UpdateOther2.value = Othername;
+    }
+
+    return UpdateOther2.value;
+  }
+  function updateOtherThaiFood(price: number, name: string) {
+    if (name === "Fried Egg") {
+      UpdatePriceOther.value = price;
+    } else if (name === "Omelet") {
+      UpdatePriceOther.value = price;
+    }
+
+    return UpdatePriceOther.value;
   }
 
   return {
@@ -313,5 +325,9 @@ export const useOrderStore = defineStore("order", () => {
     updateOther,
     UpdateOther,
     usePoint,
+    updateOtherThaiFood,
+    UpdatePriceOther,
+    UpdateOther2,
+    updateOther2,
   };
 });

@@ -159,6 +159,21 @@ const router = createRouter({
         requiresAuth: true,
       },
     },
+    {
+      path: "/checkInOut",
+      name: "CheckInOut",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      components: {
+        default: () => import("../views/checkInOut/CheckInOutView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
+    },
   ],
 });
 
