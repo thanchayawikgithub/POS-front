@@ -132,28 +132,34 @@ function Smoothie(CatId: number, Type: String) {
             </v-col>
           </v-row>
 
-          <v-window v-model="tab" style="overflow-y: auto; width: 60vw">
+          <v-window v-model="tab" style="overflow-y: auto; width: 59vw">
             <v-window-item
               v-for="item in type"
               :key="item"
               :value="item"
-              style="height: 70vh"
+              style="height: 70vh; width: 56vw"
+              class="ml-1 pa-2 mt-2"
             >
               <v-row>
                 <v-col
                   cols="12"
                   md="4"
+                  class="pr-5"
                   v-for="item in productStore.products"
                   :key="item.product_id"
                 >
                   <v-btn
-                    style="width: 33vh; height: 29vh; background-color: #84776f"
+                    style="
+                      width: 270px;
+                      height: 30vh;
+                      background-color: #84776f;
+                    "
                     class="ma-2 mt-2 ml-3"
                     @click="
                       if (item.categoryId === 1) {
                         orderStore.addOrder(item);
-                        orderStore.updatePrice('ICED', item.product_price);
-                        orderStore.updateType('ICED', item.product_name);
+                        orderStore.updatePrice('Iced', item.product_price);
+                        orderStore.updateType('Iced', item.product_name);
                         orderStore.updateSizeText('8 Oz.', '8');
                         orderStore.updateOther('Normal', '100%');
                         orderStore.posDrinkDialog = true;
@@ -188,40 +194,37 @@ function Smoothie(CatId: number, Type: String) {
                       }
                     "
                   >
-                    <v-card
-                      style="width: 33vh; height: 30vh"
-                      class="mx-auto card"
-                    >
+                    <v-card style="width: 270px; height: 30vh" class="card">
                       <v-img
                         class="align-end image mt-0"
                         style="height: 11vh; width: 20vw"
                         :src="`${backendURL}/products/image/${item.product_image}`"
                       >
                       </v-img>
-                      <v-card-title class="title mb-2"
+                      <v-card-title class="title mb-2 ml-2"
                         >{{ item.product_name }}
                       </v-card-title>
                       <v-card-title
                         style="font-size: x-small; font-weight: 100"
-                        class="title mb-1"
+                        class="title mb-1 ml-2"
                         >{{ item.product_type }}
                       </v-card-title>
-                      <v-card-title class="price"
+                      <v-card-title class="price px-4"
                         ><v-btn-toggle
                           v-if="item.categoryId === 1"
                           variant="outlined"
                           divided
                           class="pt-2 pl-1"
                           color="#df8057"
-                          style="height: 5vh; width: 13vw; border: 10px"
+                          style="height: 35px; width: 20vw; border: 10px"
                         >
                           <v-btn
-                            style="width: 4vw; font-size: xx-small"
+                            style="width: 5vw; font-size: xx-small"
                             v-if="item.product_type === 'Soda Drink'"
                             disabled
                             >{{ Hot(item.categoryId, item.product_type) }}
                             <br />-</v-btn
-                          ><v-btn style="width: 4vw; font-size: xx-small" v-else
+                          ><v-btn style="width: 5vw; font-size: xx-small" v-else
                             >{{ Hot(item.categoryId, item.product_type) }}
                             <br />
                             ฿{{ item.product_price }}</v-btn
@@ -229,7 +232,7 @@ function Smoothie(CatId: number, Type: String) {
 
                           <v-btn
                             style="
-                              width: 4vw;
+                              width: 5vw;
                               font-size: xx-small;
                               border: solid 1px;
                             "
@@ -237,7 +240,7 @@ function Smoothie(CatId: number, Type: String) {
                             ฿{{ item.product_price }}</v-btn
                           >
 
-                          <v-btn style="width: 4vw; font-size: xx-small"
+                          <v-btn style="width: 5vw; font-size: xx-small"
                             >{{ Smoothie(item.categoryId, item.product_type)
                             }}<br />
                             ฿{{ item.product_price + 5 }}</v-btn
@@ -249,9 +252,9 @@ function Smoothie(CatId: number, Type: String) {
                           divided
                           class="pt-2 pl-1"
                           color="#df8057"
-                          style="height: 5vh; width: 13vw; border: 10px"
+                          style="height: 35px; width: 20vw; border: 10px"
                         >
-                          <v-btn style="width: 4vw; font-size: small" disabled
+                          <v-btn style="width: 5vw; font-size: small" disabled
                             >{{
                               Hot(item.categoryId, item.product_type)
                             }}
@@ -260,7 +263,7 @@ function Smoothie(CatId: number, Type: String) {
 
                           <v-btn
                             style="
-                              width: 4vw;
+                              width: 5vw;
                               font-size: small;
                               border: solid 1px;
                             "
@@ -269,7 +272,7 @@ function Smoothie(CatId: number, Type: String) {
                             }}</v-btn
                           >
 
-                          <v-btn style="width: 3vw; font-size: small" disabled
+                          <v-btn style="width: 5vw; font-size: small" disabled
                             >{{
                               Smoothie(item.categoryId, item.product_type)
                             }}-</v-btn
@@ -281,15 +284,15 @@ function Smoothie(CatId: number, Type: String) {
                           divided
                           class="pt-2 pl-1"
                           color="#df8057"
-                          style="height: 5vh; width: 13vw; border: 10px"
+                          style="height: 35px; width: 20vw; border: 10px"
                         >
                           <v-btn
-                            style="width: 4vw; font-size: xx-small"
+                            style="width: 5vw; font-size: xx-small"
                             v-if="item.product_type === 'Thai Food'"
                             >{{ Hot(item.categoryId, item.product_type) }}
                             <br />{{ item.product_price }}</v-btn
                           ><v-btn
-                            style="width: 4vw; font-size: small"
+                            style="width: 5vw; font-size: small"
                             v-else
                             disabled
                             >{{
@@ -303,7 +306,7 @@ function Smoothie(CatId: number, Type: String) {
                             style="
                               font-size: xx-small;
                               border: solid 1px;
-                              width: 2vw;
+                              width: 5vw;
                             "
                             >{{ Ice(item.categoryId, item.product_type) }}<br />
                             ฿{{ item.product_price }}</v-btn
@@ -313,14 +316,14 @@ function Smoothie(CatId: number, Type: String) {
                             style="
                               font-size: small;
                               border: solid 1px;
-                              width: 2vw;
+                              width: 5vw;
                             "
                             >{{ Ice(item.categoryId, item.product_type) }} ฿{{
                               item.product_price
                             }}</v-btn
                           >
                           <v-btn
-                            style="font-size: xx-small; width: 2vw"
+                            style="font-size: xx-small; width: 5vw"
                             v-if="item.product_type === 'Thai Food'"
                             >{{ Smoothie(item.categoryId, item.product_type)
                             }}<br />
@@ -328,7 +331,7 @@ function Smoothie(CatId: number, Type: String) {
                           >
 
                           <v-btn
-                            style="font-size: small; width: 2vw"
+                            style="font-size: small; width: 5vw"
                             v-else
                             disabled
                             >{{
@@ -348,7 +351,7 @@ function Smoothie(CatId: number, Type: String) {
       <v-col cols="4" class="mx-12">
         <v-card
           height="900px"
-          width="75vh"
+          width="542px"
           style="border: 3px solid; height: 97vh"
           class="bg2 ml-0"
         >
@@ -371,7 +374,7 @@ function Smoothie(CatId: number, Type: String) {
             </v-row>
             <v-card
               style="
-                height: 40vh;
+                height: 34vh;
                 width: 37vw;
                 overflow-y: auto;
                 background-color: #e7e7e7;
@@ -473,7 +476,7 @@ function Smoothie(CatId: number, Type: String) {
             <tbody>
               <tr>
                 <td style="width: 100%">Member :</td>
-
+                <td></td>
                 <td class="text-lg-right">
                   {{ customerStore.customer?.customer_name }}
                 </td>
@@ -482,11 +485,16 @@ function Smoothie(CatId: number, Type: String) {
               <tr>
                 <td>Point :</td>
                 <td>
-                  <v-btn variant="outlined" @click="orderStore.usePoint = true"
+                  <v-btn
+                    v-if="customerStore.customer?.customer_point >= 10"
+                    variant="outlined"
+                    @click="orderStore.usePoint = true"
                     >Use</v-btn
                   >
                 </td>
-                <td class="text-lg-right">{{ 0 }}</td>
+                <td class="text-lg-right">
+                  {{ customerStore.customer?.customer_point }}
+                </td>
                 <td class="text-lg-right">Point</td>
               </tr>
               <tr>
@@ -510,7 +518,7 @@ function Smoothie(CatId: number, Type: String) {
             </tbody>
           </v-table>
           <v-container>
-            <v-row class="text-center">
+            <v-row class="text-center mt-9">
               <v-col>
                 <v-btn
                   style="height: 5vh; width: 20vw"
@@ -562,7 +570,7 @@ function Smoothie(CatId: number, Type: String) {
 .card::after {
   content: "Add to Cart";
   padding-top: 0.7em;
-  padding-left: 1.25em;
+  padding-left: 0.1em;
   position: absolute;
   left: 0;
   bottom: -65px;
@@ -577,7 +585,7 @@ function Smoothie(CatId: number, Type: String) {
 
 .card .title {
   font-family: sans-serif;
-  font-size: 1.1em;
+  font-size: 1.2em;
   position: absolute;
   left: 0em;
   bottom: 2em;

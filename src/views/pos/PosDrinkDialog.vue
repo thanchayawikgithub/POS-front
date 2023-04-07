@@ -30,7 +30,11 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               class="mx-auto pl-7 mb-0"
               flat
             >
-              <v-avatar size="130px" style="background-color: white">
+              <v-avatar
+                v-if="orderStore.Order?.product_type != 'Soda Drink'"
+                size="140px"
+                style="background-color: white"
+              >
                 <v-img
                   class="ml-2 mt-2"
                   style="height: 70px"
@@ -38,9 +42,16 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                 >
                 </v-img>
               </v-avatar>
+              <v-avatar v-else size="140px" style="background-color: white">
+                <v-img
+                  style="height: 100px"
+                  :src="`${backendURL}/products/image/${orderStore.Order?.product_image}`"
+                >
+                </v-img>
+              </v-avatar>
             </v-card>
             <v-card-text
-              style="text-align: center; font-size: 32px; font-weight: 700"
+              style="text-align: center; font-size: 25px; font-weight: 700"
               class="pb-1 pt-1"
               >{{
                 orderStore.UpdateType + " " + orderStore.UpdateSizeText
@@ -48,7 +59,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             >
             <v-card-text
               style="text-align: center; font-size: 15px"
-              class="pt-2 pb-0"
+              class="pt-0 pb-0"
               >{{ "Sweetness Level " + orderStore.UpdateOther }}</v-card-text
             >
             <v-card-text
@@ -58,7 +69,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             >
             <v-row class="pb-0">
               <v-col>
-                <v-card style="border-radius: 20px" height="15vh">
+                <v-card style="border-radius: 20px" height="110px">
                   <v-container>
                     <v-row>
                       <v-card-text
@@ -105,11 +116,11 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             disabled
                             @click="
                               orderStore.updatePrice(
-                                'HOT',
+                                'Hot',
                                 orderStore.Order!.product_price
                               );
                               orderStore.updateType(
-                                'HOT',
+                                'Hot',
                                 orderStore.Order!.product_name
                               );
                             "
@@ -121,11 +132,11 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             v-else
                             @click="
                               orderStore.updatePrice(
-                                'HOT',
+                                'Hot',
                                 orderStore.Order!.product_price
                               );
                               orderStore.updateType(
-                                'HOT',
+                                'Hot',
                                 orderStore.Order!.product_name
                               );
                             "
@@ -138,29 +149,47 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             style="width: 7vw; font-size: x-small"
                             @click="
                               orderStore.updatePrice(
-                                'ICED',
+                                'Iced',
                                 orderStore.Order!.product_price
                               );
                               orderStore.updateType(
-                                'ICED',
+                                'Iced',
                                 orderStore.Order!.product_name
                               );
                             "
                             >ICED ฿{{ orderStore.Order?.product_price }}</v-btn
                           >
                           <v-btn
+                            v-if="orderStore.Order!.product_type === 'Coffee'"
                             style="width: 7vw; font-size: x-small"
                             @click="
                               orderStore.updatePrice(
-                                'SMOOTHIE',
+                                'Frappe',
                                 orderStore.Order!.product_price
                               );
                               orderStore.updateType(
-                                'SMOOTHIE',
+                                'Frappe',
                                 orderStore.Order!.product_name
                               );
                             "
-                            >SMOOTHIE ฿{{
+                            >Frappe ฿{{
+                              orderStore.Order!.product_price + 5
+                            }}</v-btn
+                          >
+                          <v-btn
+                            v-else
+                            style="width: 7vw; font-size: x-small"
+                            @click="
+                              orderStore.updatePrice(
+                                'Smoothie',
+                                orderStore.Order!.product_price
+                              );
+                              orderStore.updateType(
+                                'Smoothie',
+                                orderStore.Order!.product_name
+                              );
+                            "
+                            >Smoothie ฿{{
                               orderStore.Order!.product_price + 5
                             }}</v-btn
                           >

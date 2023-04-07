@@ -28,7 +28,6 @@ onMounted(async () => {
         <v-table>
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
-              <th>ID</th>
               <th>Name</th>
               <th>Tel</th>
               <th>Point</th>
@@ -38,7 +37,6 @@ onMounted(async () => {
           </thead>
           <tbody>
             <tr v-for="item of customerStore.customers" :key="item.customer_id">
-              <td>{{ item.customer_id }}</td>
               <td>{{ item.customer_name }}</td>
               <td>{{ item.customer_tel }}</td>
               <td>{{ item.customer_point }}</td>

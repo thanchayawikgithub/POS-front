@@ -193,17 +193,19 @@ export const useOrderStore = defineStore("order", () => {
   const UpdateOther2 = ref("");
 
   function updateType(add_on_name: string, name: string) {
-    if (add_on_name === "ICED") {
+    if (add_on_name === "Iced") {
       UpdateType.value = add_on_name + " " + name;
-    } else if (add_on_name === "HOT") {
+    } else if (add_on_name === "Hot") {
       UpdateType.value = add_on_name + " " + name;
-    } else if (add_on_name === "SMOOTHIE") {
+    } else if (add_on_name === "Frappe") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Chicken") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Pig") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Seafood") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "Smoothie") {
       UpdateType.value = add_on_name + " " + name;
     }
     return UpdatePrice.value;

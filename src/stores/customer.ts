@@ -20,7 +20,6 @@ export const useCustomerStore = defineStore("customer", () => {
   const editedCustomer = ref<Customer>({
     customer_name: "",
     customer_tel: "",
-    customer_point: 0,
   });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -28,7 +27,6 @@ export const useCustomerStore = defineStore("customer", () => {
       editedCustomer.value = {
         customer_name: "",
         customer_tel: "",
-        customer_point: 0,
       };
     }
   });

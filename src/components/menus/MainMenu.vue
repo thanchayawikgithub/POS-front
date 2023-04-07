@@ -90,6 +90,14 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
+        :prepend-icon="mdiFaceAgent"
+        title="CheckInOut"
+        value="CheckInOut"
+        to="/checkInOut"
+        style="color: #e8e4e1"
+      ></v-list-item>
+
+      <v-list-item
         :prepend-icon="mdiLogout"
         title="Logout"
         value="Logout"
