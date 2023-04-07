@@ -4,7 +4,6 @@ import { useOrderStore } from "@/stores/order";
 import { mdiSpoonSugar, mdiCupcake, mdiResize } from "@mdi/js";
 import { ref } from "vue";
 const orderStore = useOrderStore();
-const selection = ref(3);
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
@@ -265,6 +264,10 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           color="#655a54"
           @click="
             orderStore.posBakeryDialog = false;
+            orderStore.Order!.product_updateName! =
+              orderStore.Order!.product_name;
+            orderStore.Order!.product_updatePrice! =
+              orderStore.Order!.product_price;
             orderStore.addCart(orderStore.Order!);
           "
         >

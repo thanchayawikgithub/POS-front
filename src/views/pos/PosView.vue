@@ -17,6 +17,7 @@ import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
+import PosUsePointDialog from "./PosUsePointDialog.vue";
 const customerStore = useCustomerStore();
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
@@ -76,6 +77,7 @@ function Smoothie(CatId: number, Type: String) {
 </script>
 
 <template>
+  <PosUsePointDialog></PosUsePointDialog>
   <PosBakeryDialog></PosBakeryDialog>
   <PosDrinkDialog></PosDrinkDialog>
   <PosFoodDialog></PosFoodDialog>
@@ -160,7 +162,26 @@ function Smoothie(CatId: number, Type: String) {
 
                         orderStore.posBakeryDialog = true;
                       } else if (item.categoryId === 3) {
-                        orderStore.addOrder(item);
+                        if (item.product_type === 'Thai Food') {
+                          orderStore.addOrder(item);
+                          orderStore.updatePrice(
+                            'Pig',
+                            orderStore.Order!.product_price
+                          );
+                          orderStore.updateType(
+                            'Pig',
+                            orderStore.Order!.product_name
+                          );
+
+                          orderStore.updateSizeText('M', 'M');
+                        } else {
+                          orderStore.addOrder(item);
+                          orderStore.Order!.product_updateName! =
+                            orderStore.Order!.product_name;
+                          orderStore.Order!.product_updatePrice! =
+                            orderStore.Order!.product_price;
+                        }
+
                         orderStore.posFoodDialog = true;
                       }
                     "
@@ -370,9 +391,7 @@ function Smoothie(CatId: number, Type: String) {
               >
                 <v-row>
                   <v-col cols="5" class="pl-0">
-                    <v-card-text v-if="item.categoryId === 1">
-                      {{ item.product_updateName }}</v-card-text
-                    ><v-card-text else> {{ item.product_name }}</v-card-text>
+                    <v-card-text> {{ item.product_updateName }}</v-card-text>
                   </v-col>
                   <v-col cols="1" class="text-right"
                     ><v-card-actions class="justify-center">
@@ -400,13 +419,10 @@ function Smoothie(CatId: number, Type: String) {
                     </v-card-actions>
                   </v-col>
                   <v-col cols="2" class="text-center"
-                    ><v-card-text v-if="item.categoryId === 1">{{
+                    ><v-card-text>{{
                       item.product_updatePrice! * item.product_amount!
                     }}</v-card-text>
-                    <v-card-text v-else>{{
-                      item.product_price! * item.product_amount!
-                    }}</v-card-text></v-col
-                  >
+                  </v-col>
                   <v-col cols="1" class="text-center">
                     <v-btn
                       :icon="mdiTrashCanOutline"
@@ -455,23 +471,37 @@ function Smoothie(CatId: number, Type: String) {
             <tbody>
               <tr>
                 <td style="width: 100%">Member :</td>
+
                 <td class="text-lg-right">
                   {{ customerStore.customer?.customer_name }}
                 </td>
                 <td class="text-lg-right"></td>
               </tr>
               <tr>
+                <td>Point :</td>
+                <td>
+                  <v-btn variant="outline" @click="orderStore.usePoint = true"
+                    >Use</v-btn
+                  >
+                </td>
+                <td class="text-lg-right">{{ 0 }}</td>
+                <td class="text-lg-right">Point</td>
+              </tr>
+              <tr>
                 <td>Price :</td>
+                <td></td>
                 <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
                 <td class="text-lg-right">Baht</td>
               </tr>
               <tr>
                 <td>Discount :</td>
+                <td></td>
                 <td class="text-lg-right">0</td>
                 <td class="text-lg-right">Baht</td>
               </tr>
               <tr>
                 <td>Total :</td>
+                <td></td>
                 <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
                 <td class="text-lg-right">Baht</td>
               </tr>

@@ -24,6 +24,7 @@ export const useOrderStore = defineStore("order", () => {
   const posBakeryDialog = ref(false);
   const posFoodDialog = ref(false);
   const successDialog = ref(false);
+  const usePoint = ref(false);
   const customerStore = useCustomerStore();
 
   const receiptStore = useReceiptStore();
@@ -41,25 +42,16 @@ export const useOrderStore = defineStore("order", () => {
     orderList.value = [];
   };
   const addCart = (productItem: Product) => {
-    if (productItem.categoryId === 1) {
-      const item = JSON.parse(JSON.stringify(productItem));
-      const index = orderList.value.findIndex(
-        (element) => element.product_updateName === item.product_updateName
-      );
-      if (index !== -1) {
-        const existingItem = orderList.value[index];
-        addAmount(existingItem);
-      } else {
-        item.product_amount = 1;
-        orderList.value.push(item);
-      }
+    const item = JSON.parse(JSON.stringify(productItem));
+    const index = orderList.value.findIndex(
+      (element) => element.product_updateName === item.product_updateName
+    );
+    if (index !== -1) {
+      const existingItem = orderList.value[index];
+      addAmount(existingItem);
     } else {
-      if (orderList.value.includes(productItem)) {
-        addAmount(productItem);
-      } else {
-        productItem.product_amount = 1;
-        orderList.value.push(productItem);
-      }
+      item.product_amount = 1;
+      orderList.value.push(item);
     }
   };
 
@@ -114,113 +106,58 @@ export const useOrderStore = defineStore("order", () => {
   };
 
   const totalPrice = computed(function () {
-    if (Order.value?.categoryId === 1) {
-      return orderList.value.reduce(
-        (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
-        0
-      );
-    } else {
-      return orderList.value.reduce(
-        (sum, item) => sum + item.product_price * item.product_amount!,
-        0
-      );
-    }
+    return orderList.value.reduce(
+      (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
+      0
+    );
   });
 
   async function openOrder() {
-    if (Order.value?.categoryId === 1) {
-      const employee: { employee_id: number } = authStore.getEmployee();
-      const customer = customerStore.customer?.customer_id;
+    const employee: { employee_id: number } = authStore.getEmployee();
+    const customer = customerStore.customer?.customer_id;
 
-      const recieptDetails = orderList.value.map(
-        (item) =>
-          <
-            {
-              productId: number;
-              rcd_price: number;
-              rcd_amount: number;
-              rcd_name: string;
-            }
-          >{
-            productId: item.product_id,
-            rcd_price: item.product_updatePrice,
-            rcd_amount: item.product_amount,
-            rcd_name: item.product_updateName,
+    const recieptDetails = orderList.value.map(
+      (item) =>
+        <
+          {
+            productId: number;
+            rcd_price: number;
+            rcd_amount: number;
+            rcd_name: string;
           }
-      );
+        >{
+          productId: item.product_id,
+          rcd_price: item.product_updatePrice,
+          rcd_amount: item.product_amount,
+          rcd_name: item.product_updateName,
+        }
+    );
 
-      const reciept = {
-        rec_queue: 1,
-        rec_time: 15,
-        rec_discount: 0,
-        rec_total: totalPrice.value,
-        rec_received: +received.value,
-        rec_payment: paymentMethod.value,
-        rec_changed: changed.value,
-        employeeId: employee.employee_id,
-        storeId: 1,
-        customerId: customer !== undefined ? customer : 0,
-        recieptDetails: recieptDetails,
-      };
-      loadingStore.isLoading = true;
-      try {
-        console.log(reciept);
-        const res = await recieptService.saveReciept(reciept);
-        dialog.value = false;
-        clearOrder();
-      } catch (e) {
-        console.log(e);
-        messageStore.showError("ไม่สามารถบันทึก Order ได้");
-      }
-      customerStore.customer = undefined;
-      loadingStore.isLoading = false;
-    } else {
-      const employee: { employee_id: number } = authStore.getEmployee();
-      const customer = customerStore.customer?.customer_id;
-
-      const recieptDetails = orderList.value.map(
-        (item) =>
-          <
-            {
-              productId: number;
-              rcd_price: number;
-              rcd_amount: number;
-              rcd_name: string;
-            }
-          >{
-            productId: item.product_id,
-            rcd_price: item.product_price,
-            rcd_amount: item.product_amount,
-            rcd_name: item.product_name,
-          }
-      );
-
-      const reciept = {
-        rec_queue: 1,
-        rec_time: 15,
-        rec_discount: 0,
-        rec_total: totalPrice.value,
-        rec_received: +received.value,
-        rec_payment: paymentMethod.value,
-        rec_changed: changed.value,
-        employeeId: employee.employee_id,
-        storeId: 1,
-        customerId: customer !== undefined ? customer : 0,
-        recieptDetails: recieptDetails,
-      };
-      loadingStore.isLoading = true;
-      try {
-        console.log(reciept);
-        const res = await recieptService.saveReciept(reciept);
-        dialog.value = false;
-        clearOrder();
-      } catch (e) {
-        console.log(e);
-        messageStore.showError("ไม่สามารถบันทึก Order ได้");
-      }
-      customerStore.customer = undefined;
-      loadingStore.isLoading = false;
+    const reciept = {
+      rec_queue: 1,
+      rec_time: 15,
+      rec_discount: 0,
+      rec_total: totalPrice.value,
+      rec_received: +received.value,
+      rec_payment: paymentMethod.value,
+      rec_changed: changed.value,
+      employeeId: employee.employee_id,
+      storeId: 1,
+      customerId: customer !== undefined ? customer : 0,
+      recieptDetails: recieptDetails,
+    };
+    loadingStore.isLoading = true;
+    try {
+      console.log(reciept);
+      const res = await recieptService.saveReciept(reciept);
+      dialog.value = false;
+      clearOrder();
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถบันทึก Order ได้");
     }
+    customerStore.customer = undefined;
+    loadingStore.isLoading = false;
   }
 
   const calChanged = async () => {
@@ -260,8 +197,13 @@ export const useOrderStore = defineStore("order", () => {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "SMOOTHIE") {
       UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "Chicken") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "Pig") {
+      UpdateType.value = add_on_name + " " + name;
+    } else if (add_on_name === "Seafood") {
+      UpdateType.value = add_on_name + " " + name;
     }
-
     return UpdatePrice.value;
   }
   function updateSize(price: number, name: string) {
@@ -270,6 +212,10 @@ export const useOrderStore = defineStore("order", () => {
     } else if (name === "12 Oz.") {
       UpdateSize.value = price;
     } else if (name === "16 Oz.") {
+      UpdateSize.value = price;
+    } else if (name === "M") {
+      UpdateSize.value = price;
+    } else if (name === "L") {
       UpdateSize.value = price;
     }
     return UpdateSize.value;
@@ -284,6 +230,10 @@ export const useOrderStore = defineStore("order", () => {
     } else if (name === "16 Oz.") {
       UpdateSizeText.value =
         "(" + sizeName + "  " + Order.value?.product_size_unit + ")";
+    } else if (name === "M") {
+      UpdateSizeText.value = "(" + sizeName + ")";
+    } else if (name === "L") {
+      UpdateSizeText.value = "(" + sizeName + ")";
     }
     return UpdateSizeText.value;
   }
@@ -295,6 +245,12 @@ export const useOrderStore = defineStore("order", () => {
       UpdatePrice.value = price - 5;
     } else if (name === "SMOOTHIE") {
       UpdatePrice.value = price + 5;
+    } else if (name === "Chicken") {
+      UpdatePrice.value = price - 5;
+    } else if (name === "Pig") {
+      UpdatePrice.value = price;
+    } else if (name === "Seafood") {
+      UpdatePrice.value = price + 10;
     }
 
     return UpdatePrice.value;
@@ -309,6 +265,16 @@ export const useOrderStore = defineStore("order", () => {
     } else if (name === "Normal") {
       UpdateOther.value = Othername;
     } else if (name === "More Sweet") {
+      UpdateOther.value = Othername;
+    } else if (name === "No Vegetable") {
+      UpdateOther.value = Othername;
+    } else if (name === "No Spicy") {
+      UpdateOther.value = Othername;
+    } else if (name === "Very Spicy") {
+      UpdateOther.value = Othername;
+    } else if (name === "Fried Egg") {
+      UpdateOther.value = Othername;
+    } else if (name === "Omelet") {
       UpdateOther.value = Othername;
     }
 
@@ -346,5 +312,6 @@ export const useOrderStore = defineStore("order", () => {
     UpdateType,
     updateOther,
     UpdateOther,
+    usePoint,
   };
 });
