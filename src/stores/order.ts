@@ -8,6 +8,7 @@ import recieptService from "@/services/receipt";
 import { useCustomerStore } from "./customer";
 import { useReceiptStore } from "./receipt";
 import { useProductStore } from "./product";
+import product from "@/services/product";
 
 export const useOrderStore = defineStore("order", () => {
   const orderList = ref<Product[]>([]);
@@ -39,14 +40,51 @@ export const useOrderStore = defineStore("order", () => {
   const clearOrder = () => {
     orderList.value = [];
   };
-  const addCart = (item: Product) => {
-    if (orderList.value.includes(item)) {
-      addAmount(item);
+  const addCart = (productItem: Product) => {
+    if (productItem.categoryId === 1) {
+      const item = JSON.parse(JSON.stringify(productItem));
+      const index = orderList.value.findIndex(
+        (element) => element.product_updateName === item.product_updateName
+      );
+      if (index !== -1) {
+        const existingItem = orderList.value[index];
+        addAmount(existingItem);
+      } else {
+        item.product_amount = 1;
+        orderList.value.push(item);
+      }
     } else {
-      item.product_amount = 1;
-      orderList.value.push(item);
+      if (orderList.value.includes(productItem)) {
+        addAmount(productItem);
+      } else {
+        productItem.product_amount = 1;
+        orderList.value.push(productItem);
+      }
     }
   };
+
+  // const addCart = (productItem: Product) => {
+  //   const item = JSON.parse(JSON.stringify(productItem));
+  //   if (item.categoryId === 1) {
+  //     if (
+  //       orderList.value.findIndex(
+  //         (item) => item.product_updateName === item.product_updateName
+  //       )
+  //     ) {
+  //       addAmount(item);
+  //     } else {
+  //       item.product_amount = 1;
+  //       orderList.value.push(item);
+  //     }
+  //   } else {
+  //     if (orderList.value.includes(item)) {
+  //       addAmount(item);
+  //     } else {
+  //       item.product_amount = 1;
+  //       orderList.value.push(item);
+  //     }
+  //   }
+  // };
   const addOrder = (item: Product) => {
     Order.value = item;
   };

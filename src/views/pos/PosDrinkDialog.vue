@@ -10,6 +10,11 @@ const productStore = useProductStore();
 const selection = ref(3);
 const selectionSize = ref(0);
 const selectionType = ref(1);
+const reset = () => {
+  selection.value = 3;
+  selectionSize.value = 0;
+  selectionType.value = 1;
+};
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
@@ -94,8 +99,8 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           <v-btn
                             style="width: 7vw; font-size: x-small"
                             v-if="
-                              orderStore.Order!.product_type === 'Soda Drink'
-                            "
+                            orderStore.Order!.product_type === 'Soda Drink'
+                          "
                             disabled
                             @click="
                               orderStore.updatePrice(
@@ -344,7 +349,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-btn
           color="darken-1"
           variant="plain"
-          @click="orderStore.posDrinkDialog = false"
+          @click="(orderStore.posDrinkDialog = false), reset()"
         >
           Close
         </v-btn>
@@ -365,6 +370,8 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             orderStore.Order!.product_updatePrice =
               orderStore.UpdatePrice + orderStore.UpdateSize;
             orderStore.addCart(orderStore.Order!);
+
+            reset();
           "
         >
           Add | ฿{{ orderStore.UpdatePrice + orderStore.UpdateSize }}
