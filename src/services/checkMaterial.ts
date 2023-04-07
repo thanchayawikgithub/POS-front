@@ -7,7 +7,7 @@ function saveCheckMaterial(check_material: {
   checkMaterialDetails: {
     MaterialId: number;
     cmd_qty_remain: number;
-    cmd_qty_expire: Date;
+    cmd_qty_expire: number;
   }[];
   EmployeeId: number;
 }) {

@@ -47,7 +47,7 @@ export const useCheckMaterialStore = defineStore("checkMaterial", () => {
           {
             MaterialId: number;
             cmd_qty_remain: number;
-            cmd_qty_expire: Date;
+            cmd_qty_expire: number;
           }
         >{
           MaterialId: item.mat_id,
