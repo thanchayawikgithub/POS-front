@@ -6,7 +6,7 @@ export default interface CheckMaterialDetail {
   cmd_name: string;
   cmd_qty_last: number;
   cmd_qty_remain: number;
-  cmd_qty_expire: Date;
+  cmd_qty_expire: number;
   checkmaterial: CheckMaterial;
   material: Material;
 }

@@ -8,6 +8,6 @@ export default interface Material {
   mat_remain?: number;
   mat_shop_name?: string;
   mat_buy_amount?: number;
-  mat_exp?: Date;
+  mat_exp?: number;
   mat_check?: number;
 }

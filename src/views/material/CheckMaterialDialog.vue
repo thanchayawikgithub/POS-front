@@ -39,9 +39,8 @@ const materialStore = useMaterialStore();
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
+                    label="Expire Quanity"
                     v-model="item.mat_exp"
-                    label="Date*"
-                    type="Date"
                   ></v-text-field>
                 </v-col>
                 <v-col cols="0">
