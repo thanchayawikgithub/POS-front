@@ -4,7 +4,6 @@ import { useOrderStore } from "@/stores/order";
 import { mdiSpoonSugar, mdiCupcake, mdiResize } from "@mdi/js";
 import { ref } from "vue";
 const orderStore = useOrderStore();
-const selection = ref(3);
 
 const backendURL = import.meta.env.VITE_BACKEND_URL;
 </script>
