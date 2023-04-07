@@ -41,7 +41,7 @@ export const useOrderStore = defineStore("order", () => {
     orderList.value = [];
   };
   const addCart = (productItem: Product) => {
-    if (productItem.categoryId === 1) {
+    if (productItem.categoryId === 1 && 2) {
       const item = JSON.parse(JSON.stringify(productItem));
       const index = orderList.value.findIndex(
         (element) => element.product_updateName === item.product_updateName
@@ -114,17 +114,10 @@ export const useOrderStore = defineStore("order", () => {
   };
 
   const totalPrice = computed(function () {
-    if (Order.value?.categoryId === 1) {
-      return orderList.value.reduce(
-        (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
-        0
-      );
-    } else {
-      return orderList.value.reduce(
-        (sum, item) => sum + item.product_price * item.product_amount!,
-        0
-      );
-    }
+    return orderList.value.reduce(
+      (sum, item) => sum + item.product_updatePrice! * item.product_amount!,
+      0
+    );
   });
 
   async function openOrder() {

@@ -265,6 +265,10 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           color="#655a54"
           @click="
             orderStore.posBakeryDialog = false;
+            orderStore.Order!.product_updateName! =
+              orderStore.Order!.product_name;
+            orderStore.Order!.product_updatePrice! =
+              orderStore.Order!.product_price;
             orderStore.addCart(orderStore.Order!);
           "
         >
