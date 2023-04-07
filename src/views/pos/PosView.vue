@@ -174,6 +174,8 @@ function Smoothie(CatId: number, Type: String) {
                           );
 
                           orderStore.updateSizeText('M', 'M');
+                          orderStore.updateOtherThaiFood(0, 'Omelet');
+                          orderStore.updateOther2('Omelet', '');
                         } else {
                           orderStore.addOrder(item);
                           orderStore.Order!.product_updateName! =

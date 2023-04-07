@@ -89,6 +89,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols-6
                         ><v-btn-toggle
+                          mandatory
                           rounded="xl"
                           variant="outlined"
                           divided
@@ -115,6 +116,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             >HOT -
                           </v-btn>
                           <v-btn
+                            mandatory
                             style="width: 7vw; font-size: x-small"
                             v-else
                             @click="
@@ -202,6 +204,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols-6
                         ><v-btn-toggle
+                          mandatory
                           rounded="xl"
                           variant="outlined"
                           divided
@@ -273,6 +276,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       </v-col>
                       <v-col cols="10">
                         <v-chip-group
+                          mandatory
                           v-model="selection"
                           color="#df8057"
                           variant="outlined"
