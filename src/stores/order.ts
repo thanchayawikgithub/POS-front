@@ -240,8 +240,8 @@ export const useOrderStore = defineStore("order", () => {
   const pay = () => {
     if (orderList.value.length === 0) {
       messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
-    } else if (!customerStore.customer) {
-      messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
+      // } else if (!customerStore.customer) {
+      //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
     } else {
       payDialog.value = true;
     }

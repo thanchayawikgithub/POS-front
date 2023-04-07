@@ -34,7 +34,7 @@ const productStore = useProductStore();
       >
       <v-card-text style="font-size: 14px; font-weight: 400" class="pt-0 pb-0">
         Customer :
-        {{ receiptStore.lastReceipt?.customer.customer_name }}
+        {{ receiptStore.lastReceipt?.customer?.customer_name }}
       </v-card-text>
 
       <v-card-text

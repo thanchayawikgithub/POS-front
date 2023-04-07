@@ -21,7 +21,7 @@ function saveReciept(reciept: {
   rec_received: number;
   rec_payment: string;
   employeeId: number;
-  customerId: number;
+  customerId?: number;
   storeId: number;
 }) {
   return http.post("/reciepts", reciept);
