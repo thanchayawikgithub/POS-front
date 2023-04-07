@@ -53,7 +53,7 @@ const Click = (rec: Reciept) => {
           <v-col cols="1">{{ rec.rec_id }}</v-col>
           <v-col cols="2">{{ rec.store.store_name }}</v-col>
           <v-col cols="2">{{ rec.employee.employee_name }}</v-col>
-          <v-col cols="2">{{ rec.customer.customer_name }}</v-col>
+          <v-col cols="2">{{ rec.customer?.customer_name }}</v-col>
           <v-col cols="2">{{ rec.rec_payment }}</v-col>
           <v-col cols="2">{{ rec.rec_total }}</v-col>
           <v-divider></v-divider
