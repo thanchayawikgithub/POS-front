@@ -41,23 +41,50 @@ export const useOrderStore = defineStore("order", () => {
     orderList.value = [];
   };
   const addCart = (productItem: Product) => {
-    const item = JSON.parse(JSON.stringify(productItem));
-    if (item.categoryId === 1) {
-      if (orderList.value.includes(item)) {
-        addAmount(item);
+    if (productItem.categoryId === 1) {
+      const item = JSON.parse(JSON.stringify(productItem));
+      const index = orderList.value.findIndex(
+        (element) => element.product_updateName === item.product_updateName
+      );
+      if (index !== -1) {
+        const existingItem = orderList.value[index];
+        addAmount(existingItem);
       } else {
         item.product_amount = 1;
         orderList.value.push(item);
       }
     } else {
-      if (orderList.value.includes(item)) {
-        addAmount(item);
+      if (orderList.value.includes(productItem)) {
+        addAmount(productItem);
       } else {
-        item.product_amount = 1;
-        orderList.value.push(item);
+        productItem.product_amount = 1;
+        orderList.value.push(productItem);
       }
     }
   };
+
+  // const addCart = (productItem: Product) => {
+  //   const item = JSON.parse(JSON.stringify(productItem));
+  //   if (item.categoryId === 1) {
+  //     if (
+  //       orderList.value.findIndex(
+  //         (item) => item.product_updateName === item.product_updateName
+  //       )
+  //     ) {
+  //       addAmount(item);
+  //     } else {
+  //       item.product_amount = 1;
+  //       orderList.value.push(item);
+  //     }
+  //   } else {
+  //     if (orderList.value.includes(item)) {
+  //       addAmount(item);
+  //     } else {
+  //       item.product_amount = 1;
+  //       orderList.value.push(item);
+  //     }
+  //   }
+  // };
   const addOrder = (item: Product) => {
     Order.value = item;
   };
