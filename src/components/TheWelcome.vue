@@ -79,13 +79,27 @@ function statusText(quantity: number, min: number) {
       <v-row class="pl-3">
         <v-col cols="4" style="width: 30vw; height: 35vh">
           <v-card style="width: 30vw; height: 35vh">
-            <v-card style="width: 30vw; height: 35vh" class="mt-16"></v-card
-            ><v-card-text style="font-size: 17px">Today Sales</v-card-text>
+            <!-- Parent v-card content -->
+            <v-card-text style="font-size: 17px">Today Sales</v-card-text>
             <v-card-text style="font-size: 60px" align="right"
               >฿ 20,000</v-card-text
             >
             <v-card-text style="font-size: 17px">Receipt</v-card-text>
             <v-card-text style="font-size: 60px" align="right">5</v-card-text>
+
+            <!-- Child v-card for overlap effect -->
+            <v-card
+              style="
+                width: 25vw;
+                background-color: aqua;
+                height: 35vh;
+
+                position: absolute;
+                top: -30px;
+                z-index: -1;
+                margin-bottom: -24px;
+              "
+            ></v-card>
           </v-card>
           <v-card class="mt-5" style="width: 30vw; height: 35vh"
             ><v-card-text>Material Min Quantity</v-card-text>
