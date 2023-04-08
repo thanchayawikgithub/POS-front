@@ -142,15 +142,15 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                           "
                             @click="
                               orderStore.updatePrice(
-                                'Pig',
+                                'Pork',
                                 orderStore.Order!.product_price
                               );
                               orderStore.updateType(
-                                'Pig',
+                                'Pork',
                                 orderStore.Order!.product_name
                               );
                             "
-                            >Pig ฿{{ orderStore.Order!.product_price }}</v-btn
+                            >Pork ฿{{ orderStore.Order!.product_price }}</v-btn
                           >
                           <v-btn
                             style="width: 7vw; font-size: larger"

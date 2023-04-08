@@ -43,7 +43,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
     >
     <v-row cols="12">
       <v-col>
-        <v-table>
+        <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th>ID</th>
@@ -99,3 +99,16 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
     </v-row>
   </v-container>
 </template>
+<style scoped>
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+</style>

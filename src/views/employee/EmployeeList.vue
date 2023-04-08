@@ -26,7 +26,7 @@ onMounted(async () => {
     </v-row>
     <v-row class="mt-0">
       <v-col>
-        <v-table>
+        <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th class="text-center">Name</th>
@@ -84,5 +84,17 @@ onMounted(async () => {
 <style scoped>
 th {
   text-align: center;
+}
+
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }
 </style>

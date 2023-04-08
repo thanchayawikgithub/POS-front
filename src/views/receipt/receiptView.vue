@@ -104,4 +104,15 @@ const Click = (rec: Reciept) => {
   background-color: whitesmoke;
   cursor: pointer;
 }
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
 </style>

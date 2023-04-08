@@ -9,6 +9,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const checkInDialog = ref(false);
   const checkOutDialog = ref(false);
   const disbtn = ref(false);
+  const salaryDialog = ref(false);
   const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
 

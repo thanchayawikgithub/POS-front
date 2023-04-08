@@ -9,8 +9,10 @@ import { useCustomerStore } from "./customer";
 import { useReceiptStore } from "./receipt";
 import { useProductStore } from "./product";
 import product from "@/services/product";
+import QRCodeVue from "qrcode.vue";
 
 export const useOrderStore = defineStore("order", () => {
+  ///////////
   const orderList = ref<Product[]>([]);
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
@@ -121,6 +123,12 @@ export const useOrderStore = defineStore("order", () => {
       return totalPrice.value - billDiscount.value;
     }
   });
+  ////qr
+
+  const recipientPromptPayId = "0959389589"; // Replace with the recipient's PromptPay ID
+  const fixedAmount = "200"; // Replace with the fixed amount to be paid
+  const promptPayValue = `promptpay://pay?phone=${recipientPromptPayId}&amount=${fixedAmount}`; // Generate the PromptPay value
+  const qrcodeOptions = { type: "svg" };
 
   async function openOrder() {
     const employee: { employee_id: number } = authStore.getEmployee();
@@ -213,7 +221,7 @@ export const useOrderStore = defineStore("order", () => {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Chicken") {
       UpdateType.value = add_on_name + " " + name;
-    } else if (add_on_name === "Pig") {
+    } else if (add_on_name === "Pork") {
       UpdateType.value = add_on_name + " " + name;
     } else if (add_on_name === "Seafood") {
       UpdateType.value = add_on_name + " " + name;
@@ -263,7 +271,7 @@ export const useOrderStore = defineStore("order", () => {
       UpdatePrice.value = price + 5;
     } else if (name === "Chicken") {
       UpdatePrice.value = price - 5;
-    } else if (name === "Pig") {
+    } else if (name === "Pork") {
       UpdatePrice.value = price;
     } else if (name === "Seafood") {
       UpdatePrice.value = price + 10;
@@ -362,5 +370,8 @@ export const useOrderStore = defineStore("order", () => {
     calDiscount,
     billPrice,
     clearCustomer,
+    promptPayValue,
+    qrcodeOptions,
+    clearOrder,
   };
 });

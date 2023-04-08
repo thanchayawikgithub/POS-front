@@ -8,7 +8,7 @@ const messageStore = useMessageStore();
     {{ messageStore.message }}
 
     <template v-slot:actions>
-      <v-btn color="red" variant="text" @click="messageStore.isShow = false">
+      <v-btn color="green" variant="text" @click="messageStore.isShow = false">
         Close
       </v-btn>
     </template>

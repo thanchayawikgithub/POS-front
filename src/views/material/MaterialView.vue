@@ -14,7 +14,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-app>
+  <v-app style="background-color: #e7e7e7">
     <v-container style="background-color: #e7e7e7" fluid>
       <BuyMaterialDialog></BuyMaterialDialog>
       <MaterialList></MaterialList>

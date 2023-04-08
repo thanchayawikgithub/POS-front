@@ -83,6 +83,7 @@ onMounted(async () => {
                           } else if (vendorStore.orderList.length < 0) {
                             vendorStore.dis = false;
                           }
+                          vendorStore.addCart(vendorMat);
                         }
                       "
                     >

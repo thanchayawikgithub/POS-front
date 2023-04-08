@@ -99,23 +99,6 @@ async function save() {
 
               <v-col cols="12">
                 <v-text-field
-                  label="Password*"
-                  v-model="employeeStore.editedEmployee.employee_password"
-                  type="password"
-                  required
-                  :rules="[
-                    (v) => !!v || 'Item is required',
-                    (v) => v.length >= 8 || 'Length must more than 8',
-                    (v) =>
-                      /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(
-                        v
-                      ) ||
-                      'Password must contain uppercase letters and special characters.',
-                  ]"
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
                   label="Position*"
                   required
                   v-model="employeeStore.editedEmployee.employee_position"
