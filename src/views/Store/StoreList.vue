@@ -1,18 +1,17 @@
 <script lang="ts" setup>
-import { useStoreStore } from "@/stores/Store";
 import { onMounted } from "vue";
 import { mdiMapMarker, mdiPhone, mdiCalendarRange } from "@mdi/js";
-const storeStore = useStoreStore();
-
+import { useReport } from "@/stores/report";
+const reportStore = useReport();
 onMounted(async () => {
-  await storeStore.getStore();
+  await reportStore.getStoreRep();
 });
 </script>
 
 <template>
   <v-container style="background-color: #e7e7e7" fluid class="h-screen">
     <v-row>
-      <v-col v-for="item of storeStore.stores" :key="item.store_id">
+      <v-col v-for="item of reportStore.storerp" :key="item.store_id">
         <v-card-title align="center" style="font-size: 25px; font-weight: bold"
           >Our Cafe Locations</v-card-title
         >

@@ -16,6 +16,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const currentCheckInOuts = ref<CheckInOut[]>([]);
   const empCheckOut = ref<CheckInOut>();
   const CheckInOuts = ref<CheckInOut[]>([]);
+  const paySalaryDialog = ref(false);
 
   async function getCheckInOuts() {
     loadingStore.isLoading = true;
@@ -85,7 +86,10 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     }
   }
 
+  function PaySalaries() {}
+
   return {
+    PaySalaries,
     checkInDialog,
     checkOutDialog,
     checkIn,
@@ -95,6 +99,10 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     empCheckOut,
     disbtn,
     CheckInOuts,
+<<<<<<< HEAD
     salaryDialog,
+=======
+    paySalaryDialog,
+>>>>>>> 33d4428bcf01c5bce7f0c15e4ff273ecbbe441d9
   };
 });
