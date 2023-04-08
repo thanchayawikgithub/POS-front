@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { mdiPlus } from "@mdi/js";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
 import { useEmployeeStore } from "@/stores/employee";
 const employeeStore = useEmployeeStore();
-
+const btndisabled = ref(false);
 const checkInOutStore = useCheckInOutStore();
 onMounted(async () => {
   await employeeStore.getEmployees();

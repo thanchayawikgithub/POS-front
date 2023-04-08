@@ -8,13 +8,11 @@ const employeeStore = useEmployeeStore();
 
 <template>
   <v-app>
-    <v-container>
-      <v-row>
-        <EmployeeList></EmployeeList>
+    <v-container style="background-color: #e7e7e7" fluid class="h-screen">
+      <EmployeeList></EmployeeList>
 
-        <EmployeeCheckDialog></EmployeeCheckDialog>
-        <EmployeeDialog></EmployeeDialog>
-      </v-row>
+      <EmployeeCheckDialog></EmployeeCheckDialog>
+      <EmployeeDialog></EmployeeDialog>
     </v-container>
   </v-app>
   <!-- <div class="text-h1">Employee View</div> -->

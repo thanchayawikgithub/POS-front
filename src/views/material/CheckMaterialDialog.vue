@@ -10,8 +10,13 @@ const checkMaterialStore = useCheckMaterialStore();
 const materialStore = useMaterialStore();
 </script>
 <template>
-  <v-dialog v-model="checkMaterialStore.dialog" persistent width="1024">
-    <v-card>
+  <v-dialog v-model="checkMaterialStore.dialog" persistent width="1050">
+    <v-sheet
+      elevation="15"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto text-center"
+    >
       <v-card-title>
         <span class="text-h5">Check Material</span>
       </v-card-title>
@@ -58,6 +63,7 @@ const materialStore = useMaterialStore();
           </v-container>
         </v-form>
       </v-card-text>
+      <v-divider class="mb-0"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
@@ -77,6 +83,6 @@ const materialStore = useMaterialStore();
           Save
         </v-btn>
       </v-card-actions>
-    </v-card>
+    </v-sheet>
   </v-dialog>
 </template>

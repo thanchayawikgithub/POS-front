@@ -40,7 +40,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             >
             <v-row class="pb-0">
               <v-col>
-                <v-card style="border-radius: 20px" height="15vh">
+                <v-card style="border-radius: 20px" height="110px">
                   <v-container>
                     <v-row>
                       <v-card-text
@@ -56,7 +56,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       <v-col cols-6>
                         <v-card
                           flat
-                          style="width: 3vw; height: 6vh; border-radius: 8px"
+                          style="width: 3vw; height: 45px; border-radius: 8px"
                           color="#e7e7e7"
                         >
                           <v-btn
@@ -64,7 +64,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             disabled
                             class="pl-0"
                             size="x-large"
-                            height="6vh"
+                            height="45px"
                             :prepend-icon="mdiCupcake"
                           ></v-btn
                         ></v-card>
@@ -95,7 +95,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             </v-row>
             <v-row class="mt-0">
               <v-col>
-                <v-card style="border-radius: 20px" height="15vh">
+                <v-card style="border-radius: 20px" height="110px">
                   <v-container>
                     <v-row>
                       <v-card-text
@@ -111,7 +111,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       <v-col cols-6>
                         <v-card
                           flat
-                          style="width: 3vw; height: 6vh; border-radius: 8px"
+                          style="width: 3vw; height: 45px; border-radius: 8px"
                           color="#e7e7e7"
                         >
                           <v-btn
@@ -119,7 +119,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             disabled
                             class="pl-0"
                             size="x-large"
-                            height="6vh"
+                            height="45px"
                             :prepend-icon="mdiResize"
                           ></v-btn
                         ></v-card>
@@ -150,7 +150,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
             </v-row>
             <v-row class="mt-0">
               <v-col>
-                <v-card style="border-radius: 20px" height="15vh">
+                <v-card style="border-radius: 20px" height="110px">
                   <v-container>
                     <v-row>
                       <v-card-text
@@ -166,7 +166,7 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                       <v-col cols="2">
                         <v-card
                           flat
-                          style="width: 3vw; height: 6vh; border-radius: 8px"
+                          style="width: 3vw; height: 45px; border-radius: 8px"
                           color="#e7e7e7"
                         >
                           <v-btn
@@ -174,17 +174,13 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
                             disabled
                             class="pl-0"
                             size="x-large"
-                            height="6vh"
+                            height="45px"
                             :prepend-icon="mdiSpoonSugar"
                           ></v-btn
                         ></v-card>
                       </v-col>
                       <v-col cols="10">
-                        <v-chip-group
-                          v-model="selection"
-                          color="#df8057"
-                          variant="outlined"
-                        >
+                        <v-chip-group color="#df8057" variant="outlined">
                           <v-chip
                             disabled
                             style="

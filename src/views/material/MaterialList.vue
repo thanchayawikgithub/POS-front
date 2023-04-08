@@ -2,7 +2,13 @@
 import { useMaterialStore } from "@/stores/material";
 import { onMounted } from "vue";
 
-import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import {
+  mdiDelete,
+  mdiPencil,
+  mdiPlus,
+  mdiClipboardEdit,
+  mdiCartArrowDown,
+} from "@mdi/js";
 import CheckMaterialDialog from "./CheckMaterialDialog.vue";
 import { useCheckMaterialStore } from "@/stores/checkMaterial";
 import { useVendorStore } from "@/stores/vendor";
@@ -37,28 +43,30 @@ function statusText(quantity: number, min: number) {
 
 <template>
   <CheckMaterialDialog></CheckMaterialDialog>
-  <v-container>
-    <v-row>
+  <v-container class="pl-0" style="background-color: #e7e7e7"
+    ><v-row class="pl-16">
       <v-col cols="6" offset="8">
         <v-btn
-          class="mr-4"
-          color="primary"
-          :prepend-icon="mdiPlus"
+          color="#8D7B68"
+          style="font-weight: bold; color: #f0e3dd"
+          :prepend-icon="mdiClipboardEdit"
+          class="mr-4 ml-6"
           @click="checkMaterialStore.dialog = true"
           >Check Material</v-btn
         >
         <v-btn
-          color="primary"
-          :prepend-icon="mdiPlus"
+          color="#8D7B68"
+          style="font-weight: bold; color: #f0e3dd"
+          :prepend-icon="mdiCartArrowDown"
           @click="vendorStore.dialog = true"
-          >Add New</v-btn
+          >Order</v-btn
         >
       </v-col>
     </v-row>
     <v-row cols="12">
       <v-col>
         <v-table>
-          <thead>
+          <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th class="text-center">ID</th>
               <th class="text-center">Name</th>
@@ -80,7 +88,7 @@ function statusText(quantity: number, min: number) {
               <td class="text-center">฿ {{ item.mat_price_per_unit }}</td>
               <td>
                 <v-card
-                  height="4vh"
+                  height="30px"
                   width="6vw"
                   align="center"
                   :color="statusColor(item.mat_quantity, item.mat_min_quantity)"
@@ -99,14 +107,16 @@ function statusText(quantity: number, min: number) {
               <td class="text-center">
                 <v-btn
                   :icon="mdiPencil"
-                  color="secondary"
+                  color="#665A48"
                   class="ma-1"
+                  variant="tonal"
                   @click="materialStore.editMaterial(item)"
                 ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
-                  color="error"
+                  color="#B46060"
                   class="ma-1"
+                  variant="tonal"
                   @click="
                     (materialStore.deleteDialog = true),
                       (materialStore.checkDialog = item.mat_id!)

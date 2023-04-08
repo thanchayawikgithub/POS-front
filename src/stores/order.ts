@@ -243,11 +243,11 @@ export const useOrderStore = defineStore("order", () => {
   }
 
   function updatePrice(name: string, price: number) {
-    if (name === "ICED") {
+    if (name === "Iced") {
       UpdatePrice.value = price;
-    } else if (name === "HOT") {
+    } else if (name === "Hot") {
       UpdatePrice.value = price - 5;
-    } else if (name === "SMOOTHIE") {
+    } else if (name === "Smoothie") {
       UpdatePrice.value = price + 5;
     } else if (name === "Chicken") {
       UpdatePrice.value = price - 5;
@@ -255,8 +255,9 @@ export const useOrderStore = defineStore("order", () => {
       UpdatePrice.value = price;
     } else if (name === "Seafood") {
       UpdatePrice.value = price + 10;
+    } else if (name === "Frappe") {
+      UpdatePrice.value = price + 5;
     }
-
     return UpdatePrice.value;
   }
   function updateOther(name: string, Othername: string) {

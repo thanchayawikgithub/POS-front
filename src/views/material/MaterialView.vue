@@ -15,14 +15,12 @@ onMounted(async () => {
 
 <template>
   <v-app>
-    <v-container>
-      <v-row>
-        <BuyMaterialDialog></BuyMaterialDialog>
-        <MaterialList></MaterialList>
+    <v-container style="background-color: #e7e7e7" fluid class="h-screen">
+      <BuyMaterialDialog></BuyMaterialDialog>
+      <MaterialList></MaterialList>
 
-        <MaterialCheckDialog></MaterialCheckDialog>
-        <MaterialDialog></MaterialDialog>
-      </v-row>
+      <MaterialCheckDialog></MaterialCheckDialog>
+      <MaterialDialog></MaterialDialog>
     </v-container>
   </v-app>
 </template>

@@ -2,7 +2,7 @@
 import { useProductStore } from "@/stores/product";
 import { onMounted } from "vue";
 
-import { mdiPlus, mdiDelete, mdiPencil, mdiMagnify } from "@mdi/js";
+import { mdiFood, mdiDelete, mdiPencil, mdiMagnify } from "@mdi/js";
 import ProductDialog from "./ProductDialog.vue";
 const productsStore = useProductStore();
 onMounted(async () => {
@@ -32,17 +32,19 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
       ></v-text-field
       ><v-col cols="2" offset="12">
         <v-btn
-          color="primary"
-          :prepend-icon="mdiPlus"
+          color="#8D7B68"
+          style="font-weight: bold; color: #f0e3dd"
+          :prepend-icon="mdiFood"
+          class="mr-2"
           @click="productsStore.dialog = true"
-          >Add New</v-btn
+          >Add Product</v-btn
         >
       </v-col></v-row
     >
     <v-row cols="12">
       <v-col>
-        <v-table striped hover>
-          <thead>
+        <v-table>
+          <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th>ID</th>
               <th>Name</th>
@@ -70,14 +72,16 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
               <td>
                 <v-btn
                   :icon="mdiPencil"
-                  color="secondary"
+                  color="#665A48"
                   class="ma-1"
+                  variant="tonal"
                   @click="productsStore.editProduct(item)"
                 ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
-                  color="error"
+                  color="#B46060"
                   class="ma-1"
+                  variant="tonal"
                   @click="
                     (productsStore.deleteDialog = true),
                       (productsStore.checkDialog = item.product_id!)

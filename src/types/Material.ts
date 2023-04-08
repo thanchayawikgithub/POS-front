@@ -10,4 +10,5 @@ export default interface Material {
   mat_buy_amount?: number;
   mat_exp?: number;
   mat_check?: number;
+  mat_image?: string;
 }

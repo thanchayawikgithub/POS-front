@@ -8,9 +8,9 @@ import { useEmployeeStore } from "@/stores/employee";
 
 const employeeStore = useEmployeeStore();
 
-// onMounted(async () => {
-//   await employeeStore.getEmployees();
-// });
+onMounted(async () => {
+  await employeeStore.getEmployees();
+});
 </script>
 
 <template>

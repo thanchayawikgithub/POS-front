@@ -383,15 +383,15 @@ function Smoothie(CatId: number, Type: String) {
               flat
             >
               <v-card
-                class="pa-3 mb-2 mt-3 ml-0"
+                class="pa-3 mb-2 mt-3 ml-0 pl-2 pt-1"
                 v-for="item in orderStore.orderList"
                 :key="item.product_id"
                 color="#f2f2f0"
                 style="
                   border-radius: 5px;
-                  border: 2px solid;
+                  border: solid 2px;
                   width: 33vw;
-                  height: 11vh;
+                  height: 68px;
                 "
               >
                 <v-row>

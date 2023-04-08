@@ -12,39 +12,38 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container class="pl-0"
-    ><v-row>
-      <v-col offset="11">
+  <v-container class="pl-0" style="background-color: #e7e7e7"
+    ><v-row justify="end">
+      <v-col cols="2" offset="12" class="pl-16">
         <v-btn
-          color="primary"
+          color="#8D7B68"
+          style="font-weight: bold; color: #f0e3dd"
           :prepend-icon="mdiPlus"
           @click="employeeStore.dialog = true"
           >Add New</v-btn
         >
       </v-col>
     </v-row>
-    <v-row style="width: 83vw">
-      <v-col cols="12">
+    <v-row class="mt-0">
+      <v-col>
         <v-table>
-          <thead>
+          <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
-              <th>ID</th>
-              <th>Name</th>
+              <th class="text-center">Name</th>
               <th>Province</th>
               <th>District</th>
               <th>Subdistrict</th>
-              <th>Tel</th>
-              <th>Email</th>
+              <th class="text-center">Tel</th>
+              <th class="text-center">Email</th>
               <th>Login</th>
-              <th>Password</th>
+
               <th>Position</th>
               <th>Hourly Wage</th>
-              <th>Operations</th>
+              <th class="text-center pl-0">Operations</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item of employeeStore.employees" :key="item.employee_id">
-              <td>{{ item.employee_id }}</td>
               <td>{{ item.employee_name }}</td>
               <td>{{ item.employee_province }}</td>
               <td>{{ item.employee_district }}</td>
@@ -52,21 +51,23 @@ onMounted(async () => {
               <td>{{ item.employee_tel }}</td>
               <td>{{ item.employee_email }}</td>
               <td>{{ item.employee_login }}</td>
-              <td>{{ item.employee_password }}</td>
+
               <td>{{ item.employee_position }}</td>
               <td>฿ {{ item.employee_hourly_wage }}</td>
 
               <td>
                 <v-btn
                   :icon="mdiPencil"
-                  color="secondary"
+                  color="#665A48"
                   class="ma-1"
+                  variant="tonal"
                   @click="employeeStore.editEmployee(item)"
                 ></v-btn>
                 <v-btn
                   :icon="mdiDelete"
-                  color="error"
+                  color="#B46060"
                   class="ma-1"
+                  variant="tonal"
                   @click="
                     (employeeStore.deleteDialog = true),
                       (employeeStore.checkDialog = item.employee_id!)

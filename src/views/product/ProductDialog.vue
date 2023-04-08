@@ -19,8 +19,14 @@ onMounted(async () => {
 
 <template>
   <v-dialog v-model="productStore.dialog" persistent width="1024">
-    <v-card>
-      <v-card-title>
+    <v-sheet
+      elevation="15"
+      max-width="600"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto"
+    >
+      <v-card-title class="text-center">
         <span class="text-h5">Product Profile</span>
       </v-card-title>
 
@@ -101,17 +107,14 @@ onMounted(async () => {
         </v-form>
         <small>*indicates required field</small>
       </v-card-text>
+      <v-divider class="mb-0"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click="productStore.dialog = false"
-        >
+        <v-btn color="red" variant="text" @click="productStore.dialog = false">
           Close
         </v-btn>
         <v-btn color="blue-darken-1" variant="text" @click="save"> Save </v-btn>
       </v-card-actions>
-    </v-card></v-dialog
+    </v-sheet></v-dialog
   >
 </template>

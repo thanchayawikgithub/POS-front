@@ -1,9 +1,11 @@
 <script lang="ts" setup>
 import receipt from "@/services/receipt";
+import { useCustomerStore } from "@/stores/customer";
 import { useProductStore } from "@/stores/product";
 import { useReceiptStore } from "@/stores/receipt";
 
 const receiptStore = useReceiptStore();
+const customerStore = useCustomerStore();
 const productStore = useProductStore();
 </script>
 <template>
@@ -54,12 +56,10 @@ const productStore = useProductStore();
                 v-for="item in receiptStore.lastReceipt?.recieptDetail"
                 :key="item.rcd_id"
               >
-                <td class="text-center">{{ item.rcd_name }}</td>
-                <td class="text-center">
-                  {{ item.rcd_price }}
-                </td>
+                <td>{{ item.rcd_name }}</td>
+                <td class="text-center">฿ {{ item.rcd_price }}</td>
                 <td class="text-center">{{ item.rcd_amount }}</td>
-                <td class="text-center">{{ item.rcd_total }}</td>
+                <td class="text-center">฿ {{ item.rcd_total }}</td>
               </tr>
             </tbody>
           </v-table></v-card
@@ -67,20 +67,31 @@ const productStore = useProductStore();
         <v-card-text class="receipt__line mb-1"></v-card-text>
         <tfoot cols="12">
           <tr style="font-size: 17px; font-weight: 600">
-            Total :
-            {{
+            Total : ฿{{
               receiptStore.lastReceipt?.rec_total
+            }}
+          </tr>
+          <tr v-if="customerStore.customer?.customer_point! > 0">
+            Discount : ฿
+            {{
+              0
+            }}
+          </tr>
+          <tr v-if="customerStore.customer?.customer_point! > 0">
+            Point : +
+            {{
+              customerStore.customer?.customer_point
             }}
           </tr>
 
           <tr>
-            Received :
+            Received : ฿
             {{
               receiptStore.lastReceipt?.rec_received
             }}
           </tr>
           <tr style="font-size: 18px; font-weight: 600">
-            Changed :
+            Changed : ฿
             {{
               receiptStore.lastReceipt?.rec_changed
             }}

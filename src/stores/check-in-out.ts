@@ -8,6 +8,7 @@ import type CheckInOut from "@/types/CheckInOut";
 export const useCheckInOutStore = defineStore("check-in-out", () => {
   const checkInDialog = ref(false);
   const checkOutDialog = ref(false);
+  const disbtn = ref(false);
   const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
 
@@ -77,5 +78,6 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     checkOut,
     checkInOutList,
     empCheckOut,
+    disbtn,
   };
 });

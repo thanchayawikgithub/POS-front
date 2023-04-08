@@ -4,10 +4,15 @@ import { mdiTrashCanOutline, mdiBackspaceOutline } from "@mdi/js";
 import { ref } from "vue";
 import MaterialPayDialog from "./MaterialPayDialog.vue";
 import { onMounted } from "vue";
+import { useMaterialStore } from "@/stores/material";
+import material from "@/services/material";
+import { useProductStore } from "@/stores/product";
 
 const tab = ref();
-
+const backendURL = import.meta.env.VITE_BACKEND_URL;
 const vendorStore = useVendorStore();
+
+const materialStore = useMaterialStore();
 const selectVendor = ref();
 onMounted(async () => {
   await vendorStore.getMaterialsByShopName(vendorStore.selectedVendor);
@@ -19,7 +24,7 @@ onMounted(async () => {
 <template>
   <MaterialPayDialog></MaterialPayDialog>
   <v-dialog v-model="vendorStore.dialog" persistent width="1280">
-    <v-card height="1000px" style="background-color: #e7e7e7">
+    <v-card style="background-color: #e7e7e7">
       <v-card-title>Buy Material </v-card-title>
 
       <v-container>
@@ -58,34 +63,39 @@ onMounted(async () => {
                       "
                       class="mt-4 ml-1"
                       @click="
-                        vendorStore.addCart(vendorMat)
-                        // if (vendor.vendor_id === 1) {
-                        //   if (vendorStore.orderList.length >= 0) {
-                        //     vendorStore.dis = true;
-                        //   } else if (vendorStore.orderList.length < 0) {
-                        //     vendorStore.dis = false;
-                        //   }
-                        //   vendorStore.addCart(vendorMat);
-                        // } else if (vendor.vendor_id === 2) {
-                        //   if (vendorStore.orderList.length >= 0) {
-                        //     vendorStore.dis = true;
-                        //   } else if (vendorStore.orderList.length < 0) {
-                        //     vendorStore.dis = false;
-                        //   }
-                        //   vendorStore.addCart(vendorMat);
-                        // } else if (vendor.vendor_id === 3) {
-                        //   if (vendorStore.orderList.length >= 0) {
-                        //     vendorStore.dis = true;
-                        //   } else if (vendorStore.orderList.length < 0) {
-                        //     vendorStore.dis = false;
-                        //   }
-                        //   vendorStore.addCart(vendorMat);
-                        // }
+                        if (vendor.mat_shop_name === 'Makro') {
+                          if (vendorStore.orderList.length >= 0) {
+                            vendorStore.dis = true;
+                          } else if (vendorStore.orderList.length < 0) {
+                            vendorStore.dis = false;
+                          }
+                          vendorStore.addCart(vendorMat);
+                        } else if (vendor.mat_shop_name === 'Lotus') {
+                          if (vendorStore.orderList.length >= 0) {
+                            vendorStore.dis = true;
+                          } else if (vendorStore.orderList.length < 0) {
+                            vendorStore.dis = false;
+                          }
+                          vendorStore.addCart(vendorMat);
+                        } else if (vendor.mat_shop_name === 'Big C') {
+                          if (vendorStore.orderList.length >= 0) {
+                            vendorStore.dis = true;
+                          } else if (vendorStore.orderList.length < 0) {
+                            vendorStore.dis = false;
+                          }
+                        }
                       "
                     >
                       <v-card
                         style="width: 175px; height: 25vh; border: 1px solid"
                         class="card"
+                      >
+                        <v-img
+                          class="mt-5"
+                          height="10vh"
+                          width="10vw"
+                          :src="`${backendURL}/materials/image/${vendorMat.mat_image}`"
+                        ></v-img
                         ><v-card-title class="title mb-0">{{
                           vendorMat.mat_name
                         }}</v-card-title>
@@ -132,19 +142,19 @@ onMounted(async () => {
               <v-container>
                 <v-row>
                   <v-col cols="1 "> </v-col>
-                  <v-col cols="3" class="text-center pl-14">
+                  <v-col cols="3" class="text-center pl-0">
                     <h5>Name</h5>
                   </v-col>
-                  <v-col cols="5" class="text-center pl-16">
+                  <v-col cols="4" class="text-center pl-2">
                     <h5>Quantity</h5>
                   </v-col>
-                  <v-col cols="2  " class="text-center pl-2">
+                  <v-col cols="2  " class="text-center pl-7">
                     <h5>Price</h5>
                   </v-col>
                 </v-row>
                 <v-card
                   style="
-                    height: 30vh;
+                    height: 32vh;
                     width: 37vw;
                     overflow-y: auto;
 
@@ -156,23 +166,16 @@ onMounted(async () => {
                   <v-card
                     v-for="item in vendorStore.orderList"
                     :key="item.mat_id"
-                    class="pa-3 mb-2 mt-3 ml-0 pt-0"
+                    class="pa-3 mb-2 mt-3 ml-0 pl-2 pt-0"
                     style="
                       border-radius: 5px;
                       border: 1px solid;
                       width: 30vw;
-                      height: 8vh;
+                      height: 57px;
                     "
                   >
                     <v-row>
-                      <!-- <v-col cols="2">
-                          <v-img
-                            height="7vh"
-                            width="90%"
-                            :src="`${backendURL}/products/image/${item.product_image}`"
-                          ></v-img>
-                        </v-col> -->
-                      <v-col cols="3" class="pl-0">
+                      <v-col cols="4" class="pl-0">
                         <v-card-text style="font-size: small">
                           {{ item.mat_name }}</v-card-text
                         >
@@ -243,7 +246,7 @@ onMounted(async () => {
               <v-table style="width: 35vw; height: 20vh">
                 <tbody>
                   <tr>
-                    <td class="text-lg-center text-sm-h3 pt-12">
+                    <td class="text-lg-center text-sm-h3 pt-10">
                       Total : ฿ {{ vendorStore.totalPrice }}
                     </td>
                   </tr>
@@ -254,7 +257,7 @@ onMounted(async () => {
                   <v-btn
                     style="height: 5vh; width: 20vw"
                     rounded
-                    class="fontbtn mb-12"
+                    class="fontbtn mb-7"
                     color="#df8057"
                     @click="vendorStore.pay()"
                     >PAY</v-btn
@@ -265,7 +268,7 @@ onMounted(async () => {
           </v-col>
         </v-row>
       </v-container>
-
+      <v-divider style="width: 80vw" class="ml-5"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
@@ -342,6 +345,7 @@ onMounted(async () => {
   content: "Added !";
   height: 4.125em;
 }
+
 .fontbtn {
   color: rgb(0, 0, 0);
   font-weight: bold;
@@ -350,6 +354,7 @@ onMounted(async () => {
 .font-btn {
   font-weight: bold;
 }
+
 td {
   font-weight: bolder;
 }

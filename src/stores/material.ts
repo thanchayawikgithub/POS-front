@@ -25,6 +25,7 @@ export const useMaterialStore = defineStore("material", () => {
     mat_quantity: 0,
     mat_unit: "",
     mat_price_per_unit: 0,
+    mat_image: "no_img_available.jpg",
   });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -35,6 +36,7 @@ export const useMaterialStore = defineStore("material", () => {
         mat_quantity: 0,
         mat_unit: "",
         mat_price_per_unit: 0,
+        mat_image: "no_img_available.jpg",
       };
     }
   });

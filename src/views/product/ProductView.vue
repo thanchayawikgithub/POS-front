@@ -13,11 +13,9 @@ onMounted(async () => {
 
 <template>
   <v-app>
-    <v-container>
-      <v-row>
-        <ProductList></ProductList>
-        <ProductCheckDialog></ProductCheckDialog>
-      </v-row>
+    <v-container style="background-color: #e7e7e7" fluid>
+      <ProductList></ProductList>
+      <ProductCheckDialog></ProductCheckDialog>
     </v-container>
   </v-app>
 </template>
