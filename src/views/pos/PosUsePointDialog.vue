@@ -21,7 +21,7 @@ const customerStore = useCustomerStore();
       <v-container>
         <v-row
           ><v-col align="center" style="font-size: 21px"
-            >Point: {{ customerStore.customer?.customer_point }}
+            >Points: {{ customerStore.customer?.customer_point }}
           </v-col>
         </v-row>
         <v-card-subtitle align="center"
@@ -37,13 +37,18 @@ const customerStore = useCustomerStore();
           >
           <v-col cols="6" align="right">
             <v-text-field
-              v-model="orderStore.received"
+              v-model="orderStore.usedPoint"
               suffix="Point"
+              :rules="[
+                (value) => /(.*0)$/.test(value) || 'Point must end with 0',
+              ]"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row class="justify-center"><v-btn>Submit</v-btn></v-row>
+        <v-row class="justify-center" @click="orderStore.calDiscount()"
+          ><v-btn>Submit</v-btn></v-row
+        >
       </v-container>
 
       <v-card-actions>

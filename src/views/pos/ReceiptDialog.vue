@@ -16,7 +16,7 @@ const productStore = useProductStore();
         style="font-size: 40px; font-weight: 800; text-align: center"
         >D-Coffee</v-card-title
       ><v-card-text style="font-size: 16px; font-weight: 400" class="pb-0 pt-1"
-        >Here is your receipt: TAX ID #{{
+        >Here is your receipt: Receipt ID #{{
           receiptStore.lastReceipt?.rec_id
         }}</v-card-text
       ><v-card-text style="font-size: 14px; font-weight: 400" class="pb-0 pt-0"
@@ -66,21 +66,24 @@ const productStore = useProductStore();
         >
         <v-card-text class="receipt__line mb-1"></v-card-text>
         <tfoot cols="12">
+          <tr>
+            Sub Total : ฿
+            {{
+              receiptStore.lastReceipt?.recieptDetail.reduce(
+                (sum, rcd) => sum + rcd.rcd_total,
+                0
+              )
+            }}
+          </tr>
+          <tr>
+            Discount : ฿
+            {{
+              receiptStore.lastReceipt?.rec_discount
+            }}
+          </tr>
           <tr style="font-size: 17px; font-weight: 600">
             Total : ฿{{
               receiptStore.lastReceipt?.rec_total
-            }}
-          </tr>
-          <tr v-if="customerStore.customer?.customer_point! > 0">
-            Discount : ฿
-            {{
-              0
-            }}
-          </tr>
-          <tr v-if="customerStore.customer?.customer_point! > 0">
-            Point : +
-            {{
-              customerStore.customer?.customer_point
             }}
           </tr>
 
@@ -94,6 +97,13 @@ const productStore = useProductStore();
             Changed : ฿
             {{
               receiptStore.lastReceipt?.rec_changed
+            }}
+          </tr>
+
+          <tr v-if="receiptStore.lastReceipt?.customer">
+            Current Point :
+            {{
+              receiptStore.lastReceipt?.customer.customer_point
             }}
           </tr>
         </tfoot>

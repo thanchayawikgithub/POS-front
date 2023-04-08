@@ -16,7 +16,7 @@ export default interface Reciept {
   rec_updatedAt: Date;
   rec_deletedAt: Date;
   store: Store;
-  customer: Customer;
+  customer?: Customer;
   employee: Employee;
   recieptDetail: RecieptDetail[];
 

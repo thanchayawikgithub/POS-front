@@ -32,7 +32,7 @@ const orderStore = useOrderStore();
         <v-container v-if="orderStore.paymentMethod === 'Cash'"
           ><v-row
             ><v-col align="center" style="font-size: 21px"
-              >Total : {{ orderStore.totalPrice }} Baht</v-col
+              >Total : {{ orderStore.billPrice }} Baht</v-col
             ></v-row
           >
           <v-row

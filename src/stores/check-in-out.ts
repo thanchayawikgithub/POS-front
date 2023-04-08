@@ -12,11 +12,25 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
 
-  const checkInOutList = ref<CheckInOut[]>([]);
+  const currentCheckInOuts = ref<CheckInOut[]>([]);
   const empCheckOut = ref<CheckInOut>();
+  const CheckInOuts = ref<CheckInOut[]>([]);
+
+  async function getCheckInOuts() {
+    loadingStore.isLoading = true;
+    try {
+      const res = await checkInOutService.getCheckInOut();
+      CheckInOuts.value = res.data;
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล ChekInOut ได้");
+    }
+    loadingStore.isLoading = false;
+  }
+
   async function checkIn(username: string, password: string) {
     try {
-      const duplicate = checkInOutList.value.find(
+      const duplicate = currentCheckInOuts.value.find(
         (cio) =>
           cio.employee.employee_name === username && cio.cio_time_out === null
       );
@@ -32,10 +46,10 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       );
       loadingStore.isLoading = false;
 
-      checkInOutList.value.push(check_in_out.data);
+      currentCheckInOuts.value.push(check_in_out.data);
       console.log(check_in_out.data);
 
-      console.log("check in list", checkInOutList.value);
+      console.log("check in list", currentCheckInOuts.value);
       checkInDialog.value = false;
       messageStore.showMessage("check in success");
     } catch (error) {
@@ -52,15 +66,15 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
         empCheckOut.value?.employee.employee_login!,
         password
       );
-      const index = checkInOutList.value.findIndex(
+      const index = currentCheckInOuts.value.findIndex(
         (obj) => obj.cio_id === check_in_out.data.cio_id
       );
       if (index !== -1) {
-        checkInOutList.value.splice(index, 1, check_in_out.data);
+        currentCheckInOuts.value.splice(index, 1, check_in_out.data);
       }
       loadingStore.isLoading = false;
       console.log(check_in_out.data);
-      console.log("list", checkInOutList);
+      console.log("list", currentCheckInOuts);
       empCheckOut.value = undefined;
       checkOutDialog.value = false;
       messageStore.showMessage("check out success");
@@ -74,10 +88,11 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     checkInDialog,
     checkOutDialog,
     checkIn,
-    status,
+    getCheckInOuts,
     checkOut,
-    checkInOutList,
+    currentCheckInOuts,
     empCheckOut,
     disbtn,
+    CheckInOuts,
   };
 });

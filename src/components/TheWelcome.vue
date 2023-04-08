@@ -164,7 +164,7 @@ function statusText(quantity: number, min: number) {
                   </thead>
                   <tbody>
                     <tr
-                      v-for="item in checkInOutStore.checkInOutList"
+                      v-for="item in checkInOutStore.currentCheckInOuts"
                       :key="item.cio_id"
                     >
                       <td>{{ item.employee.employee_name }}</td>

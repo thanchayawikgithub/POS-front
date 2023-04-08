@@ -9,7 +9,7 @@ const employeeStore = useEmployeeStore();
 const btndisabled = ref(false);
 const checkInOutStore = useCheckInOutStore();
 onMounted(async () => {
-  await employeeStore.getEmployees();
+  await checkInOutStore.getCheckInOuts();
 });
 </script>
 
@@ -39,10 +39,7 @@ onMounted(async () => {
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="item in checkInOutStore.checkInOutList"
-              :key="item.cio_id"
-            >
+            <tr v-for="item in checkInOutStore.CheckInOuts" :key="item.cio_id">
               <td>{{ item.employee.employee_name }}</td>
               <td>
                 {{ JSON.stringify(item.cio_time_in).substring(1, 11) }}

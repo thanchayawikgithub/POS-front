@@ -486,7 +486,7 @@ function Smoothie(CatId: number, Type: String) {
                 <td>Point :</td>
                 <td>
                   <v-btn
-                    v-if="customerStore.customer?.customer_point >= 10"
+                    v-if="customerStore.customer?.customer_point! >= 10"
                     variant="outlined"
                     @click="orderStore.usePoint = true"
                     >Use</v-btn
@@ -506,13 +506,13 @@ function Smoothie(CatId: number, Type: String) {
               <tr>
                 <td>Discount :</td>
                 <td></td>
-                <td class="text-lg-right">0</td>
+                <td class="text-lg-right">{{ orderStore.billDiscount }}</td>
                 <td class="text-lg-right">Baht</td>
               </tr>
               <tr>
                 <td>Total :</td>
                 <td></td>
-                <td class="text-lg-right">{{ orderStore.totalPrice }}</td>
+                <td class="text-lg-right">{{ orderStore.billPrice }}</td>
                 <td class="text-lg-right">Baht</td>
               </tr>
             </tbody>

@@ -25,7 +25,9 @@ export const useOrderStore = defineStore("order", () => {
   const posFoodDialog = ref(false);
   const successDialog = ref(false);
   const usePoint = ref(false);
+  const billDiscount = ref(0);
   const customerStore = useCustomerStore();
+  const usedPoint = ref(0);
 
   const receiptStore = useReceiptStore();
   const Order = ref<Product>();
@@ -112,6 +114,14 @@ export const useOrderStore = defineStore("order", () => {
     );
   });
 
+  const billPrice = computed(function () {
+    if (totalPrice.value - billDiscount.value < 0) {
+      return 0;
+    } else {
+      return totalPrice.value - billDiscount.value;
+    }
+  });
+
   async function openOrder() {
     const employee: { employee_id: number } = authStore.getEmployee();
     const customer = customerStore.customer?.customer_id;
@@ -136,8 +146,8 @@ export const useOrderStore = defineStore("order", () => {
     const reciept = {
       rec_queue: 1,
       rec_time: 15,
-      rec_discount: 0,
-      rec_total: totalPrice.value,
+      rec_discount: billDiscount.value,
+      rec_total: billPrice.value,
       rec_received: +received.value,
       rec_payment: paymentMethod.value,
       rec_changed: changed.value,
@@ -151,6 +161,8 @@ export const useOrderStore = defineStore("order", () => {
       console.log(reciept);
       const res = await recieptService.saveReciept(reciept);
       dialog.value = false;
+      billDiscount.value = 0;
+      usedPoint.value = 0;
       clearOrder();
     } catch (e) {
       console.log(e);
@@ -161,10 +173,10 @@ export const useOrderStore = defineStore("order", () => {
   }
 
   const calChanged = async () => {
-    if (received.value < totalPrice.value) {
+    if (received.value < billPrice.value) {
       messageStore.showError("กรุณาใส่จำนวนเงินใหม่อีกครั้ง");
     } else {
-      changed.value = received.value - totalPrice.value;
+      changed.value = received.value - billPrice.value;
       payDialog.value = false;
       // successDialog.value = true;
       await openOrder();
@@ -294,6 +306,21 @@ export const useOrderStore = defineStore("order", () => {
     return UpdatePriceOther.value;
   }
 
+  function calDiscount() {
+    const discountPer10Points = 30;
+    const discount = Math.floor(usedPoint.value / 10) * discountPer10Points;
+    if (discount > totalPrice.value) {
+      billDiscount.value = totalPrice.value;
+    } else {
+      billDiscount.value = discount;
+    }
+    usePoint.value = false;
+  }
+
+  function clearCustomer() {
+    customerStore.customer = undefined;
+  }
+
   return {
     orderList,
     addCart,
@@ -330,5 +357,10 @@ export const useOrderStore = defineStore("order", () => {
     UpdatePriceOther,
     UpdateOther2,
     updateOther2,
+    billDiscount,
+    usedPoint,
+    calDiscount,
+    billPrice,
+    clearCustomer,
   };
 });
