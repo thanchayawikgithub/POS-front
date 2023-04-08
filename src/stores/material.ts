@@ -19,13 +19,14 @@ export const useMaterialStore = defineStore("material", () => {
 
   const vendorStore = useVendorStore();
   const materials = ref<Material[]>([]);
-  const editedMaterial = ref<Material>({
+  const editedMaterial = ref<Material & { files: File[] }>({
     mat_name: "",
     mat_min_quantity: 0,
     mat_quantity: 0,
     mat_unit: "",
     mat_price_per_unit: 0,
     mat_image: "no_img_available.jpg",
+    files: [],
   });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -37,6 +38,7 @@ export const useMaterialStore = defineStore("material", () => {
         mat_unit: "",
         mat_price_per_unit: 0,
         mat_image: "no_img_available.jpg",
+        files: [],
       };
     }
   });
