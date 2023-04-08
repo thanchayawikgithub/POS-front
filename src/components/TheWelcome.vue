@@ -12,15 +12,18 @@ import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
 import type checkInOut from "@/services/checkInOut";
 import { computed } from "vue";
+import { useReport } from "@/stores/report";
 
 const employeeStore = useEmployeeStore();
 const materialStore = useMaterialStore();
 const checkInOutStore = useCheckInOutStore();
 const loadingStore = useLoadingStore();
+const reportStore = useReport();
 
 onMounted(async () => {
-  await materialStore.getMaterials();
+  await reportStore.getMatirial();
 });
+
 function statusColor(quantity: number, min: number) {
   if (quantity === 0) {
     return "red";
@@ -97,10 +100,7 @@ function statusText(quantity: number, min: number) {
                   </thead>
                   <tbody>
                     <tr
-                      v-for="item in materialStore.materials.filter(
-                        (materials) =>
-                          materials.mat_quantity < materials.mat_min_quantity
-                      )"
+                      v-for="item in reportStore.matReport"
                       :key="item.mat_quantity"
                     >
                       <td>{{ item.mat_name }}</td>
