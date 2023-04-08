@@ -1,12 +1,12 @@
 <script lang="ts" setup>
 import { onMounted, ref } from "vue";
-import { mdiPlus } from "@mdi/js";
+import { mdiCreditCardCheckOutline } from "@mdi/js";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
+import PaySalariesDialog from "@/views/checkInOut/PaySalariesDialog.vue";
 import { useEmployeeStore } from "@/stores/employee";
-const employeeStore = useEmployeeStore();
-const btndisabled = ref(false);
+
 const checkInOutStore = useCheckInOutStore();
 onMounted(async () => {
   await checkInOutStore.getCheckInOuts();
@@ -16,14 +16,17 @@ onMounted(async () => {
 <template>
   <EmployeeCheckInDialog></EmployeeCheckInDialog>
   <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
+  <PaySalariesDialog></PaySalariesDialog>
   <v-container style="background-color: #e7e7e7">
     <v-row justify="end">
       <v-col cols="2" offset="12">
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
-          :prepend-icon="mdiPlus"
-        ></v-btn>
+          :prepend-icon="mdiCreditCardCheckOutline"
+          @click="checkInOutStore.paySalaryDialog = true"
+          >Pay Salaries</v-btn
+        >
       </v-col>
     </v-row>
     <v-row class="mt-0">
