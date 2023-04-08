@@ -15,7 +15,18 @@ export const useEmployeeStore = defineStore("employee", () => {
   const employeeLoginDialog = ref(false);
   const employeeLogoutDialog = ref(false);
   const employees = ref<Employee[]>([]);
-  const editedEmployee = ref<Employee>({
+  const editedEmployee = ref<{
+    employee_id?: number;
+    employee_name: string;
+    employee_province: string;
+    employee_district: string;
+    employee_subdistrict: string;
+    employee_tel: string;
+    employee_email: string;
+    employee_position: string;
+    employee_hourly_wage: number;
+    employee_login: string;
+  }>({
     employee_name: "",
     employee_province: "",
     employee_district: "",
