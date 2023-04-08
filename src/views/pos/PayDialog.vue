@@ -1,6 +1,8 @@
 <script lang="ts" setup>
 import { useOrderStore } from "@/stores/order";
 import { mdiQrcodeScan, mdiCashMultiple } from "@mdi/js";
+
+import QRCodeVue from "qrcode.vue";
 const orderStore = useOrderStore();
 </script>
 
@@ -59,7 +61,10 @@ const orderStore = useOrderStore();
             ><v-col align="center" style="font-size: 21px"
               >Total : {{ orderStore.totalPrice }} Baht</v-col
             ></v-row
-          ><v-img src="./public/QR.jpg" height="300px"></v-img>
+          ><QRCodeVue
+            :value="orderStore.promptPayValue"
+            :renderAs="orderStore.qrcodeOptions"
+          />
           <v-row class="justify-center"
             ><v-btn @click="orderStore.payDialog = false">Submit</v-btn></v-row
           ></v-container

@@ -12,7 +12,7 @@ import PayDialog from "./PayDialog.vue";
 import PosDrinkDialog from "./PosDrinkDialog.vue";
 import PosBakeryDialog from "./PosBakeryDialog.vue";
 import PosFoodDialog from "./PosFoodDialog.vue";
-import { mdiTrashCanOutline } from "@mdi/js";
+import { mdiTrashCanOutline, mdiBackspaceOutline } from "@mdi/js";
 import CustomerDialog from "@/views/Customer/CustomerDialog.vue";
 import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
@@ -62,7 +62,7 @@ function Ice(CatId: number, Type: String) {
   } else if (CatId === 1 && Type == "Soda Drink") {
     return "Iced";
   } else if (CatId === 3 && Type == "Thai Food") {
-    return "Pig";
+    return "Pork";
   } else if (CatId === 1 && Type == "Milk") {
     return "Iced";
   }
@@ -177,11 +177,11 @@ function Smoothie(CatId: number, Type: String) {
                         if (item.product_type === 'Thai Food') {
                           orderStore.addOrder(item);
                           orderStore.updatePrice(
-                            'Pig',
+                            'Pork',
                             orderStore.Order!.product_price
                           );
                           orderStore.updateType(
-                            'Pig',
+                            'Pork',
                             orderStore.Order!.product_name
                           );
 
@@ -202,6 +202,21 @@ function Smoothie(CatId: number, Type: String) {
                   >
                     <v-card style="width: 270px; height: 30vh" class="card">
                       <v-img
+                        v-if="item.product_type === 'Soda Drink'"
+                        class="align-end image mb-2"
+                        style="height: 15vh; width: 20vw"
+                        :src="`${backendURL}/products/image/${item.product_image}`"
+                      >
+                      </v-img>
+                      <v-img
+                        v-else-if="item.categoryId === 3"
+                        class="align-end image mb-2"
+                        style="height: 15vh; width: 20vw"
+                        :src="`${backendURL}/products/image/${item.product_image}`"
+                      >
+                      </v-img>
+                      <v-img
+                        v-else
                         class="align-end image mt-0"
                         style="height: 11vh; width: 20vw"
                         :src="`${backendURL}/products/image/${item.product_image}`"
@@ -361,9 +376,23 @@ function Smoothie(CatId: number, Type: String) {
           style="border: 3px solid; height: 97vh"
           class="bg2 ml-0"
         >
-          <h2 style="text-align: center; font-size: 20px; padding-top: 6px">
-            Cart
-          </h2>
+          <v-container class="pb-0">
+            <v-row>
+              <v-col
+                align="center"
+                style="font-size: 21px; font-weight: bold"
+                class="pt-0 ml-16 pb-0"
+              >
+                Cart
+              </v-col>
+              <v-btn
+                flat
+                style="font-weight: bold; background-color: #e7e7e7"
+                :append-icon="mdiBackspaceOutline"
+                @click="orderStore.clearOrder()"
+              ></v-btn>
+            </v-row>
+          </v-container>
 
           <v-container fluid>
             <v-row>

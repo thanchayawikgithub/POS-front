@@ -65,7 +65,7 @@ function statusText(quantity: number, min: number) {
     </v-row>
     <v-row cols="12">
       <v-col>
-        <v-table>
+        <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th class="text-center">ID</th>
@@ -131,4 +131,16 @@ function statusText(quantity: number, min: number) {
   </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+</style>

@@ -4,6 +4,7 @@ import { mdiPlus } from "@mdi/js";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
+import SalaryDialog from "@/views/checkInOut/SalaryDialog.vue";
 import { useEmployeeStore } from "@/stores/employee";
 const employeeStore = useEmployeeStore();
 const btndisabled = ref(false);
@@ -14,6 +15,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <SalaryDialog></SalaryDialog>
   <EmployeeCheckInDialog></EmployeeCheckInDialog>
   <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
   <v-container style="background-color: #e7e7e7">
@@ -23,12 +25,13 @@ onMounted(async () => {
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
           :prepend-icon="mdiPlus"
+          @click="checkInOutStore.salaryDialog = true"
         ></v-btn>
       </v-col>
     </v-row>
     <v-row class="mt-0">
       <v-col>
-        <v-table>
+        <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th>Name</th>
@@ -73,5 +76,17 @@ onMounted(async () => {
 <style scoped>
 td {
   text-align: center;
+}
+
+.table {
+  border-spacing: 1;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 6px;
+  overflow: hidden;
+  max-width: 100vw;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }
 </style>

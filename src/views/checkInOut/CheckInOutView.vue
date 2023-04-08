@@ -8,8 +8,10 @@ const employeeStore = useEmployeeStore();
 </script>
 
 <template>
-  <v-container style="background-color: #e7e7e7" fluid class="h-screen">
-    <CheckInOutList></CheckInOutList>
-  </v-container>
+  <v-app>
+    <v-container style="background-color: #e7e7e7" fluid>
+      <CheckInOutList></CheckInOutList>
+    </v-container>
+  </v-app>
 </template>
 <style scoped></style>

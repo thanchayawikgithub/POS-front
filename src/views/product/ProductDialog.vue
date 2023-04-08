@@ -47,14 +47,12 @@ onMounted(async () => {
               </v-col>
 
               <v-col cols="12">
-                <v-select
+                <v-text-field
                   v-model="productStore.editedProduct.product_type"
                   :items="productStore.products"
-                  item-title="product_type"
-                  item-value="product_type"
-                  label="Type"
+                  label="Type*"
                   :rules="[(v) => !!v || 'Item is required']"
-                ></v-select>
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
