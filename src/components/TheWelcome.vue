@@ -96,30 +96,15 @@ function statusText(quantity: number, min: number) {
                       <tr>
                         <th class="text-center">Name</th>
 
-<<<<<<< HEAD
                         <th class="text-center">Status</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr
-                        v-for="item in materialStore.materials.filter(
-                          (materials) =>
-                            materials.mat_quantity < materials.mat_min_quantity
-                        )"
+                        v-for="item in reportStore.matReport"
                         :key="item.mat_quantity"
                       >
                         <td>{{ item.mat_name }}</td>
-=======
-                      <th class="text-center">Status</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr
-                      v-for="item in reportStore.matReport"
-                      :key="item.mat_quantity"
-                    >
-                      <td>{{ item.mat_name }}</td>
->>>>>>> 33d4428bcf01c5bce7f0c15e4ff273ecbbe441d9
 
                         <td>
                           <v-card
