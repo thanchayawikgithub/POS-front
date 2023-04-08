@@ -50,6 +50,8 @@ function Hot(CatId: number, Type: String) {
     return "Hot";
   } else if (CatId === 3 && Type == "Thai Food") {
     return "Chicken";
+  } else if (CatId === 1 && Type == "Milk") {
+    return "Hot";
   }
 }
 function Ice(CatId: number, Type: String) {
@@ -61,6 +63,8 @@ function Ice(CatId: number, Type: String) {
     return "Iced";
   } else if (CatId === 3 && Type == "Thai Food") {
     return "Pig";
+  } else if (CatId === 1 && Type == "Milk") {
+    return "Iced";
   }
 }
 function Smoothie(CatId: number, Type: String) {
@@ -72,6 +76,8 @@ function Smoothie(CatId: number, Type: String) {
     return "Smoothie";
   } else if (CatId === 3 && Type == "Thai Food") {
     return "SeaFood";
+  } else if (CatId === 1 && Type == "Milk") {
+    return "Smoothie";
   }
 }
 </script>
@@ -227,7 +233,7 @@ function Smoothie(CatId: number, Type: String) {
                           ><v-btn style="width: 5vw; font-size: xx-small" v-else
                             >{{ Hot(item.categoryId, item.product_type) }}
                             <br />
-                            ฿{{ item.product_price }}</v-btn
+                            ฿{{ item.product_price - 5 }}</v-btn
                           >
 
                           <v-btn
