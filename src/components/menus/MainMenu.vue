@@ -11,12 +11,15 @@ import {
   mdiHomeOutline,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
+import { useEmployeeStore } from "@/stores/employee";
+
 const authStore = useAuthStore();
 const logout = () => {
   authStore.logout();
 };
-const employee: { employee_name: string; employee_email: string } =
+const employee: { employee_name: string; employee_position: string } =
   authStore.getEmployee();
+const employeeStore = useEmployeeStore();
 </script>
 
 <template>
@@ -26,7 +29,7 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
         prepend-avatar="./public/than.png"
         :title="employee.employee_name"
-        :subtitle="employee.employee_email"
+        :subtitle="employee.employee_position"
       ></v-list-item>
     </v-list>
 
@@ -41,6 +44,7 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
+        v-if="employee.employee_position === 'Owner'"
         :prepend-icon="mdiFaceMan"
         title="Customer"
         value="customer"
@@ -48,6 +52,7 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
+        v-if="employee.employee_position === 'Owner'"
         :prepend-icon="mdiStorefront"
         title="Store"
         value="store"
@@ -62,6 +67,7 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
+        v-if="employee.employee_position === 'Owner'"
         :prepend-icon="mdiGlassCocktail"
         title="Product"
         value="product"
@@ -69,6 +75,7 @@ const employee: { employee_name: string; employee_email: string } =
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
+        v-if="employee.employee_position === 'Owner'"
         :prepend-icon="mdiReceiptTextOutline"
         title="Receipt"
         value="receipt"
@@ -84,6 +91,7 @@ const employee: { employee_name: string; employee_email: string } =
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiFaceAgent"
+        v-if="employee.employee_position === 'Owner'"
         title="Employee"
         value="Employee"
         to="/employees"
@@ -91,6 +99,7 @@ const employee: { employee_name: string; employee_email: string } =
       ></v-list-item>
       <v-list-item
         :prepend-icon="mdiFaceAgent"
+        v-if="employee.employee_position === 'Owner'"
         title="CheckInOut"
         value="CheckInOut"
         to="/checkInOut"

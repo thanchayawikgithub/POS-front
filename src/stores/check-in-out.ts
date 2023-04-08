@@ -100,5 +100,6 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     disbtn,
     CheckInOuts,
     paySalaryDialog,
+    salaryDialog,
   };
 });

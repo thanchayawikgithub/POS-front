@@ -92,7 +92,7 @@ async function save() {
                   v-model="employeeStore.editedEmployee.employee_login"
                   :rules="[
                     (v) => !!v || 'Item is required',
-                    (v) => v.length >= 5 || 'Length must more than 5',
+                    (v) => v.length >= 4 || 'Length must more than 4',
                   ]"
                 ></v-text-field>
               </v-col>

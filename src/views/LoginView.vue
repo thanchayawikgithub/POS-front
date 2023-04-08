@@ -77,8 +77,8 @@ const show2 = ref(false);
                   :rules="[
                     (v) => !!v || 'Login Name is required',
                     (v) =>
-                      v.length >= 4 ||
-                      'Name must be more than or equal 4 characters',
+                      v.length >= 2 ||
+                      'Name must be more than or equal 2 characters',
                   ]"
                   required
                 ></v-text-field>

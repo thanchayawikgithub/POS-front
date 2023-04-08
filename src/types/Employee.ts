@@ -9,7 +9,7 @@ export default interface Employee {
   employee_position: string;
   employee_hourly_wage: number;
   employee_login: string;
-  employee_password: string;
+  employee_password?: string;
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;

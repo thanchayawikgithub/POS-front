@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import type { VForm } from "vuetify/components";
-import { mdiPhone, mdiAccountBox } from "@mdi/js";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 const form = ref<VForm | null>(null);
 

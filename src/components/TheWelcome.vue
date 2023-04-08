@@ -78,7 +78,8 @@ function statusText(quantity: number, min: number) {
       </v-row>
       <v-row class="pl-3">
         <v-col cols="4" style="width: 30vw; height: 35vh">
-          <v-card style="width: 30vw; height: 35vh"
+          <v-card style="width: 30vw; height: 35vh">
+            <v-card style="width: 30vw; height: 35vh" class="mt-16"></v-card
             ><v-card-text style="font-size: 17px">Today Sales</v-card-text>
             <v-card-text style="font-size: 60px" align="right"
               >฿ 20,000</v-card-text
