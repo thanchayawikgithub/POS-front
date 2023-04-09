@@ -76,11 +76,9 @@ function statusText(quantity: number, min: number) {
             <v-card-text
               class="pt-16 mt-8 pl-5"
               style="font-size: 30px; font-weight: bolder"
-              >Low Stock</v-card-text
+              >Drink Category Sold</v-card-text
             >
-            <v-card-subtitle class="pl-5"
-              >Please order Material are low stock.
-            </v-card-subtitle>
+            <v-card-subtitle class="pl-5"> </v-card-subtitle>
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
           <v-card
@@ -165,11 +163,9 @@ function statusText(quantity: number, min: number) {
             <v-card-text
               class="pt-16 mt-8 pl-5"
               style="font-size: 30px; font-weight: bolder"
-              >Low Stock</v-card-text
+              >Day Of Week Total Sales</v-card-text
             >
-            <v-card-subtitle class="pl-5"
-              >Please order Material are low stock.
-            </v-card-subtitle>
+            <v-card-subtitle class="pl-5"> </v-card-subtitle>
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
 

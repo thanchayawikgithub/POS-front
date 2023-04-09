@@ -6,6 +6,9 @@ import { ref } from "vue";
 import reportService from "@/services/report";
 import type Material from "@/types/Material";
 import type DrinkSalesQty from "@/types/DrinkSalesQty";
+import type BakerySalesQty from "@/types/BakerySalesQty";
+import type FoodSalesQty from "@/types/FoodSalesQty";
+import type DayOfWeekTotalSales from "@/types/DayOfWeekTotalSales";
 
 export const useReport = defineStore("report", () => {
   const loadingStore = useLoadingStore();
@@ -13,8 +16,17 @@ export const useReport = defineStore("report", () => {
   const storerp = ref<Store[]>([]);
   const matReport = ref<Material[]>([]);
   const DrinkSalesQty = ref<DrinkSalesQty[]>([]);
-  const productsName = ref<string[]>([]);
-  const productsQty = ref<number[]>([]);
+  const DrinkproductsName = ref<string[]>([]);
+  const DrinkproductsQty = ref<number[]>([]);
+  const BakerySalesQty = ref<BakerySalesQty[]>([]);
+  const BakeryproductsName = ref<string[]>([]);
+  const BakeryproductsQty = ref<number[]>([]);
+  const FoodSalesQty = ref<FoodSalesQty[]>([]);
+  const FoodproductsName = ref<string[]>([]);
+  const FoodproductsQty = ref<number[]>([]);
+  const DayOfWeekTotalSales = ref<DayOfWeekTotalSales[]>([]);
+  const DayOfWeek = ref<string[]>([]);
+  const TotalSales = ref<number[]>([]);
   async function getStoreRep() {
     loadingStore.isLoading = true;
     try {
@@ -44,16 +56,76 @@ export const useReport = defineStore("report", () => {
       const res = await reportService.getProductSalesQtyDrink();
       DrinkSalesQty.value = res.data;
       if (DrinkSalesQty.value.length > 0) {
-        productsName.value = DrinkSalesQty.value.map(
+        DrinkproductsName.value = DrinkSalesQty.value.map(
           (product) => product.Product_name
         );
-        productsQty.value = DrinkSalesQty.value.map((product) =>
+        DrinkproductsQty.value = DrinkSalesQty.value.map((product) =>
           parseInt(product.Drink_quantity_sold.toString())
         );
       }
       console.log(DrinkSalesQty.value);
-      console.log(productsName.value);
-      console.log(productsQty.value);
+      console.log(DrinkproductsName.value);
+      console.log(DrinkproductsQty.value);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
+    }
+  }
+
+  async function getBakerySalesQty() {
+    try {
+      const res = await reportService.getProductSalesQtyBakery();
+      BakerySalesQty.value = res.data;
+      if (BakerySalesQty.value.length > 0) {
+        BakeryproductsName.value = BakerySalesQty.value.map(
+          (product) => product.Product_name
+        );
+        BakeryproductsQty.value = BakerySalesQty.value.map((product) =>
+          parseInt(product.Bakery_quantity_sold.toString())
+        );
+      }
+      console.log(BakerySalesQty.value);
+      console.log(BakeryproductsName.value);
+      console.log(BakeryproductsQty.value);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
+    }
+  }
+  async function getFoodSalesQty() {
+    try {
+      const res = await reportService.getProductSalesQtyFood();
+      FoodSalesQty.value = res.data;
+      if (FoodSalesQty.value.length > 0) {
+        FoodproductsName.value = FoodSalesQty.value.map(
+          (product) => product.Product_name
+        );
+        FoodproductsQty.value = FoodSalesQty.value.map((product) =>
+          parseInt(product.Food_quantity_sold.toString())
+        );
+      }
+      console.log(FoodSalesQty.value);
+      console.log(FoodproductsName.value);
+      console.log(FoodproductsQty.value);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
+    }
+  }
+
+  async function getDayOfWeekTotalSales() {
+    try {
+      const res = await reportService.getDayOfWeekTotalSales();
+      DayOfWeekTotalSales.value = res.data;
+      if (DayOfWeekTotalSales.value.length > 0) {
+        DayOfWeek.value = DayOfWeekTotalSales.value.map((day) => day.DayOfWeek);
+        TotalSales.value = DayOfWeekTotalSales.value.map((day) =>
+          parseInt(day.Total.toString())
+        );
+      }
+      console.log(DayOfWeekTotalSales.value);
+      console.log(DayOfWeek.value);
+      console.log(TotalSales.value);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Product ได้");
@@ -61,13 +133,25 @@ export const useReport = defineStore("report", () => {
   }
 
   return {
+    DayOfWeek,
+    TotalSales,
+    getDayOfWeekTotalSales,
+    DayOfWeekTotalSales,
     getDrinkSalesQty,
     DrinkSalesQty,
     getStoreRep,
     storerp,
     getMatirial,
     matReport,
-    productsName,
-    productsQty,
+    DrinkproductsName,
+    DrinkproductsQty,
+    getBakerySalesQty,
+    BakeryproductsName,
+    BakeryproductsQty,
+    BakerySalesQty,
+    getFoodSalesQty,
+    FoodSalesQty,
+    FoodproductsName,
+    FoodproductsQty,
   };
 });

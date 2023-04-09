@@ -6,35 +6,24 @@ import { useReport } from "@/stores/report";
 
 onMounted(async () => {
   await reportStore.getDrinkSalesQty();
+  await reportStore.getBakerySalesQty();
+  await reportStore.getFoodSalesQty();
   const canvasTag = document.getElementById("myChart1") as ChartItem;
   new Chart(canvasTag, config);
 });
 const reportStore = useReport();
-const labels = reportStore.productsName;
+const labels1 = reportStore.DrinkproductsName;
+
 const data = {
-  labels: labels,
+  labels: labels1,
   datasets: [
     {
       label: "Drink",
-      data: reportStore.productsQty,
+      data: reportStore.DrinkproductsQty,
       backgroundColor: ["#F7F1E5"],
       borderColor: ["#F7F1E5"],
       borderWidth: 0.1,
     },
-    // {
-    //   label: 'Dataset 2',
-    //   data: [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170],
-    //   backgroundColor: ['#E5F7F1'],
-    //   borderColor: ['#E5F7F1'],
-    //   borderWidth: 0.1,
-    // },
-    // {
-    //   label: 'Dataset 3',
-    //   data: [30, 40, 50, 60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 170],
-    //   backgroundColor: ['#E5F7F1'],
-    //   borderColor: ['#E5F7F1'],
-    //   borderWidth: 0.1,
-    // },
   ],
 };
 
