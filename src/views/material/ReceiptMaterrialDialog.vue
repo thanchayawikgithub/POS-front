@@ -14,16 +14,16 @@ const vendorStore = useVendorStore();
       <v-container>
         <v-row>
           <v-col class="text-center">
-            <span class="text-h5">Recipt Materrial</span>
+            <span class="text-h5">Vendor Bill</span>
           </v-col>
         </v-row>
         <v-row>
           <v-card-text
             class="pl-3 pb-1"
             style="font-weight: bold; font-size: 20px"
-            >Vendor{{
-          }}</v-card-text>
-          <v-card-text></v-card-text>
+            >Vendor name :
+            {{ vendorStore.lastbill?.bill_shop_name }}</v-card-text
+          >
           <v-card-text
             class="pl-1 pb-1 mr-2"
             style="font-weight: bold; font-size: 20px"
@@ -31,13 +31,7 @@ const vendorStore = useVendorStore();
             >Customer details
           </v-card-text> </v-row
         ><v-row>
-          <v-col class="pt-1 pl-0">
-            <v-card-text
-              class="pt-0 mr-2 pr-1"
-              style="font-weight: 500; font-size: 15px"
-              >Makro{{
-            }}</v-card-text>
-          </v-col>
+          <v-col class="pt-1 pl-0"> </v-col>
           <v-card-text></v-card-text>
           <v-col class="pt-1 pl-0">
             <v-card-text
@@ -97,42 +91,54 @@ const vendorStore = useVendorStore();
           <v-divider class="ma-1" color="black"></v-divider>
         </v-row>
         <v-card class="mt-5" height="190px" flat>
-          <v-row class="pb-2">
+          <v-row
+            v-for="item in vendorStore.lastbill?.bill_details"
+            :key="item.bill_detail_id"
+            class="pb-2"
+          >
             <v-col cols="6"
               ><v-card-text
                 class="pt-0 pl-10"
                 style="font-weight: bold; font-size: 13px"
-                >กุ้ง</v-card-text
+                >{{ item.bill_detail_name }}</v-card-text
               ></v-col
             ><v-col cols="2"
               ><v-card-text
                 class="pt-0 pl-9"
                 style="font-weight: bold; font-size: 13px"
-                >2</v-card-text
+                >{{ item.bill_detail_amount }}</v-card-text
               ></v-col
             >
             <v-col cols="2"
               ><v-card-text
                 class="pt-0 pl-12"
                 style="font-weight: bold; font-size: 13px"
-                >฿ 20</v-card-text
+                >{{ item.bill_detail_price }} ฿</v-card-text
               ></v-col
             ><v-col cols="2"
               ><v-card-text
                 class="pt-0 pl-7"
                 style="font-weight: bold; font-size: 13px"
-                >฿40</v-card-text
+                >{{ item.bill_detail_total }} ฿</v-card-text
               ></v-col
             >
           </v-row>
         </v-card>
         <v-divider class="mt-5" color="black"> </v-divider>
-
         <v-card-text
           align="right"
           style="font-size: 25px; font-weight: bold"
           class="pt-5 pb-0"
-          >Total : ฿
+          >Total : {{ vendorStore.lastbill?.bill_total }} ฿
+        </v-card-text>
+        <v-card-text align="right" style="font-size: 25px" class="pt-5 pb-0"
+          >Received : {{ vendorStore.lastbill?.bill_buy }} ฿
+        </v-card-text>
+        <v-card-text
+          align="right"
+          style="font-size: 25px; font-weight: bold"
+          class="pt-5 pb-0"
+          >Changed : {{ vendorStore.lastbill?.bill_change }} ฿
         </v-card-text>
       </v-container>
 

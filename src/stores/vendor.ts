@@ -9,6 +9,7 @@ import { useMessageStore } from "./message";
 import materialService from "@/services/material";
 import type Material from "@/types/Material";
 import { useMaterialStore } from "./material";
+import type { Bill } from "@/types/Bill";
 
 export const useVendorStore = defineStore("vendor", () => {
   const dialog = ref(false);
@@ -25,7 +26,7 @@ export const useVendorStore = defineStore("vendor", () => {
   const confirmDialog = ref(false);
   const receiptMaterial = ref(false);
   const selectedVendor = ref("Makro");
-  const lastbill = ref();
+  const lastbill = ref<Bill>();
   const vendorMaterials = ref<Material[]>([]);
   const venderShopName = ref<string[]>(["Makro", "Big C", "Lotus"]);
 
@@ -112,6 +113,7 @@ export const useVendorStore = defineStore("vendor", () => {
     try {
       console.log(bill);
       const res = await billService.saveBill(bill);
+      lastbill.value = res.data;
       clearOrder();
       materialStore.getMaterials();
       dialog.value = false;
@@ -127,10 +129,12 @@ export const useVendorStore = defineStore("vendor", () => {
     } else {
       changed.value = received.value - totalPrice.value;
       payMaterial.value = false;
-      openBill(), (dialog.value = false);
+      openBill();
+      dialog.value = false;
       clearOrder();
       dis.value = false;
       received.value = 0;
+      receiptMaterial.value = true;
     }
   };
   const clearOrder = () => {
@@ -194,5 +198,6 @@ export const useVendorStore = defineStore("vendor", () => {
     venderShopName,
     confirmDialog,
     receiptMaterial,
+    lastbill,
   };
 });
