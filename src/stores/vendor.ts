@@ -25,6 +25,7 @@ export const useVendorStore = defineStore("vendor", () => {
   const confirmDialog = ref(false);
   const receiptMaterial = ref(false);
   const selectedVendor = ref("Makro");
+  const lastbill = ref();
   const vendorMaterials = ref<Material[]>([]);
   const venderShopName = ref<string[]>(["Makro", "Big C", "Lotus"]);
   const vendorMats = ref<Vendor[]>([

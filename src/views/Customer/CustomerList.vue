@@ -16,8 +16,8 @@ onMounted(async () => {
 
 <template>
   <v-container style="background-color: #e7e7e7">
-    <v-row justify="end">
-      <v-col cols="2" offset="12">
+    <v-row justify="end" class="pb-0">
+      <v-col class="pt-5 pb-0">
         <v-text-field
           v-model="customerStore.keyword"
           density="comfortable"
@@ -25,8 +25,9 @@ onMounted(async () => {
           label="Search"
           :append-inner-icon="mdiMagnify"
           clearable
-          class="pt-3"
         ></v-text-field>
+      </v-col>
+      <v-col cols="2" class="mt-5">
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
