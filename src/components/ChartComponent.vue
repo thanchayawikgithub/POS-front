@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import Chart, { type ChartConfiguration, type ChartItem } from "chart.js/auto";
 import { onMounted } from "vue";
-import { Colors } from 'chart.js';
-
-
-
+import { Colors } from "chart.js";
+onMounted(() => {
+  const canvasTag = document.getElementById("myChart");
+  const myChart = new Chart(canvasTag, config);
+});
 
 const data = {
   labels: ["M", "T", "W", "T", "F", "S", "S"],
@@ -15,69 +16,53 @@ const data = {
       borderColor: "rgb(232, 212, 202)",
       borderWidth: 4,
       data: [0, 1, 2, 5, 4, 1, 2],
-      tension: 0.1
+      tension: 0.1,
     },
   ],
-  
 };
-
-const config = {
-  type: 'line',
+const config: ChartConfiguration = {
+  type: "line",
   data,
   options: {
     scales: {
       x: {
         title: {
-          color: 'rgba(247, 241, 229, 1)',
+          color: "rgba(247, 241, 229, 1)",
           display: true,
-          text: 'Day'
+          text: "Day",
         },
         grid: {
-          color: 'rgba(247, 241, 229, 0.3)',// set x-axis grid color to red
-        },ticks: {
-          color: '#F7F1E5' // set y-axis ticks color to purple
-        }
+          color: "rgba(247, 241, 229, 0.3)", // set x-axis grid color to red
+        },
+        ticks: {
+          color: "#F7F1E5", // set y-axis ticks color to purple
+        },
       },
       y: {
         grid: {
-          color: 'rgba(247, 241, 229, 0.3)',// set y-axis grid color to green
-
+          color: "rgba(247, 241, 229, 0.3)", // set y-axis grid color to green
         },
         title: {
-          color: '#F7F1E5', // set y-axis title color to blue
+          color: "#F7F1E5", // set y-axis title color to blue
           display: true,
-          text: 'Sales'
+          text: "Sales",
         },
         ticks: {
-          color: '#F7F1E5' // set y-axis ticks color to purple
-        }
-      }
+          color: "#F7F1E5", // set y-axis ticks color to purple
+        },
+      },
     },
     plugins: {
       legend: {
         labels: {
-          color: '#F7F1E5', // set legend labels color to gray
-
-        }
-      }
-    }
-  }
-}
-
-
-
-
-
-
-
-
-
-
-onMounted(() => {
-  const canvasTag = <ChartItem>document.getElementById("myChart")
-  const myChart = new Chart(canvasTag, config)
-})
+          color: "#F7F1E5", // set legend labels color to gray
+        },
+      },
+    },
+  },
+};
 </script>
+
 <template>
   <canvas id="myChart"></canvas>
 </template>
