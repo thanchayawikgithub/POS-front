@@ -2,10 +2,6 @@
 import Chart, { type ChartConfiguration, type ChartItem } from "chart.js/auto";
 import { onMounted } from "vue";
 import { Colors } from "chart.js";
-onMounted(() => {
-  const canvasTag = document.getElementById("myChart");
-  const myChart = new Chart(canvasTag, config);
-});
 
 const data = {
   labels: ["M", "T", "W", "T", "F", "S", "S"],
@@ -61,6 +57,11 @@ const config: ChartConfiguration = {
     },
   },
 };
+
+// onMounted(() => {
+//   const canvasTag = document.getElementById("myChart");
+//   const myChart = new Chart(canvasTag, config);
+// });
 </script>
 
 <template>

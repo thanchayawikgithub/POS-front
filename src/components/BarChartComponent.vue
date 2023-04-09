@@ -3,14 +3,12 @@ import Chart, { type ChartConfiguration, type ChartItem } from "chart.js/auto";
 import { onMounted, ref } from "vue";
 import { Colors } from "chart.js";
 import { useReport } from "@/stores/report";
+
 onMounted(async () => {
   await reportStore.getDrinkSalesQty();
-  const canvasTag = <ChartItem>document.getElementById("myChart1");
-  const myChart = new Chart(canvasTag, config);
+  const canvasTag = document.getElementById("myChart1") as ChartItem;
+  new Chart(canvasTag, config);
 });
-
-
-const mmChart = ref<HTMLCanvasElement | null>(null)
 const reportStore = useReport();
 const labels = reportStore.productsName;
 const data = {
@@ -40,14 +38,8 @@ const data = {
   ],
 };
 
-<<<<<<< HEAD
-const config :  ChartConfiguration ={
-  type: 'bar',
-=======
-
 const config: ChartConfiguration = {
   type: "bar",
->>>>>>> 3837f46b51c2cc5449edac2435bfd1f5d1571834
   data: data,
   options: {
     scales: {
@@ -59,12 +51,7 @@ const config: ChartConfiguration = {
         // },
         beginAtZero: true,
         grid: {
-<<<<<<< HEAD
-          color: 'rgba(247, 241, 229, 0.1)'
-          
-=======
           color: "rgba(247, 241, 229, 0.1)",
->>>>>>> 3837f46b51c2cc5449edac2435bfd1f5d1571834
         },
         ticks: {
           color: "#F7F1E5", // set y-axis ticks color to purple
@@ -72,12 +59,7 @@ const config: ChartConfiguration = {
       },
       x: {
         grid: {
-<<<<<<< HEAD
-          color: 'rgba(247, 241, 229, 0.1)'
-          
-=======
           color: "rgba(247, 241, 229, 0.1)",
->>>>>>> 3837f46b51c2cc5449edac2435bfd1f5d1571834
         },
         // title: {
         //   color: '#F7F1E5', // set y-axis title color to blue
@@ -92,28 +74,12 @@ const config: ChartConfiguration = {
     plugins: {
       legend: {
         labels: {
-<<<<<<< HEAD
-          color: '#F7F1E5', // set legend labels color to gray
-
-        }
-      }
-    }
-  }
-}
-
-
-onMounted(() => {
-  const canvasTag = <ChartItem>document.getElementById("myChart1")
-  const myChart = new Chart(canvasTag, config)
-  })
-=======
           color: "#F7F1E5", // set legend labels color to gray
         },
       },
     },
   },
 };
->>>>>>> 3837f46b51c2cc5449edac2435bfd1f5d1571834
 </script>
 <template>
   <canvas id="myChart1"></canvas>
