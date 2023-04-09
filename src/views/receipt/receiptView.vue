@@ -17,8 +17,8 @@ const Click = (rec: Reciept) => {
 
 <template>
   <v-app style="background-color: #e7e7e7">
-    <v-container style="background-color: #e7e7e7" class="mt-10" fluid>
-      <v-card style="height: 510px; overflow-y: auto" rounded="lg"
+    <v-container style="background-color: #e7e7e7" class="mt-2">
+      <v-card style="height: 735px; overflow-y: auto" rounded="lg"
         ><v-card-text
           ><v-row
             align="center"
