@@ -16,10 +16,28 @@ export const useCustomerStore = defineStore("customer", () => {
   const customer = ref<Customer>();
   const searchDialog = ref(false);
   const customerTel = ref("");
+  const page = ref(1);
+  const take = ref(10);
+  const keyword = ref("");
+  const lastPage = ref(0);
 
   const editedCustomer = ref<Customer>({
     customer_name: "",
     customer_tel: "",
+  });
+
+  watch(page, async (newPage, oldPage) => {
+    await getCustomer();
+  });
+
+  watch(keyword, async (newKeyword, oldKeyword) => {
+    await getCustomer();
+  });
+
+  watch(lastPage, async (newLastPage, oldLastPage) => {
+    if (newLastPage < page.value) {
+      page.value = 1;
+    }
   });
 
   watch(dialog, (newDialog, oldDialog) => {
@@ -33,9 +51,14 @@ export const useCustomerStore = defineStore("customer", () => {
   async function getCustomer() {
     loadingStore.isLoading = true;
     try {
-      const res = await customerService.getCustomers();
-      customers.value = res.data;
-      console.log(res);
+      const res = await customerService.getCustomers({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+      });
+      customers.value = res.data.data;
+      lastPage.value = res.data.lastPage;
+      console.log(customers.value);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Customer ได้");
@@ -111,5 +134,8 @@ export const useCustomerStore = defineStore("customer", () => {
     customerTel,
     searchCustomer,
     customer,
+    lastPage,
+    page,
+    keyword,
   };
 });

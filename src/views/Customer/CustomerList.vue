@@ -1,8 +1,12 @@
 <script lang="ts" setup>
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
-import { mdiDelete, mdiPencil, mdiAccountMultiplePlus } from "@mdi/js";
-const date = new Date();
+import {
+  mdiDelete,
+  mdiPencil,
+  mdiAccountMultiplePlus,
+  mdiMagnify,
+} from "@mdi/js";
 const customerStore = useCustomerStore();
 
 onMounted(async () => {
@@ -14,6 +18,15 @@ onMounted(async () => {
   <v-container style="background-color: #e7e7e7">
     <v-row justify="end">
       <v-col cols="2" offset="12">
+        <v-text-field
+          v-model="customerStore.keyword"
+          density="comfortable"
+          variant="outlined"
+          label="Search"
+          :append-inner-icon="mdiMagnify"
+          clearable
+          class="pt-3"
+        ></v-text-field>
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
@@ -70,6 +83,10 @@ onMounted(async () => {
         </v-table>
       </v-col>
     </v-row>
+    <v-pagination
+      :length="customerStore.lastPage"
+      v-model="customerStore.page"
+    ></v-pagination>
   </v-container>
 </template>
 <style scoped>
