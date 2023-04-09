@@ -1,4 +1,9 @@
 import http from "./axios";
+
+function getCheckInOutsByEmpId(id: number) {
+  return http.get(`/check-in-outs/employee/${id}`);
+}
+
 function getCheckInOut() {
   return http.get("/check-in-outs");
 }
@@ -14,4 +19,5 @@ export default {
   getCheckInOut,
   saveCheckInOut,
   updateCheckInOut,
+  getCheckInOutsByEmpId,
 };
