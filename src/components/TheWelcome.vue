@@ -51,7 +51,7 @@ function statusText(quantity: number, min: number) {
 </script>
 
 <template>
-  <v-app style="background-color: #e7e7e7; height: 870px">
+  <v-app style="background-color: #e7e7e7; height: 900px">
     <EmployeeCheckInDialog></EmployeeCheckInDialog>
     <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
     <v-container style="background-color: #e7e7e7" fluid>
@@ -255,23 +255,118 @@ function statusText(quantity: number, min: number) {
               background-color: #8d7b68;
             "
           >
-            <v-row class="pl-2 pt-2" style="width: 30vw">
+          </v-card>
+        </v-col>
+      </v-row>
+      <v-row class="ml-2 mt-16 pt-7"></v-row>
+      <v-row class="ml-0 mt-16">
+        <v-col cols="5" class="mr-11">
+          <v-card
+            rounded="lg"
+            class="pa-1"
+            style="width: 40vw; height: 290px; position: absolute"
+            elevation="15"
+          >
+            <v-card-text class="mt-5"></v-card-text>
+            <v-table
+              style="overflow-y: auto; height: 21vh; width: 50vw"
+              class="mt-8"
+            >
+              <thead>
+                <tr>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Date</th>
+                  <th class="text-center">Time-in</th>
+                  <th class="text-center">Time-out</th>
+                  <th class="text-center">Status</th>
+                  <th class="text-center"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  v-for="item in checkInOutStore.currentCheckInOuts"
+                  :key="item.cio_id"
+                >
+                  <td class="text-center">{{ item.employee.employee_name }}</td>
+                  <td class="text-center">
+                    {{ JSON.stringify(item.cio_time_in).substring(11, 9) }}/{{
+                      JSON.stringify(item.cio_time_in).substring(8, 6)
+                    }}/{{ JSON.stringify(item.cio_time_in).substring(1, 5) }}
+                  </td>
+                  <td class="text-center">
+                    {{ JSON.stringify(item.cio_time_in).substring(12, 20) }}
+                  </td>
+                  <td v-if="item.cio_time_out" class="text-center">
+                    {{ JSON.stringify(item.cio_time_out).substring(12, 20) }}
+                  </td>
+                  <td v-else></td>
+
+                  <td class="text-center">{{ item.status }}</td>
+                  <td>
+                    <v-btn
+                      v-if="item.status === 'checked in'"
+                      @click="
+                        (checkInOutStore.checkOutDialog = true),
+                          (checkInOutStore.empCheckOut = item)
+                      "
+                      >out</v-btn
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </v-table>
+          </v-card>
+          <v-card
+            rounded="lg"
+            class="pa-1"
+            elevation="15"
+            style="
+              width: 38vw;
+              height: 120px;
+              top: -39px;
+              left: 16px;
+
+              background-color: #876445;
+            "
+            ><v-card-text
+              class="pb-2 text-center"
+              style="font-weight: bold; font-size: 20px; color: #f7f1e5"
+              >Employee Check In Out</v-card-text
+            >
+            <v-card-text align="center"
+              ><v-btn
+                @click="checkInOutStore.checkInDialog = true"
+                style="width: 25vw"
+                class="startbutton"
+                >Check In</v-btn
+              ></v-card-text
+            >
+          </v-card>
+        </v-col>
+        <v-col cols="3" class="pl-0">
+          <v-card
+            rounded="lg"
+            class="pa-1"
+            style="width: 29vw; height: 290px; position: absolute"
+            elevation="15"
+          >
+            <v-row class="pl-2 mt-16 pt-5" style="width: 35vw">
               <v-table
                 style="
                   overflow-y: auto;
                   height: 248px;
-                  background-color: #8d7b68;
-                  width: 30vw;
+
+                  width: 33vw;
                 "
               >
-                <thead style="color: #f7f1e5">
+                <thead>
                   <tr>
                     <th class="text-center">Name</th>
 
                     <th class="text-center">Status</th>
                   </tr>
                 </thead>
-                <tbody style="color: #f7f1e5">
+                <tbody>
                   <tr
                     v-for="item in reportStore.matReport"
                     :key="item.mat_quantity"
@@ -302,10 +397,81 @@ function statusText(quantity: number, min: number) {
               </v-table>
             </v-row>
           </v-card>
+          <v-card
+            rounded="lg"
+            class="pa-1 pl2"
+            elevation="15"
+            style="
+              width: 27vw;
+              height: 120px;
+              top: -39px;
+              left: 16px;
+
+              background-color: #532e1c;
+            "
+          >
+            <v-card-text
+              class="pb-2 text-center"
+              style="font-weight: bold; font-size: 22px; color: #f7f1e5"
+              >Low Stock</v-card-text
+            >
+            <v-divider class="mb-0 ma-2" color="#f7f1e5"></v-divider>
+            <v-card-text
+              class="pt-2 text-center"
+              style="font-weight: bold; font-size: 14px; color: #f7f1e5"
+              >Please order Material are low stock.</v-card-text
+            >
+          </v-card>
+        </v-col>
+        <v-col cols="2" class="pl-16 ml-10">
+          <v-card
+            rounded="lg"
+            class="pa-1"
+            style="width: 19vw; height: 290px; position: absolute"
+            elevation="15"
+          >
+            <v-card-subtitle
+              class="mt-13"
+              style="text-align: end; font-size: 18px"
+              >Daily Sales</v-card-subtitle
+            ><v-card-text class="mt-2" style="text-align: end; font-size: 40px"
+              >฿ 1000</v-card-text
+            ><v-card-subtitle
+              class="mt-4"
+              style="text-align: end; font-size: 18px"
+              >Daily Recipt</v-card-subtitle
+            ><v-card-text class="mt-1" style="text-align: end; font-size: 40px"
+              >8</v-card-text
+            >
+            <v-divider class="mb-0 ma-1"></v-divider>
+          </v-card>
+          <v-card
+            :prepend-icon="mdiCashMultiple"
+            rounded="lg"
+            class="pa-1"
+            elevation="15"
+            style="
+              width: 8vw;
+              height: 120px;
+              top: -39px;
+              left: 16px;
+
+              background-color: #433520;
+            "
+          >
+            <template v-slot:prepend>
+              <v-icon color="#f7f1e5" size="55" class="mt-4 ml-4">{{
+                mdiCashMultiple
+              }}</v-icon> </template
+            ><v-card-text
+              class="pb-2 text-center"
+              style="font-weight: bold; font-size: 20px; color: #f7f1e5"
+            ></v-card-text>
+          </v-card>
         </v-col>
       </v-row>
-      <v-row class="ml-2 mt-16 pt-7"></v-row>
-      <v-row class="ml-0 mt-16">
+      <!-- <v-row class="ml-2 mt-16 pt-16"></v-row>
+      <v-row class="ml-0 mt-16 pt-16">
         <v-col cols="6" class="mr-16">
           <v-card
             rounded="lg"
@@ -321,6 +487,7 @@ function statusText(quantity: number, min: number) {
               <thead>
                 <tr>
                   <th class="text-center">Name</th>
+                  <th class="text-center">Date</th>
                   <th class="text-center">Time-in</th>
                   <th class="text-center">Time-out</th>
                   <th class="text-center">Status</th>
@@ -334,12 +501,14 @@ function statusText(quantity: number, min: number) {
                 >
                   <td class="text-center">{{ item.employee.employee_name }}</td>
                   <td class="text-center">
-                    {{ JSON.stringify(item.cio_time_in).substring(1, 11) }}
+                    {{ JSON.stringify(item.cio_time_in).substring(11, 9) }}/{{
+                      JSON.stringify(item.cio_time_in).substring(8, 6)
+                    }}/{{ JSON.stringify(item.cio_time_in).substring(1, 5) }}
+                  </td>
+                  <td class="text-center">
                     {{ JSON.stringify(item.cio_time_in).substring(12, 20) }}
                   </td>
                   <td v-if="item.cio_time_out" class="text-center">
-                    {{ JSON.stringify(item.cio_time_out).substring(1, 11) }}
-
                     {{ JSON.stringify(item.cio_time_out).substring(12, 20) }}
                   </td>
                   <td v-else></td>
@@ -386,52 +555,7 @@ function statusText(quantity: number, min: number) {
             >
           </v-card>
         </v-col>
-        <v-col cols="2" class="pl-4">
-          <v-card
-            rounded="lg"
-            class="pa-1"
-            style="width: 19vw; height: 290px; position: absolute"
-            elevation="15"
-          >
-            <v-card-subtitle
-              class="mt-13"
-              style="text-align: end; font-size: 18px"
-              >Daily Sales</v-card-subtitle
-            ><v-card-text class="mt-2" style="text-align: end; font-size: 40px"
-              >฿ 1000</v-card-text
-            ><v-card-subtitle
-              class="mt-4"
-              style="text-align: end; font-size: 18px"
-              >Daily Recipt</v-card-subtitle
-            ><v-card-text class="mt-1" style="text-align: end; font-size: 40px"
-              >8</v-card-text
-            >
-            <v-divider class="mb-0 ma-1"></v-divider>
-          </v-card>
-          <v-card
-            :prepend-icon="mdiCashMultiple"
-            rounded="lg"
-            class="pa-1"
-            elevation="15"
-            style="
-              width: 8vw;
-              height: 120px;
-              top: -39px;
-              left: 16px;
 
-              background-color: #532e1c;
-            "
-          >
-            <template v-slot:prepend>
-              <v-icon color="#f7f1e5" size="55" class="mt-4 ml-4">{{
-                mdiCashMultiple
-              }}</v-icon> </template
-            ><v-card-text
-              class="pb-2 text-center"
-              style="font-weight: bold; font-size: 20px; color: #f7f1e5"
-            ></v-card-text>
-          </v-card>
-        </v-col>
         <v-col cols="3" class="pl-16 ml-6">
           <v-card
             rounded="lg"
@@ -482,7 +606,7 @@ function statusText(quantity: number, min: number) {
             ></v-card-text>
           </v-card>
         </v-col>
-      </v-row>
+      </v-row> -->
     </v-container>
   </v-app>
 </template>
