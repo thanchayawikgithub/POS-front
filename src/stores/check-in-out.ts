@@ -91,7 +91,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     }
   }
 
-  async function getCheckInOutcById() {
+  async function getCheckInOutById() {
     try {
       loadingStore.isLoading = true;
       const res = await checkInOutService.getCheckInOutsByEmpId(
@@ -135,6 +135,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       lastSalary.value = res.data;
       console.log(lastSalary.value);
       await closeDialog();
+      slip.value = true;
       payEmpId.value = undefined;
       searchCheckInOuts.value = [];
     } catch (error) {
@@ -147,7 +148,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     confirmDialog.value = false;
   }
   return {
-    getCheckInOutcById,
+    getCheckInOutById,
     PaySalaries,
     checkInDialog,
     checkOutDialog,
@@ -166,5 +167,6 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     empHourlyWage,
     confirmDialog,
     slip,
+    lastSalary,
   };
 });

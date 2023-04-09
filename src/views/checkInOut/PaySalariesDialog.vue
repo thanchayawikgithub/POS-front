@@ -46,7 +46,7 @@ onMounted(async () => {
                 single-line
                 label="Select Employee"
               ></v-select>
-              <v-btn @click="checkInOutStore.getCheckInOutcById">Search</v-btn>
+              <v-btn @click="checkInOutStore.getCheckInOutById">Search</v-btn>
             </v-col>
             <v-container
               ><v-table

@@ -4,8 +4,6 @@ import { useCheckInOutStore } from "@/stores/check-in-out";
 import { useEmployeeStore } from "@/stores/employee";
 
 const checkInOutStore = useCheckInOutStore();
-const storesStore = useStoreStore();
-const employeeStore = useEmployeeStore();
 </script>
 <template>
   <v-dialog v-model="checkInOutStore.slip" persistent width="1000">
@@ -31,25 +29,27 @@ const employeeStore = useEmployeeStore();
         <v-row
           ><v-card-text class="pl-3 pb-1" style="font-weight: bold"
             >Employee ID :{{
-              checkInOutStore.empCheckOut?.EmployeeId
+              checkInOutStore.lastSalary?.EmployeeId
             }}</v-card-text
           >
           <v-card-text class="ml-10 pl-16 pb-1" style="font-weight: bold"
-            >Period :{{ checkInOutStore.empCheckOut?.updatedDate }}</v-card-text
+            >Period :{{ "01/04/2566 - 30/04/2566" }}</v-card-text
           > </v-row
         ><v-row
           ><v-card-text class="pl-3 pt-0" style="font-weight: bold"
             >Employee Name :{{
-              checkInOutStore.empCheckOut?.employee.employee_name
+              checkInOutStore.lastSalary?.employee.employee_name
             }}</v-card-text
           ><v-card-text class="ml-16 pl-16 pt-0" style="font-weight: bold"
             >Payment Date :{{
-              checkInOutStore.empCheckOut?.deletedDate
+              checkInOutStore.lastSalary?.ss_date
             }}</v-card-text
           >
         </v-row>
         <v-divider class="mt-16"> </v-divider>
-        <v-card-text>In come : ฿</v-card-text>
+        <v-card-text
+          >Total : ฿ {{ checkInOutStore.lastSalary?.ss_salary }}</v-card-text
+        >
       </v-container>
 
       <v-divider class="mb-0"></v-divider>
