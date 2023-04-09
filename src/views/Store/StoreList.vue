@@ -45,6 +45,28 @@ onMounted(async () => {
             </v-row>
           </v-container>
         </v-card>
+        <v-card width="60vw" class="mx-auto mt-6">
+          <v-container>
+            <v-row>
+              <v-col cols="7">
+                <v-card-text
+                  class="mt-16 pt-10 text-center"
+                  style="font-size: 22px; font-weight: bold"
+                >
+                  D-COFFEE IS EXPANDING TO A NEW NEIGHBORHOOD</v-card-text
+                >
+                <v-card-subtitle
+                  style="font-size: 19px; font-weight: bold"
+                  class="text-center pt-0"
+                  >STAY TUNED!</v-card-subtitle
+                >
+              </v-col>
+              <v-col cols="5">
+                <v-img src="./D-coffee2.jpg" style="width: 40vw"></v-img
+              ></v-col>
+            </v-row>
+          </v-container>
+        </v-card>
       </v-col>
     </v-row>
   </v-container>
