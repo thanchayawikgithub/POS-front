@@ -22,6 +22,7 @@ export const useVendorStore = defineStore("vendor", () => {
   const changed = ref(0);
   const dis = ref(false);
   const materialStore = useMaterialStore();
+  const confirmDialog = ref(false);
 
   const selectedVendor = ref("Makro");
   const vendorMaterials = ref<Material[]>([]);
@@ -246,5 +247,6 @@ export const useVendorStore = defineStore("vendor", () => {
     dis,
     vendorMaterials,
     venderShopName,
+    confirmDialog,
   };
 });

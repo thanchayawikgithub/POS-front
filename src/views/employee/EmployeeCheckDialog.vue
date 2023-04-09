@@ -1,14 +1,31 @@
 <script lang="ts" setup>
 import { useEmployeeStore } from "@/stores/employee";
-
+import { mdiDeleteAlertOutline } from "@mdi/js";
 const employeeStore = useEmployeeStore();
 </script>
 <template>
   <v-row justify="center">
     <v-dialog v-model="employeeStore.deleteDialog" persistent width="600">
-      <v-card>
-        <v-card-title class="text-h5"> Delete data. </v-card-title>
-        <v-card-text> Are you sure you want to delete!!!</v-card-text>
+      <v-sheet
+        elevation="15"
+        max-width="600"
+        rounded="lg"
+        width="100%"
+        class="pa-4 mx-auto"
+      >
+        <v-card-title class="text-center" style="font-size: 23px">
+          Delete data
+        </v-card-title>
+        <v-divider class="mb-0"></v-divider>
+        <v-card-text class="text-center pb-0">
+          <v-icon size="60px" color="red">{{
+            mdiDeleteAlertOutline
+          }}</v-icon></v-card-text
+        >
+        <v-card-text class="text-h5 text-center pt-0">
+          Are you sure you want to delete!!!</v-card-text
+        >
+        <v-divider class="mb-0"></v-divider>
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
@@ -16,19 +33,19 @@ const employeeStore = useEmployeeStore();
             variant="text"
             @click="employeeStore.deleteDialog = false"
           >
-            cancel
+            No
           </v-btn>
           <v-btn
-            color="green-darken-1"
+            color="blue-darken-1"
             variant="text"
             @click="
               employeeStore.deleteEmployee(employeeStore.checkDialog),
                 (employeeStore.deleteDialog = false)
             "
-            >ok
+            >Yes
           </v-btn>
         </v-card-actions>
-      </v-card>
+      </v-sheet>
     </v-dialog>
   </v-row>
 </template>

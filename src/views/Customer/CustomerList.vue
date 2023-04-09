@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
-import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import { mdiDelete, mdiPencil, mdiAccountMultiplePlus } from "@mdi/js";
 const date = new Date();
 const customerStore = useCustomerStore();
 
@@ -17,7 +17,7 @@ onMounted(async () => {
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
-          :prepend-icon="mdiPlus"
+          :prepend-icon="mdiAccountMultiplePlus"
           @click="customerStore.dialog = true"
           >Add Customer</v-btn
         >

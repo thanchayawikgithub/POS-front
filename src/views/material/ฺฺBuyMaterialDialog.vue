@@ -259,7 +259,7 @@ onMounted(async () => {
                     style="height: 5vh; width: 20vw"
                     rounded
                     class="fontbtn mb-7"
-                    color="#df8057"
+                    color="#BB9981"
                     @click="vendorStore.pay()"
                     >PAY</v-btn
                   >

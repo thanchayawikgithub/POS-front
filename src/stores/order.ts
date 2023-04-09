@@ -30,6 +30,7 @@ export const useOrderStore = defineStore("order", () => {
   const billDiscount = ref(0);
   const customerStore = useCustomerStore();
   const usedPoint = ref(0);
+  const confirmDialog = ref(false);
 
   const receiptStore = useReceiptStore();
   const Order = ref<Product>();
@@ -381,5 +382,6 @@ export const useOrderStore = defineStore("order", () => {
     qrcodeOptions,
     clearOrder,
     UsePoint,
+    confirmDialog,
   };
 });

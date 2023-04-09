@@ -23,7 +23,6 @@ const orderStore = useOrderStore();
         <v-row>
           <v-col cols="12" align="center">
             <v-btn
-              color="blue"
               variant="outlined"
               class="mx-2"
               :prepend-icon="mdiQrcodeScan"
@@ -31,7 +30,6 @@ const orderStore = useOrderStore();
               >QR-Payment</v-btn
             >
             <v-btn
-              color="green"
               variant="outlined"
               :prepend-icon="mdiCashMultiple"
               @click="orderStore.paymentMethod = 'Cash'"
@@ -65,7 +63,7 @@ const orderStore = useOrderStore();
             ><v-btn
               color="green-darken-2"
               variant="tonal"
-              @click="orderStore.calChanged()"
+              @click="orderStore.confirmDialog = true"
               >Submit</v-btn
             ></v-row
           >
@@ -77,13 +75,10 @@ const orderStore = useOrderStore();
             ><v-col align="center" style="font-size: 21px"
               >Total : ฿ {{ orderStore.totalPrice }}
             </v-col></v-row
-          ><QRCodeVue
-            :value="orderStore.promptPayValue"
-            :renderAs="orderStore.qrcodeOptions"
-          />
+          ><v-img src="./public/QR.jpg" height="300px"></v-img>
           <v-row class="justify-center"
             ><v-btn
-              @click="orderStore.payDialog = false"
+              @click="orderStore.calChanged()"
               color="green-darken-2"
               variant="tonal"
               >Submit</v-btn

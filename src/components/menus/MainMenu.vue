@@ -9,6 +9,7 @@ import {
   mdiGlassCocktail,
   mdiReceiptTextOutline,
   mdiHomeOutline,
+  mdiTextBoxEditOutline,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 import { useEmployeeStore } from "@/stores/employee";
@@ -98,7 +99,7 @@ const employeeStore = useEmployeeStore();
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item
-        :prepend-icon="mdiFaceAgent"
+        :prepend-icon="mdiTextBoxEditOutline"
         v-if="employee.employee_position === 'Owner'"
         title="CheckInOut"
         value="CheckInOut"

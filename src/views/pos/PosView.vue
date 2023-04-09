@@ -18,6 +18,7 @@ import SuccessDialog from "./SuccessDialog.vue";
 import CustomerSearchDialog from "./CustomerSearchDialog.vue";
 import ReceiptDialog from "./ReceiptDialog.vue";
 import PosUsePointDialog from "./PosUsePointDialog.vue";
+import ConfirmDialog from "./ConfirmDialog.vue";
 const customerStore = useCustomerStore();
 const tab = ref("Menu");
 const type = ref(["Drink", "Bakery", "Food"]);
@@ -83,6 +84,7 @@ function Smoothie(CatId: number, Type: String) {
 </script>
 
 <template>
+  <ConfirmDialog></ConfirmDialog>
   <PosUsePointDialog></PosUsePointDialog>
   <PosBakeryDialog></PosBakeryDialog>
   <PosDrinkDialog></PosDrinkDialog>

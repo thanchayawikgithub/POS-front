@@ -14,12 +14,14 @@ const vendorStore = useVendorStore();
         <v-row>
           <v-col cols="12" align="center">
             <v-btn
+              variant="outlined"
               class="mx-2"
               :prepend-icon="mdiQrcodeScan"
               @click="vendorStore.paymentMethod = 'QR-Payment'"
               >QR-Payment</v-btn
             >
             <v-btn
+              variant="outlined"
               :prepend-icon="mdiCashMultiple"
               @click="vendorStore.paymentMethod = 'Cash'"
               >Cash</v-btn
@@ -49,7 +51,12 @@ const vendorStore = useVendorStore();
           </v-row>
 
           <v-row class="justify-center"
-            ><v-btn @click="vendorStore.calChanged()">Submit</v-btn></v-row
+            ><v-btn
+              color="green"
+              variant="tonal"
+              @click="vendorStore.confirmDialog = true"
+              >Submit</v-btn
+            ></v-row
           >
         </v-container>
       </v-expand-transition>
@@ -62,12 +69,11 @@ const vendorStore = useVendorStore();
           ><v-img src="./public/QR.jpg" height="300px"></v-img>
           <v-row class="justify-center"
             ><v-btn
+              color="green"
+              variant="tonal"
               @click="
                 vendorStore.calChanged();
-                vendorStore.openBill(),
-                  (vendorStore.payMaterial = false),
-                  (vendorStore.dialog = false),
-                  vendorStore.clearOrder();
+
                 vendorStore.dis = false;
               "
               >Submit</v-btn

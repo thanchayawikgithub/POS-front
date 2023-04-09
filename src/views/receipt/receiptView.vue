@@ -17,7 +17,7 @@ const Click = (rec: Reciept) => {
 
 <template>
   <v-container fluid>
-    <v-card style="height: 90vh; overflow-y: auto; background-color: #e7e7e7"
+    <v-card style="height: 75vh; overflow-y: auto; background-color: #e7e7e7"
       ><v-card-text
         ><v-row
           align="center"
@@ -25,7 +25,9 @@ const Click = (rec: Reciept) => {
           class="text-center"
           style="background-color: #a4907c; color: #f0e3dd"
         >
-          <v-col cols="1" class="font-weight-bold text-uppercase">ID</v-col>
+          <v-col cols="2" class="font-weight-bold text-uppercase"
+            >Date Time</v-col
+          >
           <v-col cols="2" class="font-weight-bold text-uppercase"
             >Store Name</v-col
           >
@@ -50,7 +52,12 @@ const Click = (rec: Reciept) => {
           @click="Click(rec)"
           class="row text-center"
         >
-          <v-col cols="1">{{ rec.rec_id }}</v-col>
+          <v-col cols="2"
+            >{{ JSON.stringify(rec.rec_createdAt).substring(9, 11) }}/{{
+              JSON.stringify(rec.rec_createdAt).substring(6, 8)
+            }}/{{ JSON.stringify(rec.rec_createdAt).substring(1, 5) }}
+            {{ JSON.stringify(rec.rec_createdAt).substring(12, 17) }}
+          </v-col>
           <v-col cols="2">{{ rec.store.store_name }}</v-col>
           <v-col cols="2">{{ rec.employee?.employee_name }}</v-col>
           <v-col cols="2">{{ rec.customer?.customer_name }}</v-col>
@@ -58,13 +65,17 @@ const Click = (rec: Reciept) => {
           <v-col cols="2">{{ rec.rec_total }}</v-col>
           <v-divider></v-divider
           ><v-expand-transition
-            ><v-container v-show="rec.show" align="center" justify="center">
+            ><v-container
+              v-show="rec.show"
+              align="center"
+              justify="center"
+              fluid
+              style="background-color: white"
+            >
               <v-row align="center" justify="center" cols="12"
                 ><v-col cols="8"
                   ><v-row cols="12"
-                    ><v-col cols="5" style="padding-left: 6vw"
-                      >Product Name</v-col
-                    >
+                    ><v-col cols="5" class="text-end">Product Name</v-col>
                     <v-col cols="3" class="text-end">Product Price</v-col>
                     <v-col cols="2" class="text-end">Amount</v-col>
                     <v-col cols="2" class="text-end">Total</v-col></v-row
@@ -78,8 +89,8 @@ const Click = (rec: Reciept) => {
                     ><v-row cols="12"
                       ><v-col
                         cols="5"
-                        class="text-start"
-                        style="padding-left: 11vw"
+                        class="text-end"
+                        style="padding-left: 13vw"
                         >{{ rcd.rcd_name }}</v-col
                       >
                       <v-col cols="3" class="text-end">{{

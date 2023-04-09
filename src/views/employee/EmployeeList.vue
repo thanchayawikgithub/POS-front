@@ -2,7 +2,7 @@
 import { useEmployeeStore } from "@/stores/employee";
 import { onMounted } from "vue";
 import EmployeeDialog from "./EmployeeDialog.vue";
-import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import { mdiDelete, mdiPencil, mdiAccountMultiplePlus } from "@mdi/js";
 
 const employeeStore = useEmployeeStore();
 
@@ -18,7 +18,7 @@ onMounted(async () => {
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
-          :prepend-icon="mdiPlus"
+          :prepend-icon="mdiAccountMultiplePlus"
           @click="employeeStore.dialog = true"
           >Add New</v-btn
         >
