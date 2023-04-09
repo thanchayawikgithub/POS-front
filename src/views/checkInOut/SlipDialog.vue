@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { useStoreStore } from "@/stores/Store";
 import { useCheckInOutStore } from "@/stores/check-in-out";
-import { useEmployeeStore } from "@/stores/employee";
 
 const checkInOutStore = useCheckInOutStore();
 </script>
@@ -45,7 +43,7 @@ const checkInOutStore = useCheckInOutStore();
             class="pl-1 pb-1"
             style="font-weight: bold; font-size: 15px"
             align="right"
-            >Period :{{ "2023/04/2566 - 30/04/2566" }}</v-card-text
+            >Period :{{ "01/04/2566 - 30/04/2566" }}</v-card-text
           > </v-row
         ><v-row
           ><v-card-text

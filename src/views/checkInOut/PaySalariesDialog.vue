@@ -1,10 +1,9 @@
 <script lang="ts" setup>
-import { onMounted, ref } from "vue";
-import type { VForm } from "vuetify/components";
+import { onMounted } from "vue";
+
 import { useCheckInOutStore } from "@/stores/check-in-out";
-import employee from "@/services/employee";
+
 import { useEmployeeStore } from "@/stores/employee";
-import type Employee from "@/types/Employee";
 
 import ConfirmDialog from "./ConfirmDialog.vue";
 import { mdiMagnify } from "@mdi/js";

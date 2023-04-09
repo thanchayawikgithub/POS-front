@@ -1,3 +1,5 @@
+import type Salary from "./Salary";
+
 export default interface Employee {
   employee_id?: number;
   employee_name: string;
@@ -13,4 +15,5 @@ export default interface Employee {
   createdAt?: Date;
   updatedAt?: Date;
   deletedAt?: Date;
+  salaries: Salary[];
 }

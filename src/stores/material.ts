@@ -4,13 +4,11 @@ import { ref, watch } from "vue";
 import materialService from "@/services/material";
 import { useLoadingStore } from "./loading";
 import { useMessageStore } from "./message";
-import { useVendorStore } from "./vendor";
-import { useCheckMaterialStore } from "./checkMaterial";
 
 export const useMaterialStore = defineStore("material", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
-  const checkMaterialStore = useCheckMaterialStore();
+
   const checkDialog = ref();
   const deleteDialog = ref(false);
   const isTable = ref(true);
@@ -21,7 +19,6 @@ export const useMaterialStore = defineStore("material", () => {
   const keyword = ref("");
   const lastPage = ref(0);
 
-  const vendorStore = useVendorStore();
   const materials = ref<Material[]>([]);
   const editedMaterial = ref<Material & { files: File[] }>({
     mat_name: "",

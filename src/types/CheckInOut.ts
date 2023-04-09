@@ -1,4 +1,5 @@
 import type Employee from "./Employee";
+import type Salary from "./Salary";
 
 export default interface CheckInOut {
   cio_id: number;
@@ -21,5 +22,5 @@ export default interface CheckInOut {
 
   employee: Employee;
 
-  // salary: Salary;
+  salary: Salary;
 }

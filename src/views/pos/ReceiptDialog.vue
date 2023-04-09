@@ -1,12 +1,7 @@
 <script lang="ts" setup>
-import receipt from "@/services/receipt";
-import { useCustomerStore } from "@/stores/customer";
-import { useProductStore } from "@/stores/product";
 import { useReceiptStore } from "@/stores/receipt";
 
 const receiptStore = useReceiptStore();
-const customerStore = useCustomerStore();
-const productStore = useProductStore();
 </script>
 <template>
   <v-dialog v-model="receiptStore.showDialog" persistent width="500"
