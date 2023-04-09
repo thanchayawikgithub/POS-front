@@ -8,10 +8,17 @@ const customerStore = useCustomerStore();
 
 <template>
   <v-dialog v-model="orderStore.usePoint" persistent width="600">
-    <v-card>
-      <v-card-title>
+    <v-sheet
+      elevation="15"
+      max-width="700"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto"
+    >
+      <v-card-title style="text-align: center">
         <span class="text-h5">UsePoint</span>
       </v-card-title>
+      <v-divider class="mb-0"></v-divider>
       <v-container>
         <v-row>
           <v-col cols="12" align="center"> </v-col>
@@ -19,8 +26,8 @@ const customerStore = useCustomerStore();
       </v-container>
 
       <v-container>
-        <v-row
-          ><v-col align="center" style="font-size: 21px"
+        <v-row class="pt-0"
+          ><v-col align="center" style="font-size: 25px" class="pt-0"
             >Points: {{ customerStore.customer?.customer_point }}
           </v-col>
         </v-row>
@@ -40,28 +47,30 @@ const customerStore = useCustomerStore();
               v-model="orderStore.usedPoint"
               suffix="Point"
               :rules="[
-                (value) => /(.*0)$/.test(value) || 'Point must end with 0',
+                (value) => /(.*0)$/.test(value) || 'Point must end with 10',
               ]"
             ></v-text-field>
           </v-col>
         </v-row>
 
-        <v-row class="justify-center" @click="orderStore.calDiscount()"
-          ><v-btn>Submit</v-btn></v-row
+        <v-row class="justify-center"
+          ><v-btn
+            color="green-darken-2"
+            variant="elevated"
+            @click="orderStore.calDiscount()"
+            >Submit</v-btn
+          ></v-row
         >
       </v-container>
+      <v-divider class="mb-0 mt-5"></v-divider>
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-          color="blue-darken-1"
-          variant="text"
-          @click="orderStore.usePoint = false"
-        >
+        <v-btn color="red" variant="text" @click="orderStore.usePoint = false">
           Close
         </v-btn>
       </v-card-actions>
-    </v-card></v-dialog
+    </v-sheet></v-dialog
   >
 </template>
 

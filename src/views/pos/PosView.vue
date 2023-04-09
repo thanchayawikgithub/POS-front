@@ -7,7 +7,7 @@ import { useCategoryStore } from "@/stores/category";
 import { useProductStore } from "@/stores/product";
 import { useOrderStore } from "@/stores/order";
 import { useCustomerStore } from "@/stores/customer";
-
+import { mdiCloseCircleOutline } from "@mdi/js";
 import PayDialog from "./PayDialog.vue";
 import PosDrinkDialog from "./PosDrinkDialog.vue";
 import PosBakeryDialog from "./PosBakeryDialog.vue";
@@ -409,7 +409,7 @@ function Smoothie(CatId: number, Type: String) {
             </v-row>
             <v-card
               style="
-                height: 34vh;
+                height: 36vh;
                 width: 37vw;
                 overflow-y: auto;
                 background-color: #e7e7e7;
@@ -487,7 +487,7 @@ function Smoothie(CatId: number, Type: String) {
                 ><v-btn
                   style="width: 13vw"
                   rounded
-                  color="#f6ad8d"
+                  color="#A9907E"
                   class="font-btn"
                   @click="customerStore.dialog = true"
                 >
@@ -498,7 +498,7 @@ function Smoothie(CatId: number, Type: String) {
                 <v-btn
                   style="width: 13vw"
                   rounded
-                  color="#f6ad8d"
+                  color="#A9907E"
                   class="font-btn"
                   @click="customerStore.searchDialog = true"
                 >
@@ -515,15 +515,25 @@ function Smoothie(CatId: number, Type: String) {
                 <td class="text-lg-right">
                   {{ customerStore.customer?.customer_name }}
                 </td>
-                <td class="text-lg-right"></td>
+                <td>
+                  <v-btn
+                    class="mr-0 pl-10 pr-0"
+                    style="color: red"
+                    :prepend-icon="mdiCloseCircleOutline"
+                    v-if="customerStore.customer?.customer_name != undefined"
+                    variant="plain"
+                    @click="orderStore.clearCustomer()"
+                  ></v-btn>
+                </td>
               </tr>
               <tr>
                 <td>Point :</td>
                 <td>
                   <v-btn
+                    color="green"
                     v-if="customerStore.customer?.customer_point! >= 10"
                     variant="outlined"
-                    @click="orderStore.usePoint = true"
+                    @click="orderStore.UsePoint()"
                     >Use</v-btn
                   >
                 </td>
@@ -559,7 +569,7 @@ function Smoothie(CatId: number, Type: String) {
                   style="height: 5vh; width: 20vw"
                   rounded
                   class="eiei"
-                  color="#df8057"
+                  color="#BB9981"
                   @click="orderStore.pay()"
                   >PAY</v-btn
                 >

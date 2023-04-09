@@ -7,21 +7,32 @@ const orderStore = useOrderStore();
 </script>
 
 <template>
-  <v-dialog v-model="orderStore.payDialog" persistent width="600">
-    <v-card>
-      <v-card-title>
+  <v-dialog v-model="orderStore.payDialog" persistent width="700">
+    <v-sheet
+      elevation="15"
+      max-width="700"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto"
+    >
+      <v-card-title align="center">
         <span class="text-h5">Payment Method</span>
       </v-card-title>
+      <v-divider class="mb-0"></v-divider>
       <v-container>
         <v-row>
           <v-col cols="12" align="center">
             <v-btn
+              color="blue"
+              variant="outlined"
               class="mx-2"
               :prepend-icon="mdiQrcodeScan"
               @click="orderStore.paymentMethod = 'QR-Payment'"
               >QR-Payment</v-btn
             >
             <v-btn
+              color="green"
+              variant="outlined"
               :prepend-icon="mdiCashMultiple"
               @click="orderStore.paymentMethod = 'Cash'"
               >Cash</v-btn
@@ -34,8 +45,8 @@ const orderStore = useOrderStore();
         <v-container v-if="orderStore.paymentMethod === 'Cash'"
           ><v-row
             ><v-col align="center" style="font-size: 21px"
-              >Total : {{ orderStore.billPrice }} Baht</v-col
-            ></v-row
+              >Total : ฿ {{ orderStore.billPrice }}
+            </v-col></v-row
           >
           <v-row
             ><v-col style="font-size: 21px" cols="3" class="pa-6"
@@ -51,7 +62,12 @@ const orderStore = useOrderStore();
           </v-row>
 
           <v-row class="justify-center"
-            ><v-btn @click="orderStore.calChanged()">Submit</v-btn></v-row
+            ><v-btn
+              color="green-darken-2"
+              variant="tonal"
+              @click="orderStore.calChanged()"
+              >Submit</v-btn
+            ></v-row
           >
         </v-container>
       </v-expand-transition>
@@ -59,22 +75,28 @@ const orderStore = useOrderStore();
         <v-container v-if="orderStore.paymentMethod === 'QR-Payment'"
           ><v-row
             ><v-col align="center" style="font-size: 21px"
-              >Total : {{ orderStore.totalPrice }} Baht</v-col
-            ></v-row
+              >Total : ฿ {{ orderStore.totalPrice }}
+            </v-col></v-row
           ><QRCodeVue
             :value="orderStore.promptPayValue"
             :renderAs="orderStore.qrcodeOptions"
           />
           <v-row class="justify-center"
-            ><v-btn @click="orderStore.payDialog = false">Submit</v-btn></v-row
+            ><v-btn
+              @click="orderStore.payDialog = false"
+              color="green-darken-2"
+              variant="tonal"
+              >Submit</v-btn
+            ></v-row
           ></v-container
         >
       </v-expand-transition>
+      <v-divider class="mb-0 mt-5"></v-divider>
 
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn
-          color="blue-darken-1"
+          color="red"
           variant="text"
           @click="
             (orderStore.payDialog = false),
@@ -85,7 +107,7 @@ const orderStore = useOrderStore();
           Close
         </v-btn>
       </v-card-actions>
-    </v-card></v-dialog
+    </v-sheet></v-dialog
   >
 </template>
 

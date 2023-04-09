@@ -43,19 +43,19 @@ function statusText(quantity: number, min: number) {
 
 <template>
   <CheckMaterialDialog></CheckMaterialDialog>
-  <v-container class="pl-0" style="background-color: #e7e7e7"
-    ><v-row class="pl-16"
-      ><v-text-field
+  <v-container style="background-color: #e7e7e7"
+    ><v-row class="pb-0 pl-3">
+      <v-text-field
         v-model="materialStore.keyword"
-        style="height: 5vh"
         density="comfortable"
         variant="outlined"
         label="Search"
         :append-inner-icon="mdiMagnify"
         clearable
-        class="pa-3"
+        class="pt-3"
       ></v-text-field>
-      <v-col cols="6" offset="8">
+
+      <v-col cols="4" class="mt-2">
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
@@ -73,7 +73,7 @@ function statusText(quantity: number, min: number) {
         >
       </v-col>
     </v-row>
-    <v-row cols="12">
+    <v-row cols="12" class="mt-0">
       <v-col>
         <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>

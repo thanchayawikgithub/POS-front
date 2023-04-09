@@ -196,11 +196,21 @@ export const useOrderStore = defineStore("order", () => {
 
   const pay = () => {
     if (orderList.value.length === 0) {
-      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
       // } else if (!customerStore.customer) {
       //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
     } else {
       payDialog.value = true;
+    }
+  };
+
+  const UsePoint = () => {
+    if (orderList.value.length === 0) {
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
+      // } else if (!customerStore.customer) {
+      //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
+    } else {
+      usePoint.value = true;
     }
   };
 
@@ -318,8 +328,13 @@ export const useOrderStore = defineStore("order", () => {
     const discountPer10Points = 30;
     const discount = Math.floor(usedPoint.value / 10) * discountPer10Points;
     if (discount > totalPrice.value) {
+      messageStore.showError("ไม่สามารถใช้ Point ได้");
       billDiscount.value = totalPrice.value;
+    } else if (discount == 0) {
+      messageStore.showError("ไม่สามารถใช้ Point ได้");
     } else {
+      messageStore.showMessage("ใช้ point สำเร็จ");
+
       billDiscount.value = discount;
     }
     usePoint.value = false;
@@ -373,5 +388,6 @@ export const useOrderStore = defineStore("order", () => {
     promptPayValue,
     qrcodeOptions,
     clearOrder,
+    UsePoint,
   };
 });

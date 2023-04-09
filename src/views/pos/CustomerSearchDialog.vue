@@ -21,6 +21,10 @@ const customerStore = useCustomerStore();
               v-model="customerStore.customerTel"
               :prepend-inner-icon="mdiPhone"
               label="Phone Number"
+              :rules="[
+                (v) => !!v || 'Item is required',
+                (v) => v.length == 10 || 'Length must be equal to 10',
+              ]"
             ></v-text-field>
           </v-col>
         </v-row>

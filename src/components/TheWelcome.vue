@@ -42,7 +42,7 @@ function statusText(quantity: number, min: number) {
 </script>
 
 <template>
-  <v-app style="background-color: #e7e7e7; height: 850px">
+  <v-app style="background-color: #e7e7e7; height: 870px">
     <EmployeeCheckInDialog></EmployeeCheckInDialog>
     <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
     <v-container style="background-color: #e7e7e7" fluid>

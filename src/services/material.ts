@@ -1,7 +1,10 @@
 import type Material from "@/types/Material";
 import http from "./axios";
-function getMaterials(params: any) {
-  return http.get("/materials", { params: params });
+function getMaterials() {
+  return http.get("/materials");
+}
+function getMaterialsImage() {
+  return http.get("/materials/image");
 }
 
 function getMaterialsById() {

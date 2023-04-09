@@ -9,12 +9,13 @@ export enum DialogType {
 
 export const useMessageStore = defineStore("message", () => {
   const isShow = ref(false);
+  const isShoww = ref(false);
   const message = ref("");
   const type = ref<DialogType>(DialogType.info);
-  const timeout = ref(2000);
+  const timeout = ref(1000);
   const showMessage = (msg: string, tout: number = 2000) => {
     message.value = msg;
-    isShow.value = true;
+    isShoww.value = true;
     timeout.value = tout;
   };
   const closeMessage = () => {
@@ -26,5 +27,13 @@ export const useMessageStore = defineStore("message", () => {
     message.value = text;
     isShow.value = true;
   }
-  return { isShow, message, showMessage, closeMessage, timeout, showError };
+  return {
+    isShow,
+    message,
+    showMessage,
+    closeMessage,
+    timeout,
+    showError,
+    isShoww,
+  };
 });

@@ -17,13 +17,13 @@ const Click = (rec: Reciept) => {
 
 <template>
   <v-container fluid>
-    <v-card style="height: 93vh; overflow-y: auto; background-color: #e7e7e7"
+    <v-card style="height: 90vh; overflow-y: auto; background-color: #e7e7e7"
       ><v-card-text
         ><v-row
           align="center"
           justify="center"
           class="text-center"
-          style="background-color: #655a54; color: #f0e3dd"
+          style="background-color: #a4907c; color: #f0e3dd"
         >
           <v-col cols="1" class="font-weight-bold text-uppercase">ID</v-col>
           <v-col cols="2" class="font-weight-bold text-uppercase"
@@ -118,5 +118,12 @@ const Click = (rec: Reciept) => {
   width: 100%;
   margin: 0 auto;
   position: relative;
+}
+.v-col (even) {
+  background: #ffffff;
+}
+
+.v-col (odd) {
+  background: #efefef;
 }
 </style>

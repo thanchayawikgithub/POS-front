@@ -27,7 +27,7 @@ const employeeStore = useEmployeeStore();
     <v-list>
       <v-list-item
         style="color: #e8e4e1"
-        prepend-avatar="./public/than.png"
+        prepend-avatar="./public/dc.png"
         :title="employee.employee_name"
         :subtitle="employee.employee_position"
       ></v-list-item>

@@ -93,6 +93,11 @@ export const useCustomerStore = defineStore("customer", () => {
   async function searchCustomer() {
     searchDialog.value = false;
     await getCustomerByTel(customerTel.value);
+    // if (customer.value?.customer_tel == customer.value?.customer_tel) {
+    //   messageStore.showError("ดึงข้อมูลสำเร็จ");
+    // } else {
+    //   messageStore.showMessage("ดึงข้อมูลสำเร็จ");
+    // }
   }
 
   return {

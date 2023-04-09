@@ -1,25 +1,58 @@
 <script lang="ts" setup>
 import { useCheckInOutStore } from "@/stores/check-in-out";
+import { mdiAlertOutline } from "@mdi/js";
 
 const checkInOutStore = useCheckInOutStore();
 </script>
 <template>
   <v-dialog v-model="checkInOutStore.confirmDialog" persistent width="600"
-    ><v-card
-      ><v-card-text
-        >Pay
+    ><v-sheet
+      elevation="15"
+      max-width="800"
+      rounded="lg"
+      width="100%"
+      class="pa-5 mx-auto"
+    >
+      <v-card-title style="text-align: center">
+        <span class="text-h6">Confirm Pay Salaries</span>
+      </v-card-title>
+      <v-divider class="mb-0"></v-divider>
+      <v-card-text
+        class="pb-2"
+        align="center
+        "
+        ><v-icon size="100" color="red-darken-4">{{
+          mdiAlertOutline
+        }}</v-icon></v-card-text
+      >
+
+      <v-card-text
+        align="center"
+        style="font-size: 30px; font-weight: bold"
+        class="pt-0"
+      >
+        Pay : ฿
         {{ checkInOutStore.empTotalWorkHours * checkInOutStore.empHourlyWage }}
-        Bath to Employee :
+        to Employee :
         {{
           checkInOutStore.searchCheckInOuts[0]?.employee?.employee_name
         }}</v-card-text
       >
-      <v-card-actions
-        ><v-btn @click="checkInOutStore.PaySalaries()">Comfirm</v-btn
-        ><v-btn @click="checkInOutStore.confirmDialog = false"
+      <v-divider class="mb-0"></v-divider>
+      <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn color="red" @click="checkInOutStore.confirmDialog = false"
           >Close</v-btn
+        >
+        <v-btn
+          color="green"
+          @click="
+            checkInOutStore.PaySalaries(),
+              (checkInOutStore.paySalaryDialog = false)
+          "
+          >Comfirm</v-btn
         ></v-card-actions
-      ></v-card
+      ></v-sheet
     ></v-dialog
   >
 </template>

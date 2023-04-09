@@ -37,6 +37,7 @@ onMounted(async () => {
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
               <th class="text-center">Name</th>
+              <th class="text-center">Date</th>
               <th class="text-center">Time-in</th>
               <th class="text-center">Time-out</th>
               <th class="text-center">Status</th>
@@ -47,11 +48,11 @@ onMounted(async () => {
               <td>{{ item.employee.employee_name }}</td>
               <td>
                 {{ JSON.stringify(item.cio_time_in).substring(1, 11) }}
+              </td>
+              <td>
                 {{ JSON.stringify(item.cio_time_in).substring(12, 20) }}
               </td>
               <td v-if="item.cio_time_out">
-                {{ JSON.stringify(item.cio_time_out).substring(1, 11) }}
-
                 {{ JSON.stringify(item.cio_time_out).substring(12, 20) }}
               </td>
               <td v-else></td>

@@ -41,7 +41,7 @@ const labels = ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15
   };
   
 
-const config = {
+const config :  ChartConfiguration ={
   type: 'bar',
   data: data,
   options: {
@@ -54,8 +54,8 @@ const config = {
           // },
         beginAtZero: true,
         grid: {
-          color: 'rgba(247, 241, 229, 0.1)',
-          borderDash: [2, 2]
+          color: 'rgba(247, 241, 229, 0.1)'
+          
         },
         ticks: {
           color: '#F7F1E5' // set y-axis ticks color to purple
@@ -63,8 +63,8 @@ const config = {
       },
       x: {
         grid: {
-          color: 'rgba(247, 241, 229, 0.1)',
-          borderDash: [2,2]
+          color: 'rgba(247, 241, 229, 0.1)'
+          
         },
         // title: {
         //   color: '#F7F1E5', // set y-axis title color to blue
@@ -91,7 +91,7 @@ const config = {
 onMounted(() => {
   const canvasTag = <ChartItem>document.getElementById("myChart1")
   const myChart = new Chart(canvasTag, config)
-})
+  })
 </script>
 <template>
   <canvas id="myChart1"></canvas>

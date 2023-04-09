@@ -40,7 +40,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       console.log(CheckInOuts.value);
     } catch (e) {
       console.log(e);
-      messageStore.showError("ไม่สามารถดึงข้อมูล ChekInOut ได้");
+      messageStore.showError("ไม่สามารถดึงข้อมูล Check In Out ได้");
     }
     loadingStore.isLoading = false;
   }
@@ -62,7 +62,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       );
       if (duplicate) {
         checkInDialog.value = false;
-        messageStore.showError("this employee already checked in");
+        messageStore.showError("พนักงานคนนี้ Chick in แล้ว");
         return;
       }
       loadingStore.isLoading = true;
@@ -77,7 +77,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
 
       console.log("check in list", currentCheckInOuts.value);
       checkInDialog.value = false;
-      messageStore.showMessage("check in success");
+      messageStore.showMessage("check in สำเร็จ");
     } catch (error) {
       loadingStore.isLoading = false;
       messageStore.showError("username หรือ password ไม่ถูกต้อง");
@@ -103,7 +103,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
       console.log("list", currentCheckInOuts);
       empCheckOut.value = undefined;
       checkOutDialog.value = false;
-      messageStore.showMessage("check out success");
+      messageStore.showMessage("check out สำเร็จ");
     } catch (error) {
       loadingStore.isLoading = false;
       messageStore.showError("username หรือ password ไม่ถูกต้อง");
