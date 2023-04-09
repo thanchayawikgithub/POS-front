@@ -5,7 +5,10 @@ import { useCheckInOutStore } from "@/stores/check-in-out";
 import employee from "@/services/employee";
 import { useEmployeeStore } from "@/stores/employee";
 import type Employee from "@/types/Employee";
+
 import ConfirmDialog from "./ConfirmDialog.vue";
+import { mdiMagnify } from "@mdi/js";
+
 const checkInOutStore = useCheckInOutStore();
 const employeeStore = useEmployeeStore();
 onMounted(async () => {
@@ -170,7 +173,9 @@ onMounted(async () => {
               ></v-select>
             </v-col>
             <v-col class="mt-4">
-              <v-btn @click="checkInOutStore.getCheckInOutById"
+              <v-btn
+                :prepend-icon="mdiMagnify"
+                @click="checkInOutStore.getCheckInOutById"
                 >Search</v-btn
               ></v-col
             >
