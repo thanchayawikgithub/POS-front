@@ -27,7 +27,13 @@ const show2 = ref(false);
 </script>
 <template>
   <v-dialog v-model="checkInOutStore.checkOutDialog" persistent width="650">
-    <v-card>
+    <v-sheet
+      elevation="15"
+      max-width="600"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto"
+    >
       <v-card-title>
         <span class="text-h5">Employee Check out</span>
       </v-card-title>
@@ -52,6 +58,7 @@ const show2 = ref(false);
           ></v-text-field>
         </v-form>
       </v-card-text>
+
       <v-card-actions class="justify-center pa-0">
         <v-container>
           <v-row class="mx-4"> </v-row>
@@ -75,12 +82,13 @@ const show2 = ref(false);
           </v-row>
         </v-container>
       </v-card-actions>
+      <v-divider class="mb-0"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="(checkInOutStore.checkOutDialog = false), reset()"
           >Close</v-btn
         >
       </v-card-actions>
-    </v-card>
+    </v-sheet>
   </v-dialog>
 </template>

@@ -34,11 +34,10 @@ onMounted(async () => {
         <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
-              <th>Name</th>
-              <th>Time-in</th>
-              <th>Time-out</th>
-              <th>Status</th>
-              <th>Operations</th>
+              <th class="text-center">Name</th>
+              <th class="text-center">Time-in</th>
+              <th class="text-center">Time-out</th>
+              <th class="text-center">Status</th>
             </tr>
           </thead>
           <tbody>
@@ -56,7 +55,7 @@ onMounted(async () => {
               <td v-else></td>
 
               <td>{{ item.status }}</td>
-              <td>
+              <!-- <td>
                 <v-btn
                   v-if="item.status === 'checked in'"
                   @click="
@@ -65,7 +64,7 @@ onMounted(async () => {
                   "
                   >out</v-btn
                 >
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </v-table>

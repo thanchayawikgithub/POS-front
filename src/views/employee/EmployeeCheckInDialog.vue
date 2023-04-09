@@ -23,7 +23,13 @@ const show2 = ref(false);
 </script>
 <template>
   <v-dialog v-model="checkInOutStore.checkInDialog" persistent width="650">
-    <v-card>
+    <v-sheet
+      elevation="15"
+      max-width="600"
+      rounded="lg"
+      width="100%"
+      class="pa-4 mx-auto"
+    >
       <v-card-title>
         <span class="text-h5">Employee Check in</span>
       </v-card-title>
@@ -38,7 +44,7 @@ const show2 = ref(false);
             :rules="[
               (v) => !!v || 'Login Name is required',
               (v) =>
-                v.length >= 4 || 'Name must be more than or equal 4 characters',
+                v.length >= 2 || 'Name must be more than or equal 2 characters',
             ]"
             required
           ></v-text-field>
@@ -84,12 +90,13 @@ const show2 = ref(false);
           </v-row>
         </v-container>
       </v-card-actions>
+      <v-divider class="mb-0"></v-divider>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn @click="(checkInOutStore.checkInDialog = false), reset()"
           >Close</v-btn
         >
       </v-card-actions>
-    </v-card>
+    </v-sheet>
   </v-dialog>
 </template>
