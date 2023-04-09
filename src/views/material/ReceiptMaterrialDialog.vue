@@ -148,7 +148,10 @@ const vendorStore = useVendorStore();
         <v-btn
           color="red"
           variant="text"
-          @click="vendorStore.receiptMaterial = false"
+          @click="
+            (vendorStore.receiptMaterial = false),
+              (vendorStore.lastbill = undefined)
+          "
         >
           Close
         </v-btn>

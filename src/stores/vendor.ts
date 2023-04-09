@@ -129,7 +129,7 @@ export const useVendorStore = defineStore("vendor", () => {
     } else {
       changed.value = received.value - totalPrice.value;
       payMaterial.value = false;
-      openBill();
+      await openBill();
       dialog.value = false;
       clearOrder();
       dis.value = false;
