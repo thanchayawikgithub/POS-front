@@ -10,6 +10,7 @@ import {
   mdiReceiptTextOutline,
   mdiHomeOutline,
   mdiTextBoxEditOutline,
+  mdiReceiptTextCheckOutline,
 } from "@mdi/js";
 import { useAuthStore } from "@/stores/auth";
 import { useEmployeeStore } from "@/stores/employee";
@@ -88,6 +89,14 @@ const employeeStore = useEmployeeStore();
         title="Material"
         value="Material"
         to="/materials"
+        style="color: #e8e4e1"
+      ></v-list-item>
+      <v-list-item
+        v-if="employee.employee_position === 'Owner'"
+        :prepend-icon="mdiReceiptTextCheckOutline"
+        title="Bill"
+        value="Bill"
+        to="/bills"
         style="color: #e8e4e1"
       ></v-list-item>
       <v-list-item

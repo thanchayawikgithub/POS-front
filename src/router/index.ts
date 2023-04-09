@@ -101,6 +101,21 @@ const router = createRouter({
       },
     },
     {
+      path: "/bills",
+      name: "bill",
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      components: {
+        default: () => import("../views/bill/billView.vue"),
+        menu: () => import("@/components/menus/MainMenu.vue"),
+      },
+      meta: {
+        layout: "MainLayout",
+        requiresAuth: true,
+      },
+    },
+    {
       path: "/employees",
       name: "employee",
       // route level code-splitting

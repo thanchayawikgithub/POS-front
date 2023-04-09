@@ -28,7 +28,11 @@ onMounted(() => {
           title: {
             color: "rgba(247, 241, 229, 1)",
             display: true,
+<<<<<<< HEAD
             text: "Mouth",
+=======
+            text: "Month",
+>>>>>>> d4226aa6feea8f4059f1d0c6bd239aef315b0c89
           },
           grid: {
             color: "rgba(247, 241, 229, 0.3)", // set x-axis grid color to red

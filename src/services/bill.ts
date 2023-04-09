@@ -1,6 +1,6 @@
 import http from "./axios";
-function getBill() {
-  return http.get("/bill");
+function getBills(params: any) {
+  return http.get("/bill", { params: params });
 }
 
 function saveBill(bill: {
@@ -18,7 +18,7 @@ function deleteBill(id: number) {
 }
 
 export default {
-  getBill,
+  getBills,
   saveBill,
   deleteBill,
 };

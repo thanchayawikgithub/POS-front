@@ -28,7 +28,6 @@ onMounted(() => {
           title: {
             color: "rgba(247, 241, 229, 1)",
             display: true,
-            text: "Day",
           },
           grid: {
             color: "rgba(247, 241, 229, 0.3)", // set x-axis grid color to red
