@@ -201,6 +201,7 @@ export const useVendorStore = defineStore("vendor", () => {
   const clearOrder = () => {
     orderList.value = [];
   };
+
   const pay = () => {
     if (orderList.value.length === 0) {
       messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
@@ -223,7 +224,18 @@ export const useVendorStore = defineStore("vendor", () => {
     loadingStore.isLoading = false;
   }
 
+  const payMat = () => {
+    if (orderList.value.length === 0) {
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
+      // } else if (!customerStore.customer) {
+      //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
+    } else {
+      payMaterial.value = true;
+    }
+  };
+
   return {
+    payMat,
     dialog,
     vendorMats,
     orderList,

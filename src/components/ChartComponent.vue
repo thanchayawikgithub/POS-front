@@ -61,7 +61,7 @@ onMounted(() => {
     },
   };
 
-  const canvasTag = document.getElementById("myChart");
+  const canvasTag = document.getElementById("myChart") as HTMLCanvasElement;
   const myChart = new Chart(canvasTag, config);
 });
 </script>

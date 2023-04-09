@@ -196,16 +196,6 @@ export const useOrderStore = defineStore("order", () => {
     }
   };
 
-  const UsePoint = () => {
-    if (orderList.value.length === 0) {
-      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
-      // } else if (!customerStore.customer) {
-      //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
-    } else {
-      usePoint.value = true;
-    }
-  };
-
   const UpdatePrice = ref(0);
   const UpdatePriceOther = ref(0);
   const UpdateSize = ref(0);
@@ -380,6 +370,5 @@ export const useOrderStore = defineStore("order", () => {
     promptPayValue,
     qrcodeOptions,
     clearOrder,
-    UsePoint,
   };
 });
