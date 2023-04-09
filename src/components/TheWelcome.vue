@@ -32,6 +32,7 @@ const drinkChat = ref(true);
 
 onMounted(async () => {
   await reportStore.getMatirial();
+  await reportStore.getDailySales();
 });
 
 function statusColor(quantity: number, min: number) {
@@ -56,20 +57,20 @@ function statusText(quantity: number, min: number) {
     <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
     <v-container style="background-color: #e7e7e7" fluid>
       <!-- <v-row>
-      <v-col cols="12" class="pl-1">
-        <v-card color="#a4907c" style="width: 100vw; height: 14vh">
-          <v-card-text
-            align="center"
-            style="font-size: 40px; font-weight: 600; color: #f0e3dd"
-            >Main Menu</v-card-text
-          ><v-card-text
-            align="center"
-            style="font-size: 30px; font-weight: 600; color: #f0e3dd"
-            >Welcome, Admin</v-card-text
-          ></v-card
-        ></v-col
-      >
-    </v-row> -->
+                                    <v-col cols="12" class="pl-1">
+                                      <v-card color="#a4907c" style="width: 100vw; height: 14vh">
+                                        <v-card-text
+                                          align="center"
+                                          style="font-size: 40px; font-weight: 600; color: #f0e3dd"
+                                          >Main Menu</v-card-text
+                                        ><v-card-text
+                                          align="center"
+                                          style="font-size: 30px; font-weight: 600; color: #f0e3dd"
+                                          >Welcome, Admin</v-card-text
+                                        ></v-card
+                                      ></v-col
+                                    >
+                                  </v-row> -->
       <v-row style="font-size: 25px; font-weight: 700" class="ml-3">
         <v-col class="mt-3"> Dashboard </v-col>
       </v-row>
@@ -216,11 +217,12 @@ function statusText(quantity: number, min: number) {
 
               background-color: #433520;
             "
-            ><ChartComponent
+          >
+            <ChartComponent
               class="pt-5"
               style="width: 27vw; height: 230px"
-            ></ChartComponent
-          ></v-card>
+            ></ChartComponent>
+          </v-card>
         </v-col>
 
         <v-col cols="4" class="pb-0">
@@ -435,13 +437,15 @@ function statusText(quantity: number, min: number) {
               style="text-align: end; font-size: 18px"
               >Daily Sales</v-card-subtitle
             ><v-card-text class="mt-2" style="text-align: end; font-size: 40px"
-              >฿ 1000</v-card-text
+              >{{ reportStore.total_sales }}฿</v-card-text
             ><v-card-subtitle
               class="mt-4"
               style="text-align: end; font-size: 18px"
               >Daily Recipt</v-card-subtitle
-            ><v-card-text class="mt-1" style="text-align: end; font-size: 40px"
-              >8</v-card-text
+            ><v-card-text
+              class="mt-1"
+              style="text-align: end; font-size: 40px"
+              >{{ reportStore.total_receipts }}</v-card-text
             >
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
@@ -554,59 +558,59 @@ function statusText(quantity: number, min: number) {
               ></v-card-text
             >
           </v-card>
-        </v-col>
+                                </v-col>
 
-        <v-col cols="3" class="pl-16 ml-6">
-          <v-card
-            rounded="lg"
-            class="pa-1"
-            style="width: 19vw; height: 290px; position: absolute"
-            elevation="15"
-          >
-            <v-card-subtitle
-              class="mt-13"
-              style="text-align: end; font-size: 18px"
-              >Best Customer</v-card-subtitle
-            ><v-table height="152px">
-              <thead>
-                <tr>
-                  <th class="text-center">Name</th>
-                  <th class="text-center">Point</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="text-center">Tee</td>
-                  <td class="text-center">5</td>
-                </tr>
-              </tbody>
-            </v-table>
+                                      <v-col cols="3" class="pl-16 ml-6">
+                                        <v-card
+                                          rounded="lg"
+                                          class="pa-1"
+                                          style="width: 19vw; height: 290px; position: absolute"
+                                          elevation="15"
+                                        >
+                                          <v-card-subtitle
+                                            class="mt-13"
+                                            style="text-align: end; font-size: 18px"
+                                            >Best Customer</v-card-subtitle
+                                          ><v-table height="152px">
+                                            <thead>
+                                              <tr>
+                                                <th class="text-center">Name</th>
+                                                <th class="text-center">Point</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                                <td class="text-center">Tee</td>
+                                                <td class="text-center">5</td>
+                                              </tr>
+                                            </tbody>
+                                          </v-table>
 
-            <v-divider class="mb-0 ma-1"></v-divider>
-          </v-card>
-          <v-card
-            rounded="lg"
-            class="pa-1"
-            elevation="15"
-            style="
-              width: 8vw;
-              height: 120px;
-              top: -39px;
-              left: 16px;
+                                          <v-divider class="mb-0 ma-1"></v-divider>
+                                        </v-card>
+                                        <v-card
+                                          rounded="lg"
+                                          class="pa-1"
+                                          elevation="15"
+                                          style="
+                                            width: 8vw;
+                                            height: 120px;
+                                            top: -39px;
+                                            left: 16px;
 
-              background-color: #433520;
-            "
-            ><template v-slot:prepend>
-              <v-icon color="#f7f1e5" size="55" class="mt-4 ml-4">{{
-                mdiCardAccountDetailsStar
-              }}</v-icon> </template
-            ><v-card-text
-              class="pb-2 text-center"
-              style="font-weight: bold; font-size: 20px; color: #f7f1e5"
-            ></v-card-text>
-          </v-card>
-        </v-col>
-      </v-row> -->
+                                            background-color: #433520;
+                                          "
+                                          ><template v-slot:prepend>
+                                            <v-icon color="#f7f1e5" size="55" class="mt-4 ml-4">{{
+                                              mdiCardAccountDetailsStar
+                                            }}</v-icon> </template
+                                          ><v-card-text
+                                            class="pb-2 text-center"
+                                            style="font-weight: bold; font-size: 20px; color: #f7f1e5"
+                                          ></v-card-text>
+                                        </v-card>
+                                      </v-col>
+                                    </v-row> -->
     </v-container>
   </v-app>
 </template>

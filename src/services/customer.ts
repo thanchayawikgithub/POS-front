@@ -1,7 +1,7 @@
 import type Customer from "@/types/Customer";
 import http from "./axios";
-function getCustomers() {
-  return http.get("/customers");
+function getCustomers(params: any) {
+  return http.get("/customers", { params: params });
 }
 
 function getCustomerByTel(tel: string) {
