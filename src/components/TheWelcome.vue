@@ -7,6 +7,8 @@ import { onMounted, ref } from "vue";
 import material from "@/services/material";
 import ChartComponent from "./ChartComponent.vue";
 import BarChartComponent from "./BarChartComponent.vue";
+import BarChartComponentB from "./BarChartComponentB.vue";
+import BarChartComponentF from "./BarChartComponentF.vue";
 import { useLoadingStore } from "@/stores/loading";
 import { useCheckInOutStore } from "@/stores/check-in-out";
 import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
@@ -14,12 +16,19 @@ import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue
 import type checkInOut from "@/services/checkInOut";
 import { computed } from "vue";
 import { useReport } from "@/stores/report";
-import { mdiStoreOutline, mdiCashMultiple } from "@mdi/js";
+import {
+  mdiStoreOutline,
+  mdiCashMultiple,
+  mdiCardAccountDetailsStar,
+} from "@mdi/js";
 const employeeStore = useEmployeeStore();
 const materialStore = useMaterialStore();
 const checkInOutStore = useCheckInOutStore();
 const loadingStore = useLoadingStore();
 const reportStore = useReport();
+const bakeryChat = ref(false);
+const foodChat = ref(false);
+const drinkChat = ref(true);
 
 onMounted(async () => {
   await reportStore.getMatirial();
@@ -74,12 +83,77 @@ function statusText(quantity: number, min: number) {
           >
             <v-card-text class="pt-16 mt-16"></v-card-text>
             <v-card-text
-              class="pt-16 mt-8 pl-5"
+              v-if="drinkChat === true"
+              class="pt-16 mt-7 pl-5"
               style="font-size: 30px; font-weight: bolder"
               >Drink Category Sold</v-card-text
             >
-            <v-card-subtitle class="pl-5"> </v-card-subtitle>
+            <v-card-text
+              v-if="bakeryChat === true"
+              class="pt-16 mt-7 pl-5"
+              style="font-size: 30px; font-weight: bolder"
+              >Bakery Category Sold</v-card-text
+            >
+            <v-card-text
+              v-if="foodChat === true"
+              class="pt-16 mt-7 pl-5"
+              style="font-size: 30px; font-weight: bolder"
+              >Food Category Sold</v-card-text
+            >
+            <v-card-subtitle class="pl-6">
+              Last sold by category.</v-card-subtitle
+            >
             <v-divider class="mb-0 ma-1"></v-divider>
+            <v-row>
+              <v-col>
+                <v-btn
+                  rounded="lg"
+                  variant="tonal"
+                  color="#e7e7e7"
+                  style="background-color: #534340"
+                  elevation="6"
+                  class="ml-12 mt-1"
+                  @click="
+                    drinkChat = true;
+                    bakeryChat = false;
+                    foodChat = false;
+                  "
+                  >Drink</v-btn
+                >
+              </v-col>
+              <v-col>
+                <v-btn
+                  rounded="lg"
+                  elevation="6"
+                  variant="tonal"
+                  color="#e7e7e7"
+                  style="background-color: #534340"
+                  class="ml-5 mt-1"
+                  @click="
+                    bakeryChat = true;
+                    drinkChat = false;
+                    foodChat = false;
+                  "
+                  >Bakery</v-btn
+                >
+              </v-col>
+              <v-col>
+                <v-btn
+                  rounded="lg"
+                  variant="tonal"
+                  color="#e7e7e7"
+                  style="background-color: #534340"
+                  elevation="6"
+                  class="ml-2 mt-1"
+                  @click="
+                    foodChat = true;
+                    bakeryChat = false;
+                    drinkChat = false;
+                  "
+                  >Food</v-btn
+                >
+              </v-col>
+            </v-row>
           </v-card>
           <v-card
             rounded="lg"
@@ -93,61 +167,23 @@ function statusText(quantity: number, min: number) {
 
               background-color: #532e1c;
             "
-            ><BarChartComponent class="pt-5" style="width: 27vw; height: 230px"
-          /></v-card>
-          <!-- <v-card class="mt-5" style="width: 30vw; height: 35vh"
-            ><v-card-text>Material Min Quantity</v-card-text>
-            <v-container style="width: 62vw; height: 35vh" class="pt-0">
-              <v-row>
-                <v-col cols="5">
-                  <v-table style="overflow-y: auto; height: 25vh">
-                    <thead>
-                      <tr>
-                        <th class="text-center">Name</th>
-
-                        <th class="text-center">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr
-                        v-for="item in reportStore.matReport"
-                        :key="item.mat_quantity"
-                      >
-                        <td>{{ item.mat_name }}</td>
-
-                        <td>
-                          <v-card
-                            height="4vh"
-                            width="6vw"
-                            align="center"
-                            :color="
-                              statusColor(
-                                item.mat_quantity,
-                                item.mat_min_quantity
-                              )
-                            "
-                            style="color: aquamarine"
-                            class="mx-auto"
-                          >
-                            <v-card-subtitle
-                              class="pt-1"
-                              style="font-size: 11px; font-weight: bold"
-                              >{{
-                                statusText(
-                                  item.mat_quantity,
-                                  item.mat_min_quantity
-                                )
-                              }}</v-card-subtitle
-                            >
-                          </v-card>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </v-table>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card> -->
+          >
+            <BarChartComponent
+              v-if="drinkChat === true"
+              class="pt-5"
+              style="width: 27vw; height: 230px"
+            />
+            <BarChartComponentB
+              v-if="bakeryChat === true"
+              class="pt-5"
+              style="width: 27vw; height: 230px"
+            />
+            <BarChartComponentF
+              v-if="foodChat === true"
+              class="pt-5"
+              style="width: 27vw; height: 230px"
+            />
+          </v-card>
         </v-col>
         <v-col cols="4">
           <v-card
@@ -156,16 +192,15 @@ function statusText(quantity: number, min: number) {
             class="pa-1"
             elevation="15"
           >
-            <!-- Parent v-card content -->
-
-            <!-- Child v-card for overlap effect -->
             <v-card-text class="pt-16 mt-16"></v-card-text>
             <v-card-text
               class="pt-16 mt-8 pl-5"
               style="font-size: 30px; font-weight: bolder"
               >Day Of Week Total Sales</v-card-text
             >
-            <v-card-subtitle class="pl-5"> </v-card-subtitle>
+            <v-card-subtitle class="pl-6">
+              Last day of week total sales</v-card-subtitle
+            >
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
 
@@ -186,70 +221,6 @@ function statusText(quantity: number, min: number) {
               style="width: 27vw; height: 230px"
             ></ChartComponent
           ></v-card>
-          <!-- <v-card style="width: 30vw; height: 35vh"
-            ><v-card-text>Sale By Type</v-card-text>
-            <ChartComponent
-              class="pb-10 pt-0 pl-3"
-              style="width: 29vw"
-            ></ChartComponent>
-          </v-card> -->
-          <!-- <v-card class="mt-5" style="width: 30vw; height: 35vh"
-            ><v-card-text>Employee Check In Out</v-card-text>
-            <v-container style="width: 62vw; height: 35vh" class="pt-0">
-              <v-row>
-                <v-col cols="7">
-                  <v-table style="overflow-y: auto; height: 25vh; width: 30vw">
-                    <thead>
-                      <tr>
-                        <th class="text-center">Name</th>
-                        <th class="text-center">Time-in</th>
-                        <th class="text-center">Time-out</th>
-                        <th class="text-center">Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr
-                        v-for="item in checkInOutStore.currentCheckInOuts"
-                        :key="item.cio_id"
-                      >
-                        <td>{{ item.employee.employee_name }}</td>
-                        <td>
-                          {{
-                            JSON.stringify(item.cio_time_in).substring(1, 11)
-                          }}
-                          {{
-                            JSON.stringify(item.cio_time_in).substring(12, 20)
-                          }}
-                        </td>
-                        <td v-if="item.cio_time_out">
-                          {{
-                            JSON.stringify(item.cio_time_out).substring(1, 11)
-                          }}
-
-                          {{
-                            JSON.stringify(item.cio_time_out).substring(12, 20)
-                          }}
-                        </td>
-                        <td v-else></td>
-
-                        <td>{{ item.status }}</td>
-                        <td>
-                          <v-btn
-                            v-if="item.status === 'checked in'"
-                            @click="
-                              (checkInOutStore.checkOutDialog = true),
-                                (checkInOutStore.empCheckOut = item)
-                            "
-                            >out</v-btn
-                          >
-                        </td>
-                      </tr>
-                    </tbody>
-                  </v-table>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-card> -->
         </v-col>
 
         <v-col cols="4" class="pb-0">
@@ -265,7 +236,7 @@ function statusText(quantity: number, min: number) {
               style="font-size: 30px; font-weight: bolder"
               >Low Stock</v-card-text
             >
-            <v-card-subtitle class="pl-5"
+            <v-card-subtitle class="pl-6"
               >Please order Material are low stock.
             </v-card-subtitle>
             <v-divider class="mb-0 ma-1"></v-divider>
@@ -288,7 +259,7 @@ function statusText(quantity: number, min: number) {
               <v-table
                 style="
                   overflow-y: auto;
-                  height: 260px;
+                  height: 248px;
                   background-color: #8d7b68;
                   width: 30vw;
                 "
@@ -471,16 +442,22 @@ function statusText(quantity: number, min: number) {
             <v-card-subtitle
               class="mt-13"
               style="text-align: end; font-size: 18px"
-              >Daily Sales</v-card-subtitle
-            ><v-card-text class="mt-2" style="text-align: end; font-size: 40px"
-              >฿ 1000</v-card-text
-            ><v-card-subtitle
-              class="mt-4"
-              style="text-align: end; font-size: 18px"
-              >Daily Recipt</v-card-subtitle
-            ><v-card-text class="mt-1" style="text-align: end; font-size: 40px"
-              >8</v-card-text
-            >
+              >Best Customer</v-card-subtitle
+            ><v-table height="152px">
+              <thead>
+                <tr>
+                  <th class="text-center">Name</th>
+                  <th class="text-center">Point</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="text-center">Tee</td>
+                  <td class="text-center">5</td>
+                </tr>
+              </tbody>
+            </v-table>
+
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
           <v-card
@@ -495,6 +472,10 @@ function statusText(quantity: number, min: number) {
 
               background-color: #433520;
             "
+            ><template v-slot:prepend>
+              <v-icon color="#f7f1e5" size="55" class="mt-4 ml-4">{{
+                mdiCardAccountDetailsStar
+              }}</v-icon> </template
             ><v-card-text
               class="pb-2 text-center"
               style="font-weight: bold; font-size: 20px; color: #f7f1e5"
