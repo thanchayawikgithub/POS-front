@@ -8,7 +8,12 @@ function getMatirial() {
   return http.get("/reports/getmat");
 }
 
+function getProductSalesQtyDrink() {
+  return http.get("/reports/getSalesQtyDrink");
+}
+
 export default {
   getStoreRep,
   getMatirial,
+  getProductSalesQtyDrink,
 };

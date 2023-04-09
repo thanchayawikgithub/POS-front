@@ -33,15 +33,7 @@ export const useOrderStore = defineStore("order", () => {
 
   const receiptStore = useReceiptStore();
   const Order = ref<Product>();
-  async function getOrder() {
-    loadingStore.isLoading = true;
-    try {
-      const res = await recieptService.getReciept();
-    } catch (e) {
-      console.log(e);
-      messageStore.showError("ไม่สามารถดึงข้อมูล order ได้");
-    }
-  }
+
   const clearOrder = () => {
     orderList.value = [];
   };
