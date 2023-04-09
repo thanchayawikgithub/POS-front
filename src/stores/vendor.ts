@@ -22,6 +22,7 @@ export const useVendorStore = defineStore("vendor", () => {
   const changed = ref(0);
   const dis = ref(false);
   const materialStore = useMaterialStore();
+  const confirmDialog = ref(false);
 
   const selectedVendor = ref("Makro");
   const vendorMaterials = ref<Material[]>([]);
@@ -204,7 +205,7 @@ export const useVendorStore = defineStore("vendor", () => {
 
   const pay = () => {
     if (orderList.value.length === 0) {
-      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
     } else {
       payMaterial.value = true;
       received.value = 0;
@@ -258,5 +259,6 @@ export const useVendorStore = defineStore("vendor", () => {
     dis,
     vendorMaterials,
     venderShopName,
+    confirmDialog,
   };
 });

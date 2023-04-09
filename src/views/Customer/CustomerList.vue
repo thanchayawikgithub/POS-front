@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useCustomerStore } from "@/stores/customer";
 import { onMounted } from "vue";
-import { mdiDelete, mdiPencil, mdiPlus } from "@mdi/js";
+import { mdiDelete, mdiPencil, mdiAccountMultiplePlus } from "@mdi/js";
 const date = new Date();
 const customerStore = useCustomerStore();
 
@@ -17,7 +17,7 @@ onMounted(async () => {
         <v-btn
           color="#8D7B68"
           style="font-weight: bold; color: #f0e3dd"
-          :prepend-icon="mdiPlus"
+          :prepend-icon="mdiAccountMultiplePlus"
           @click="customerStore.dialog = true"
           >Add Customer</v-btn
         >
@@ -41,7 +41,9 @@ onMounted(async () => {
               <td>{{ item.customer_tel }}</td>
               <td>{{ item.customer_point }}</td>
               <td>
-                {{ JSON.stringify(item.createdDate).substring(1, 11) }}
+                {{ JSON.stringify(item.createdDate).substring(11, 9) }}/{{
+                  JSON.stringify(item.createdDate).substring(8, 6)
+                }}/{{ JSON.stringify(item.createdDate).substring(1, 5) }}
                 {{ JSON.stringify(item.createdDate).substring(12, 17) }}
               </td>
               <td>

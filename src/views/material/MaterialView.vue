@@ -5,6 +5,7 @@ import MaterialDialog from "./MaterialDialog.vue";
 import MaterialList from "./MaterialList.vue";
 import BuyMaterialDialog from "./ฺฺBuyMaterialDialog.vue";
 import MaterialCheckDialog from "./MaterialCheckDialog.vue";
+import ConfirmDialogVue from "./ConfirmDialog.vue";
 
 const materialStore = useMaterialStore();
 
@@ -17,6 +18,7 @@ onMounted(async () => {
   <v-app style="background-color: #e7e7e7">
     <v-container style="background-color: #e7e7e7" fluid>
       <BuyMaterialDialog></BuyMaterialDialog>
+      <ConfirmDialogVue></ConfirmDialogVue>
       <MaterialList></MaterialList>
 
       <MaterialCheckDialog></MaterialCheckDialog>

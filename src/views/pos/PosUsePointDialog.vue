@@ -56,7 +56,7 @@ const customerStore = useCustomerStore();
         <v-row class="justify-center"
           ><v-btn
             color="green-darken-2"
-            variant="elevated"
+            variant="tonal"
             @click="orderStore.calDiscount()"
             >Submit</v-btn
           ></v-row

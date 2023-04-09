@@ -253,18 +253,19 @@ onMounted(async () => {
       <v-card-actions class="mb-0">
         <v-spacer></v-spacer>
         <v-btn
-          color="green"
-          variant="text"
-          @click="checkInOutStore.confirmDialog = true"
-          >PAY</v-btn
-        >
-        <v-btn
           color="red"
           variant="text"
           @click="checkInOutStore.paySalaryDialog = false"
         >
           Close
         </v-btn>
+        <v-btn
+          v-if="checkInOutStore.searchCheckInOuts.length !== 0"
+          color="green"
+          variant="text"
+          @click="checkInOutStore.confirmDialog = true"
+          >PAY</v-btn
+        >
       </v-card-actions>
     </v-sheet>
   </v-dialog>
