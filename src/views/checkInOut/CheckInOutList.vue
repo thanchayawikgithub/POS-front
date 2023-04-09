@@ -6,6 +6,7 @@ import EmployeeCheckInDialog from "@/views/employee/EmployeeCheckInDialog.vue";
 import EmployeeCheckOutDialog from "@/views/employee/EmployeeCheckOutDialog .vue";
 import PaySalariesDialog from "@/views/checkInOut/PaySalariesDialog.vue";
 import { useEmployeeStore } from "@/stores/employee";
+import SlipDialog from "./SlipDialog.vue";
 
 const checkInOutStore = useCheckInOutStore();
 onMounted(async () => {
@@ -14,6 +15,7 @@ onMounted(async () => {
 </script>
 
 <template>
+  <SlipDialog></SlipDialog>
   <EmployeeCheckInDialog></EmployeeCheckInDialog>
   <EmployeeCheckOutDialog></EmployeeCheckOutDialog>
   <PaySalariesDialog></PaySalariesDialog>

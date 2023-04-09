@@ -25,10 +25,9 @@ onMounted(async () => {
                   >{{ item.store_name }}</v-card-text
                 >
                 <v-card-subtitle style="font-size: medium">
-                  <v-icon :icon="mdiMapMarker" class="pb-1"></v-icon> Sub.{{
-                    item.store_sub_district
-                  }}
-                  , {{ item.store_district }} District ,
+                  <v-icon :icon="mdiMapMarker" class="pb-1"></v-icon>
+                  {{ item.store_sub_district }} Subdistrict,
+                  {{ item.store_district }} District ,
                   {{ item.store_province }}
                 </v-card-subtitle>
                 <v-card-text style="font-size: medium" class="pl-4 pb-0">
@@ -41,7 +40,7 @@ onMounted(async () => {
                 >
               </v-col>
               <v-col cols="5">
-                <v-img src="./Cafe.jpg" style="width: 40vw"></v-img
+                <v-img src="./D-coffeeee.jpg" style="width: 40vw"></v-img
               ></v-col>
             </v-row>
           </v-container>

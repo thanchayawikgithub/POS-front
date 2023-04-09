@@ -21,6 +21,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const paySalaryDialog = ref(false);
   const payEmpId = ref<number>();
   const confirmDialog = ref(false);
+  const slip = ref(false);
   const lastSalary = ref<Salary>();
   async function getCheckInOuts() {
     loadingStore.isLoading = true;
@@ -164,5 +165,6 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     empTotalWorkHours,
     empHourlyWage,
     confirmDialog,
+    slip,
   };
 });
