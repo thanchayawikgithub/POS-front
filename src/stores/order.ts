@@ -371,10 +371,6 @@ export const useOrderStore = defineStore("order", () => {
     promptPayValue,
     qrcodeOptions,
     clearOrder,
-<<<<<<< HEAD
-=======
-    UsePoint,
     confirmDialog,
->>>>>>> d3d03c2e9f52897d56ce7d4edcfae2ed8d410ab0
   };
 });
