@@ -209,7 +209,6 @@ function statusText(quantity: number, min: number) {
                         <th class="text-center">Time-in</th>
                         <th class="text-center">Time-out</th>
                         <th class="text-center">Status</th>
-                        <th class="text-center"></th>
                       </tr>
                     </thead>
                     <tbody>
