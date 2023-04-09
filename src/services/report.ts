@@ -27,7 +27,12 @@ function getDailySales() {
   return http.get("/reports/getDailySales");
 }
 
+function getCustomersRegister() {
+  return http.get("/reports/getCustomersRegister");
+}
+
 export default {
+  getCustomersRegister,
   getDailySales,
   getStoreRep,
   getMatirial,

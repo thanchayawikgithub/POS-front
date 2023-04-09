@@ -6,6 +6,7 @@ import { useMaterialStore } from "@/stores/material";
 import { onMounted, ref } from "vue";
 import material from "@/services/material";
 import ChartComponent from "./ChartComponent.vue";
+import ChartComponent2 from "./ChartComponent2.vue";
 import BarChartComponent from "./BarChartComponent.vue";
 import BarChartComponentB from "./BarChartComponentB.vue";
 import BarChartComponentF from "./BarChartComponentF.vue";
@@ -236,11 +237,9 @@ function statusText(quantity: number, min: number) {
             <v-card-text
               class="pt-16 mt-8 pl-5"
               style="font-size: 30px; font-weight: bolder"
-              >Low Stock</v-card-text
+              >New Member</v-card-text
             >
-            <v-card-subtitle class="pl-6"
-              >Please order Material are low stock.
-            </v-card-subtitle>
+            <v-card-subtitle class="pl-6">new member </v-card-subtitle>
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
 
@@ -256,7 +255,10 @@ function statusText(quantity: number, min: number) {
 
               background-color: #8d7b68;
             "
-          >
+            ><ChartComponent2
+              class="pt-5"
+              style="width: 27vw; height: 230px"
+            ></ChartComponent2>
           </v-card>
         </v-col>
       </v-row>

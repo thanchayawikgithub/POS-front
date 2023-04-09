@@ -10,7 +10,7 @@ import type BakerySalesQty from "@/types/BakerySalesQty";
 import type FoodSalesQty from "@/types/FoodSalesQty";
 import type DayOfWeekTotalSales from "@/types/DayOfWeekTotalSales";
 import type DailySales from "@/types/DailySales";
-
+import type CustomerRegisters from "@/types/CustomerRegisters";
 export const useReport = defineStore("report", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
@@ -28,9 +28,12 @@ export const useReport = defineStore("report", () => {
   const DayOfWeekTotalSales = ref<DayOfWeekTotalSales[]>([]);
   const DayOfWeek = ref<string[]>([]);
   const TotalSales = ref<number[]>([]);
+  const CustomerRegisters = ref<CustomerRegisters[]>([]);
   const DailySales = ref<DailySales>();
   const total_receipts = ref(0);
   const total_sales = ref(0);
+  const month = ref<number[]>([]);
+  const members = ref<number[]>([]);
   async function getStoreRep() {
     loadingStore.isLoading = true;
     try {
@@ -154,7 +157,24 @@ export const useReport = defineStore("report", () => {
     }
   }
 
+  async function getCustomersRegister() {
+    try {
+      const res = await reportService.getCustomersRegister();
+      CustomerRegisters.value = res.data;
+      if (CustomerRegisters.value.length > 0) {
+        members.value = CustomerRegisters.value.map((member) => member.member);
+        month.value = CustomerRegisters.value.map((member) => member.MONTH);
+      }
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Daily Sales ได้");
+    }
+  }
+
   return {
+    month,
+    members,
+    getCustomersRegister,
     DailySales,
     getDailySales,
     DayOfWeek,
