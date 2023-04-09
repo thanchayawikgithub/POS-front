@@ -9,8 +9,8 @@ const customerStore = useCustomerStore();
 const productStore = useProductStore();
 </script>
 <template>
-  <v-dialog v-model="receiptStore.showDialog" persistent width="650"
-    ><v-card class="receipt">
+  <v-dialog v-model="receiptStore.showDialog" persistent width="500"
+    ><v-card class="receipt" width="500">
       <v-card-title></v-card-title>
       <v-card-title
         style="font-size: 40px; font-weight: 800; text-align: center"
