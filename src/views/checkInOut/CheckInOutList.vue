@@ -70,6 +70,10 @@ onMounted(async () => {
             </tr>
           </tbody>
         </v-table>
+        <v-pagination
+          :length="checkInOutStore.lastPage"
+          v-model="checkInOutStore.page"
+        ></v-pagination>
       </v-col>
     </v-row>
   </v-container>

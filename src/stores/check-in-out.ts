@@ -1,4 +1,4 @@
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { defineStore } from "pinia";
 import checkInOutService from "@/services/checkInOut";
 import { useMessageStore } from "./message";
@@ -13,6 +13,10 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   const salaryDialog = ref(false);
   const messageStore = useMessageStore();
   const loadingStore = useLoadingStore();
+  const page = ref(1);
+  const take = ref(10);
+  const keyword = ref("");
+  const lastPage = ref(0);
 
   const currentCheckInOuts = ref<CheckInOut[]>([]);
   const empCheckOut = ref<CheckInOut>();
@@ -26,8 +30,14 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
   async function getCheckInOuts() {
     loadingStore.isLoading = true;
     try {
-      const res = await checkInOutService.getCheckInOut();
-      CheckInOuts.value = res.data;
+      const res = await checkInOutService.getCheckInOut({
+        page: page.value,
+        take: take.value,
+        // keyword: keyword.value,
+      });
+      CheckInOuts.value = res.data.data;
+      lastPage.value = res.data.lastPage;
+      console.log(CheckInOuts.value);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล ChekInOut ได้");
@@ -35,6 +45,15 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     loadingStore.isLoading = false;
   }
 
+  watch(page, async (newPage, oldPage) => {
+    await getCheckInOuts();
+  });
+
+  watch(lastPage, async (newLastPage, oldLastPage) => {
+    if (newLastPage < page.value) {
+      page.value = 1;
+    }
+  });
   async function checkIn(username: string, password: string) {
     try {
       const duplicate = currentCheckInOuts.value.find(
@@ -168,5 +187,7 @@ export const useCheckInOutStore = defineStore("check-in-out", () => {
     confirmDialog,
     slip,
     lastSalary,
+    page,
+    lastPage,
   };
 });

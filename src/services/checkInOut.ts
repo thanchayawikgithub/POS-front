@@ -4,8 +4,8 @@ function getCheckInOutsByEmpId(id: number) {
   return http.get(`/check-in-outs/employee/${id}`);
 }
 
-function getCheckInOut() {
-  return http.get("/check-in-outs");
+function getCheckInOut(params: any) {
+  return http.get("/check-in-outs", { params: params });
 }
 function saveCheckInOut(username: string, password: string) {
   return http.post("/check-in-outs", { username, password });

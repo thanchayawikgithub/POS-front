@@ -19,6 +19,8 @@ export default interface Reciept {
   customer?: Customer;
   employee: Employee;
   recieptDetail: RecieptDetail[];
-
   show?: boolean;
+  // StoreId?: number;
+  // CustomerId?: number;
+  // EmployeeId?: number;
 }

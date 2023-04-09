@@ -25,7 +25,7 @@ export const useVendorStore = defineStore("vendor", () => {
 
   const selectedVendor = ref("Makro");
   const vendorMaterials = ref<Material[]>([]);
-  const venderShopName = new Set<string | undefined>();
+  const venderShopName = ref<string[]>(["Makro", "Big C", "Lotus"]);
   const vendorMats = ref<Vendor[]>([
     {
       vendor_id: 1,

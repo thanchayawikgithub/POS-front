@@ -5,7 +5,7 @@ import { onMounted } from "vue";
 import {
   mdiDelete,
   mdiPencil,
-  mdiPlus,
+  mdiMagnify,
   mdiClipboardEdit,
   mdiCartArrowDown,
 } from "@mdi/js";
@@ -44,7 +44,17 @@ function statusText(quantity: number, min: number) {
 <template>
   <CheckMaterialDialog></CheckMaterialDialog>
   <v-container class="pl-0" style="background-color: #e7e7e7"
-    ><v-row class="pl-16">
+    ><v-row class="pl-16"
+      ><v-text-field
+        v-model="materialStore.keyword"
+        style="height: 5vh"
+        density="comfortable"
+        variant="outlined"
+        label="Search"
+        :append-inner-icon="mdiMagnify"
+        clearable
+        class="pa-3"
+      ></v-text-field>
       <v-col cols="6" offset="8">
         <v-btn
           color="#8D7B68"
@@ -126,6 +136,10 @@ function statusText(quantity: number, min: number) {
             </tr>
           </tbody>
         </v-table>
+        <v-pagination
+          :length="materialStore.lastPage"
+          v-model="materialStore.page"
+        ></v-pagination>
       </v-col>
     </v-row>
   </v-container>

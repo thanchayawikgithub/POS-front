@@ -1,7 +1,7 @@
 import type Reciept from "@/types/RecieptDetail";
 import http from "./axios";
-function getReciept() {
-  return http.get("/reciepts");
+function getReciept(params: any) {
+  return http.get("/reciepts", { params: params });
 }
 function getLastReceipt() {
   return http.get("/reciepts/lastReceipt");

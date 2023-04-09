@@ -94,8 +94,12 @@ const Click = (rec: Reciept) => {
                     ></v-col
                   ><v-col
                     cols="4"
-                  ></v-col></v-row></v-row></v-container></v-expand-transition></v-row></v-card-text
-    ></v-card>
+                  ></v-col></v-row></v-row></v-container></v-expand-transition></v-row
+      ></v-card-text> </v-card
+    ><v-pagination
+      :length="receiptStore.lastPage"
+      v-model="receiptStore.page"
+    ></v-pagination>
   </v-container>
 </template>
 

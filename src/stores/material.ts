@@ -16,6 +16,10 @@ export const useMaterialStore = defineStore("material", () => {
   const isTable = ref(true);
   const dialog = ref(false);
   const checkMaterial = ref(false);
+  const page = ref(1);
+  const take = ref(10);
+  const keyword = ref("");
+  const lastPage = ref(0);
 
   const vendorStore = useVendorStore();
   const materials = ref<Material[]>([]);
@@ -42,17 +46,35 @@ export const useMaterialStore = defineStore("material", () => {
       };
     }
   });
+
+  watch(page, async (newPage, oldPage) => {
+    await getMaterials();
+  });
+
+  watch(keyword, async (newKeyword, oldKeyword) => {
+    await getMaterials();
+  });
+
+  watch(lastPage, async (newLastPage, oldLastPage) => {
+    if (newLastPage < page.value) {
+      page.value = 1;
+    }
+  });
   async function getMaterials() {
     loadingStore.isLoading = true;
     try {
-      const res = await materialService.getMaterials();
-      materials.value = res.data;
-      console.log(res);
-      vendorStore.venderShopName = new Set(
-        materials.value.map((mat) => mat.mat_shop_name)
-      );
-
-      console.log(vendorStore.venderShopName);
+      const res = await materialService.getMaterials({
+        page: page.value,
+        take: take.value,
+        keyword: keyword.value,
+      });
+      materials.value = res.data.data;
+      lastPage.value = res.data.lastPage;
+      console.log(materials.value);
+      // vendorStore.venderShopName = new Set(
+      //   materials.value.map((mat) => mat.mat_shop_name)
+      // );
+      // console.log(vendorStore.venderShopName);
     } catch (e) {
       console.log(e);
       messageStore.showError("ไม่สามารถดึงข้อมูล Material ได้");
@@ -108,5 +130,8 @@ export const useMaterialStore = defineStore("material", () => {
     checkDialog,
     deleteDialog,
     checkMaterial,
+    lastPage,
+    page,
+    keyword,
   };
 });
