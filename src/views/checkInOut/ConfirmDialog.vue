@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useCheckInOutStore } from "@/stores/check-in-out";
-import { mdiAlertOutline } from "@mdi/js";
+import { mdiCommentProcessingOutline } from "@mdi/js";
 
 const checkInOutStore = useCheckInOutStore();
 </script>
@@ -21,8 +21,8 @@ const checkInOutStore = useCheckInOutStore();
         class="pb-2"
         align="center
         "
-        ><v-icon size="100" color="red-darken-4">{{
-          mdiAlertOutline
+        ><v-icon size="85">{{
+          mdiCommentProcessingOutline
         }}</v-icon></v-card-text
       >
 

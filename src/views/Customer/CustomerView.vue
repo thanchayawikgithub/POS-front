@@ -15,10 +15,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <v-container style="background-color: #e7e7e7" fluid class="h-screen">
-    <CustomerList></CustomerList>
-    <CustomerDialog></CustomerDialog>
-    <CustomerCheckDialog></CustomerCheckDialog>
-  </v-container>
+  <v-app style="background-color: #e7e7e7">
+    <v-container style="background-color: #e7e7e7" fluid>
+      <CustomerList></CustomerList>
+      <CustomerDialog></CustomerDialog>
+      <CustomerCheckDialog></CustomerCheckDialog>
+    </v-container>
+  </v-app>
 </template>
 <style scoped></style>
