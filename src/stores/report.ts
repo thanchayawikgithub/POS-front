@@ -9,6 +9,7 @@ import type DrinkSalesQty from "@/types/DrinkSalesQty";
 import type BakerySalesQty from "@/types/BakerySalesQty";
 import type FoodSalesQty from "@/types/FoodSalesQty";
 import type DayOfWeekTotalSales from "@/types/DayOfWeekTotalSales";
+import type DailySales from "@/types/DailySales";
 
 export const useReport = defineStore("report", () => {
   const loadingStore = useLoadingStore();
@@ -27,6 +28,9 @@ export const useReport = defineStore("report", () => {
   const DayOfWeekTotalSales = ref<DayOfWeekTotalSales[]>([]);
   const DayOfWeek = ref<string[]>([]);
   const TotalSales = ref<number[]>([]);
+  const DailySales = ref<DailySales>();
+  const total_receipts = ref(0);
+  const total_sales = ref(0);
   async function getStoreRep() {
     loadingStore.isLoading = true;
     try {
@@ -132,7 +136,27 @@ export const useReport = defineStore("report", () => {
     }
   }
 
+  async function getDailySales() {
+    try {
+      const res = await reportService.getDailySales();
+      DailySales.value = res.data[0];
+      if (DailySales.value) {
+        total_receipts.value = DailySales.value.total_receipts;
+        total_sales.value = DailySales.value.total_sales;
+      }
+      console.log("dd", res.data);
+      console.log("sds", DailySales.value);
+      console.log("sds", total_receipts.value);
+      console.log("sds", total_sales.value);
+    } catch (e) {
+      console.log(e);
+      messageStore.showError("ไม่สามารถดึงข้อมูล Daily Sales ได้");
+    }
+  }
+
   return {
+    DailySales,
+    getDailySales,
     DayOfWeek,
     TotalSales,
     getDayOfWeekTotalSales,
@@ -153,5 +177,7 @@ export const useReport = defineStore("report", () => {
     FoodSalesQty,
     FoodproductsName,
     FoodproductsQty,
+    total_receipts,
+    total_sales,
   };
 });
