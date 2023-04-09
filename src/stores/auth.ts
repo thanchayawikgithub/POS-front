@@ -1,4 +1,3 @@
-import { ref } from "vue";
 import { defineStore } from "pinia";
 import auth from "@/services/auth";
 import { useLoadingStore } from "./loading";
@@ -8,7 +7,6 @@ import router from "@/router";
 export const useAuthStore = defineStore("auth", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
-  const authName = ref("");
 
   const getEmployee = () => {
     const employeeString = localStorage.getItem("employee");

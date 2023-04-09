@@ -1,6 +1,6 @@
 import { ref, computed, watch } from "vue";
 import { defineStore } from "pinia";
-import type Vendor from "@/types/Vendor";
+
 import type VendorMat from "@/types/VendorMat";
 import { useAuthStore } from "./auth";
 import { useLoadingStore } from "./loading";

@@ -1,7 +1,5 @@
 <script setup lang="ts">
-import { useStoreStore } from "@/stores/Store";
 import { useCheckInOutStore } from "@/stores/check-in-out";
-import { useEmployeeStore } from "@/stores/employee";
 
 const checkInOutStore = useCheckInOutStore();
 </script>

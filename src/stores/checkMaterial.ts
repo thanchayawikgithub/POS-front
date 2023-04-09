@@ -10,8 +10,7 @@ import { useMaterialStore } from "./material";
 export const useCheckMaterialStore = defineStore("checkMaterial", () => {
   const loadingStore = useLoadingStore();
   const messageStore = useMessageStore();
-  const deleteDialog = ref(false);
-  const isTable = ref(true);
+
   const dialog = ref(false);
   const checkMaterialList = ref<Material[]>([]);
   const material = ref<Material>();

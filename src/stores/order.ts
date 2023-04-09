@@ -7,9 +7,6 @@ import { useAuthStore } from "./auth";
 import recieptService from "@/services/receipt";
 import { useCustomerStore } from "./customer";
 import { useReceiptStore } from "./receipt";
-import { useProductStore } from "./product";
-import product from "@/services/product";
-import QRCodeVue from "qrcode.vue";
 
 export const useOrderStore = defineStore("order", () => {
   ///////////
