@@ -54,7 +54,7 @@ const vendorStore = useVendorStore();
             ><v-btn
               color="green"
               variant="tonal"
-              @click="vendorStore.confirmDialog = true"
+              @click="vendorStore.calChanged()"
               >Submit</v-btn
             ></v-row
           >

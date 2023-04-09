@@ -204,7 +204,7 @@ export const useVendorStore = defineStore("vendor", () => {
   };
   const pay = () => {
     if (orderList.value.length === 0) {
-      messageStore.showMessage("ไม่มีสินค้าที่ถูกเลือก");
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
     } else {
       payMaterial.value = true;
       received.value = 0;

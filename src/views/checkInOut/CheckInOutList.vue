@@ -47,7 +47,9 @@ onMounted(async () => {
             <tr v-for="item in checkInOutStore.CheckInOuts" :key="item.cio_id">
               <td>{{ item.employee.employee_name }}</td>
               <td>
-                {{ JSON.stringify(item.cio_time_in).substring(1, 11) }}
+                {{ JSON.stringify(item.cio_time_in).substring(11, 9) }}/{{
+                  JSON.stringify(item.cio_time_in).substring(8, 6)
+                }}/{{ JSON.stringify(item.cio_time_in).substring(1, 5) }}
               </td>
               <td>
                 {{ JSON.stringify(item.cio_time_in).substring(12, 20) }}

@@ -63,7 +63,7 @@ const orderStore = useOrderStore();
             ><v-btn
               color="green-darken-2"
               variant="tonal"
-              @click="orderStore.confirmDialog = true"
+              @click="orderStore.calChanged()"
               >Submit</v-btn
             ></v-row
           >

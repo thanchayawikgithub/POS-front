@@ -41,7 +41,9 @@ onMounted(async () => {
               <td>{{ item.customer_tel }}</td>
               <td>{{ item.customer_point }}</td>
               <td>
-                {{ JSON.stringify(item.createdDate).substring(1, 11) }}
+                {{ JSON.stringify(item.createdDate).substring(11, 9) }}/{{
+                  JSON.stringify(item.createdDate).substring(8, 6)
+                }}/{{ JSON.stringify(item.createdDate).substring(1, 5) }}
                 {{ JSON.stringify(item.createdDate).substring(12, 17) }}
               </td>
               <td>
