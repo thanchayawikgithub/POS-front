@@ -28,7 +28,7 @@ onMounted(() => {
           title: {
             color: "rgba(247, 241, 229, 1)",
             display: true,
-            text: "Day",
+            text: "Mouth",
           },
           grid: {
             color: "rgba(247, 241, 229, 0.3)", // set x-axis grid color to red
@@ -44,7 +44,7 @@ onMounted(() => {
           title: {
             color: "#F7F1E5", // set y-axis title color to blue
             display: true,
-            text: "Sales",
+            text: "Member",
           },
           ticks: {
             color: "#F7F1E5", // set y-axis ticks color to purple

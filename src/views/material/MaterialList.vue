@@ -78,24 +78,24 @@ function statusText(quantity: number, min: number) {
         <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
-              <th class="text-center">ID</th>
               <th class="text-center">Name</th>
               <th class="text-center">Min Quantity</th>
               <th class="text-center">Quantity</th>
               <th class="text-center">Unit</th>
               <th class="text-center">Price Per Unit</th>
+              <th class="text-center">MatreiaL Shop Name</th>
               <th class="text-center">Status</th>
               <th class="text-center">Operations</th>
             </tr>
           </thead>
           <tbody>
             <tr v-for="item of materialStore.materials" :key="item.mat_id">
-              <td class="text-center">{{ item.mat_id }}</td>
               <td>{{ item.mat_name }}</td>
               <td class="text-center">{{ item.mat_min_quantity }}</td>
               <td class="text-center">{{ item.mat_quantity }}</td>
               <td class="text-center">{{ item.mat_unit }}</td>
               <td class="text-center">฿ {{ item.mat_price_per_unit }}</td>
+              <td class="text-center">{{ item.mat_shop_name }}</td>
               <td>
                 <v-card
                   height="30px"

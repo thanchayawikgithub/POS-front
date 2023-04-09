@@ -28,6 +28,7 @@ const show2 = ref(false);
 <template>
   <v-container class="my-container h-screen" fluid full-height>
     <v-card
+      elevation="20"
       width="1000px"
       height="490px"
       class="mx-auto ma-16"

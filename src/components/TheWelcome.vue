@@ -239,7 +239,7 @@ function statusText(quantity: number, min: number) {
               style="font-size: 30px; font-weight: bolder"
               >New Member</v-card-text
             >
-            <v-card-subtitle class="pl-6">new member </v-card-subtitle>
+            <v-card-subtitle class="pl-6">Last new member </v-card-subtitle>
             <v-divider class="mb-0 ma-1"></v-divider>
           </v-card>
 
@@ -257,7 +257,7 @@ function statusText(quantity: number, min: number) {
             "
             ><ChartComponent2
               class="pt-5"
-              style="width: 27vw; height: 230px"
+              style="width: 24vw; height: 230px"
             ></ChartComponent2>
           </v-card>
         </v-col>

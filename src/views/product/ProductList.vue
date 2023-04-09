@@ -46,7 +46,6 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
         <v-table class="table">
           <thead style="background-color: #a4907c; color: #f0e3dd" fixed-header>
             <tr>
-              <th>ID</th>
               <th>Name</th>
               <th>Type</th>
               <th>Price</th>
@@ -57,7 +56,6 @@ const backendURL = import.meta.env.VITE_BACKEND_URL;
           </thead>
           <tbody>
             <tr v-for="item of productsStore.products" :key="item.product_id">
-              <td>{{ item.product_id }}</td>
               <td>{{ item.product_name }}</td>
               <td>{{ item.product_type }}</td>
               <td>{{ item.product_price }}</td>
