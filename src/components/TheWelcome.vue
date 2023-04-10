@@ -308,6 +308,8 @@ function statusText(quantity: number, min: number) {
                   <td class="text-center">{{ item.status }}</td>
                   <td>
                     <v-btn
+                      variant="outlined"
+                      color="red"
                       v-if="item.status === 'checked in'"
                       @click="
                         (checkInOutStore.checkOutDialog = true),
