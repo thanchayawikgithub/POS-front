@@ -322,9 +322,21 @@ export const useOrderStore = defineStore("order", () => {
 
   function clearCustomer() {
     customerStore.customer = undefined;
+    billDiscount.value = 0;
   }
 
+  const UsePoint = () => {
+    if (orderList.value.length === 0) {
+      messageStore.showError("ไม่มีสินค้าที่ถูกเลือก");
+      // } else if (!customerStore.customer) {
+      //   messageStore.showMessage("กรุณาใส่หมายเลขสมาชิก");
+    } else {
+      usePoint.value = true;
+    }
+  };
+
   return {
+    UsePoint,
     orderList,
     addCart,
     addAmount,
